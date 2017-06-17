@@ -19,6 +19,10 @@ import ResetPassword from './components/auth/reset_password';
 
 // Import dashboard pages
 import Dashboard from './components/dashboard/dashboard';
+// import MyProfile from './components/dashboard/my-profile';
+// import YourProfile from './components/dashboard/your-profile';
+// import FindMatches from './components/dashboard/find-matches';
+
 import ViewProfile from './components/dashboard/profile/view-profile';
 import Inbox from './components/dashboard/messaging/inbox';
 import Conversation from './components/dashboard/messaging/conversation';

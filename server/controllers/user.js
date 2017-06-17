@@ -6,9 +6,11 @@ const setUserInfo = require('../helpers').setUserInfo;
 //= =======================================
 exports.viewProfile = function (req, res, next) {
   const userId = req.params.userId;
-
-  //comment out to see api route
-  if (req.body.user._id.toString() !== userId) { return res.status(401).json({ error: 'You are not authorized to view this user profile.' }); }
+  // console.log(req.user._id + " " + userId);
+  // need to turn req.user._id to string
+  if (req.user._id.toString() !== userId) { 
+    return res.status(401).json({ error: 'You are not authorized to view this user profile.' }); 
+  }
 
   
   User.findById(userId, (err, user) => {

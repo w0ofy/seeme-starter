@@ -15,7 +15,6 @@ export function fetchUser(uid) {
       headers: { Authorization: cookie.load('token') },
     })
     .then((response) => {
-      console.log("response", response.data.user);
       dispatch({
         type: FETCH_USER,
         payload: response.data.user,
