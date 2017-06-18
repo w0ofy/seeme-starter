@@ -16,7 +16,7 @@ export function loginUser({ email, password }) {
       cookie.save('token', response.data.token, { path: '/' });
       cookie.save('user', response.data.user, { path: '/' });
       dispatch({ type: AUTH_USER });
-      window.location.href = `${CLIENT_ROOT_URL}/dashboard`;
+      window.location.href = `${CLIENT_ROOT_URL}/my-profile`;
     })
     .catch((error) => {
       errorHandler(dispatch, error.response, AUTH_ERROR);
@@ -31,7 +31,7 @@ export function registerUser({ email, firstName, lastInitial, password }) {
       cookie.save('token', response.data.token, { path: '/' });
       cookie.save('user', response.data.user, { path: '/' });
       dispatch({ type: AUTH_USER });
-      window.location.href = `${CLIENT_ROOT_URL}/dashboard`;
+      window.location.href = `${CLIENT_ROOT_URL}/my-profile`;
     })
     .catch((error) => {
       errorHandler(dispatch, error.response, AUTH_ERROR);

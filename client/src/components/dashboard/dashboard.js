@@ -22,38 +22,10 @@ class Dashboard extends Component {
     return false;
   }
 
-  adminMenu() {
-    return (
-      <div className="admin-menu">
-        <Link to="/admin">Admin</Link>
-      </div>
-    );
-  }
-
-  ownerMenu() {
-    return (
-      <div className="trainer-menu">
-        Owner menu coming soon.
-      </div>
-    );
-  }
-
-  clientMenu() {
-    return (
-      <div className="client-menu">
-        Client menu coming soon.
-      </div>
-    );
-  }
-
   render() {
     return (
       <div>
-        <Link to="/dashboard/inbox">Inbox</Link> | <Link to="/profile/edit">Edit Profile</Link> | <Link to="/billing/settings">Billing</Link>
-        {this.isRole('Member', this.adminMenu())}
-        {this.isRole('Member', this.ownerMenu())}
-        {this.isRole('Member', this.clientMenu())}
-        <p>{this.props.content}</p>
+
       </div>
     );
   }
@@ -64,3 +36,6 @@ function mapStateToProps(state) {
 }
 
 export default connect(mapStateToProps, { protectedTest })(Dashboard);
+
+        // <Link to="/dashboard/inbox">Inbox</Link> | <Link to="/profile/edit">Edit Profile</Link> | <Link to="/billing/settings">Billing</Link>
+        // <p>{this.props.content}</p>

@@ -23,13 +23,15 @@ import Dashboard from './components/dashboard/dashboard';
 // import YourProfile from './components/dashboard/your-profile';
 // import FindMatches from './components/dashboard/find-matches';
 
-import ViewProfile from './components/dashboard/profile/view-profile';
+import MyProfile from './components/dashboard/profile/my-profile';
+import EditProfile from './components/dashboard/profile/edit-profile';
 import Inbox from './components/dashboard/messaging/inbox';
 import Conversation from './components/dashboard/messaging/conversation';
 import ComposeMessage from './components/dashboard/messaging/compose-message';
 
 // Import admin pages
-import AdminDashboard from './components/admin/dashboard';
+// import AdminDashboard from './components/admin/dashboard';
+    // <Route path="admin" component={RequireAuth(AdminDashboard)} />
 
 // Import higher order components
 import RequireAuth from './components/auth/require_auth';
@@ -45,9 +47,9 @@ export default (
     <Route path="forgot-password" component={ForgotPassword} />
     <Route path="reset-password/:resetToken" component={ResetPassword} />
 
-    <Route path="profile" component={RequireAuth(ViewProfile)} />
+    <Route path="my-profile" component={RequireAuth(MyProfile)} />
+    <Route path="edit-profile" component={RequireAuth(MyProfile)} />
 
-    <Route path="admin" component={RequireAuth(AdminDashboard)} />
 
     <Route path="dashboard">
       <IndexRoute component={RequireAuth(Dashboard)} />

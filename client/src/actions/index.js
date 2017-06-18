@@ -1,28 +1,13 @@
 import axios from 'axios';
 import cookie from 'react-cookie';
 import { logoutUser } from './auth';
-import { STATIC_ERROR, FETCH_USER, FETCH_MYPROFILE } from './types';
+import { STATIC_ERROR, FETCH_USER, FETCH_MYPROFILE, FETCH_EDITPROFILE } from './types';
 export const API_URL = 'http://localhost:3000/api';
 export const CLIENT_ROOT_URL = 'http://localhost:8080';
-
+export const editClicked = false;
 //= ===============================
 // Utility actions
 //= ===============================
-
-export function fetchUser(uid) {
-  return function (dispatch) {
-    axios.get(`${API_URL}/user/${uid}`, {
-      headers: { Authorization: cookie.load('token') },
-    })
-    .then((response) => {
-      dispatch({
-        type: FETCH_USER,
-        payload: response.data.user,
-      });
-    })
-    .catch(response => dispatch(errorHandler(response.data.error)));
-  };
-}
 
 export function fetchMyProfile(uid) {
   return function (dispatch) {
@@ -32,11 +17,40 @@ export function fetchMyProfile(uid) {
     .then((response) => {
       dispatch({
         type: FETCH_MYPROFILE,
-        payload: response.data.user,
+        payload: response.data,
       });
+      console.log("res", response)
     })
-    .catch(response => dispatch(errorHandler(response.data.error)));
+    .catch(res => dispatch(errorHandler(res.data.error)));
   };
+}
+
+export function checkForEditProfile() {
+    
+    if(window.location.href.indexOf("edit-profile") > -1) {
+      const editClicked = true;
+    }
+}
+
+// Put Request
+export function fetchEditProfile(action, errorType, isAuthReq, url, dispatch, data) {
+  const requestUrl = API_URL + url;
+  let headers = {};
+
+  if (isAuthReq) {
+    headers = { headers: { Authorization: cookie.load('token') } };
+  }
+
+  axios.put(requestUrl, data, headers)
+  .then((response) => {
+    dispatch({
+      type: action,
+      payload: response.data,
+    });
+  })
+  .catch((error) => {
+    errorHandler(dispatch, error.response, errorType);
+  });
 }
 
 export function errorHandler(dispatch, error, type) {

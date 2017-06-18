@@ -8,7 +8,7 @@ exports.setUserInfo = function setUserInfo(request) {
   const getUserInfo = {
     _id: request._id,
     firstName: request.firstName,
-    lastInitial: request.lastInital,
+    lastInitial: request.lastInitial,
     email: request.email,
     age: request.age,
     age_pref_min: request.age_pref_min,
@@ -20,6 +20,7 @@ exports.setUserInfo = function setUserInfo(request) {
     questions_asked: request.questions_asked,
     questions_asking: request.questions_asking,
     reactions: request.reactions,
+    role: request.role
   };
 
   return getUserInfo;
