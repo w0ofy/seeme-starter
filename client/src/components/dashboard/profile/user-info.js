@@ -3,8 +3,8 @@ import React, { Component } from 'react';
 class UserInfo extends Component {
   render() {
     return (
-      <div>
-        {this.props.user}
+      <div className="user-info">
+        {this.props.profile}
       </div>
     );
   }
