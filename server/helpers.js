@@ -11,6 +11,7 @@ exports.setUserInfo = function setUserInfo(request) {
     lastInitial: request.lastInitial,
     email: request.email,
     age: request.age,
+    is_male: request.is_male,
     age_pref_min: request.age_pref_min,
     age_pref_max: request.age_pref_max,
     location: request.location,

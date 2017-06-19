@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Field, reduxForm } from 'redux-form';
+import { Field, reduxForm, formValueSelector } from 'redux-form';
 import { registerUser } from '../../actions/auth';
 
 const form = reduxForm({
@@ -34,16 +34,22 @@ function validate(formProps) {
     errors.password = 'Please enter a password';
   }
   if (!formProps.age) {
-    errors.password = 'Please enter your age';
+    errors.age = 'Please enter your age';
+  }
+  if (!formProps.is_male) {
+    errors.is_male = 'Please enter your gender';
   }
 
   return errors;
 }
 
 class Register extends Component {
+
+
   handleFormSubmit(formProps) {
     this.props.registerUser(formProps);
   }
+
 
   renderAlert() {
     if (this.props.errorMessage) {
@@ -88,7 +94,11 @@ class Register extends Component {
           </div>
           <div className="col-md-6">
             <label>Gender</label>
-            <Field name="gender" component={renderField} type="text" />
+            <Field name="is_male" component="select">
+              <option></option>
+              <option value="true">Male</option>
+              <option value="false">Female</option>
+            </Field>
           </div>
         </div>
         <button type="submit" className="btn btn-primary">Register</button>

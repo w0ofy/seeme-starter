@@ -101,6 +101,16 @@ p.copyright>span {
 }
 
 
+/* ================= NAV BAR =================*/
+
+.navbar-default .navbar-brand {
+    color: #009fdc;
+    font-family: Montserrat;
+    font-weight: bold;
+    font-size: 30px;
+}
+
+
 /* ================= MY PROFILE =================*/
 
 .lookContainer {
@@ -151,6 +161,7 @@ p.copyright>span {
 /* ================= REGISTER =================*/
 
 #register input,
+#register select,
 #login input {
     padding: 15px;
     border: 1px solid #ccc;
@@ -162,9 +173,11 @@ p.copyright>span {
     font-size: 13px;
     transition: border 0.3s;
     width: 100%;
+    outline: none;
 }
 
 #register input:focus,
+#register select:focus,
 #login input:focus {
-    border-bottom: solid 1px #2C3E50;
+    border: solid 1px lightblue;
 }
