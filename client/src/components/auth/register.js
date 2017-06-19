@@ -5,12 +5,12 @@ import { registerUser } from '../../actions/auth';
 
 const form = reduxForm({
   form: 'register',
-  validate,
+  validate
 });
 
 const renderField = field => (
   <div>
-    <input className="form-control" {...field.input} />
+    <input {...field.input} />
     {field.touched && field.error && <div className="error">{field.error}</div>}
   </div>
 );
@@ -19,11 +19,11 @@ function validate(formProps) {
   const errors = {};
 
   if (!formProps.firstName) {
-    errors.firstName = 'Please enter a first name';
+    errors.firstName = 'Please enter your first name';
   }
 
   if (!formProps.lastInitial) {
-    errors.lastInitial = 'Please enter a last initial';
+    errors.lastInitial = 'Please enter your last initial';
   }
 
   if (!formProps.email) {
@@ -32,6 +32,9 @@ function validate(formProps) {
 
   if (!formProps.password) {
     errors.password = 'Please enter a password';
+  }
+  if (!formProps.age) {
+    errors.password = 'Please enter your age';
   }
 
   return errors;
@@ -56,28 +59,36 @@ class Register extends Component {
     const { handleSubmit } = this.props;
 
     return (
-      <form onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}>
+      <form id="register" onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}>
         {this.renderAlert()}
         <div className="row">
           <div className="col-md-6">
             <label>First Name</label>
-            <Field name="firstName" className="form-control" component={renderField} type="text" />
+            <Field name="firstName" component={renderField} type="text" />
           </div>
           <div className="col-md-6">
             <label>Last Initial</label>
-            <Field name="lastInitial" className="form-control" component={renderField} type="text" />
+            <Field name="lastInitial" component={renderField} type="text" />
           </div>
         </div>
         <div className="row">
-          <div className="col-md-12">
+          <div className="col-md-6">
             <label>Email</label>
-            <Field name="email" className="form-control" component={renderField} type="text" />
+            <Field name="email" component={renderField} type="text" />
+          </div>
+          <div className="col-md-6">
+            <label>Password</label>
+            <Field name="password" component={renderField} type="password" />
           </div>
         </div>
         <div className="row">
-          <div className="col-md-12">
-            <label>Password</label>
-            <Field name="password" className="form-control" component={renderField} type="password" />
+          <div className="col-md-6">
+            <label>Age</label>
+            <Field name="age" component={renderField} type="text" />
+          </div>
+          <div className="col-md-6">
+            <label>Gender</label>
+            <Field name="gender" component={renderField} type="text" />
           </div>
         </div>
         <button type="submit" className="btn btn-primary">Register</button>

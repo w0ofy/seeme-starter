@@ -24,9 +24,9 @@ export function loginUser({ email, password }) {
   };
 }
 
-export function registerUser({ email, firstName, lastInitial, password }) {
+export function registerUser({ email, firstName, lastInitial, password, age, gender }) {
   return function (dispatch) {
-    axios.post(`${API_URL}/auth/register`, { email, firstName, lastInitial, password })
+    axios.post(`${API_URL}/auth/register`, { email, firstName, lastInitial, password, age, gender })
     .then((response) => {
       cookie.save('token', response.data.token, { path: '/' });
       cookie.save('user', response.data.user, { path: '/' });

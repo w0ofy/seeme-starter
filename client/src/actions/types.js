@@ -14,7 +14,7 @@ export const AUTH_USER = 'auth_user',
 //= =====================
 export const FETCH_USER = 'fetch_user',
   FETCH_MYPROFILE = "fetch_myprofile",
-  FETCH_EDITPROFILE = "fetch_editprofile"
+  FETCH_EDITPROFILE = "fetch_editprofile";
 
 //= =====================
 // Messaging Actions

@@ -1,3 +1,24 @@
+body,
+html {
+    height: 100%;
+    width: 100%;
+}
+
+body {
+    background: #fff;
+    padding-top: 70px;
+    padding-bottom: 50px;
+}
+
+footer {
+    position: fixed;
+    bottom: 0;
+}
+
+.wrapper {
+    height: 100%;
+}
+
 .modal {
     display: none;
     position: fixed;
@@ -46,11 +67,6 @@
 
 .modal.is-open {
     display: block
-}
-
-body {
-    background: #efefef;
-    padding-top: 70px
 }
 
 .navbar-default .navbar-nav>li>a:hover {
@@ -111,7 +127,6 @@ p.copyright>span {
     margin: 8px;
     padding: 10px;
     outline: none;
-    background: #efefef;
     border: none;
     border-bottom: solid 2px #c9c9c9;
     transition: border 0.3s;
@@ -130,4 +145,26 @@ p.copyright>span {
 
 #edit-info input:focus {
     border-bottom: solid 2px #969696;
+}
+
+
+/* ================= REGISTER =================*/
+
+#register input,
+#login input {
+    padding: 15px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    margin-bottom: 10px;
+    box-sizing: border-box;
+    font-family: montserrat;
+    color: #2C3E50;
+    font-size: 13px;
+    transition: border 0.3s;
+    width: 100%;
+}
+
+#register input:focus,
+#login input:focus {
+    border-bottom: solid 1px #2C3E50;
 }

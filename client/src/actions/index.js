@@ -4,7 +4,7 @@ import { logoutUser } from './auth';
 import { STATIC_ERROR, FETCH_USER, FETCH_MYPROFILE, FETCH_EDITPROFILE } from './types';
 export const API_URL = 'http://localhost:3000/api';
 export const CLIENT_ROOT_URL = 'http://localhost:8080';
-export const editClicked = false;
+
 //= ===============================
 // Utility actions
 //= ===============================
@@ -23,27 +23,6 @@ export function fetchMyProfile(uid) {
     })
     .catch(res => dispatch(errorHandler(res.data.error)));
   };
-}
-
-// Put Request
-export function fetchEditProfile(action, errorType, isAuthReq, url, dispatch, data) {
-  const requestUrl = API_URL + url;
-  let headers = {};
-
-  if (isAuthReq) {
-    headers = { headers: { Authorization: cookie.load('token') } };
-  }
-
-  axios.put(requestUrl, data, headers)
-  .then((response) => {
-    dispatch({
-      type: action,
-      payload: response.data,
-    });
-  })
-  .catch((error) => {
-    errorHandler(dispatch, error.response, errorType);
-  });
 }
 
 export function errorHandler(dispatch, error, type) {

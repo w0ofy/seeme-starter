@@ -1,4 +1,4 @@
-import { FETCH_USER, FETCH_MYPROFILE, ERROR_RESPONSE } from '../actions/types';
+import { FETCH_USER, FETCH_MYPROFILE, FETCH_EDITPROFILE, ERROR_RESPONSE } from '../actions/types';
 
 const INITIAL_STATE = { profile: {}, message: '', error: '' };
 
@@ -10,7 +10,9 @@ export default function (state = INITIAL_STATE, action) {
       return { ...state, profile: action.payload.user };
     case ERROR_RESPONSE:
       return { ...state, error: action.payload };
+    case FETCH_EDITPROFILE:
+      return { ...state, error: '', message: '', editclicked: true };
+      
   }
-
   return state;
 }
