@@ -5,17 +5,8 @@ class UserInfo extends Component {
   render() {
     return (
       <div className="user-info">
-        <div className="lookContainer">
-          <span className="look">{this.props.profile_look}</span>
-          <span className="look">{this.props.profile_look}</span>
-          <span className="look">{this.props.profile_look}</span>
-          <span className="look">{this.props.profile_look}</span>
-          <span className="look">{this.props.profile_look}</span>
-          <span className="look">{this.props.profile_look}</span>
-        </div>
-        <br />
         <div className="user-info-text">
-          <Link to="/edit-profile">edit profile</Link>
+          <Link to="/edit-info">edit profile</Link>
           <h5>{this.props.firstName} {this.props.lastInitial}</h5>
           <h5>{this.props.email}</h5>
           <h5>{this.props.age}</h5>

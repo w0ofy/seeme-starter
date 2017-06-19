@@ -24,7 +24,7 @@ import Dashboard from './components/dashboard/dashboard';
 // import FindMatches from './components/dashboard/find-matches';
 
 import MyProfile from './components/dashboard/profile/my-profile';
-import EditProfile from './components/dashboard/profile/edit-profile';
+import EditInfo from './components/dashboard/profile/edit-info';
 import Inbox from './components/dashboard/messaging/inbox';
 import Conversation from './components/dashboard/messaging/conversation';
 import ComposeMessage from './components/dashboard/messaging/compose-message';
@@ -48,7 +48,7 @@ export default (
     <Route path="reset-password/:resetToken" component={ResetPassword} />
 
     <Route path="my-profile" component={RequireAuth(MyProfile)} />
-    <Route path="edit-profile" component={RequireAuth(MyProfile)} />
+    <Route path="edit-info" component={RequireAuth(MyProfile)} />
 
 
     <Route path="dashboard">

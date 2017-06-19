@@ -7,10 +7,10 @@ class FooterTemplate extends Component {
     if (this.props.authenticated) {
       return [
         <li key={1}>
-          <Link to="/">Home</Link>
+          <Link to="my-profile">My Profile</Link>
         </li>,
         <li key={2}>
-          <Link to="dashboard">Dashboard</Link>
+          <Link to="sas">See More</Link>
         </li>,
         <li key={3}>
           <Link to="logout">Logout</Link>

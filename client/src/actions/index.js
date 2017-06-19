@@ -25,13 +25,6 @@ export function fetchMyProfile(uid) {
   };
 }
 
-export function checkForEditProfile() {
-    
-    if(window.location.href.indexOf("edit-profile") > -1) {
-      const editClicked = true;
-    }
-}
-
 // Put Request
 export function fetchEditProfile(action, errorType, isAuthReq, url, dispatch, data) {
   const requestUrl = API_URL + url;

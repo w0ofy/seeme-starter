@@ -101,3 +101,33 @@ p.copyright>span {
 .user-info-text {
     display: block;
 }
+
+.inline {
+    display: inline-block !important;
+}
+
+.user-info-text h5 {
+    display: block;
+    margin: 8px;
+    padding: 10px;
+    outline: none;
+    background: #efefef;
+    border: none;
+    border-bottom: solid 2px #c9c9c9;
+    transition: border 0.3s;
+}
+
+#edit-info input {
+    display: block;
+    margin: 8px;
+    padding: 10px;
+    outline: none;
+    background: #efefef;
+    border: none;
+    border-bottom: solid 2px #c9c9c9;
+    transition: border 0.3s;
+}
+
+#edit-info input:focus {
+    border-bottom: solid 2px #969696;
+}
