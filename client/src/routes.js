@@ -46,10 +46,8 @@ export default (
     <Route path="logout" component={Logout} />
     <Route path="forgot-password" component={ForgotPassword} />
     <Route path="reset-password/:resetToken" component={ResetPassword} />
-
     <Route path="my-profile" component={RequireAuth(MyProfile)} />
     <Route path="edit-info" component={RequireAuth(MyProfile)} />
-
 
     <Route path="dashboard">
       <IndexRoute component={RequireAuth(Dashboard)} />

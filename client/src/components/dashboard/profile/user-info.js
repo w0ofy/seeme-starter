@@ -5,8 +5,10 @@ class UserInfo extends Component {
   render() {
     return (
       <div className="user-info">
-        <div className="user-info-text">
+        <div className="edit-container">
           <Link to="/edit-info">edit profile</Link>
+        </div>
+        <div className="user-info-text">
           <h5>{this.props.firstName} {this.props.lastInitial}</h5>
           <h5>{this.props.email}</h5>
           <h5>{this.props.age}</h5>

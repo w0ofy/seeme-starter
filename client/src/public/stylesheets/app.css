@@ -103,18 +103,64 @@ p.copyright>span {
 
 /* ================= NAV BAR =================*/
 
+.nav-container {
+    padding: 0 2% 0 1%;
+}
+
+.navbar {
+    background: rgba(125, 5, 174, 0.75);
+    height: 6%;
+}
+
+.navbar-default {
+    border: none;
+}
+
 .navbar-default .navbar-brand {
-    color: #009fdc;
+    color: white;
     font-family: Montserrat;
     font-weight: bold;
     font-size: 30px;
+    letter-spacing: 1px;
+}
+
+.navbar-default .navbar-brand:hover {
+    color: white;
+}
+
+.navbar-default .navbar-nav>li>a {
+    color: white
 }
 
 
 /* ================= MY PROFILE =================*/
 
+.edit-container {
+    position: relative;
+    margin-top: 10px;
+    height: 22px;
+}
+
+.edit-container a {
+    letter-spacing: 1px;
+    position: absolute;
+    right: 0;
+    transition: 400ms cubic-bezier(.08, .52, .52, 1) color, 400ms cubic-bezier(.08, .52, .52, 1) opacity;
+}
+
+.edit-container a:hover {
+    text-decoration: none;
+}
+
+.user-container {
+    width: 85%;
+    margin-left: 0%;
+    padding: 1%;
+}
+
 .lookContainer {
     display: flex;
+    width: 50%;
 }
 
 .look {
@@ -124,8 +170,16 @@ p.copyright>span {
     background: lightgreen;
 }
 
+.user-info {
+    width: 50%
+}
+
 .user-info-text {
     display: block;
+}
+
+.user-info-text>a {
+    float: right
 }
 
 .inline {
@@ -180,4 +234,26 @@ p.copyright>span {
 #register select:focus,
 #login input:focus {
     border: solid 1px lightblue;
+}
+
+
+/* ================= REGISTER =================*/
+
+.match-list-container {
+    position: fixed;
+    right: 0;
+    width: 15%;
+    padding: 1%;
+    top: calc(6%);
+    height: calc(94%);
+    background: aliceblue;
+    border-left: 1px solid #3f3f3f
+}
+
+.match {
+    display: block;
+    height: 60px;
+    line-height: 60px;
+    padding: 1%;
+    width: 100%;
 }
