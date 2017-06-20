@@ -9,10 +9,7 @@ export default function (state = INITIAL_STATE, action) {
     case FETCH_MYPROFILE:
       return { ...state, profile: action.payload.user };
     case ERROR_RESPONSE:
-      return { ...state, error: action.payload };
-    case FETCH_EDITPROFILE:
-      return { ...state, error: '', message: '', editclicked: true };
-      
+      return { ...state, error: action.payload };      
   }
   return state;
 }

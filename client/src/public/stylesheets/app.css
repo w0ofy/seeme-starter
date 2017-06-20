@@ -8,6 +8,7 @@ body {
     background: #fff;
     padding-top: 70px;
     padding-bottom: 50px;
+    -webkit-font-smoothing: antialiased;
 }
 
 footer {
@@ -251,6 +252,10 @@ p.copyright>span {
     border: solid 1px lightblue;
 }
 
+#register input::placeholder {
+    color: rgba(0, 159, 220, 0.6);
+}
+
 
 /* ================= REGISTER =================*/
 
@@ -271,6 +276,23 @@ p.copyright>span {
     line-height: 60px;
     padding: 1%;
     width: 100%;
+}
+
+select option {
+    border: 0px;
+    outline: 0px;
+    box-shadow: none;
+}
+
+.err-inp {
+    margin-top: -8px;
+    display: block;
+    right: 27px;
+    top: 46px;
+    position: absolute;
+    color: #9e44c2;
+    font-weight: bold;
+    font-size: 13px;
 }
 
 

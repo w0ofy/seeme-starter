@@ -2,42 +2,43 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Field, reduxForm, formValueSelector } from 'redux-form';
 import { registerUser } from '../../actions/auth';
+import asyncValidate from './validate/asyncValidate'
 
-const form = reduxForm({
-  form: 'register',
-  validate
-});
 
-const renderField = field => (
-  <div>
-    <input {...field.input} />
-    {field.touched && field.error && <div className="error">{field.error}</div>}
+
+const renderField = ({ input, placeholder, type, meta: { asyncValidating, touched, error } }) => (
+  <div className={asyncValidating ? 'async-validating' : ''}>
+    <input {...input} type={type} placeholder={placeholder} />
+    {touched && error && <span className="err-inp">{error}</span>}
   </div>
 );
 
-function validate(formProps) {
-  const errors = {};
+const validate = values => {
+  const errors = {}
 
-  if (!formProps.firstName) {
+  if (!values.firstName) {
     errors.firstName = 'Please enter your first name';
   }
 
-  if (!formProps.lastInitial) {
+  if (!values.lastInitial) {
     errors.lastInitial = 'Please enter your last initial';
   }
 
-  if (!formProps.email) {
+  if (!values.email) {
     errors.email = 'Please enter an email';
   }
 
-  if (!formProps.password) {
+  if (!values.password) {
     errors.password = 'Please enter a password';
   }
-  if (!formProps.age) {
+  if (!values.age) {
     errors.age = 'Please enter your age';
   }
-  if (!formProps.is_male) {
+  if (!values.is_male) {
     errors.is_male = 'Please enter your gender';
+  }
+  if (!values.seeking_male) {
+    errors.is_male = 'Please enter the gender of your future partner';
   }
 
   return errors;
@@ -69,12 +70,12 @@ class Register extends Component {
         {this.renderAlert()}
         <div className="row">
           <div className="col-md-6">
-            
-            <Field name="firstName" component={renderField} type="text" placeholder="First Name"/>
+
+            <Field placeholder="First Name" name="firstName" component={renderField} type="text" />
           </div>
           <div className="col-md-6">
 
-            <Field name="lastInitial" component={renderField} type="text" placeholder="Last Initial"/>
+            <Field name="lastInitial" component={renderField} type="text" placeholder="Last Initial" />
           </div>
         </div>
         <div className="row">
@@ -89,15 +90,20 @@ class Register extends Component {
         </div>
         <div className="row">
           <div className="col-md-6">
-
             <Field name="age" component={renderField} type="text" placeholder="Age" />
           </div>
           <div className="col-md-6">
-            <label>Gender</label>
             <Field name="is_male" component="select">
               <option></option>
               <option value="true">Male</option>
               <option value="false">Female</option>
+            </Field>
+          </div>
+          <div className="col-md-6">
+            <Field name="seeking_male" component="select">
+              <option>Looking to meet a</option>
+              <option value="true">Guy</option>
+              <option value="false">Girl</option>
             </Field>
           </div>
         </div>
@@ -114,5 +120,12 @@ function mapStateToProps(state) {
     authenticated: state.auth.authenticated,
   };
 }
+
+const form = reduxForm({
+  form: 'Register',
+  validate,
+  asyncValidate,
+  asyncBlurFields: [ 'email' ]
+});
 
 export default connect(mapStateToProps, { registerUser })(form(Register));

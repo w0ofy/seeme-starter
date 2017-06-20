@@ -37,7 +37,8 @@ exports.register = function (req, res, next) {
   lastInitial = req.body.lastInitial,
   password = req.body.password,
   age = req.body.age,
-  is_male = req.body.is_male;
+  is_male = req.body.is_male,
+  seeking_male = req.body.seeking_male;
 
   // Return error if no email provided
   if (!email) {
@@ -69,7 +70,8 @@ exports.register = function (req, res, next) {
       firstName, 
       lastInitial,
       age,
-      is_male
+      is_male,
+      seeking_male
     });
 
     user.save((err, user) => {
