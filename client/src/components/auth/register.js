@@ -69,28 +69,28 @@ class Register extends Component {
         {this.renderAlert()}
         <div className="row">
           <div className="col-md-6">
-            <label>First Name</label>
-            <Field name="firstName" component={renderField} type="text" />
+            
+            <Field name="firstName" component={renderField} type="text" placeholder="First Name"/>
           </div>
           <div className="col-md-6">
-            <label>Last Initial</label>
-            <Field name="lastInitial" component={renderField} type="text" />
-          </div>
-        </div>
-        <div className="row">
-          <div className="col-md-6">
-            <label>Email</label>
-            <Field name="email" component={renderField} type="text" />
-          </div>
-          <div className="col-md-6">
-            <label>Password</label>
-            <Field name="password" component={renderField} type="password" />
+
+            <Field name="lastInitial" component={renderField} type="text" placeholder="Last Initial"/>
           </div>
         </div>
         <div className="row">
           <div className="col-md-6">
-            <label>Age</label>
-            <Field name="age" component={renderField} type="text" />
+
+            <Field name="email" component={renderField} type="text" placeholder="Email" />
+          </div>
+          <div className="col-md-6">
+
+            <Field name="password" type="password" component="input" placeholder="Password" />
+          </div>
+        </div>
+        <div className="row">
+          <div className="col-md-6">
+
+            <Field name="age" component={renderField} type="text" placeholder="Age" />
           </div>
           <div className="col-md-6">
             <label>Gender</label>
@@ -101,7 +101,7 @@ class Register extends Component {
             </Field>
           </div>
         </div>
-        <button type="submit" className="btn btn-primary">Register</button>
+        <button type="submit" className="btn btn-success">Sign Up</button>
       </form>
     );
   }

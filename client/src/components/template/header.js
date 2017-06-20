@@ -1,19 +1,24 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router';
+import mui from 'material-ui';
+import MdIconPack from 'react-icons/lib/md';
+import MdPeople from 'react-icons/lib/md/people';
+import MdTouchApp from 'react-icons/lib/md/touch-app';
+import MdExitApp from 'react-icons/lib/md/exit-to-app';
 
 class HeaderTemplate extends Component {
   renderLinks() {
     if (this.props.authenticated) {
       return [
         <li key={`${1}header`}>
-          <Link to="my-profile">Profile</Link>
+          <Link to="my-profile"><MdPeople className="nav-size"/></Link>
         </li>,
         <li key={`${2}header`}>
-          <Link to="sas">Swipe</Link>
+          <Link to="sas"><MdTouchApp className="nav-size"/></Link>
         </li>,
         <li key={`${3}header`}>
-          <Link to="logout">Logout</Link>
+          <Link to="logout"><MdExitApp className="nav-size"/></Link>
         </li>,
       ];
     } else {

@@ -69,9 +69,24 @@ footer {
     display: block
 }
 
+.navbar-nav>li>a {
+    line-height: 50px;
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+}
+
+.nav-size {
+    font-size: 27px;
+}
+
 .navbar-default .navbar-nav>li>a:hover {
-    color: #555;
-    background-color: #e7e7e7
+    color: rgba(63, 30, 76, 0.9);
+    /*color: #555;
+    background-color: #e7e7e7;*/
+}
+
+.navbar-default .navbar-nav>li>a:active {
+    color: white;
 }
 
 .dropdown:hover .dropdown-menu {
@@ -224,7 +239,7 @@ p.copyright>span {
     box-sizing: border-box;
     font-family: montserrat;
     color: #2C3E50;
-    font-size: 13px;
+    font-size: 17px;
     transition: border 0.3s;
     width: 100%;
     outline: none;
@@ -256,4 +271,11 @@ p.copyright>span {
     line-height: 60px;
     padding: 1%;
     width: 100%;
+}
+
+
+/* ================= Add/Remove Classes ================= */
+
+.hundred {
+    width: 100% !important;
 }
