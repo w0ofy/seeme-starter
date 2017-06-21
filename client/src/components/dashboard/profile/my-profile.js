@@ -12,7 +12,7 @@ class MyProfile extends Component {
         // Fetch user data prior to component mounting
         const user = cookie.load('user');
         const userId = user._id;
-        console.log("userID", userId);
+        // console.log("userID", userId);
         this.props.fetchMyProfile(userId);
     }
 
