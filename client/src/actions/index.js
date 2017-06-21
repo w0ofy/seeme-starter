@@ -1,13 +1,27 @@
 import axios from 'axios';
 import cookie from 'react-cookie';
 import { logoutUser } from './auth';
-import { STATIC_ERROR, FETCH_USER, FETCH_MYPROFILE, FETCH_EDITPROFILE } from './types';
+import { STATIC_ERROR, FETCH_USER, FETCH_MYPROFILE, FETCH_EDITPROFILE, AUTH_USER, AUTH_ERROR, UNAUTH_USER, } from './types';
 export const API_URL = 'http://localhost:3000/api';
 export const CLIENT_ROOT_URL = 'http://localhost:8080';
 
 //= ===============================
 // Utility actions
 //= ===============================
+
+export function updateProfile({ email, firstName, age, age_pref_min, age_pref_max }) {
+  return function (dispatch) {
+
+    axios.put(`${API_URL}/user/update`,    
+    { headers: { Authorization: cookie.load('token') }, email, firstName, age, age_pref_min, age_pref_max })
+    .then((response) => {
+      window.location.href = `${CLIENT_ROOT_URL}/my-profile`;
+    })
+    .catch((error) => {
+      errorHandler(dispatch, error.response, AUTH_ERROR);
+    });
+  };
+}
 
 export function fetchMyProfile(uid) {
   return function (dispatch) {

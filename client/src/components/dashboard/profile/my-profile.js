@@ -10,7 +10,6 @@ import UserInfo from './user-info';
 class MyProfile extends Component {
     componentWillMount() {
         // Fetch user data prior to component mounting
-        // uid === UNDEFINED   WTFFFFFFFFFFF
         const user = cookie.load('user');
         const userId = user._id;
         console.log("userID", userId);

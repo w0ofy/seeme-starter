@@ -25,11 +25,11 @@ const validate = values => {
   }
 
   if (!values.email) {
-    errors.email = 'Please enter an email';
+    errors.email = 'Please enter your email';
   }
 
   if (!values.password) {
-    errors.password = 'Please enter a password';
+    errors.password = 'Please enter your super secret password';
   }
   if (!values.age) {
     errors.age = 'Please enter your age';
