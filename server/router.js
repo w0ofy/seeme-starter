@@ -53,6 +53,9 @@ module.exports = function (app) {
   // View user profile route
   userRoutes.get('/:userId', requireAuth, UserController.viewProfile);
 
+  // Update user profile route
+  userRoutes.put('/update', requireAuth, UserController.updateProfile);
+
   // Test protected route
   apiRoutes.get('/protected', requireAuth, (req, res) => {
     res.send({ content: 'The protected test route is functional!' });

@@ -16,7 +16,7 @@ export function loginUser({ email, password }) {
       cookie.save('token', response.data.token, { path: '/' });
       cookie.save('user', response.data.user, { path: '/' });
       dispatch({ type: AUTH_USER });
-      window.location.href = `${CLIENT_ROOT_URL}/dashboard`;
+      window.location.href = `${CLIENT_ROOT_URL}/my-profile`;
     })
     .catch((error) => {
       errorHandler(dispatch, error.response, AUTH_ERROR);
@@ -24,14 +24,15 @@ export function loginUser({ email, password }) {
   };
 }
 
-export function registerUser({ email, firstName, lastInitial, password }) {
+export function registerUser({ email, firstName, lastInitial, password, age, is_male, seeking_male }) {
   return function (dispatch) {
-    axios.post(`${API_URL}/auth/register`, { email, firstName, lastInitial, password })
+
+    axios.post(`${API_URL}/auth/register`, { email, firstName, lastInitial, password, age, is_male, seeking_male })
     .then((response) => {
       cookie.save('token', response.data.token, { path: '/' });
       cookie.save('user', response.data.user, { path: '/' });
       dispatch({ type: AUTH_USER });
-      window.location.href = `${CLIENT_ROOT_URL}/dashboard`;
+      window.location.href = `${CLIENT_ROOT_URL}/my-profile`;
     })
     .catch((error) => {
       errorHandler(dispatch, error.response, AUTH_ERROR);
@@ -97,3 +98,17 @@ export function protectedTest() {
     });
   };
 }
+
+
+const sleep = ms => new Promise(resolve => setTimeout(resolve, ms))
+
+const asyncValidate = (values/*, dispatch */) => {
+  return sleep(1000) // simulate server latency
+    .then(() => {
+      if ([ 'foo@foo.com', 'bar@bar.com' ].includes(values.email)) {
+        throw { email: 'Email already Exists' }
+      }
+    })
+}
+
+export default asyncValidate;

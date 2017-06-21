@@ -10,8 +10,8 @@ import reducers from './reducers/index';
 import ReactGA from 'react-ga';
 import { AUTH_USER } from './actions/types';
 
-// Import stylesheets
-import './public/stylesheets/base.scss';
+// // Import stylesheets
+// import './public/stylesheets/base.scss';
 
 // Initialize Google Analytics
 ReactGA.initialize('UA-000000-01');

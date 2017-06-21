@@ -1,1 +1,303 @@
-@import url(https://fonts.googleapis.com/css?family=Open+Sans:400,600,300,700,400italic);.modal{display:none;position:fixed;z-index:99;left:0;top:0;width:100%;height:100%;overflow:auto;background-color:#000;background-color:rgba(0,0,0,.4)}.modal-container{position:relative;width:100%;height:100%}.modal-content{box-sizing:border-box;background-color:#fefefe;padding:20px;border:1px solid #888;min-width:450px;position:absolute;top:50%;left:50%;transform:translate(-50%,-50%)}.modal-content .close{float:right;transition:color .2s ease-in-out}.modal-content .close:hover{color:"red";cursor:pointer}.modal-content .button-row{max-width:100%;margin-top:20px}.modal.is-open{display:block}body{background:#efefef;padding-top:70px}.navbar-default .navbar-nav>li>a:hover{color:#555;background-color:#e7e7e7}.dropdown:hover .dropdown-menu{display:block}ul.footer-nav{padding:0;margin:0}ul.footer-nav>li{display:inline-block;padding-right:5px}.footer-nav li:after{content:" |"}.footer-nav li:last-of-type:after{content:""}p.copyright>span{color:#777}
+body,
+html {
+    height: 100%;
+    width: 100%;
+}
+
+body {
+    background: #fff;
+    padding-top: 70px;
+    padding-bottom: 50px;
+    -webkit-font-smoothing: antialiased;
+}
+
+footer {
+    position: fixed;
+    bottom: 0;
+}
+
+.wrapper {
+    height: 100%;
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 99;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: #000;
+    background-color: rgba(0, 0, 0, .4)
+}
+
+.modal-container {
+    position: relative;
+    width: 100%;
+    height: 100%
+}
+
+.modal-content {
+    box-sizing: border-box;
+    background-color: #fefefe;
+    padding: 20px;
+    border: 1px solid #888;
+    min-width: 450px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%)
+}
+
+.modal-content .close {
+    float: right;
+    transition: color .2s ease-in-out
+}
+
+.modal-content .close:hover {
+    color: "red";
+    cursor: pointer
+}
+
+.modal-content .button-row {
+    max-width: 100%;
+    margin-top: 20px
+}
+
+.modal.is-open {
+    display: block
+}
+
+.navbar-nav>li>a {
+    line-height: 50px;
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+}
+
+.nav-size {
+    font-size: 27px;
+}
+
+.navbar-default .navbar-nav>li>a:hover {
+    color: rgba(63, 30, 76, 0.9);
+    /*color: #555;
+    background-color: #e7e7e7;*/
+}
+
+.navbar-default .navbar-nav>li>a:active {
+    color: white;
+}
+
+.dropdown:hover .dropdown-menu {
+    display: block
+}
+
+ul.footer-nav {
+    padding: 0;
+    margin: 0
+}
+
+ul.footer-nav>li {
+    display: inline-block;
+    padding-right: 5px
+}
+
+.footer-nav li:after {
+    content: " |"
+}
+
+.footer-nav li:last-of-type:after {
+    content: ""
+}
+
+p.copyright>span {
+    color: #777
+}
+
+
+/* ================= NAV BAR =================*/
+
+.nav-container {
+    padding: 0 2% 0 1%;
+}
+
+.navbar {
+    background: rgba(125, 5, 174, 0.75);
+    height: 6%;
+}
+
+.navbar-default {
+    border: none;
+}
+
+.navbar-default .navbar-brand {
+    color: white;
+    font-family: Montserrat;
+    font-weight: bold;
+    font-size: 30px;
+    letter-spacing: 1px;
+}
+
+.navbar-default .navbar-brand:hover {
+    color: white;
+}
+
+.navbar-default .navbar-nav>li>a {
+    color: white
+}
+
+
+/* ================= MY PROFILE =================*/
+
+.edit-container {
+    position: relative;
+    margin-top: 10px;
+    height: 22px;
+}
+
+.edit-container a {
+    letter-spacing: 1px;
+    position: absolute;
+    right: 0;
+    transition: 400ms cubic-bezier(.08, .52, .52, 1) color, 400ms cubic-bezier(.08, .52, .52, 1) opacity;
+}
+
+.edit-container a:hover {
+    text-decoration: none;
+}
+
+.user-container {
+    width: 85%;
+    margin-left: 0%;
+    padding: 1%;
+}
+
+.lookContainer {
+    display: flex;
+    width: 50%;
+}
+
+.look {
+    flex-direction: column;
+    height: 110px;
+    width: 110px;
+    background: lightgreen;
+}
+
+.user-info {
+    width: 50%
+}
+
+.user-info-text {
+    display: block;
+}
+
+.user-info-text>a {
+    float: right
+}
+
+.inline {
+    display: inline-block !important;
+}
+
+.user-info-text h5 {
+    display: block;
+    margin: 8px;
+    padding: 10px;
+    outline: none;
+    border: none;
+    border-bottom: solid 2px #c9c9c9;
+    transition: border 0.3s;
+}
+
+#edit-info input {
+    display: block;
+    margin: 8px;
+    padding: 10px;
+    outline: none;
+    background: #efefef;
+    border: none;
+    border-bottom: solid 2px #c9c9c9;
+    transition: border 0.3s;
+}
+
+#edit-info input:focus {
+    border-bottom: solid 2px #969696;
+}
+
+
+/* ================= REGISTER =================*/
+
+#register input,
+#register select,
+#login input {
+    padding: 15px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    margin-bottom: 10px;
+    box-sizing: border-box;
+    font-family: montserrat;
+    color: #2C3E50;
+    font-size: 17px;
+    transition: border 0.3s;
+    width: 100%;
+    outline: none;
+}
+
+#register input:focus,
+#register select:focus,
+#login input:focus {
+    border: solid 1px lightblue;
+}
+
+#register input::placeholder {
+    color: rgba(0, 159, 220, 0.6);
+}
+
+
+/* ================= REGISTER =================*/
+
+.match-list-container {
+    position: fixed;
+    right: 0;
+    width: 15%;
+    padding: 1%;
+    top: calc(6%);
+    height: calc(94%);
+    background: aliceblue;
+    border-left: 1px solid #3f3f3f
+}
+
+.match {
+    display: block;
+    height: 60px;
+    line-height: 60px;
+    padding: 1%;
+    width: 100%;
+}
+
+select option {
+    border: 0px;
+    outline: 0px;
+    box-shadow: none;
+}
+
+.err-inp {
+    margin-top: -8px;
+    display: block;
+    right: 27px;
+    top: 46px;
+    position: absolute;
+    color: #9e44c2;
+    font-weight: bold;
+    font-size: 13px;
+}
+
+
+/* ================= Add/Remove Classes ================= */
+
+.hundred {
+    width: 100% !important;
+}

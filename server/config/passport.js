@@ -44,7 +44,9 @@ const jwtLogin = new JwtStrategy(jwtOptions, (payload, done) => {
     if (user) {
       done(null, user);
     } else {
+      console.log("hitme", user);
       done(null, false);
+      
     }
   });
 });

@@ -32,10 +32,13 @@ exports.login = function (req, res, next) {
 //= =======================================
 exports.register = function (req, res, next) {
   // Check for registration errors
-  const email = req.body.email;
-  const firstName = req.body.firstName;
-  const lastInitial = req.body.lastInitial;
-  const password = req.body.password;
+  const email = req.body.email,
+  firstName = req.body.firstName,
+  lastInitial = req.body.lastInitial,
+  password = req.body.password,
+  age = req.body.age,
+  is_male = req.body.is_male,
+  seeking_male = req.body.seeking_male;
 
   // Return error if no email provided
   if (!email) {
@@ -65,7 +68,10 @@ exports.register = function (req, res, next) {
       email,
       password,
       firstName, 
-      lastInitial
+      lastInitial,
+      age,
+      is_male,
+      seeking_male
     });
 
     user.save((err, user) => {

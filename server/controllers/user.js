@@ -6,11 +6,13 @@ const setUserInfo = require('../helpers').setUserInfo;
 //= =======================================
 exports.viewProfile = function (req, res, next) {
   const userId = req.params.userId;
+  console.log(req.user._id);
   // console.log(req.user._id + " " + userId);
-  // need to turn req.user._id to string
+  // console.log("here", req.user._id);
+  // console.log("here", userId);
   if (req.user._id.toString() !== userId) { 
     return res.status(401).json({ error: 'You are not authorized to view this user profile.' }); 
-  }
+  } else{
 
   
   User.findById(userId, (err, user) => {
@@ -22,5 +24,37 @@ exports.viewProfile = function (req, res, next) {
     const userToReturn = setUserInfo(user);
 
     return res.status(200).json({ user: userToReturn });
+  });
+  }
+};
+
+//= =======================================
+// Update Profile Route
+//= =======================================
+exports.updateProfile = function (req, res, next) {
+  // Check for registration errors
+  const email = req.body.email,
+  firstName = req.body.firstName,
+  lastInitial = req.body.lastInitial
+  age = req.body.age,
+  is_male = req.body.is_male,
+  seeking_male = req.body.seeking_male,
+  age_pref_min = req.body.age_pref_min,
+  age_pref_max = req.body.age_pref_max;
+
+
+  var query = { email: email };
+  User.update(query, { 
+    firstName: firstName, 
+    email: email,
+    age: age,
+    age_pref_min: age_pref_min,
+    age_pref_max: age_pref_max
+  }, (err) => {
+    if (err) { return next(err); }
+
+      const userInfo = setUserInfo(user);
+
+      res.status(200).json({ user: userInfo });
   });
 };
