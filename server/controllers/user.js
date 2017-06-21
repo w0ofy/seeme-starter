@@ -35,7 +35,6 @@ exports.viewProfile = function (req, res, next) {
 exports.updateProfile = function (req, res, next) {
   // Check for registration errors
   const emailQuery = req.body.emailQuery,
-    email = req.user.email,
     firstName = req.body.firstName,
     lastInitial = req.user.lastInitial
     age = req.user.age,
@@ -49,7 +48,6 @@ exports.updateProfile = function (req, res, next) {
   var query = { email: emailQuery };
   User.findOneAndUpdate(query, {
     firstName: firstName,
-    email: email,
     age: age,
     age_pref_min: age_pref_min,
     age_pref_max: age_pref_max

@@ -37,7 +37,6 @@ class EditInfo extends Component {
         <form id="edit-info" onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}>
           <Field name="emailQuery" component={renderInvisibleEmail} label={this.props.email} type="text" />
           <Field name="firstName" component={renderField} type="text" label={this.props.firstName} />
-          <Field name="email" component={renderField} type="text" label={this.props.email} />
           <Field name="age" component={renderField} type="text" label={this.props.age} />
           <Field name="age_pref_min" id="min" className="inline" component={renderField} type="text" label={this.props.age_pref_min} />
           <Field name="age_pref_max" id="max" className="inline" component={renderField} type="text" label={this.props.age_pref_max} />
