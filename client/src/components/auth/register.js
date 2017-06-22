@@ -50,13 +50,13 @@ const Register = React.createClass({
           </div>
           <div className="col-md-6">
 
-            <input name="lastInitial"  type="text" onChange={this.updateEmailValue} placeholder="Last Initial" />
+            <input name="lastInitial" type="text" onChange={this.updateEmailValue} placeholder="Last Initial" />
           </div>
         </div>
         <div className="row">
           <div className="col-md-6">
 
-            <input name="email"  type="text" onChange={this.updateEmailValue} placeholder="Email" />
+            <input name="email" type="text" onChange={this.updateEmailValue} placeholder="Email" />
           </div>
           <div className="col-md-6">
 
@@ -65,7 +65,7 @@ const Register = React.createClass({
         </div>
         <div className="row">
           <div className="col-md-6">
-            <input name="age"  type="text" onChange={this.updateEmailValue} placeholder="Age" />
+            <input name="age" type="text" onChange={this.updateEmailValue} placeholder="Age" />
           </div>
           <div className="col-md-6">
             <select name="is_male" onChange={this.updateEmailValue}>
@@ -82,19 +82,21 @@ const Register = React.createClass({
             </select>
           </div>
         </div>
-        <input type="submit" className="btn btn-success">Sign Up</input>
+        <input type="submit" className="btn btn-success" value="Create Profile" />
       </form>
     );
   },
+
   updateEmailValue: function (evt) {
     this.setState({
       email: evt.target.value
-    });
+    })
   },
   updatePasswordValue: function (evt) {
     this.setState({
       password: evt.target.value
-    });
+    })
+  }
 })
 
 module.exports = Register;
