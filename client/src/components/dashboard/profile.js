@@ -12,15 +12,19 @@ const Profile = React.createClass({
         if (user == undefined) {
             window.location.href = 'http://localhost:3000/login';
         } else {
-            const userId = user._id;
-
+            let gender = user.is_male;
+            if (gender === false) {
+                gender = "girl";
+            } else {
+                gender = "guy";
+            }
             this.setState({
                 firstName: user.firstName,
                 lastInitial: user.lastInitial,
                 age: user.age,
                 age_pref_min: user.age_pref_min,
                 age_pref_max: user.age_pref_max,
-                is_male: user.is_male,
+                is_male: gender,
                 seeking_male: user.seeking_male,
             })
         }
@@ -40,18 +44,18 @@ const Profile = React.createClass({
         // }
     },
 
-    check: function () {
+    // check() {
 
-        if (window.location.href.indexOf("edit-info") > -1) {
-            return (
-                <EditInfo firstName={this.state.firstName} lastInitial={this.state.lastInitial} email={this.state.email} age={this.state.age} age_pref_min={this.state.age_pref_min} age_pref_max={this.state.age_pref_max} profile_look={this.state.profile_look} />
-            );
-        } else {
-            return (
-                <UserInfo firstName={this.state.firstName} lastInitial={this.state.lastInitial} email={this.state.email} age={this.state.age} age_pref_min={this.state.age_pref_min} age_pref_max={this.state.age_pref_max} profile_look={this.state.profile_look} />
-            );
-        }
-    },
+    //     if (window.location.href.indexOf("edit-info") > -1) {
+    //         return (
+    //             <EditInfo firstName={this.state.firstName} lastInitial={this.state.lastInitial} email={this.state.email} age={this.state.age} age_pref_min={this.state.age_pref_min} age_pref_max={this.state.age_pref_max} profile_look={this.state.profile_look} />
+    //         );
+    //     } else {
+    //         return (
+    //             <UserInfo firstName={this.state.firstName} lastInitial={this.state.lastInitial} email={this.state.email} age={this.state.age} age_pref_min={this.state.age_pref_min} age_pref_max={this.state.age_pref_max} profile_look={this.state.profile_look} />
+    //         );
+    //     }
+    // },
 
     render: function () {
         return (
@@ -64,7 +68,7 @@ const Profile = React.createClass({
                     <span className="look"></span>
                     <span className="look"></span>
                 </div>
-                {this.check}
+                <UserInfo firstName={this.state.firstName} lastInitial={this.state.lastInitial} is_male={this.state.is_male} age={this.state.age} age_pref_min={this.state.age_pref_min} age_pref_max={this.state.age_pref_max} profile_look={this.state.profile_look} />
             </div>
         );
     }

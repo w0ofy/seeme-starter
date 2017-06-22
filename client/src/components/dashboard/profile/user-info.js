@@ -1,6 +1,6 @@
 
 const React = require('react');
-const Link = require('react-router');
+import { Link } from 'react-router';
 
 const UserInfo = React.createClass({
   render() {
@@ -11,7 +11,7 @@ const UserInfo = React.createClass({
         </div>
         <div className="user-info-text">
           <h5>{this.props.firstName} {this.props.lastInitial}</h5>
-          <h5>{this.props.email}</h5>
+          <h5>{this.props.is_male}</h5>
           <h5>{this.props.age}</h5>
           <h5>{this.props.age_pref_min} to {this.props.age_pref_max}</h5>
         </div>
