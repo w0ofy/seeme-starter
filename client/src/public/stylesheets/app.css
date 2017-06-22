@@ -5,10 +5,28 @@ html {
 }
 
 body {
+    font-family: 'quicksand', 'raleway', sans-serif;
     background: #fff;
     padding-top: 70px;
     padding-bottom: 50px;
     -webkit-font-smoothing: antialiased;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: 'Montserrat', sans-serif;
+}
+
+h1 {
+    font-size: 52px;
+}
+
+h2 {
+    font-size: 38px;
 }
 
 footer {
@@ -22,7 +40,6 @@ footer {
 
 .title {
     text-align: center;
-    font-family: montserrat;
 }
 
 .modal {
@@ -139,7 +156,7 @@ p.copyright>span {
 
 .navbar-default .navbar-brand {
     color: white;
-    font-family: Montserrat;
+    font-family: 'Montserrat', sans-serif;
     font-weight: bold;
     font-size: 30px;
     letter-spacing: 1px;
@@ -207,7 +224,7 @@ p.copyright>span {
     display: inline-block !important;
 }
 
-.user-info-text h5 {
+.user-info-text h3 {
     display: block;
     margin: 8px;
     padding: 10px;
@@ -243,7 +260,7 @@ p.copyright>span {
     border-radius: 3px;
     margin-bottom: 10px;
     box-sizing: border-box;
-    font-family: montserrat;
+    font-family: 'Montserrat', sans-serif;
     color: #2C3E50;
     font-size: 17px;
     transition: border 0.3s;

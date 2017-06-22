@@ -43,7 +43,7 @@ var editInfo = React.createClass({
         window.location.href = 'http://localhost:8080/my-profile';
       })
       .catch((error) => {
-        errorHandler(dispatch, error.response);
+        console.log(error);
       });
   },
 
