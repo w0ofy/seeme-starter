@@ -40,18 +40,18 @@ const Profile = React.createClass({
         // }
     },
 
-    check: function () {
+    // check() {
 
-        if (window.location.href.indexOf("edit-info") > -1) {
-            return (
-                <EditInfo firstName={this.state.firstName} lastInitial={this.state.lastInitial} email={this.state.email} age={this.state.age} age_pref_min={this.state.age_pref_min} age_pref_max={this.state.age_pref_max} profile_look={this.state.profile_look} />
-            );
-        } else {
-            return (
-                <UserInfo firstName={this.state.firstName} lastInitial={this.state.lastInitial} email={this.state.email} age={this.state.age} age_pref_min={this.state.age_pref_min} age_pref_max={this.state.age_pref_max} profile_look={this.state.profile_look} />
-            );
-        }
-    },
+    //     if (window.location.href.indexOf("edit-info") > -1) {
+    //         return (
+    //             <EditInfo firstName={this.state.firstName} lastInitial={this.state.lastInitial} email={this.state.email} age={this.state.age} age_pref_min={this.state.age_pref_min} age_pref_max={this.state.age_pref_max} profile_look={this.state.profile_look} />
+    //         );
+    //     } else {
+    //         return (
+    //             <UserInfo firstName={this.state.firstName} lastInitial={this.state.lastInitial} email={this.state.email} age={this.state.age} age_pref_min={this.state.age_pref_min} age_pref_max={this.state.age_pref_max} profile_look={this.state.profile_look} />
+    //         );
+    //     }
+    // },
 
     render: function () {
         return (
@@ -64,7 +64,7 @@ const Profile = React.createClass({
                     <span className="look"></span>
                     <span className="look"></span>
                 </div>
-                {this.check}
+                <UserInfo firstName={this.state.firstName} lastInitial={this.state.lastInitial} email={this.state.email} age={this.state.age} age_pref_min={this.state.age_pref_min} age_pref_max={this.state.age_pref_max} profile_look={this.state.profile_look} />
             </div>
         );
     }
