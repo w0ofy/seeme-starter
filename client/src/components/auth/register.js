@@ -1,131 +1,82 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { Field, reduxForm, formValueSelector } from 'redux-form';
-import { registerUser } from '../../actions/auth';
-import asyncValidate from './validate/asyncValidate'
+const axios = require('axios');
+const React = require('react');
+import asyncValidate from './validate/asyncValidate';
+
+const Register = React.createClass({
 
 
+  handleSubmit: function (e) {
 
-const renderField = ({ input, placeholder, type, meta: { asyncValidating, touched, error } }) => (
-  <div className={asyncValidating ? 'async-validating' : ''}>
-    <input {...input} type={type} placeholder={placeholder} />
-    {touched && error && <span className="err-inp">{error}</span>}
-  </div>
-);
+    axios.post(`${API_URL}/auth/register`, {
+      email,
+      firstName,
+      lastInitial,
+      password,
+      age,
+      is_male,
+      seeking_male
+    })
+      .then((response) => {
+        cookie.save('token', response.data.token, { path: '/' });
+        cookie.save('user', response.data.user, { path: '/' });
 
-const validate = values => {
-  const errors = {}
-
-  if (!values.firstName) {
-    errors.firstName = 'Please enter your first name';
-  }
-
-  if (!values.lastInitial) {
-    errors.lastInitial = 'Please enter your last initial';
-  }
-
-  if (!values.email) {
-    errors.email = 'Please enter your email';
-  }
-
-  if (!values.password) {
-    errors.password = 'Please enter your super secret password';
-  }
-  if (!values.age) {
-    errors.age = 'Please enter your age';
-  }
-  if (!values.is_male) {
-    errors.is_male = 'Please enter your gender';
-  }
-  if (!values.seeking_male) {
-    errors.is_male = 'Please enter the gender of your future partner';
-  }
-
-  return errors;
-}
-
-class Register extends Component {
+        window.location.href = `${CLIENT_ROOT_URL}/my-profile`;
+      })
+      .catch((error) => {
+        errorHandler(dispatch, error.response, AUTH_ERROR);
+      });
+  },
 
 
-  handleFormSubmit(formProps) {
-    this.props.registerUser(formProps);
-  }
-
-
-  renderAlert() {
-    if (this.props.errorMessage) {
-      return (
-        <div>
-          <span><strong>Error!</strong> {this.props.errorMessage}</span>
-        </div>
-      );
-    }
-  }
-
-  render() {
+  render: function () {
     const { handleSubmit } = this.props;
 
     return (
       <form id="register" onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}>
-        {this.renderAlert()}
+
         <div className="row">
           <div className="col-md-6">
 
-            <Field placeholder="First Name" name="firstName" component={renderField} type="text" />
+            <input placeholder="First Name" name="firstName"  type="text" />
           </div>
           <div className="col-md-6">
 
-            <Field name="lastInitial" component={renderField} type="text" placeholder="Last Initial" />
+            <input name="lastInitial"  type="text" placeholder="Last Initial" />
           </div>
         </div>
         <div className="row">
           <div className="col-md-6">
 
-            <Field name="email" component={renderField} type="text" placeholder="Email" />
+            <input name="email"  type="text" placeholder="Email" />
           </div>
           <div className="col-md-6">
 
-            <Field name="password" type="password" component="input" placeholder="Password" />
+            <input name="password" type="password" component="input" placeholder="Password" />
           </div>
         </div>
         <div className="row">
           <div className="col-md-6">
-            <Field name="age" component={renderField} type="text" placeholder="Age" />
+            <input name="age"  type="text" placeholder="Age" />
           </div>
           <div className="col-md-6">
-            <Field name="is_male" component="select">
+            <select name="is_male" component="select">
               <option></option>
               <option value="true">Male</option>
               <option value="false">Female</option>
-            </Field>
+            </select>
           </div>
           <div className="col-md-6">
-            <Field name="seeking_male" component="select">
+            <select name="seeking_male" component="select">
               <option>Looking to meet a</option>
               <option value="true">Guy</option>
               <option value="false">Girl</option>
-            </Field>
+            </select>
           </div>
         </div>
-        <button type="submit" className="btn btn-success">Sign Up</button>
+        <input type="submit" className="btn btn-success">Sign Up</input>
       </form>
     );
   }
-}
+})
 
-function mapStateToProps(state) {
-  return {
-    errorMessage: state.auth.error,
-    message: state.auth.message,
-    authenticated: state.auth.authenticated,
-  };
-}
-
-const form = reduxForm({
-  form: 'Register',
-  validate,
-  asyncValidate,
-  asyncBlurFields: [ 'email' ]
-});
-
-export default connect(mapStateToProps, { registerUser })(form(Register));
+module.exports = Register;

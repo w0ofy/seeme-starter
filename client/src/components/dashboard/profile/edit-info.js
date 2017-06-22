@@ -1,62 +1,67 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { Field, reduxForm, formValueSelector } from 'redux-form';
-import { updateProfile } from '../../../actions/auth';
-// import InputRange from 'react-input-range';
+const axios = require('axios');
+const React = require('react');
 
-const form = reduxForm({
-  form: 'EditInfo'
-});
+var editInfo = React.createClass({
 
-const renderField = ({ label, input, placeholder, type, meta: { asyncValidating, touched, error } }) => (
-  <div className={asyncValidating ? 'async-validating' : ''}>
-    <input {...input} type={type} placeholder={label} value={label} />
-    {touched && error && <span className="err-inp">{error}</span>}
-  </div>
-);
+  getInitialState: function () {
+    return {
+      firstName: "",
+      email: "",
+      age: "",
+      age_pref_min: "",
+      age_pref_max: "",
+    }
+  },
 
-class EditInfo extends Component {
+  handleChange: function (key) {
+    return function (e) {
+      var state = {};
+      state[key] = e.target.value;
+      this.setState(state);
+    }.bind(this);
+  },
 
-  handleChange() {
-    this.props.onUserInput(
-      this.setState({
-        firstName: value,
-        email: value,
-        age: value,
-        age_pref_min: value,
-        age_pref_max: value
+  handleFormSubmit: function (event) {
+
+    event.preventDefault();
+
+    let userProfile = this.state;
+
+    console.log(userProfile);
+
+    for (var prop in userProfile) {
+      if (userProfile[prop] === "") {
+        userProfile[prop] = this.props[prop];
+        console.log(userProfile[prop]);
+      };
+    };
+
+    axios.put('http://localhost:3000/api/user/update', { firstName, email, age, age_pref_min, age_pref_max }, 
+    { headers: { Authorization: cookie.load('token') } })
+      .then((response) => {
+
+        window.location.href = 'http://localhost:8080/my-profile';
       })
-    )
-  }
-  handleFormSubmit(formProps) {
-    this.props.updateProfile(formProps);
-  }
-  render() {
-    const { handleSubmit } = this.props;
+      .catch((error) => {
+        errorHandler(dispatch, error.response);
+      });
+  },
+
+  render: function () {
     return (
       <div className="edit-info">
-        <form id="edit-info" onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}>
-          <Field onChange={this.handleChange} name="firstName" component={renderField} type="text" label={this.props.firstName} />
-          <Field onChange={this.handleChange} name="email" component={renderField} type="text" label={this.props.email} />
-          <Field onChange={this.handleChange} name="age" component={renderField} type="text" label={this.props.age} />
-          <Field onChange={this.handleChange} name="age_pref_min" id="min" className="inline" component={renderField} type="text" label={this.props.age_pref_min} />
-          <Field onChange={this.handleChange} name="age_pref_max" id="max" className="inline" component={renderField} type="text" label={this.props.age_pref_max} />
+        <form id="edit-info" onSubmit={this.handleFormSubmit}>
+          <input onChange={this.handleChange("firstName")} name="firstName" type="text" placeholder={this.props.firstName} />
+          <input onChange={this.handleChange("email")} name="email" type="text" placeholder={this.props.email} />
+          <input onChange={this.handleChange("age")} name="age" type="text" placeholder={this.props.age} />
+          <input onChange={this.handleChange("age_pref_min")} name="age_pref_min" id="min" className="inline" type="text" placeholder={this.props.age_pref_min} />
+          <input onChange={this.handleChange("age_pref_max")} name="age_pref_max" id="max" className="inline" type="text" placeholder={this.props.age_pref_max} />
           <button type="submit" className="btn btn-success">Save Profile Info</button>
         </form>
       </div>
     );
   }
-}
-
-function mapStateToProps(state) {
-  return {
-    errorMessage: state.auth.error,
-    message: state.auth.message,
-    authenticated: state.auth.authenticated,
-  };
-}
-
-
+});
 
 // export default EditInfo;
-export default connect(mapStateToProps, { updateProfile })(form(EditInfo));
+module.exports = editInfo

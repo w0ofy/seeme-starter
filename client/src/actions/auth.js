@@ -24,9 +24,9 @@ export function loginUser({ email, password }) {
   };
 }
 
-export function updateProfile({ email, firstName, age, age_pref_min, age_pref_max }) {
+export function updateProfile({ emailQuery, firstName, age, age_pref_min, age_pref_max }) {
   return function (dispatch) {
-    axios.put(`${API_URL}/user/update`, { email, firstName, age, age_pref_min, age_pref_max }, { headers: { Authorization: cookie.load('token') } })
+    axios.put(`${API_URL}/user/update`, { emailQuery, firstName, age, age_pref_min, age_pref_max }, { headers: { Authorization: cookie.load('token') } })
       .then((response) => {
 
         window.location.href = `${CLIENT_ROOT_URL}/my-profile`;

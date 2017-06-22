@@ -1,43 +1,45 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { Field, reduxForm } from 'redux-form';
 import { Link } from 'react-router';
-import { loginUser } from '../../actions/auth';
+const axios = require('axios');
+const React = require('react');
+const cookie = require('react-cookie');
 
-const form = reduxForm({
-  form: 'login',
-});
+const Login = React.createClass({
+  getInitialState: function () {
+    return {
+      email: '',
+      password: ''
+    };
+  },
+  handleSubmit: function (e) {
+    e.preventDefault();
+    axios.post('http://localhost:3000/api/auth/login', {
+      email: this.state.email,
+      password: this.state.password
+    })
+      .then((response) => {
+        cookie.save('token', response.data.token, { path: '/' });
+        cookie.save('user', response.data.user, { path: '/' });
+        window.location.href = "http://localhost:8080/my-profile";
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  },
 
-class Login extends Component {
-  handleFormSubmit(formProps) {
-    this.props.loginUser(formProps);
-  }
-
-  renderAlert() {
-    if (this.props.errorMessage) {
-      return (
-        <div>
-          <span><strong>Error!</strong> {this.props.errorMessage}</span>
-        </div>
-      );
-    }
-  }
-
-  render() {
-    const { handleSubmit } = this.props;
+  render: function () {
 
     return (
       <div className="row">
         <div className="col-sm-6 col-sm-offset-3 col-xs-12">
-          <form id="login" onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}>
-            {this.renderAlert()}
+          <form id="login" onSubmit={this.handleSubmit}>
+
             <div>
               <label>Email</label>
-              <Field name="email" component="input" type="text" />
+              <input name="email" type="text" onChange={this.updateEmailValue} ref="email" />
             </div>
             <div>
               <label>Password</label>
-              <Field name="password" component="input" type="password" />
+              <input name="password" type="password" onChange={this.updatePasswordValue} ref="password" />
             </div>
             <button type="submit" className="btn btn-primary">Login</button>
           </form>
@@ -45,15 +47,17 @@ class Login extends Component {
         </div>
       </div>
     );
+  },
+  updateEmailValue: function (evt) {
+    this.setState({
+      email: evt.target.value
+    });
+  },
+  updatePasswordValue: function (evt) {
+    this.setState({
+      password: evt.target.value
+    });
   }
-}
+})
 
-function mapStateToProps(state) {
-  return {
-    errorMessage: state.auth.error,
-    message: state.auth.message,
-    authenticated: state.auth.authenticated,
-  };
-}
-
-export default connect(mapStateToProps, { loginUser })(form(Login));
+module.exports = Login;

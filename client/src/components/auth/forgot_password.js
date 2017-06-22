@@ -1,11 +1,5 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { Field, reduxForm } from 'redux-form';
 import { getForgotPasswordToken } from '../../actions/auth';
-
-const form = reduxForm({
-  form: 'forgotPassword',
-});
 
 class ForgotPassword extends Component {
   static contextTypes = {
@@ -52,14 +46,6 @@ class ForgotPassword extends Component {
       </form>
     );
   }
-}
-
-function mapStateToProps(state) {
-  return {
-    errorMessage: state.auth.error,
-    message: state.auth.message,
-    authenticated: state.auth.authenticated,
-  };
 }
 
 export default connect(mapStateToProps, { getForgotPasswordToken })(form(ForgotPassword));

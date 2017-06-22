@@ -28,36 +28,36 @@ exports.viewProfile = function (req, res, next) {
   }
 };
 
+
 //= =======================================
 // Update Profile Route
 //= =======================================
 exports.updateProfile = function (req, res, next) {
   // Check for registration errors
-  const email = req.body.email,
+  const emailQuery = req.body.emailQuery,
     firstName = req.body.firstName,
     lastInitial = req.body.lastInitial
-  age = req.body.age,
+    age = req.body.age,
     is_male = req.body.is_male,
     seeking_male = req.body.seeking_male,
     age_pref_min = req.body.age_pref_min,
     age_pref_max = req.body.age_pref_max;
+    console.log("body", req.body);
 
-  var query = { email: email };
-  User.update(query, {
+  var query = { email: emailQuery };
+  User.findOneAndUpdate(query, {
     firstName: firstName,
-    email: email,
     age: age,
     age_pref_min: age_pref_min,
     age_pref_max: age_pref_max
-  }, function (err, user) {
+  }, (err, user) => {
     if (err) {
       console.log("Something wrong when updating data!");
     }
-
+ 
     const userInfo = setUserInfo(user);
 
     res.status(201).json({
-      token: `JWT ${generateToken(userInfo)}`,
       user: userInfo
     });
   });
