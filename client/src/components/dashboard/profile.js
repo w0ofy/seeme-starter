@@ -64,7 +64,7 @@ const Profile = React.createClass({
                     <span className="look"></span>
                     <span className="look"></span>
                 </div>
-                <UserInfo firstName={this.state.firstName} lastInitial={this.state.lastInitial} email={this.state.email} age={this.state.age} age_pref_min={this.state.age_pref_min} age_pref_max={this.state.age_pref_max} profile_look={this.state.profile_look} />
+                <UserInfo firstName={this.state.firstName} lastInitial={this.state.lastInitial} is_male={this.state.is_male} age={this.state.age} age_pref_min={this.state.age_pref_min} age_pref_max={this.state.age_pref_max} profile_look={this.state.profile_look} />
             </div>
         );
     }
