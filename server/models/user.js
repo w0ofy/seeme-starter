@@ -104,7 +104,8 @@ const UserSchema = new Schema({
     role: {
         type: String,
         default: ROLE_MEMBER
-    }
+    },
+    logged_in: Boolean
 },
 
     {

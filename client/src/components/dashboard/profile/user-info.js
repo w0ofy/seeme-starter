@@ -1,7 +1,8 @@
-import React, { Component } from 'react';
-import { Link } from 'react-router';
 
-class UserInfo extends Component {
+const React = require('react');
+const Link = require('react-router');
+
+const UserInfo = React.createClass({
   render() {
     return (
       <div className="user-info">
@@ -17,6 +18,6 @@ class UserInfo extends Component {
       </div>
     );
   }
-}
+})
 
-export default UserInfo;
+module.exports = UserInfo;

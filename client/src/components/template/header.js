@@ -1,24 +1,26 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
 import { Link } from 'react-router';
 import mui from 'material-ui';
 import MdIconPack from 'react-icons/lib/md';
 import MdPeople from 'react-icons/lib/md/people';
 import MdTouchApp from 'react-icons/lib/md/touch-app';
 import MdExitApp from 'react-icons/lib/md/exit-to-app';
+const cookie = require('react-cookie');
 
-class HeaderTemplate extends Component {
+const Header = React.createClass({
   renderLinks() {
-    if (this.props.authenticated) {
+    const user = cookie.load('user')
+    console.log(user);
+    if (user !== undefined) {
       return [
         <li key={`${1}header`}>
-          <Link to="my-profile"><MdPeople className="nav-size"/></Link>
+          <Link to="my-profile"><MdPeople className="nav-size" /></Link>
         </li>,
         <li key={`${2}header`}>
-          <Link to="sas"><MdTouchApp className="nav-size"/></Link>
+          <Link to="sas"><MdTouchApp className="nav-size" /></Link>
         </li>,
         <li key={`${3}header`}>
-          <Link to="logout"><MdExitApp className="nav-size"/></Link>
+          <Link to="logout"><MdExitApp className="nav-size" /></Link>
         </li>,
       ];
     } else {
@@ -35,9 +37,9 @@ class HeaderTemplate extends Component {
         </li>,
       ];
     }
-  }
+  },
 
-  render() {
+  render: function () {
     return (
       <div>
         <nav className="navbar navbar-default navbar-fixed-top">
@@ -61,12 +63,6 @@ class HeaderTemplate extends Component {
       </div>
     );
   }
-}
+})
 
-function mapStateToProps(state) {
-  return {
-    authenticated: state.auth.authenticated,
-  };
-}
-
-export default connect(mapStateToProps)(HeaderTemplate);
+module.exports = Header;

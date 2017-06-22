@@ -5,7 +5,7 @@ const ROLE_MEMBER = require('./constants').ROLE_MEMBER;
 
 // Set user info from request
 exports.setUserInfo = function setUserInfo(request) {
-  console.log("request", request);
+  // console.log("request", request);
   const getUserInfo = {
     _id: request._id,
     firstName: request.firstName,
