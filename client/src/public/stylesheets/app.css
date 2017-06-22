@@ -20,6 +20,11 @@ footer {
     height: 100%;
 }
 
+.title {
+    text-align: center;
+    font-family: montserrat;
+}
+
 .modal {
     display: none;
     position: fixed;
