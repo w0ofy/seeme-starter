@@ -1,12 +1,13 @@
 const axios = require('axios');
 const React = require('react');
-
-var editInfo = React.createClass({
+const cookie = require('react-cookie');
+const editInfo = React.createClass({
 
   getInitialState: function () {
     return {
       firstName: "",
-      email: "",
+      is_male: "",
+      seeking_male: "",
       age: "",
       age_pref_min: "",
       age_pref_max: "",
@@ -15,31 +16,42 @@ var editInfo = React.createClass({
 
   handleChange: function (key) {
     return function (e) {
-      var state = {};
+      let state = {};
       state[key] = e.target.value;
       this.setState(state);
     }.bind(this);
   },
 
-  handleFormSubmit: function (event) {
+  handleFormSubmit: function (e) {
 
-    event.preventDefault();
+    e.preventDefault();
 
     let userProfile = this.state;
 
     console.log(userProfile);
 
-    for (var prop in userProfile) {
+    for (let prop in userProfile) {
       if (userProfile[prop] === "") {
         userProfile[prop] = this.props[prop];
         console.log(userProfile[prop]);
       };
     };
 
-    axios.put('http://localhost:3000/api/user/update', { firstName, email, age, age_pref_min, age_pref_max }, 
-    { headers: { Authorization: cookie.load('token') } })
+    const user = cookie.load('user');
+    const emailQuery = user.email;
+    axios.put('http://localhost:3000/api/user/update', {
+      emailQuery: emailQuery,
+      firstName: userProfile.firstName,
+      is_male: userProfile.is_male,
+      seeking_male: userProfile.seeking_male,
+      age: userProfile.age,
+      age_pref_min: userProfile.age_pref_min,
+      age_pref_max: userProfile.age_pref_max
+    },
+      { headers: { Authorization: cookie.load('token') } })
       .then((response) => {
-
+        cookie.save('token', response.data.token, { path: '/' });
+        cookie.save('user', response.data.user, { path: '/' });
         window.location.href = 'http://localhost:8080/my-profile';
       })
       .catch((error) => {
@@ -52,7 +64,8 @@ var editInfo = React.createClass({
       <div className="edit-info">
         <form id="edit-info" onSubmit={this.handleFormSubmit}>
           <input onChange={this.handleChange("firstName")} name="firstName" type="text" placeholder={this.props.firstName} />
-          <input onChange={this.handleChange("email")} name="email" type="text" placeholder={this.props.email} />
+          <input onChange={this.handleChange("is_male")} name="is_male" type="text" placeholder={this.props.is_male} />
+          <input onChange={this.handleChange("is_male")} name="is_male" type="text" placeholder={this.props.seeking_male} />
           <input onChange={this.handleChange("age")} name="age" type="text" placeholder={this.props.age} />
           <input onChange={this.handleChange("age_pref_min")} name="age_pref_min" id="min" className="inline" type="text" placeholder={this.props.age_pref_min} />
           <input onChange={this.handleChange("age_pref_max")} name="age_pref_max" id="max" className="inline" type="text" placeholder={this.props.age_pref_max} />
