@@ -5,6 +5,7 @@ import MdIconPack from 'react-icons/lib/md';
 import MdPeople from 'react-icons/lib/md/people';
 import MdTouchApp from 'react-icons/lib/md/touch-app';
 import MdExitApp from 'react-icons/lib/md/exit-to-app';
+const HeaderLogin = require('../auth/header-login')
 const cookie = require('react-cookie');
 
 const Header = React.createClass({
@@ -21,20 +22,14 @@ const Header = React.createClass({
         </li>,
         <li key={`${3}header`}>
           <Link to="logout"><MdExitApp className="nav-size" /></Link>
-        </li>,
+        </li>
       ];
     } else {
       return [
         // Unauthenticated navigation
-        <li key={1}>
-          <Link to="/">Home</Link>
-        </li>,
-        <li key={2}>
-          <Link to="login">Login</Link>
-        </li>,
-        <li key={3}>
-          <Link to="register">Register</Link>
-        </li>,
+        <li>
+          <HeaderLogin />
+        </li>
       ];
     }
   },

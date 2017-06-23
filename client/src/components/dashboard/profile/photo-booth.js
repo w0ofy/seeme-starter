@@ -1,11 +1,11 @@
-import React, { Component } from 'react';
+const React = require('react');
 import { Link } from 'react-router';
 
-class PhotoBooth extends Component {
+const PhotoBooth = React.createClass({
 
-    constructor(props) {
-        super(props);
-    }
+    // constructor(props) {
+    //     // super(props);
+    // },
 
     render() {
 
@@ -19,17 +19,17 @@ class PhotoBooth extends Component {
                 <WebRtc obj={object} />
             </div>
         );
-    };
-}
+    }
+})
 
-class WebRtc extends Component {
+const WebRtc = React.createClass({
 
     constructor(props) {
-        super(props);
+        // super(props);
         this.addVideo = this.addVideo.bind(this);
         this.removeVideo = this.removeVideo.bind(this);
         this.readyToCall = this.readyToCall.bind(this);
-    }
+    },
     componentDidMount() {
         this.webrtc = new SimpleWebRTC({
             localVideoEl: ReactDOM.findDOMNode(this.refs.local),
@@ -42,7 +42,7 @@ class WebRtc extends Component {
         this.webrtc.on('videoAdded', this.addVideo);
         this.webrtc.on('videoRemoved', this.removeVideo);
         this.webrtc.on('readyToCall', this.readyToCall);
-    }
+    },
 
     addVideo(video, peer) {
         console.log('video added', peer);
@@ -61,7 +61,7 @@ class WebRtc extends Component {
             console.log(container);
             remotes.appendChild(container);
         }
-    }
+    },
 
     removeVideo(video, peer) {
         console.log('video removed ', peer);
@@ -70,19 +70,19 @@ class WebRtc extends Component {
         if (remotes && el) {
             remotes.removeChild(el);
         }
-    }
+    },
 
     readyToCall() {
         return this.webrtc.joinRoom(this.props.obj.roomname);
-    }
+    },
 
     connect() {
         console.log("connected");
-    }
+    },
 
     disconnect() {
         console.log("disconnected");
-    }
+    },
 
     render() {
         return (
@@ -97,6 +97,8 @@ class WebRtc extends Component {
             </div>
         );
     }
-}
+})
 
-export default PhotoBooth;
+module.exports =
+    PhotoBooth,
+    WebRtc;

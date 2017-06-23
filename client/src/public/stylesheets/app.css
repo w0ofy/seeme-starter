@@ -23,6 +23,7 @@ h6 {
 
 h1 {
     font-size: 52px;
+    font-weight: 400;
 }
 
 h2 {
@@ -170,8 +171,39 @@ p.copyright>span {
     color: white
 }
 
+.header-login {
+    line-height: 35px;
+    margin-top: 6px;
+}
+
+.l-input-ct {
+    float: left
+}
+
+.l-input-ct input {
+    margin-left: 15px;
+    margin-right: 15px;
+    border: 1px solid #ccc;
+    border-radius: 2px;
+    box-sizing: border-box;
+    font-family: 'Quicksand', sans-serif;
+    color: #2C3E50;
+    font-size: 14px;
+    transition: border 0.5s;
+    outline: none;
+}
+
 
 /* ================= MY PROFILE =================*/
+
+.add-look {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 25%;
+    height: 25%;
+    border: none;
+}
 
 .edit-container {
     position: relative;
@@ -202,6 +234,7 @@ p.copyright>span {
 }
 
 .look {
+    position: relative;
     flex-direction: column;
     height: 110px;
     width: 110px;

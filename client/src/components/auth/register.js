@@ -70,16 +70,16 @@ const Register = React.createClass({
           </div>
           <div className="col-md-6">
             <select name="is_male" onChange={this.handleInputChange}>
-              <option></option>
-              <option value="true">Male</option>
-              <option value="false">Female</option>
+              <option>I am a</option>
+              <option value="true">Guy</option>
+              <option value="false">Girl</option>
             </select>
           </div>
           <div className="col-md-6">
             <select name="seeking_male" onChange={this.handleInputChange}>
               <option>Looking to meet a</option>
-              <option value="true">Guy</option>
               <option value="false">Girl</option>
+              <option value="true">Guy</option>
             </select>
           </div>
         </div>
