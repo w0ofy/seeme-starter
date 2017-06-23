@@ -26,7 +26,7 @@ const customStyles = {
     }
 };
 
-class PhotoBoothModal extends React.Component {
+class makeMain extends React.Component {
     constructor() {
         super();
 
@@ -74,4 +74,4 @@ class PhotoBoothModal extends React.Component {
     }
 }
 
-export default PhotoBoothModal;
+export default MakeMain;

@@ -3,6 +3,9 @@ const axios = require('axios');
 const React = require('react');
 const EditInfo = require('./profile/edit-info');
 const UserInfo = require('./profile/user-info');
+import PhotoBoothModal from './profile/photo-booth-modal';
+
+// const PhotoBooth = require('./profile/photo-booth');
 
 const Profile = React.createClass({
     componentWillMount() {
@@ -61,12 +64,12 @@ const Profile = React.createClass({
         return (
             <div>
                 <div className="lookContainer">
-                    <span className="look"></span>
-                    <span className="look"></span>
-                    <span className="look"></span>
-                    <span className="look"></span>
-                    <span className="look"></span>
-                    <span className="look"></span>
+                    <span className="look"><PhotoBoothModal /></span>
+                    <span className="look"><PhotoBoothModal /></span>
+                    <span className="look"><PhotoBoothModal /></span>
+                    <span className="look"><PhotoBoothModal /></span>
+                    <span className="look"><PhotoBoothModal /></span>
+                    <span className="look"><PhotoBoothModal /></span>
                 </div>
                 <UserInfo firstName={this.state.firstName} lastInitial={this.state.lastInitial} is_male={this.state.is_male} age={this.state.age} age_pref_min={this.state.age_pref_min} age_pref_max={this.state.age_pref_max} profile_look={this.state.profile_look} />
             </div>

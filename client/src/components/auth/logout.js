@@ -11,7 +11,7 @@ const Logout = React.createClass({
     cookie.remove('token', { path: '/' });
     cookie.remove('user', { path: '/' });
 
-    window.location.href = 'http://localhost:8080/login'
+    window.location.href = 'http://localhost:8080/'
   },
   componentWillMount() {
     {this.logoutUser()}
