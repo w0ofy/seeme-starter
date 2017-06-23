@@ -39,52 +39,62 @@ const Register = React.createClass({
 
 
   render: function () {
-    const { handleSubmit } = this.props;
+    // const { handleSubmit } = this.props;
 
     return (
-      <form id="register" onSubmit={this.handleSubmit}>
+      <div className="register-container">
+        <form id="register" onSubmit={this.handleSubmit}>
 
-        <div className="row">
-          <div className="col-md-6">
+          <div className="row">
+            <div className="col-md-6">
+              <div className="row">
+                <div className="col-md-6">
+                  <input placeholder="First Name" name="firstName" onChange={this.handleInputChange} value={this.state.firstName} type="text" />
+                </div>
+                <div className="col-md-6">
+                  <input name="lastInitial" onChange={this.handleInputChange} value={this.state.lastInitial} placeholder="Last Initial" type="text" />
+                </div>
+              </div>
+            </div>
+            <div className="col-md-6">
+              <input name="age" type="text" onChange={this.handleInputChange} value={this.state.age} placeholder="Age" />
 
-            <input placeholder="First Name" name="firstName" onChange={this.handleInputChange} value={this.state.firstName} type="text" />
+            </div>
           </div>
-          <div className="col-md-6">
+          <div className="row">
+            <div className="col-md-6">
 
-            <input name="lastInitial" onChange={this.handleInputChange} value={this.state.lastInitial} placeholder="Last Initial" type="text" />
-          </div>
-        </div>
-        <div className="row">
-          <div className="col-md-6">
+              <input name="email" type="text" onChange={this.handleInputChange} value={this.state.email} placeholder="Email" />
+            </div>
+            <div className="col-md-6">
+              <select name="is_male" onChange={this.handleInputChange}>
+                <option>I am a</option>
+                <option value="true">Guy</option>
+                <option value="false">Girl</option>
+              </select>
 
-            <input name="email" type="text" onChange={this.handleInputChange} value={this.state.email} placeholder="Email" />
+            </div>
           </div>
-          <div className="col-md-6">
+          <div className="row">
+            <div className="col-md-6">
+              <input name="password" type="password" onChange={this.handleInputChange} value={this.state.password} placeholder="Password" />
 
-            <input name="password" type="password" onChange={this.handleInputChange} value={this.state.password} placeholder="Password" />
+            </div>
+            <div className="col-md-6">
+              <select name="seeking_male" onChange={this.handleInputChange}>
+                <option>Looking to meet a</option>
+                <option value="false">Girl</option>
+                <option value="true">Guy</option>
+              </select>
+            </div>
           </div>
-        </div>
-        <div className="row">
-          <div className="col-md-6">
-            <input name="age" type="text" onChange={this.handleInputChange} value={this.state.age} placeholder="Age" />
+          <div className="row">
+            <div className="col-xs-6 col-sm-3">
+              <input type="submit" className="btn btn-success" value="Create Profile" />
+            </div>
           </div>
-          <div className="col-md-6">
-            <select name="is_male" onChange={this.handleInputChange}>
-              <option>I am a</option>
-              <option value="true">Guy</option>
-              <option value="false">Girl</option>
-            </select>
-          </div>
-          <div className="col-md-6">
-            <select name="seeking_male" onChange={this.handleInputChange}>
-              <option>Looking to meet a</option>
-              <option value="false">Girl</option>
-              <option value="true">Guy</option>
-            </select>
-          </div>
-        </div>
-        <input type="submit" className="btn btn-success" value="Create Profile" />
-      </form>
+        </form>
+      </div>
     );
   },
 

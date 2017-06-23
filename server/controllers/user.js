@@ -1,5 +1,12 @@
 const User = require('../models/user');
 const setUserInfo = require('../helpers').setUserInfo;
+const jwt = require('jsonwebtoken');
+const config = require('../config/main');
+function generateToken(user) {
+  return jwt.sign(user, config.secret, {
+    expiresIn: 604800 // in seconds
+  });
+}
 
 //= =======================================
 // User Routes
@@ -37,16 +44,19 @@ exports.updateProfile = function (req, res, next) {
   const emailQuery = req.body.emailQuery,
     firstName = req.body.firstName,
     lastInitial = req.body.lastInitial
-    age = req.body.age,
+  age = req.body.age,
     is_male = req.body.is_male,
     seeking_male = req.body.seeking_male,
     age_pref_min = req.body.age_pref_min,
     age_pref_max = req.body.age_pref_max;
-    console.log("body", req.body);
+  // console.log("body", req.body);
 
   var query = { email: emailQuery };
+
   User.findOneAndUpdate(query, {
     firstName: firstName,
+    is_male: is_male,
+    seeking_male: seeking_male,
     age: age,
     age_pref_min: age_pref_min,
     age_pref_max: age_pref_max
@@ -54,11 +64,14 @@ exports.updateProfile = function (req, res, next) {
     if (err) {
       console.log("Something wrong when updating data!");
     }
- 
-    const userInfo = setUserInfo(user);
-
-    res.status(201).json({
-      user: userInfo
+    User.findOne({ email: emailQuery }, (err, updatedUser) => {
+      const userInfo = setUserInfo(updatedUser);
+      console.log("userInfo", userInfo);
+      res.status(201).json({
+        token: `JWT ${generateToken(userInfo)}`,
+        user: userInfo
+      });
     });
+
   });
 };

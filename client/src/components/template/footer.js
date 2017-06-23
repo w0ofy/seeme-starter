@@ -10,7 +10,7 @@ const Footer = React.createClass({
         <div className="container">
           <div className="row">
             <div className="col-lg-12">
-              <p className="copyright">© 2017, seeme. All Rights Reserved.</p>
+              <p className="copyright">© 2017, seemē. All Rights Reserved.</p>
             </div>
           </div>
         </div>

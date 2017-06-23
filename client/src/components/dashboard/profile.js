@@ -10,10 +10,10 @@ import PhotoBoothModal from './profile/photo-booth-modal';
 const Profile = React.createClass({
     componentWillMount() {
         // Fetch user data prior to component mounting
-        const user = cookie.load('user');
-        console.log(user);
+        let user = cookie.load('user');
+        console.log(user.firstName);
         if (user == undefined) {
-            window.location.href = 'http://localhost:3000/login';
+            window.location.href = 'http://localhost:8080/login';
         } else {
             let gender = user.is_male;
             if (gender === false) {
@@ -31,36 +31,37 @@ const Profile = React.createClass({
                 seeking_male: user.seeking_male,
             })
         }
-        // // console.log("userID", userId);
-        // function fetchMyProfile(uid) {
-
-        //     axios.get(`${API_URL}/user/${uid}`, {
-        //         headers: { Authorization: cookie.load('token') },
-        //     })
-        //         .then((response) => {
-        //             console.log("response:", response)
-        //         })
-        //         .catch((err) => {
-        //             console.log("error", err)
-        //         });
-
-        // }
     },
 
-    // check() {
+     check() {
 
-    //     if (window.location.href.indexOf("edit-info") > -1) {
-    //         return (
-    //             <EditInfo firstName={this.state.firstName} lastInitial={this.state.lastInitial} email={this.state.email} age={this.state.age} age_pref_min={this.state.age_pref_min} age_pref_max={this.state.age_pref_max} profile_look={this.state.profile_look} />
-    //         );
-    //     } else {
-    //         return (
-    //             <UserInfo firstName={this.state.firstName} lastInitial={this.state.lastInitial} email={this.state.email} age={this.state.age} age_pref_min={this.state.age_pref_min} age_pref_max={this.state.age_pref_max} profile_look={this.state.profile_look} />
-    //         );
-    //     }
-    // },
+        console.log(window.location.href.indexOf("edit-info"));
+
+        if (window.location.href.indexOf("edit-info") > -1) {
+            return (
+                <EditInfo firstName={this.state.firstName} 
+                          lastInitial={this.state.lastInitial} 
+                          is_male={this.state.is_male} age={this.state.age} 
+                          seeking_male={this.state.seeking_male}
+                          age_pref_min={this.state.age_pref_min} 
+                          age_pref_max={this.state.age_pref_max} 
+                          profile_look={this.state.profile_look} />
+            );
+        } else {
+            return (
+                <UserInfo firstName={this.state.firstName} 
+                          lastInitial={this.state.lastInitial} 
+                          is_male={this.state.is_male} age={this.state.age}
+                          seeking_male={this.state.seeking_male} 
+                          age_pref_min={this.state.age_pref_min} 
+                          age_pref_max={this.state.age_pref_max} 
+                          profile_look={this.state.profile_look} />
+            );
+        }
+    },
 
     render: function () {
+
         return (
             <div>
                 <div className="lookContainer">
@@ -71,10 +72,10 @@ const Profile = React.createClass({
                     <span className="look"><PhotoBoothModal /></span>
                     <span className="look"><PhotoBoothModal /></span>
                 </div>
-                <UserInfo firstName={this.state.firstName} lastInitial={this.state.lastInitial} is_male={this.state.is_male} age={this.state.age} age_pref_min={this.state.age_pref_min} age_pref_max={this.state.age_pref_max} profile_look={this.state.profile_look} />
+               {this.check()}
             </div>
         );
     }
-})
+});
 
 module.exports = Profile;
