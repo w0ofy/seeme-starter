@@ -22,12 +22,15 @@ h6 {
 }
 
 h1 {
-    font-size: 52px;
-    font-weight: 400;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 42px;
+    font-weight: 500;
+    color: #009fdc
 }
 
 h2 {
-    font-size: 38px;
+    font-size: 33px;
+    color: #009fdc
 }
 
 footer {
@@ -40,9 +43,8 @@ footer {
 }
 
 .title {
-    text-align: center;
-    width: 60%;
-    margin-left: 20%;
+    text-align: left;
+    margin-left: 10%;
 }
 
 .modal {
@@ -142,8 +144,12 @@ p.copyright>span {
 }
 
 .register-container {
-    width: 70%;
-    margin-left: 15%;
+    margin-right: 10%;
+}
+
+.sm-inline {
+    color: #333;
+    font-size: 28px;
 }
 
 

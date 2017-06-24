@@ -7,24 +7,21 @@ const Schema = mongoose.Schema;
 //= ===============================
 // Looks Schema
 //= ===============================
-var LookSchema = Schema({
-    look: {
-        title: String,
-        link: String
-    }
-});
+// var LookSchema = new Schema({
+//     look: String
+// });
 //= ===============================
 // Questions Schema
 //= ===============================
-var QuestionSchema = Schema({
-    question: String
-});
-//= ===============================
-// Reactions Schema
-//= ===============================
-var ReactionSchema = Schema({
-    reaction: String
-});
+// var QuestionSchema = new Schema({
+//     question: String
+// });
+// //= ===============================
+// // Reactions Schema
+// //= ===============================
+// var ReactionSchema = new Schema({
+//     reaction: String
+// });
 
 //= ===============================
 // User Schema
@@ -143,7 +140,7 @@ UserSchema.methods.comparePassword = function (candidatePassword, cb) {
   });
 };
 
-module.exports = mongoose.model('Looks', LookSchema);
-module.exports = mongoose.model('Questions', QuestionSchema);
-module.exports = mongoose.model('Reactions', ReactionSchema);
+// module.exports = mongoose.model('Looks', LookSchema);
+// module.exports = mongoose.model('Questions', QuestionSchema);
+// module.exports = mongoose.model('Reactions', ReactionSchema);
 module.exports = mongoose.model('User', UserSchema);

@@ -1,7 +1,7 @@
 const AuthenticationController = require('./controllers/authentication');
 const UserController = require('./controllers/user');
-const ChatController = require('./controllers/chat');
-const CommunicationController = require('./controllers/communication');
+// const ChatController = require('./controllers/chat');
+// const CommunicationController = require('./controllers/communication');
 const express = require('express');
 const passport = require('passport');
 const ROLE_MEMBER = require('./constants').ROLE_MEMBER;
@@ -56,6 +56,9 @@ module.exports = function (app) {
   // Update user profile route
   userRoutes.put('/update', requireAuth, UserController.updateProfile);
 
+  // Update user looks route
+  userRoutes.put('/update-looks', requireAuth, UserController.addLook);
+
   // Test protected route
   apiRoutes.get('/protected', requireAuth, (req, res) => {
     res.send({ content: 'The protected test route is functional!' });
@@ -69,29 +72,29 @@ module.exports = function (app) {
   // Chat Routes
   //= ========================
 
-  // Set chat routes as a subgroup/middleware to apiRoutes
-  apiRoutes.use('/chat', chatRoutes);
+  // // Set chat routes as a subgroup/middleware to apiRoutes
+  // apiRoutes.use('/chat', chatRoutes);
 
-  // View messages to and from authenticated user
-  chatRoutes.get('/', requireAuth, ChatController.getConversations);
+  // // View messages to and from authenticated user
+  // chatRoutes.get('/', requireAuth, ChatController.getConversations);
 
-  // Retrieve single conversation
-  chatRoutes.get('/:conversationId', requireAuth, ChatController.getConversation);
+  // // Retrieve single conversation
+  // chatRoutes.get('/:conversationId', requireAuth, ChatController.getConversation);
 
-  // Send reply in conversation
-  chatRoutes.post('/:conversationId', requireAuth, ChatController.sendReply);
+  // // Send reply in conversation
+  // chatRoutes.post('/:conversationId', requireAuth, ChatController.sendReply);
 
-  // Start new conversation
-  chatRoutes.post('/new/:recipient', requireAuth, ChatController.newConversation);
+  // // Start new conversation
+  // chatRoutes.post('/new/:recipient', requireAuth, ChatController.newConversation);
 
  
-  //= ========================
-  // Communication Routes
-  //= ========================
-  apiRoutes.use('/communication', communicationRoutes);
+  // //= ========================
+  // // Communication Routes
+  // //= ========================
+  // apiRoutes.use('/communication', communicationRoutes);
 
-  // Send email from contact form
-  communicationRoutes.post('/contact', CommunicationController.sendContactForm);
+  // // Send email from contact form
+  // communicationRoutes.post('/contact', CommunicationController.sendContactForm);
 
   // Set url for API group routes
   app.use('/api', apiRoutes);

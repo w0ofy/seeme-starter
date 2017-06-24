@@ -1,4 +1,7 @@
 const User = require('../models/user');
+const Looks = require('../models/looks');
+const Reactions = require('../models/reactions');
+const Questions = require('../models/questions');
 const setUserInfo = require('../helpers').setUserInfo;
 const jwt = require('jsonwebtoken');
 const config = require('../config/main');
@@ -74,4 +77,39 @@ exports.updateProfile = function (req, res, next) {
     });
 
   });
+};
+
+//= =======================================
+// Update Profile Route
+//= =======================================
+exports.addLook = function (req, res, next) {
+  // Check for registration errors
+  const emailQuery = req.body.emailQuery,
+    userIdForNewLook = req.body._id,
+    newLook = { _id: userIdForNewLook,link: req.body.lookLink };
+  // console.log("body", req.body);
+
+  const query = { email: emailQuery };
+  console.log("req.body", req.body);
+  User.findOneAndUpdate(query, { $push: { "looks": newLook } },
+    (err, user) => {
+      if (err) {
+        console.log("newlook: ", newLook);
+        throw err;
+
+      }
+      console.log("loooooooooooooooooook", user.looks);
+
+      User.findOne(query, (err, updatedUser) => {
+        const userInfo = setUserInfo(updatedUser);
+        // console.log("userInfo", userInfo);
+        res.status(201).json({
+          token: `JWT ${generateToken(userInfo)}`,
+          user: userInfo
+
+        });
+
+      });
+
+    });
 };

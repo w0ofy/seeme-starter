@@ -6,7 +6,9 @@ const express = require('express'),
   router = require('./router'),
   mongoose = require('mongoose'),
   socketEvents = require('./socketEvents'),
-  config = require('./config/main');
+  config = require('./config/main'),
+  aws = require('aws-sdk'),
+  s3Router = require('./config/s3router');
 
 // Database Setup
 mongoose.connect(config.database);
@@ -33,6 +35,7 @@ app.use(bodyParser.urlencoded({ extended: false })); // Parses urlencoded bodies
 app.use(bodyParser.json()); // Send JSON responses
 app.use(logger('dev')); // Log requests to API using morgan
 
+
 // Enable CORS from client-side
 app.use((req, res, next) => {
   res.header('Access-Control-Allow-Origin', 'http://localhost:8080');
@@ -41,6 +44,12 @@ app.use((req, res, next) => {
   res.header('Access-Control-Allow-Credentials', 'true');
   next();
 });
+
+app.use('/s3', s3Router({
+  bucket: 'seemedev',
+  ACL: 'public-read'
+}))
+
 
 // Import routes to be served
 router(app);
