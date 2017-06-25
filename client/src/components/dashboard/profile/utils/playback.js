@@ -10,9 +10,9 @@ class Playback extends React.Component {
 
     render() {
         return (
-            <div>
+            <div className="v-container">
                 <video className="video" ref="newLook" src={this.props.src} />
-                <button onClick={this.playVideo.bind(this)}>replay</button>
+                <button className="v-ctl replay" onClick={this.playVideo.bind(this)}>replay</button>
             </div>
         )
     }

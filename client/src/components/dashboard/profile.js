@@ -29,7 +29,12 @@ const Profile = React.createClass({
                 age_pref_max: user.age_pref_max,
                 is_male: gender,
                 seeking_male: user.seeking_male,
-                look: user.looks[0].link
+                look: user.looks[0].link,
+                lookTwo: user.looks[1].link,
+                lookThree: user.looks[2].link,
+                lookFour: user.looks[3].link,
+                lookFive: user.looks[4].link,
+                lookSix: user.looks[5].link,
             })
         }
     },
@@ -56,7 +61,12 @@ const Profile = React.createClass({
                           seeking_male={this.state.seeking_male} 
                           age_pref_min={this.state.age_pref_min} 
                           age_pref_max={this.state.age_pref_max} 
-                          look={this.state.look} />
+                          look={this.state.look}
+                          lookTwo={this.state.lookTwo}
+                          lookThree={this.state.lookThree}
+                          lookFour={this.state.lookFour}
+                          lookFive={this.state.lookFive}
+                          lookSix={this.state.lookSix} />
             );
         }
     },
@@ -67,11 +77,11 @@ const Profile = React.createClass({
             <div>
                 <div className="lookContainer">
                     <span className="look"><video id="vid-look" className="video" autoPlay muted src={this.state.look} /><PhotoBoothModal /></span>
-                    <span className="look"><video id="vid-look" className="video" autoPlay muted src={this.state.look} /><PhotoBoothModal /></span>
-                    <span className="look"><video id="vid-look" className="video" autoPlay muted src={this.state.look} /><PhotoBoothModal /></span>
-                    <span className="look"><video id="vid-look" className="video" autoPlay muted src={this.state.look} /><PhotoBoothModal /></span>
-                    <span className="look"><video id="vid-look" className="video" autoPlay muted src={this.state.look} /><PhotoBoothModal /></span>
-                    <span className="look"><video id="vid-look" className="video" autoPlay muted src={this.state.look} /><PhotoBoothModal /></span>
+                    <span className="look"><video id="vid-look" className="video" autoPlay muted src={this.state.lookTwo} /><PhotoBoothModal /></span>
+                    <span className="look"><video id="vid-look" className="video" autoPlay muted src={this.state.lookThree} /><PhotoBoothModal /></span>
+                    <span className="look"><video id="vid-look" className="video" autoPlay muted src={this.state.lookFour} /><PhotoBoothModal /></span>
+                    <span className="look"><video id="vid-look" className="video" autoPlay muted src={this.state.lookFive} /><PhotoBoothModal /></span>
+                    <span className="look"><video id="vid-look" className="video" autoPlay muted src={this.state.lookSix} /><PhotoBoothModal /></span>
                 </div>
                {this.check()}
             </div>

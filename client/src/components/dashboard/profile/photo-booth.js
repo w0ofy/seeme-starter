@@ -24,6 +24,7 @@ class PhotoBooth extends React.Component {
         this.requestUserMedia = this.requestUserMedia.bind(this);
         this.startRecord = this.startRecord.bind(this);
         this.stopRecord = this.stopRecord.bind(this);
+        this.save = this.save.bind(this);
     }
 
     componentDidMount() {
@@ -55,13 +56,16 @@ class PhotoBooth extends React.Component {
 
     stopRecord() {
         this.state.recordVideo.stopRecording(() => {
-            let user = cookie.load('user');
+
             console.log("recordVideo", this.state.recordVideo);
             console.log("blob: ", this.state.recordVideo.blob)
+            let preview = window.URL.createObjectURL(this.state.recordVideo.blob);
             this.state.preview = window.URL.createObjectURL(this.state.recordVideo.blob);
+            this.setState({ preview: preview })
         });
     }
-    download() {
+    save() {
+        let user = cookie.load('user');
         let params = {
             type: 'video/webm',
             data: this.state.recordVideo.blob,
@@ -81,23 +85,33 @@ class PhotoBooth extends React.Component {
                 alert(error, 'error occurred. check your aws settings and try again.')
             })
     }
+    playVideo() {
+        this.refs.newLook.play();
+    }
+    retake() {
+        this.setState({ preview: null })
+    }
     render() {
         return (
             <div>
-                { //Check if message failed
-                    (this.state.recordVideo !== null)
-                        ? <Playback src={this.state.preview} />
-                        : <div><Webcam src={this.state.src} /><button>retake</button></div>
+
+                {
+                    (this.state.preview === null)
+                        ? <div className="v-container" ><Webcam src={this.state.src} />
+                            <div><button className="v-ctl start" onClick={this.startRecord}>Start</button></div>
+                            <div><button className="v-ctl stop" onClick={this.stopRecord}>Stop</button></div>
+                        </div>
+                        : <div><Playback src={this.state.preview} />
+                            <button className="v-ctl save" onClick={this.retake.bind(this)}>retake</button>
+                            <div><button className="v-ctl save" onClick={this.save}>save</button></div>
+                        </div>
                 }
 
 
                 {this.state.uploading ?
                     <div>Uploading...</div> : null}
 
-                <div><button onClick={this.startRecord}>Start</button></div>
 
-                <div><button onClick={this.stopRecord}>Stop</button></div>
-                <div><button onClick={this.download}>Download</button></div>
             </div>
         )
     }

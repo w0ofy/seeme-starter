@@ -249,8 +249,8 @@ p.copyright>span {
 .look {
     position: relative;
     flex-direction: column;
-    height: 12em;
-    width: 12em;
+    height: 153px;
+    width: 15em;
     background: lightgreen;
 }
 
