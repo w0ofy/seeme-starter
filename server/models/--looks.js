@@ -6,8 +6,8 @@ const Schema = mongoose.Schema;
 // Looks Schema
 //= ===============================
 var LookSchema = new Schema({
-    _id: String,
     look: String
 });
 
-module.exports = mongoose.model('Looks', LookSchema);
+var Looks = mongoose.model('Looks', LookSchema);
+module.exports = Looks;

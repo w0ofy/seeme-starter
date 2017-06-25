@@ -1,7 +1,4 @@
 const User = require('../models/user');
-const Looks = require('../models/looks');
-const Reactions = require('../models/reactions');
-const Questions = require('../models/questions');
 const setUserInfo = require('../helpers').setUserInfo;
 const jwt = require('jsonwebtoken');
 const config = require('../config/main');
@@ -85,8 +82,7 @@ exports.updateProfile = function (req, res, next) {
 exports.addLook = function (req, res, next) {
   // Check for registration errors
   const emailQuery = req.body.emailQuery,
-    userIdForNewLook = req.body._id,
-    newLook = { _id: userIdForNewLook,link: req.body.lookLink };
+    newLook = { link: req.body.lookLink };
   // console.log("body", req.body);
 
   const query = { email: emailQuery };

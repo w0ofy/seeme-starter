@@ -3,13 +3,13 @@ const mongoose = require('mongoose');
 const bcrypt = require('bcrypt-nodejs');
 const ROLE_MEMBER = require('../constants').ROLE_MEMBER;
 const Schema = mongoose.Schema;
-
+const Looks = require('./looks');
 //= ===============================
 // Looks Schema
 //= ===============================
-var LookSchema = new Schema({
-    link: String
-});
+// var LookSchema = new Schema({
+//     look: String
+// });
 //= ===============================
 // Questions Schema
 //= ===============================
@@ -74,14 +74,26 @@ const UserSchema = new Schema({
         required: true
     },
     profile_look: String,
-    looks: [
-        LookSchema
-    ],
+    looks: [{
+        Looks
+    }],
     liked_By_ids: Array,
     liked_ids: Array,
     matches: [{
         type: Schema.Types.ObjectId,
         ref: "Users"
+    }],
+    questions_asked: [{
+        type: Schema.Types.ObjectId,
+        ref: "Questions"
+    }],
+    questions_asking: [{
+        type: Schema.Types.ObjectId,
+        ref: "Questions"
+    }],
+    reactions: [{
+        type: Schema.Types.ObjectId,
+        ref: "Reactions"
     }],
     resetPasswordToken: { type: String },
     resetPasswordExpires: { type: Date },

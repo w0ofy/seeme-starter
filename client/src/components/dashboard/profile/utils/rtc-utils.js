@@ -59,14 +59,14 @@ export function S3Upload(fileInfo) { //parameters: { type, data, id }
                     }
                 };
 
+                // setting data to send, as variables
                 const lookLink = s3Info.publicUrl;
                 const user = cookie.load('user');
                 const emailQuery = user.email;
-                const id = user._id;
+
                 axios.put('http://localhost:3000/api/user/update-looks', {
                     emailQuery: emailQuery,
-                    lookLink: lookLink,
-                    _id: id
+                    lookLink: lookLink
                 },
                     { headers: { Authorization: cookie.load('token') } })
                     .then((response) => {

@@ -29,6 +29,7 @@ const Profile = React.createClass({
                 age_pref_max: user.age_pref_max,
                 is_male: gender,
                 seeking_male: user.seeking_male,
+                look: user.looks[0].link
             })
         }
     },
@@ -55,7 +56,7 @@ const Profile = React.createClass({
                           seeking_male={this.state.seeking_male} 
                           age_pref_min={this.state.age_pref_min} 
                           age_pref_max={this.state.age_pref_max} 
-                          profile_look={this.state.profile_look} />
+                          look={this.state.look} />
             );
         }
     },
@@ -65,12 +66,12 @@ const Profile = React.createClass({
         return (
             <div>
                 <div className="lookContainer">
-                    <span className="look"><PhotoBoothModal /></span>
-                    <span className="look"><PhotoBoothModal /></span>
-                    <span className="look"><PhotoBoothModal /></span>
-                    <span className="look"><PhotoBoothModal /></span>
-                    <span className="look"><PhotoBoothModal /></span>
-                    <span className="look"><PhotoBoothModal /></span>
+                    <span className="look"><video id="vid-look" autoPlay muted src={this.state.look} /><PhotoBoothModal /></span>
+                    <span className="look"><video id="vid-look" autoPlay muted src={this.state.look} /><PhotoBoothModal /></span>
+                    <span className="look"><video id="vid-look" autoPlay muted src={this.state.look} /><PhotoBoothModal /></span>
+                    <span className="look"><video id="vid-look" autoPlay muted src={this.state.look} /><PhotoBoothModal /></span>
+                    <span className="look"><video id="vid-look" autoPlay muted src={this.state.look} /><PhotoBoothModal /></span>
+                    <span className="look"><video id="vid-look" autoPlay muted src={this.state.look} /><PhotoBoothModal /></span>
                 </div>
                {this.check()}
             </div>

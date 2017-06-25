@@ -9,4 +9,5 @@ var ReactionSchema = new Schema({
     reaction: String
 });
 
-module.exports = mongoose.model('Reactions', ReactionSchema);
+var Reactions = mongoose.model('Reactions', ReactionSchema);
+module.exports = Reactions;

@@ -9,5 +9,5 @@ var QuestionSchema = new Schema({
     question: String
 });
 
-module.exports = mongoose.model('Questions', QuestionSchema);
-
+var Questions = mongoose.model('Questions', QuestionSchema);
+module.exports = Questions;
