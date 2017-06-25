@@ -254,8 +254,37 @@ p.copyright>span {
     background: lightgreen;
 }
 
+.v-container {
+    position: relative
+}
+
+.v-ctl {
+    position: absolute;
+    bottom: 2em;
+    right: 1em;
+}
+
+.start {
+    left: 1em;
+}
+
+.retake {
+    bottom: 5em;
+    left: 5em;
+}
+
+.save {
+    bottom: 5em;
+    right: 5em;
+}
+
+.replay {
+    left: calc(50% - 25px)
+}
+
 #vid-look {
     width: 100%;
+    cursor: pointer;
 }
 
 .user-info {

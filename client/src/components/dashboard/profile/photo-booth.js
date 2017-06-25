@@ -18,7 +18,8 @@ class PhotoBooth extends React.Component {
             src: null,
             uploadSuccess: null,
             uploading: false,
-            preview: null
+            preview: null,
+            recording: ''
         };
 
         this.requestUserMedia = this.requestUserMedia.bind(this);
@@ -44,6 +45,7 @@ class PhotoBooth extends React.Component {
     }
 
     startRecord() {
+        this.setState({ recording: true })
         captureUserMedia((stream) => {
             this.state.recordVideo = RecordRTC(stream, { type: 'video' });
             this.state.recordVideo.startRecording();
@@ -55,6 +57,7 @@ class PhotoBooth extends React.Component {
     }
 
     stopRecord() {
+        this.setState({ recording: '' })
         this.state.recordVideo.stopRecording(() => {
 
             console.log("recordVideo", this.state.recordVideo);
@@ -99,10 +102,10 @@ class PhotoBooth extends React.Component {
                     (this.state.preview === null)
                         ? <div className="v-container" ><Webcam src={this.state.src} />
                             <div><button className="v-ctl start" onClick={this.startRecord}>Start</button></div>
-                            <div><button className="v-ctl stop" onClick={this.stopRecord}>Stop</button></div>
+                            <div><button id="stop-btn"className="v-ctl stop" onClick={this.stopRecord} disabled={!this.state.recording}>Stop</button></div>
                         </div>
                         : <div><Playback src={this.state.preview} />
-                            <button className="v-ctl save" onClick={this.retake.bind(this)}>retake</button>
+                            <button className="v-ctl retake" onClick={this.retake.bind(this)}>retake</button>
                             <div><button className="v-ctl save" onClick={this.save}>save</button></div>
                         </div>
                 }
