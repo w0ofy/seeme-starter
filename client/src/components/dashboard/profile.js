@@ -66,12 +66,12 @@ const Profile = React.createClass({
         return (
             <div>
                 <div className="lookContainer">
-                    <span className="look"><video id="vid-look" autoPlay muted src={this.state.look} /><PhotoBoothModal /></span>
-                    <span className="look"><video id="vid-look" autoPlay muted src={this.state.look} /><PhotoBoothModal /></span>
-                    <span className="look"><video id="vid-look" autoPlay muted src={this.state.look} /><PhotoBoothModal /></span>
-                    <span className="look"><video id="vid-look" autoPlay muted src={this.state.look} /><PhotoBoothModal /></span>
-                    <span className="look"><video id="vid-look" autoPlay muted src={this.state.look} /><PhotoBoothModal /></span>
-                    <span className="look"><video id="vid-look" autoPlay muted src={this.state.look} /><PhotoBoothModal /></span>
+                    <span className="look"><video id="vid-look" className="video" autoPlay muted src={this.state.look} /><PhotoBoothModal /></span>
+                    <span className="look"><video id="vid-look" className="video" autoPlay muted src={this.state.look} /><PhotoBoothModal /></span>
+                    <span className="look"><video id="vid-look" className="video" autoPlay muted src={this.state.look} /><PhotoBoothModal /></span>
+                    <span className="look"><video id="vid-look" className="video" autoPlay muted src={this.state.look} /><PhotoBoothModal /></span>
+                    <span className="look"><video id="vid-look" className="video" autoPlay muted src={this.state.look} /><PhotoBoothModal /></span>
+                    <span className="look"><video id="vid-look" className="video" autoPlay muted src={this.state.look} /><PhotoBoothModal /></span>
                 </div>
                {this.check()}
             </div>
