@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Modal from 'react-modal';
 import PhotoBooth from './photo-booth';
+import MdVideoCall from 'react-icons/lib/md/video-call';
 // const PhotoBooth = require('./photo-booth');
 
 /*
@@ -55,7 +56,7 @@ class PhotoBoothModal extends React.Component {
     render() {
         return (
             <div>
-                <button className="add-look" onClick={this.openModal}>+</button>
+                <button className="add-look" onClick={this.openModal}><MdVideoCall /></button>
                 <Modal
                     isOpen={this.state.modalIsOpen}
                     onAfterOpen={this.afterOpenModal}

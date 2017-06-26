@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
 import Modal from 'react-modal';
-import mui from 'material-ui';
-import MdIconPack from 'react-icons/lib/md';
 import MdDelete from 'react-icons/lib/md/delete';
 const cookie = require('react-cookie')
 const axios = require('axios');
