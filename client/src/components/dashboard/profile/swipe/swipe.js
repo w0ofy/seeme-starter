@@ -4,20 +4,14 @@ const React = require('react');
 const EditInfo = require('./profile/edit-info');
 const UserInfo = require('./profile/user-info');
 import PhotoBoothModal from './profile/photo-booth-modal';
-import TrashLook from './profile/utils/trash-look';
-import TrashLookTwo from './profile/utils/trash-look-two';
-import TrashLookThree from './profile/utils/trash-look-three';
-import TrashLookFour from './profile/utils/trash-look-four';
-import TrashLookFive from './profile/utils/trash-look-five';
-import TrashLookSix from './profile/utils/trash-look-six';
+import TrashLook from './profile/trash-look';
 // const PhotoBooth = require('./profile/photo-booth');
 
 const Profile = React.createClass({
     componentWillMount() {
         // Fetch user data prior to component mounting
         let user = cookie.load('user');
-        console.log("this user is:", user._id + " " + user.email);
-
+        console.log(user.firstName);
         if (user == undefined) {
             window.location.href = 'http://localhost:8080/login';
         } else {
@@ -35,12 +29,12 @@ const Profile = React.createClass({
                 age_pref_max: user.age_pref_max,
                 is_male: gender,
                 seeking_male: user.seeking_male,
-                look: user.looks[0] ? user.looks[0].link : "",
-                lookTwo: user.looks[1] ? user.looks[1].link : "",
-                lookThree: user.looks[2] ? user.looks[2].link : "",
-                lookFour: user.looks[3] ? user.looks[3].link : "",
-                lookFive: user.looks[4] ? user.looks[4].link : "",
-                lookSix: user.looks[5] ? user.looks[4].link : "",
+                look: user.looks[0].link,
+                lookTwo: user.looks[1].link,
+                lookThree: user.looks[2].link,
+                lookFour: user.looks[3].link,
+                lookFive: user.looks[4].link,
+                lookSix: user.looks[5].link,
             })
         }
     },
@@ -86,20 +80,16 @@ const Profile = React.createClass({
                     {this.state.look ? <TrashLook /> : <PhotoBoothModal />}
                     </span>
                     <span className="look"><video id="vid-look" className="video" src={this.state.lookTwo} />
-                    {this.state.lookTwo ? <TrashLookTwo /> : <PhotoBoothModal />}
+                    {this.state.lookTwo ? null : <PhotoBoothModal />}
                     </span>
                     <span className="look"><video id="vid-look" className="video" src={this.state.lookThree} />
-                    {this.state.lookThree ? <TrashLookThree /> : <PhotoBoothModal />}
+                    {this.state.lookThree ? null : <PhotoBoothModal />}
                     </span>
                     <span className="look"><video id="vid-look" className="video" src={this.state.lookFour} />
-                    {this.state.lookFour ? <TrashLookFour /> : <PhotoBoothModal />}
+                    {this.state.lookFour ? null : <PhotoBoothModal />}
                     </span>
-                    <span className="look"><video id="vid-look" className="video" src={this.state.lookFive} />
-                    {this.state.lookFive ? <TrashLookFive /> : <PhotoBoothModal />}
-                    </span>
-                    <span className="look"><video id="vid-look" className="video" src={this.state.lookSix} />
-                    {this.state.lookSix ? <TrashLookSix /> : <PhotoBoothModal />}
-                    </span>
+                    <span className="look"><video id="vid-look" className="video" src={this.state.lookFive} /><PhotoBoothModal /></span>
+                    <span className="look"><video id="vid-look" className="video" src={this.state.lookSix} /><PhotoBoothModal /></span>
                 </div>
                {this.check()}
             </div>

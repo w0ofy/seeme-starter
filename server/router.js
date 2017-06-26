@@ -59,6 +59,9 @@ module.exports = function (app) {
   // Update user looks route
   userRoutes.put('/update-looks', requireAuth, UserController.addLook);
 
+  // Delete user looks route
+  userRoutes.put('/delete-look',  UserController.deleteLook);
+
   // Test protected route
   apiRoutes.get('/protected', requireAuth, (req, res) => {
     res.send({ content: 'The protected test route is functional!' });

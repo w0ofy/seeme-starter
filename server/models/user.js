@@ -131,4 +131,5 @@ UserSchema.methods.comparePassword = function (candidatePassword, cb) {
 // module.exports = mongoose.model('Questions', QuestionSchema);
 // module.exports = mongoose.model('Reactions', ReactionSchema);
 var User = mongoose.model('User', UserSchema);
-module.exports = User;
+var Looks = mongoose.model('Looks', LookSchema);
+module.exports = User, Looks;
