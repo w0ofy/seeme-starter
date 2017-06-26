@@ -262,6 +262,20 @@ p.copyright>span {
     position: absolute;
     bottom: 2em;
     right: 1em;
+    font-size: 35px;
+    background: transparent;
+    border: none;
+    border-radius: 50%;
+    line-height: 20px;
+    padding: 15px;
+    color: white;
+    outline: none;
+    font-weight: bold;
+    border: 1px solid white;
+}
+
+.v-ctl:hover:enabled {
+    background: rgba(0, 0, 0, 0.3)
 }
 
 .start {

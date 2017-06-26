@@ -3,8 +3,9 @@ import { captureUserMedia, S3Upload } from './utils/rtc-utils';
 import Webcam from './utils/webcam';
 import RecordRTC from 'recordrtc';
 import Playback from './utils/playback';
+import mui from 'material-ui';
+import MdIconPack from 'react-icons/lib/md';
 const cookie = require('react-cookie');
-// import { Modal } from 'react-bootstrap';
 
 const hasGetUserMedia = !!(navigator.getUserMedia || navigator.webkitGetUserMedia ||
     navigator.mozGetUserMedia || navigator.msGetUserMedia);
