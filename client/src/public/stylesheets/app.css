@@ -254,13 +254,30 @@ p.copyright>span {
     background: lightgreen;
 }
 
+
+/* Photo Booth */
+
+.cncl-modal {
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin: 2em;
+    transition: all .2s linear;
+}
+
 .v-container {
     position: relative
 }
 
+.v-container video {
+    width: 90%;
+    margin-left: 5%;
+    border-radius: 25px;
+}
+
 .v-ctl {
     position: absolute;
-    bottom: 2em;
+    bottom: 1em;
     right: 1em;
     font-size: 35px;
     background: transparent;
@@ -272,24 +289,40 @@ p.copyright>span {
     outline: none;
     font-weight: bold;
     border: 1px solid white;
+    transition: all .15s linear;
 }
 
-.v-ctl:hover:enabled {
+
+/*.v-ctl:hover:enabled {
     background: rgba(0, 0, 0, 0.3)
+}*/
+
+.start,
+.stop {
+    left: calc(50% - 34px);
+    background: #5cb85c
 }
 
-.start {
-    left: 1em;
+.start:hover {
+    background: #449d44
+}
+
+.stop {
+    background: #d9534f
+}
+
+.stop:hover {
+    background: #be302c
 }
 
 .retake {
-    bottom: 5em;
-    left: 5em;
+    bottom: 1em;
+    left: 2em;
 }
 
 .save {
-    bottom: 5em;
-    right: 5em;
+    bottom: 1em;
+    right: 2em;
 }
 
 .replay {

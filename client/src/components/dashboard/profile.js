@@ -76,8 +76,12 @@ const Profile = React.createClass({
         return (
             <div>
                 <div className="lookContainer">
-                    <span className="look"><video id="vid-look" className="video" src={this.state.look} /><PhotoBoothModal /></span>
-                    <span className="look"><video id="vid-look" className="video" src={this.state.lookTwo} /><PhotoBoothModal /></span>
+                    <span className="look"><video id="vid-look" className="video" src={this.state.look} />
+                    {this.state.look ? null : <PhotoBoothModal />}
+                    </span>
+                    <span className="look"><video id="vid-look" className="video" src={this.state.lookTwo} />
+                    {this.state.lookTwo ? null : <PhotoBoothModal />}
+                    </span>
                     <span className="look"><video id="vid-look" className="video" src={this.state.lookThree} /><PhotoBoothModal /></span>
                     <span className="look"><video id="vid-look" className="video" src={this.state.lookFour} /><PhotoBoothModal /></span>
                     <span className="look"><video id="vid-look" className="video" src={this.state.lookFive} /><PhotoBoothModal /></span>

@@ -5,6 +5,10 @@ import RecordRTC from 'recordrtc';
 import Playback from './utils/playback';
 import mui from 'material-ui';
 import MdIconPack from 'react-icons/lib/md';
+import MdCamera from 'react-icons/lib/md/camera';
+import MdStop from 'react-icons/lib/md/stop';
+import MdDone from 'react-icons/lib/md/done';
+import MdUndo from 'react-icons/lib/md/undo';
 const cookie = require('react-cookie');
 
 const hasGetUserMedia = !!(navigator.getUserMedia || navigator.webkitGetUserMedia ||
@@ -46,18 +50,28 @@ class PhotoBooth extends React.Component {
     }
 
     startRecord() {
+        document.getElementById('start-btn').classList.add('hide');
+        document.getElementById('stop-btn').classList.remove('hide');
+        document.getElementById('stop-btn').classList.add('spin', 'circle');
         this.setState({ recording: true })
         captureUserMedia((stream) => {
             this.state.recordVideo = RecordRTC(stream, { type: 'video' });
             this.state.recordVideo.startRecording();
         });
 
+
         setTimeout(() => {
-            this.stopRecord();
+            if (this.state.preview === null) {
+                this.stopRecord();
+            }
         }, 10000);
+
     }
 
     stopRecord() {
+        document.getElementById('stop-btn').classList.add('hide');
+        document.getElementById('start-btn').classList.remove('hide')
+        document.getElementById('stop-btn').classList.remove('spin', 'circle');
         this.setState({ recording: '' })
         this.state.recordVideo.stopRecording(() => {
 
@@ -102,12 +116,12 @@ class PhotoBooth extends React.Component {
                 {
                     (this.state.preview === null)
                         ? <div className="v-container" ><Webcam src={this.state.src} />
-                            <div><button className="v-ctl start" onClick={this.startRecord}>Start</button></div>
-                            <div><button id="stop-btn"className="v-ctl stop" onClick={this.stopRecord} disabled={!this.state.recording}>Stop</button></div>
+                            <div><button id="start-btn" className="v-ctl start" onClick={this.startRecord}><MdCamera /></button></div>
+                            <div><button id="stop-btn" className="v-ctl stop hide" onClick={this.stopRecord}><MdStop /></button></div>
                         </div>
                         : <div><Playback src={this.state.preview} />
-                            <button className="v-ctl retake" onClick={this.retake.bind(this)}>retake</button>
-                            <div><button className="v-ctl save" onClick={this.save}>save</button></div>
+                            <button className="v-ctl retake" onClick={this.retake.bind(this)}><MdUndo /></button>
+                            <div><button className="v-ctl save" onClick={this.save}><MdDone /></button></div>
                         </div>
                 }
 
