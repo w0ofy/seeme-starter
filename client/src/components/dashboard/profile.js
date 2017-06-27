@@ -82,22 +82,22 @@ const Profile = React.createClass({
         return (
             <div>
                 <div className="lookContainer">
-                    <span className="look"><video id="vid-look" className="video" src={this.state.look} />
+                    <span className="look"><video id="vid-look" className="video vid-look" src={this.state.look} />
                         {this.state.look ? <TrashLook remove={this.trashChange} /> : <PhotoBoothModal />}
                     </span>
-                    <span className="look"><video id="vid-look" className="video" src={this.state.lookTwo} />
+                    <span className="look"><video id="vid-look-two" className="video vid-look" src={this.state.lookTwo} />
                         {this.state.lookTwo ? <TrashLookTwo remove={this.trashTwoChange} /> : <PhotoBoothModal />}
                     </span>
-                    <span className="look"><video id="vid-look" className="video" src={this.state.lookThree} />
+                    <span className="look"><video id="vid-look-three" className="video vid-look" src={this.state.lookThree} />
                         {this.state.lookThree ? <TrashLookThree remove={this.trashThreeChange} /> : <PhotoBoothModal />}
                     </span>
-                    <span className="look"><video id="vid-look" className="video" src={this.state.lookFour} />
+                    <span className="look"><video id="vid-look-four" className="video vid-look" src={this.state.lookFour} />
                         {this.state.lookFour ? <TrashLookFour remove={this.trashFourChange} /> : <PhotoBoothModal />}
                     </span>
-                    <span className="look"><video id="vid-look" className="video" src={this.state.lookFive} />
+                    <span className="look"><video id="vid-look-five" className="video vid-look" src={this.state.lookFive} />
                         {this.state.lookFive ? <TrashLookFive remove={this.trashFiveChange} /> : <PhotoBoothModal />}
                     </span>
-                    <span className="look"><video id="vid-look" className="video" src={this.state.lookSix} />
+                    <span className="look"><video id="vid-look-six" className="video vid-look" src={this.state.lookSix} />
                         {this.state.lookSix ? <TrashLookSix remove={this.trashSixChange} /> : <PhotoBoothModal />}
                     </span>
                 </div>
@@ -107,22 +107,28 @@ const Profile = React.createClass({
     },
     trashSixChange() {
         this.setState({ lookSix: null })
+        document.getElementById('vid-look-six').classList.add('hide');
     },
     trashFiveChange() {
         this.setState({ lookFive: null })
+        document.getElementById('vid-look-five').classList.add('hide');
     },
     trashFourChange() {
         this.setState({ lookFour: null })
+        document.getElementById('vid-look-four').classList.add('hide');
     },
     trashThreeChange() {
         this.setState({ lookThree: null })
+        document.getElementById('vid-look-three').classList.add('hide');
     },
     trashTwoChange() {
         this.setState({ lookTwo: null })
+        document.getElementById('vid-look-two').classList.add('hide');
     },
     trashChange() {
         this.setState({ look: null })
-    },
+        document.getElementById('vid-look').classList.add('hide');
+    }
 });
 
 module.exports = Profile;

@@ -1,8 +1,16 @@
 const React = require('react')
 const Register = require('../auth/register')
+const cookie = require('react-cookie');
 
 const HomePage = React.createClass({
-
+  componentWillMount() {
+    const user = cookie.load('user');
+    if (user !== undefined) {
+            window.location.href = 'http://localhost:8080/my-profile';
+        } else {
+          return;
+        }
+  },
   getInitialState() {
     return { showRegistration: false };
   },

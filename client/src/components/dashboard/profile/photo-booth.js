@@ -59,13 +59,11 @@ class PhotoBooth extends React.Component {
             this.state.recordVideo.startRecording();
         });
 
-
         setTimeout(() => {
             if (this.state.preview === null) {
                 this.stopRecord();
             }
         }, 10000);
-
     }
 
     stopRecord() {
@@ -74,7 +72,6 @@ class PhotoBooth extends React.Component {
         document.getElementById('stop-btn').classList.remove('spin', 'circle');
         this.setState({ recording: '' })
         this.state.recordVideo.stopRecording(() => {
-
             console.log("recordVideo", this.state.recordVideo);
             console.log("blob: ", this.state.recordVideo.blob)
             let preview = window.URL.createObjectURL(this.state.recordVideo.blob);
@@ -82,6 +79,7 @@ class PhotoBooth extends React.Component {
             this.setState({ preview: preview })
         });
     }
+
     save() {
         let user = cookie.load('user');
         let params = {
@@ -112,7 +110,6 @@ class PhotoBooth extends React.Component {
     render() {
         return (
             <div>
-
                 {
                     (this.state.preview === null)
                         ? <div className="v-container" ><Webcam src={this.state.src} />
@@ -124,12 +121,8 @@ class PhotoBooth extends React.Component {
                             <div><button className="v-ctl save" onClick={this.save}><MdDone /></button></div>
                         </div>
                 }
-
-
                 {this.state.uploading ?
                     <div>Uploading...</div> : null}
-
-
             </div>
         )
     }

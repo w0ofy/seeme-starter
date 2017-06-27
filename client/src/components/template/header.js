@@ -18,7 +18,7 @@ const Header = React.createClass({
           <Link to="my-profile"><MdPeople className="nav-size" /></Link>
         </li>,
         <li key={`${2}header`}>
-          <Link to="sas"><MdTouchApp className="nav-size" /></Link>
+          <Link to="swatch"><MdTouchApp className="nav-size" /></Link>
         </li>,
         <li key={`${3}header`}>
           <Link to="logout"><MdExitApp className="nav-size" /></Link>

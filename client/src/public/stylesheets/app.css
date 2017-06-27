@@ -351,7 +351,7 @@ p.copyright>span {
     left: calc(50% - 25px)
 }
 
-#vid-look {
+.vid-look {
     width: 100%;
     cursor: pointer;
 }
@@ -463,6 +463,15 @@ select option {
     color: #9e44c2;
     font-weight: bold;
     font-size: 13px;
+}
+
+
+/* ================= Logout Classes ================= */
+
+.logout-msg {
+    font-family: 'Montserrat', 'Raleway', sans-serif;
+    font-size: 45px;
+    text-align: center;
 }
 
 
