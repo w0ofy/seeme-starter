@@ -40,7 +40,7 @@ exports.viewProfile = function (req, res, next) {
 // Update Profile Route
 //= =======================================
 exports.updateProfile = function (req, res, next) {
-  // Check for registration errors
+
   const emailQuery = req.body.emailQuery,
     firstName = req.body.firstName,
     lastInitial = req.body.lastInitial
@@ -74,4 +74,72 @@ exports.updateProfile = function (req, res, next) {
     });
 
   });
+};
+
+//= =======================================
+// Update Profile Route
+//= =======================================
+exports.addLook = function (req, res, next) {
+
+  const emailQuery = req.body.emailQuery,
+    newLook = { link: req.body.lookLink };
+  // console.log("body", req.body);
+
+  const query = { email: emailQuery };
+  console.log("req.body", req.body);
+  User.findOneAndUpdate(query, { $push: { "looks": newLook } },
+    (err, user) => {
+      if (err) {
+        console.log("newlook: ", newLook);
+        throw err;
+
+      }
+      console.log("loooooooooooooooooook", user.looks);
+
+      User.findOne(query, (err, updatedUser) => {
+        const userInfo = setUserInfo(updatedUser);
+        // console.log("userInfo", userInfo);
+        res.status(201).json({
+          token: `JWT ${generateToken(userInfo)}`,
+          user: userInfo
+
+        });
+
+      });
+
+    });
+};
+
+//= =======================================
+// Update Profile Route
+//= =======================================
+exports.deleteLook = function (req, res, next) {
+
+  const emailQuery = req.body.emailQuery,
+  deleteThisLook = req.body.lookId,
+  query = { email: emailQuery };
+
+  // console.log("emailquery: ", emailQuery)
+  // console.log("look to delete", deleteThisLook);
+
+  User.findOneAndUpdate(query, { $pull: { "looks": { _id: deleteThisLook } } },
+    (err, user) => {
+      if (err) {
+        console.log("newlook: ", newLook);
+        throw err;
+
+      }
+
+      User.findOne(query, (err, updatedUser) => {
+        const userInfo = setUserInfo(updatedUser);
+        // console.log("userInfo", userInfo);
+        res.status(201).json({
+          token: `JWT ${generateToken(userInfo)}`,
+          user: userInfo
+
+        });
+
+      });
+
+    });
 };

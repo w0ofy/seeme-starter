@@ -1,17 +1,42 @@
-import React, { Component } from 'react';
-import Register from '../auth/register'
-class HomePage extends Component {
+const React = require('react')
+const Register = require('../auth/register')
+
+const HomePage = React.createClass({
+
+  getInitialState() {
+    return { showRegistration: false };
+  },
+
+  onClick() {
+    this.setState({ showRegistration: true });
+  },
+
   render() {
     return (
       <div>
-        <div className="title">
-          <h2>seemē for real.</h2>
-          <h4>Swipe on 10s profile videos - understand a little better who you're "liking". The days of reading profiles are gone - Your profile comes to life by showing the real him or her, the real you. Meet new people nearby. See more of what you're signing up for. Simply, seemē.</h4>
+        <div className="row">
+
+          <div className="col-sm-6 col-xs-12">
+            <div className="title">
+              <h1>seemē.</h1>
+              <h3>choose how people see you. no more reading profiles. no more writing profiles. just snap your profile looks - a.k.a. videos - and let peoplewith your feelings in mind, seemē enables you to never feel compelled to ask, "what does he mean by that?", ever again!</h3>
+            <button className="btn btn-lg btn-success" onClick={this.onClick}>create your seemē profile</button>
+            </div>            
+          </div>
+
+          <div id="register-box" className="col-sm-6 col-xs-12">
+            <h2>Create Your seemē Profile.</h2>
+            <h3><span className="sm-inline">It's free and always will be.</span></h3>
+            {this.state.showRegistration ? <Register /> : null}
+          </div>
+
         </div>
-        <Register />
+
       </div>
     );
   }
-}
+})
 
-export default HomePage;
+module.exports = HomePage;
+
+// <h3>Meet new people and jive with new personalities. Live your life, fully. Love who you're with. Be who you are. "We want you to simply, seemē."</h3>
