@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Modal from 'react-modal';
 import PhotoBooth from './photo-booth';
 import MdVideoCall from 'react-icons/lib/md/video-call';
+import MdClose from 'react-icons/lib/md/close'
 // const PhotoBooth = require('./photo-booth');
 
 /*
@@ -67,7 +68,7 @@ class PhotoBoothModal extends React.Component {
 
                     <PhotoBooth />
                     
-                    <button className="cncl-modal" onClick={this.closeModal}>close</button>
+                    <button className="cncl-modal" onClick={this.closeModal}><MdClose /></button>
                     
                 </Modal>
             </div>

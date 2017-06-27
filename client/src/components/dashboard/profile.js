@@ -40,71 +40,89 @@ const Profile = React.createClass({
                 lookThree: user.looks[2] ? user.looks[2].link : "",
                 lookFour: user.looks[3] ? user.looks[3].link : "",
                 lookFive: user.looks[4] ? user.looks[4].link : "",
-                lookSix: user.looks[5] ? user.looks[4].link : "",
+                lookSix: user.looks[5] ? user.looks[5].link : "",
             })
         }
+        this.trashSixChange = this.trashSixChange.bind(this);
     },
 
-     check() {
+    check() {
 
         console.log(window.location.href.indexOf("edit-info"));
 
         if (window.location.href.indexOf("edit-info") > -1) {
             return (
-                <EditInfo firstName={this.state.firstName} 
-                          lastInitial={this.state.lastInitial} 
-                          is_male={this.state.is_male} age={this.state.age} 
-                          seeking_male={this.state.seeking_male}
-                          age_pref_min={this.state.age_pref_min} 
-                          age_pref_max={this.state.age_pref_max} 
-                          profile_look={this.state.profile_look} />
+                <EditInfo firstName={this.state.firstName}
+                    lastInitial={this.state.lastInitial}
+                    is_male={this.state.is_male} age={this.state.age}
+                    seeking_male={this.state.seeking_male}
+                    age_pref_min={this.state.age_pref_min}
+                    age_pref_max={this.state.age_pref_max}
+                    profile_look={this.state.profile_look} />
             );
         } else {
             return (
-                <UserInfo firstName={this.state.firstName} 
-                          lastInitial={this.state.lastInitial} 
-                          is_male={this.state.is_male} age={this.state.age}
-                          seeking_male={this.state.seeking_male} 
-                          age_pref_min={this.state.age_pref_min} 
-                          age_pref_max={this.state.age_pref_max} 
-                          look={this.state.look}
-                          lookTwo={this.state.lookTwo}
-                          lookThree={this.state.lookThree}
-                          lookFour={this.state.lookFour}
-                          lookFive={this.state.lookFive}
-                          lookSix={this.state.lookSix} />
+                <UserInfo firstName={this.state.firstName}
+                    lastInitial={this.state.lastInitial}
+                    is_male={this.state.is_male} age={this.state.age}
+                    seeking_male={this.state.seeking_male}
+                    age_pref_min={this.state.age_pref_min}
+                    age_pref_max={this.state.age_pref_max}
+                    look={this.state.look}
+                    lookTwo={this.state.lookTwo}
+                    lookThree={this.state.lookThree}
+                    lookFour={this.state.lookFour}
+                    lookFive={this.state.lookFive}
+                    lookSix={this.state.lookSix} />
             );
         }
     },
-
     render: function () {
 
         return (
             <div>
                 <div className="lookContainer">
                     <span className="look"><video id="vid-look" className="video" src={this.state.look} />
-                    {this.state.look ? <TrashLook /> : <PhotoBoothModal />}
+                        {this.state.look ? <TrashLook remove={this.trashChange} /> : <PhotoBoothModal />}
                     </span>
                     <span className="look"><video id="vid-look" className="video" src={this.state.lookTwo} />
-                    {this.state.lookTwo ? <TrashLookTwo /> : <PhotoBoothModal />}
+                        {this.state.lookTwo ? <TrashLookTwo remove={this.trashTwoChange} /> : <PhotoBoothModal />}
                     </span>
                     <span className="look"><video id="vid-look" className="video" src={this.state.lookThree} />
-                    {this.state.lookThree ? <TrashLookThree /> : <PhotoBoothModal />}
+                        {this.state.lookThree ? <TrashLookThree remove={this.trashThreeChange} /> : <PhotoBoothModal />}
                     </span>
                     <span className="look"><video id="vid-look" className="video" src={this.state.lookFour} />
-                    {this.state.lookFour ? <TrashLookFour /> : <PhotoBoothModal />}
+                        {this.state.lookFour ? <TrashLookFour remove={this.trashFourChange} /> : <PhotoBoothModal />}
                     </span>
                     <span className="look"><video id="vid-look" className="video" src={this.state.lookFive} />
-                    {this.state.lookFive ? <TrashLookFive /> : <PhotoBoothModal />}
+                        {this.state.lookFive ? <TrashLookFive remove={this.trashFiveChange} /> : <PhotoBoothModal />}
                     </span>
                     <span className="look"><video id="vid-look" className="video" src={this.state.lookSix} />
-                    {this.state.lookSix ? <TrashLookSix /> : <PhotoBoothModal />}
+                        {this.state.lookSix ? <TrashLookSix remove={this.trashSixChange} /> : <PhotoBoothModal />}
                     </span>
                 </div>
-               {this.check()}
+                {this.check()}
             </div>
         );
-    }
+    },
+    trashSixChange() {
+        this.setState({ lookSix: null })
+    },
+    trashFiveChange() {
+        this.setState({ lookFive: null })
+    },
+    trashFourChange() {
+        this.setState({ lookFour: null })
+    },
+    trashThreeChange() {
+        this.setState({ lookThree: null })
+    },
+    trashTwoChange() {
+        this.setState({ lookTwo: null })
+    },
+    trashChange() {
+        this.setState({ look: null })
+    },
 });
 
 module.exports = Profile;

@@ -23,6 +23,7 @@ class TrashLookFour extends React.Component {
             .catch((error) => {
                 console.log(error);
             });
+        this.props.remove();
     }
     render() {
         return (
