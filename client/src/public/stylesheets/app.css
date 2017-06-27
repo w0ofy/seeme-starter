@@ -283,8 +283,20 @@ p.copyright>span {
     position: absolute;
     top: 0;
     right: 0;
-    margin: 2em;
-    transition: all .2s linear;
+    margin: 0;
+    color: #a1a1a1;
+    background: transparent;
+    border: none;
+    font-size: 45px;
+    line-height: 45px;
+    -webkit-transition: all .1s ease-in;
+    -moz-transition: all .1s ease-in;
+    transition: all .1s ease-in;
+    outline: none;
+}
+
+.cncl-modal:hover {
+    color: #333333;
 }
 
 .v-container {
@@ -340,15 +352,30 @@ p.copyright>span {
 .retake {
     bottom: 1em;
     left: 2em;
+    background: lightcoral
+}
+
+.retake:hover {
+    background: #d84444;
 }
 
 .save {
     bottom: 1em;
     right: 2em;
+    background: lightgreen;
+}
+
+.save:hover {
+    background: #55d555
 }
 
 .replay {
-    left: calc(50% - 25px)
+    left: calc(50% - 25px);
+    background: lightskyblue;
+}
+
+.replay:hover {
+    background: #45a5e1
 }
 
 .vid-look {
@@ -479,4 +506,25 @@ select option {
 
 .hundred {
     width: 100% !important;
+}
+
+
+/* ================= React Transitions ================= */
+
+.fade-enter {
+    opacity: 0.01;
+}
+
+.fade-enter-active {
+    opacity: 1;
+    transition: opacity 1s;
+}
+
+.fade-leave {
+    opacity: 1;
+}
+
+.fade-leave-active {
+    opacity: 0;
+    transition: opacity 0.5s;
 }
