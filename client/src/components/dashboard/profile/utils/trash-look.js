@@ -7,17 +7,12 @@ const cookie = require('react-cookie')
 const axios = require('axios');
 
 class TrashLook extends React.Component {
-    // constructor() {
-    //     super();
+    constructor(props) {
+        super(props);
 
-    //     this.state = {
-    //         modalIsOpen: false
-    //     };
 
-    //     this.openModal = this.openModal.bind(this);
-    //     this.afterOpenModal = this.afterOpenModal.bind(this);
-    //     this.closeModal = this.closeModal.bind(this);
-    // }
+        this.trashLook = this.trashLook.bind(this);
+    }
     trashLook() {
         const user = cookie.load('user');
         const emailQuery = user.email;

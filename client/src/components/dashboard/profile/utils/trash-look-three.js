@@ -5,6 +5,12 @@ const cookie = require('react-cookie')
 const axios = require('axios');
 
 class TrashLookThree extends React.Component {
+    constructor(props) {
+        super(props);
+
+
+        this.trashLook = this.trashLook.bind(this);
+    }
     trashLook() {
         const user = cookie.load('user');
         const emailQuery = user.email;
@@ -18,7 +24,7 @@ class TrashLookThree extends React.Component {
             .then((response) => {
                 cookie.save('token', response.data.token, { path: '/' });
                 cookie.save('user', response.data.user, { path: '/' });
-                window.location.reload()
+                // window.location.reload()
             })
             .catch((error) => {
                 console.log(error);
