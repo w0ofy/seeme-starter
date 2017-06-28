@@ -25,7 +25,22 @@ var QuestionSchema = Schema({
 var ReactionSchema = Schema({
     reaction: String
 });
-
+// =================================
+//   Messages sent Schema
+// =================================  
+var messagesSentSchema = Schema({
+    body: String,
+    recpient: String,
+    timeStamp: time.now()
+});
+//===================================
+//  Messages recieved Schema
+// =====================================
+var MessagesRecievedSchema = Schema({
+    body: String,
+    sender: String,
+    timeStamp: time.now()
+});
 //= ===============================
 // User Schema
 //= ===============================
@@ -87,6 +102,15 @@ const UserSchema = new Schema({
         type: Schema.Types.ObjectId,
         ref: "Users"
     }],
+    messages_sent:[{
+        type: Schema.Types.ObjectId,
+        ref: "messages_sent"
+    }],
+    messages_recieved:[{
+        type: Schema.Types.ObjectId,
+        ref: "Messages_recieved"
+    }],
+
     questions_asked: [{
         type: Schema.Types.ObjectId,
         ref: "Questions"
@@ -147,3 +171,5 @@ module.exports = mongoose.model('Looks', LookSchema);
 module.exports = mongoose.model('Questions', QuestionSchema);
 module.exports = mongoose.model('Reactions', ReactionSchema);
 module.exports = mongoose.model('User', UserSchema);
+module.exports = mongoose.model('Messages_sent', messagesSentSchema);
+module.exports = mongoose.model('Messages_recieved', messagesRecievedSchema);

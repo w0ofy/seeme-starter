@@ -3,7 +3,58 @@ const React = require('react');
 const cookie = require('react-cookie');
 const currentUser = cookie.load('user');
 
+const logged_in_user = currentUser; 
+const status = $('#state')    
+const messageInput =$('#messageInput')
+const chatHistory = $('.chatHistory');
+const userName;
+userName.value = logged_in_user;
+console.log(userName.value)
+
 const chatWindow = React.createClass({
+
+    getInitialState: function () {
+        return {
+        user: userName.Value,
+        recipent:"",
+        message:"",
+        is_online: "",
+        }
+    },
+
+    handleChange: function (key) {
+        return function (e) {
+        let state = {};
+        state[key] = e.target.value;
+        this.setState(state);
+        }.bind(this);
+    },
+    
+    updateScroll: function() {
+        var panel = document.getElementById("chatWindow");
+        panel.scrollTop = panel.scrollHeight;
+    };        
+    
+    if(data.length){
+        //Loops through data and writes to the page
+        for(var i = 0; i < data.length; i++){
+            //creates page element for each message
+            if ( data[i].name === userName.value){
+                var message = $('<div>');
+                message.addClass('yourMessage');
+                message.html('<h3><span class="label label-default" id = "yourWords">'+ data[i].message + '</span></h3>');
+                chatHistory.append(message);
+                message.insertBefore(chatHistory).firstChild;
+            }else{
+                var message = $('<div>');
+                message.addClass('theirMessage');
+                message.html('<h3><span class="label label-default" id = "theirWords">'+ data[i].message + '</span></h3>');
+                chatHistory.append(message);
+                message.insertBefore(chatHistory).firstChild;   
+            };
+        };
+    };
+  
   render: function() {
     return (
         <div id="chat">
@@ -20,7 +71,7 @@ const chatWindow = React.createClass({
                 </div>
             </div>
             <div className="form-group">
-            <textarea className="form-control" id="messageInput" rows="3" placeholder = 'Enter Message Here'></textarea>
+            <textarea onChange={this.handleChange("message")} className="form-control" id="messageInput" rows="3" placeholder = 'Enter Message Here'></textarea>
             </div> 
             <div className="well well-sm">
             <div className="chatStatus">Status:<span id = 'state'>idle</span>
@@ -29,5 +80,6 @@ const chatWindow = React.createClass({
     );
   };
 });
+
 module.exports = chatWindow
 
