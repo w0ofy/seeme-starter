@@ -122,7 +122,7 @@ class PhotoBooth extends React.Component {
                         </div>
                 }
                 {this.state.uploading ?
-                    <div>Uploading...</div> : null}
+                    <div className="uploading">Uploading...</div> : null}
             </div>
         )
     }
