@@ -89,17 +89,20 @@ class PhotoBooth extends React.Component {
         }
 
         this.setState({ uploading: true });
+        setTimeout(() => {
+            S3Upload(params)
+                .then((success) => {
+                    console.log('enter then statement')
+                    if (success) {
+                        console.log(success)
+                        this.setState({ uploadSuccess: true, uploading: false });
+                        window.location.reload()
+                    }
+                }, (error) => {
+                    alert(error, 'error occurred. check your aws settings and try again.')
+                })
+        }, 10000)
 
-        S3Upload(params)
-            .then((success) => {
-                console.log('enter then statement')
-                if (success) {
-                    console.log(success)
-                    this.setState({ uploadSuccess: true, uploading: false });
-                }
-            }, (error) => {
-                alert(error, 'error occurred. check your aws settings and try again.')
-            })
     }
     playVideo() {
         this.refs.newLook.play();

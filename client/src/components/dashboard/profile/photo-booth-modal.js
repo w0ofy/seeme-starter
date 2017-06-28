@@ -68,7 +68,7 @@ class PhotoBoothModal extends React.Component {
 
                     <PhotoBooth />
                     
-                    <button className="cncl-modal" onClick={this.closeModal}><MdClose /></button>
+                    <button className="cncl-modal" title="Add A New Look" onClick={this.closeModal}><MdClose /></button>
                     
                 </Modal>
             </div>

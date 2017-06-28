@@ -50,6 +50,7 @@ exports.updateProfile = function (req, res, next) {
     age_pref_min = req.body.age_pref_min,
     age_pref_max = req.body.age_pref_max;
   // console.log("body", req.body);
+  console.log("isssssssssssssss", is_male);
 
   var query = { email: emailQuery };
 

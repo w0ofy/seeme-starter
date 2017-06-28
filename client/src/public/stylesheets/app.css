@@ -234,6 +234,10 @@ p.copyright>span {
     font-size: 50px;
 }
 
+.add-look:hover {
+    color: #5bc95b;
+}
+
 .trash-look:hover {
     color: #be302c;
 }
@@ -278,6 +282,27 @@ p.copyright>span {
 
 
 /* Photo Booth */
+
+.uploading {
+    position: absolute;
+    top: calc(50% - 95px);
+    left: calc(50% - 95px);
+    z-index: 9999;
+    color: white;
+    border: 5px solid;
+    padding: 60px;
+    transition: all .5s ease-in;
+    animation: inset .5s infinite alternate;
+}
+
+@keyframes inset {
+    from {
+        box-shadow: none
+    }
+    to {
+        box-shadow: inset 0 0 0 25px rgba(125, 5, 174, 0.75);
+    }
+}
 
 .cncl-modal {
     position: absolute;
@@ -409,7 +434,8 @@ p.copyright>span {
     transition: border 0.3s;
 }
 
-#edit-info input {
+#edit-info input,
+#edit-info select {
     display: block;
     margin: 8px;
     padding: 10px;
@@ -420,7 +446,8 @@ p.copyright>span {
     transition: border 0.3s;
 }
 
-#edit-info input:focus {
+#edit-info input:focus,
+#edit-info select:focus {
     border-bottom: solid 2px #969696;
 }
 
