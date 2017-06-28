@@ -2,28 +2,31 @@
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt-nodejs');
 const ROLE_MEMBER = require('../constants').ROLE_MEMBER;
-
 const Schema = mongoose.Schema;
-
-var LooksSchema = Schema({
-    look: {
-        title: String,
-        link: String
-    }
-});
-
-var QuestionsSchema = Schema({
-    question: String
-});
-
-var ReactionsSchema = Schema({
-    reaction: String
-});
+const Looks = require('./looks');
+//= ===============================
+// Looks Schema
+//= ===============================
+// var LookSchema = new Schema({
+//     look: String
+// });
+//= ===============================
+// Questions Schema
+//= ===============================
+// var QuestionSchema = new Schema({
+//     question: String
+// });
+// //= ===============================
+// // Reactions Schema
+// //= ===============================
+// var ReactionSchema = new Schema({
+//     reaction: String
+// });
 
 //= ===============================
 // User Schema
 //= ===============================
-const UsersSchema = new Schema({
+const UserSchema = new Schema({
     email: {
         type: String,
         lowercase: true,
@@ -72,8 +75,7 @@ const UsersSchema = new Schema({
     },
     profile_look: String,
     looks: [{
-        type: Schema.Types.ObjectId,
-        ref: "Looks"
+        Looks
     }],
     liked_By_ids: Array,
     liked_ids: Array,
@@ -81,11 +83,11 @@ const UsersSchema = new Schema({
         type: Schema.Types.ObjectId,
         ref: "Users"
     }],
-    questions_Asked: [{
+    questions_asked: [{
         type: Schema.Types.ObjectId,
         ref: "Questions"
     }],
-    questions_Asking: [{
+    questions_asking: [{
         type: Schema.Types.ObjectId,
         ref: "Questions"
     }],
@@ -98,7 +100,8 @@ const UsersSchema = new Schema({
     role: {
         type: String,
         default: ROLE_MEMBER
-    }
+    },
+    logged_in: Boolean
 },
 
     {
@@ -110,33 +113,34 @@ const UsersSchema = new Schema({
 //= ===============================
 
 // Pre-save of user to database, hash password if password is modified or new
-UsersSchema.pre('save', function (next) {
-    const user = this,
-        SALT_FACTOR = 5;
+UserSchema.pre('save', function (next) {
+  const user = this,
+    SALT_FACTOR = 5;
 
-    if (!user.isModified('password')) return next();
+  if (!user.isModified('password')) return next();
 
-    bcrypt.genSalt(SALT_FACTOR, (err, salt) => {
-        if (err) return next(err);
+  bcrypt.genSalt(SALT_FACTOR, (err, salt) => {
+    if (err) return next(err);
 
-        bcrypt.hash(user.password, salt, null, (err, hash) => {
-            if (err) return next(err);
-            user.password = hash;
-            next();
-        });
+    bcrypt.hash(user.password, salt, null, (err, hash) => {
+      if (err) return next(err);
+      user.password = hash;
+      next();
     });
+  });
 });
 
 // Method to compare password for login
-UsersSchema.methods.comparePassword = function (candidatePassword, cb) {
-    bcrypt.compare(candidatePassword, this.password, (err, isMatch) => {
-        if (err) { return cb(err); }
+UserSchema.methods.comparePassword = function (candidatePassword, cb) {
+  bcrypt.compare(candidatePassword, this.password, (err, isMatch) => {
+    if (err) { return cb(err); }
 
-        cb(null, isMatch);
-    });
+    cb(null, isMatch);
+  });
 };
 
-module.exports = mongoose.model('Looks', LooksSchema);
-module.exports = mongoose.model('Questions', QuestionsSchema);
-module.exports = mongoose.model('Reactions', ReactionsSchema);
-module.exports = mongoose.model('User', UsersSchema);
+// module.exports = mongoose.model('Looks', LookSchema);
+// module.exports = mongoose.model('Questions', QuestionSchema);
+// module.exports = mongoose.model('Reactions', ReactionSchema);
+var User = mongoose.model('User', UserSchema);
+module.exports = User;

@@ -7,15 +7,13 @@ const Schema = mongoose.Schema;
 //= ===============================
 // Looks Schema
 //= ===============================
-var LookSchema = Schema({
-    look: {
-        title: String,
-        link: String
-    }
+var LookSchema = new Schema({
+    link: String
 });
 //= ===============================
 // Questions Schema
 //= ===============================
+
 var QuestionSchema = Schema({
     question: String
 });
@@ -41,6 +39,17 @@ var MessagesRecievedSchema = Schema({
     sender: String,
     timeStamp: time.now()
 });
+
+// var QuestionSchema = new Schema({
+//     question: String
+// });
+// //= ===============================
+// // Reactions Schema
+// //= ===============================
+// var ReactionSchema = new Schema({
+//     reaction: String
+// });
+
 //= ===============================
 // User Schema
 //= ===============================
@@ -92,10 +101,9 @@ const UserSchema = new Schema({
         required: true
     },
     profile_look: String,
-    looks: [{
-        type: Schema.Types.ObjectId,
-        ref: "Looks"
-    }],
+    looks: [
+        LookSchema
+    ],
     liked_By_ids: Array,
     liked_ids: Array,
     matches: [{
@@ -123,6 +131,7 @@ const UserSchema = new Schema({
         type: Schema.Types.ObjectId,
         ref: "Reactions"
     }],
+
     resetPasswordToken: { type: String },
     resetPasswordExpires: { type: Date },
     role: {
@@ -167,9 +176,18 @@ UserSchema.methods.comparePassword = function (candidatePassword, cb) {
   });
 };
 
+
 module.exports = mongoose.model('Looks', LookSchema);
 module.exports = mongoose.model('Questions', QuestionSchema);
 module.exports = mongoose.model('Reactions', ReactionSchema);
 module.exports = mongoose.model('User', UserSchema);
 module.exports = mongoose.model('Messages_sent', messagesSentSchema);
 module.exports = mongoose.model('Messages_recieved', messagesRecievedSchema);
+
+// module.exports = mongoose.model('Looks', LookSchema);
+// module.exports = mongoose.model('Questions', QuestionSchema);
+// module.exports = mongoose.model('Reactions', ReactionSchema);
+var User = mongoose.model('User', UserSchema);
+var Looks = mongoose.model('Looks', LookSchema);
+module.exports = User, Looks;
+

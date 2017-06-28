@@ -33,7 +33,7 @@ const config = {
       output: { comments: false },
       mangle: false,
       sourcemap: false,
-      minimize: true,
+      minimize: false,
       mangle: { except: ['$super', '$', 'exports', 'require', '$q', '$ocLazyLoad'] },
     }),
     new ExtractTextPlugin('src/public/stylesheets/app.css', {

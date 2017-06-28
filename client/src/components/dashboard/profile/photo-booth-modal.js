@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import Modal from 'react-modal';
-
+import PhotoBooth from './photo-booth';
+import MdVideoCall from 'react-icons/lib/md/video-call';
+import MdClose from 'react-icons/lib/md/close'
 // const PhotoBooth = require('./photo-booth');
 
 /*
@@ -45,7 +47,7 @@ class PhotoBoothModal extends React.Component {
 
     afterOpenModal() {
         // references are now sync'd and can be accessed.
-        this.subtitle.style.color = '#f00';
+        // this.subtitle.style.color = '#f00';
     }
 
     closeModal() {
@@ -55,7 +57,7 @@ class PhotoBoothModal extends React.Component {
     render() {
         return (
             <div>
-                <button className="add-look" onClick={this.openModal}>+</button>
+                <button className="add-look" onClick={this.openModal}><MdVideoCall /></button>
                 <Modal
                     isOpen={this.state.modalIsOpen}
                     onAfterOpen={this.afterOpenModal}
@@ -64,9 +66,9 @@ class PhotoBoothModal extends React.Component {
                     contentLabel="Example Modal"
                 >
 
-                    <h2 ref={subtitle => this.subtitle = subtitle}>Hello</h2>
+                    <PhotoBooth />
                     
-                    <button onClick={this.closeModal}>close</button>
+                    <button className="cncl-modal" onClick={this.closeModal}><MdClose /></button>
                     
                 </Modal>
             </div>

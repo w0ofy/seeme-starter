@@ -10,15 +10,17 @@ const Logout = React.createClass({
     // dispatch({ type: UNAUTH_USER, payload: error || '' });
     cookie.remove('token', { path: '/' });
     cookie.remove('user', { path: '/' });
-
-    window.location.href = 'http://localhost:8080/'
+    setTimeout(function() {
+      window.location.href = 'http://localhost:8080/'
+    }, 2000);
+    
   },
   componentWillMount() {
     {this.logoutUser()}
   },
 
   render() {
-    return <div>see you soon!</div>;
+    return <div className="logout-msg">see you soon!</div>;
   }
 })
 

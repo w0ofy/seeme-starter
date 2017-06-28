@@ -22,12 +22,15 @@ h6 {
 }
 
 h1 {
-    font-size: 52px;
-    font-weight: 400;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 42px;
+    font-weight: 500;
+    color: #009fdc
 }
 
 h2 {
-    font-size: 38px;
+    font-size: 33px;
+    color: #009fdc
 }
 
 footer {
@@ -40,9 +43,8 @@ footer {
 }
 
 .title {
-    text-align: center;
-    width: 60%;
-    margin-left: 20%;
+    text-align: left;
+    margin-left: 10%;
 }
 
 .modal {
@@ -142,8 +144,12 @@ p.copyright>span {
 }
 
 .register-container {
-    width: 70%;
-    margin-left: 15%;
+    margin-right: 10%;
+}
+
+.sm-inline {
+    color: #333;
+    font-size: 28px;
 }
 
 
@@ -203,13 +209,33 @@ p.copyright>span {
 
 /* ================= MY PROFILE =================*/
 
-.add-look {
+.add-look,
+.trash-look {
     position: absolute;
-    bottom: 0;
-    left: 0;
+    top: 0;
+    right: 0;
     width: 25%;
     height: 25%;
     border: none;
+    background: 0;
+    padding: 0;
+    margin: 0;
+    font-size: 26px;
+    line-height: 26px;
+    outline: none;
+    transition: all .1s linear;
+    -webkit-transition: all .1s linear;
+    -moz-transition: all .1s linear;
+}
+
+.add-look {
+    top: 30%;
+    left: calc(25% + 25px);
+    font-size: 50px;
+}
+
+.trash-look:hover {
+    color: #be302c;
 }
 
 .edit-container {
@@ -237,15 +263,124 @@ p.copyright>span {
 
 .lookContainer {
     display: flex;
-    width: 50%;
+    width: 100%;
+    border: 4px solid rgba(125, 5, 174, 0.75);
+    border-radius: 1px;
 }
 
 .look {
     position: relative;
     flex-direction: column;
-    height: 110px;
-    width: 110px;
+    height: 157px;
+    width: 15em;
     background: lightgreen;
+}
+
+
+/* Photo Booth */
+
+.cncl-modal {
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin: 0;
+    color: #a1a1a1;
+    background: transparent;
+    border: none;
+    font-size: 45px;
+    line-height: 45px;
+    -webkit-transition: all .1s ease-in;
+    -moz-transition: all .1s ease-in;
+    transition: all .1s ease-in;
+    outline: none;
+}
+
+.cncl-modal:hover {
+    color: #333333;
+}
+
+.v-container {
+    position: relative
+}
+
+.v-container video {
+    width: 90%;
+    margin-left: 5%;
+    border-radius: 25px;
+}
+
+.v-ctl {
+    position: absolute;
+    bottom: 1em;
+    right: 1em;
+    font-size: 35px;
+    background: transparent;
+    border: none;
+    border-radius: 50%;
+    line-height: 20px;
+    padding: 15px;
+    color: white;
+    outline: none;
+    font-weight: bold;
+    border: 1px solid white;
+    transition: all .15s linear;
+}
+
+
+/*.v-ctl:hover:enabled {
+    background: rgba(0, 0, 0, 0.3)
+}*/
+
+.start,
+.stop {
+    left: calc(50% - 34px);
+    background: #5cb85c
+}
+
+.start:hover {
+    background: #449d44
+}
+
+.stop {
+    background: #d9534f
+}
+
+.stop:hover {
+    background: #be302c
+}
+
+.retake {
+    bottom: 1em;
+    left: 2em;
+    background: lightcoral
+}
+
+.retake:hover {
+    background: #d84444;
+}
+
+.save {
+    bottom: 1em;
+    right: 2em;
+    background: lightgreen;
+}
+
+.save:hover {
+    background: #55d555
+}
+
+.replay {
+    left: calc(50% - 25px);
+    background: lightskyblue;
+}
+
+.replay:hover {
+    background: #45a5e1
+}
+
+.vid-look {
+    width: 100%;
+    cursor: pointer;
 }
 
 .user-info {
@@ -358,8 +493,38 @@ select option {
 }
 
 
+/* ================= Logout Classes ================= */
+
+.logout-msg {
+    font-family: 'Montserrat', 'Raleway', sans-serif;
+    font-size: 45px;
+    text-align: center;
+}
+
+
 /* ================= Add/Remove Classes ================= */
 
 .hundred {
     width: 100% !important;
+}
+
+
+/* ================= React Transitions ================= */
+
+.fade-enter {
+    opacity: 0.01;
+}
+
+.fade-enter.fade-enter-active {
+    opacity: 1;
+    transition: opacity 500ms ease-in;
+}
+
+.fade-leave {
+    opacity: 1;
+}
+
+.fade-leave.fade-leave-active {
+    opacity: 0.01;
+    transition: opacity 300ms ease-in;
 }
