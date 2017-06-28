@@ -26,12 +26,12 @@ class TrashLook extends React.Component {
             .then((response) => {
                 cookie.save('token', response.data.token, { path: '/' });
                 cookie.save('user', response.data.user, { path: '/' });
-                window.location.reload()
+                this.props.remove();
             })
             .catch((error) => {
                 console.log(error);
             });
-        this.props.remove();
+        
     }
     render() {
         return (
@@ -43,20 +43,3 @@ class TrashLook extends React.Component {
 }
 
 export default TrashLook;
-
-// <div>
-//     <button className="add-look" onClick={this.openModal}>+</button>
-//     <Modal
-//         isOpen={this.state.modalIsOpen}
-//         onAfterOpen={this.afterOpenModal}
-//         onRequestClose={this.closeModal}
-//         style={customStyles}
-//         contentLabel="Example Modal"
-//     >
-
-//         <h2 ref={subtitle => this.subtitle = subtitle}>Hello</h2>
-
-//         <button onClick={this.closeModal}>close</button>
-
-//     </Modal>
-// </div>

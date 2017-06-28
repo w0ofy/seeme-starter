@@ -6,6 +6,7 @@ import CSSTransitionGroup from 'react-transition-group/CSSTransitionGroup';
 
 class App extends Component {
   render() {
+    const page = this.props.location.pathname.substr(1);
     return (
       <div>
         <HeaderTemplate logo="seemē" />
@@ -13,14 +14,14 @@ class App extends Component {
 
         <CSSTransitionGroup
           transitionName='fade'
-          transitionAppear={false}
+          transitionAppear={true}
           transitionEnter={true}
           transitionLeave={true}
           transitionEnterTimeout={200}
         >
-
-          <div key={1} className="user-container">
-            {this.props.children}
+        
+          <div className="user-container">
+           {React.cloneElement(this.props.children, {key: page})}
           </div>
           
         </CSSTransitionGroup>

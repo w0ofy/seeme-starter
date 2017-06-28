@@ -24,12 +24,12 @@ class TrashLookThree extends React.Component {
             .then((response) => {
                 cookie.save('token', response.data.token, { path: '/' });
                 cookie.save('user', response.data.user, { path: '/' });
+                this.props.remove();
                 // window.location.reload()
             })
             .catch((error) => {
                 console.log(error);
             });
-        this.props.remove();
     }
     render() {
         return (

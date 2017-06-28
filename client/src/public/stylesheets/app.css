@@ -515,16 +515,16 @@ select option {
     opacity: 0.01;
 }
 
-.fade-enter-active {
+.fade-enter.fade-enter-active {
     opacity: 1;
-    transition: opacity 1s;
+    transition: opacity 500ms ease-in;
 }
 
 .fade-leave {
     opacity: 1;
 }
 
-.fade-leave-active {
-    opacity: 0;
-    transition: opacity 0.5s;
+.fade-leave.fade-leave-active {
+    opacity: 0.01;
+    transition: opacity 300ms ease-in;
 }

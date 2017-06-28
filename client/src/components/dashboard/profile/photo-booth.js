@@ -118,7 +118,7 @@ class PhotoBooth extends React.Component {
                         </div>
                         : <div><Playback src={this.state.preview} />
                             <button className="v-ctl retake" onClick={this.retake.bind(this)}><MdUndo /></button>
-                            <div><button className="v-ctl save" onClick={this.save}><MdDone /></button></div>
+                            <button className="v-ctl save" onClick={this.save}><MdDone /></button>
                         </div>
                 }
                 {this.state.uploading ?
