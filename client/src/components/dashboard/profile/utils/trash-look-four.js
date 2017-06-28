@@ -24,12 +24,11 @@ class TrashLookFour extends React.Component {
             .then((response) => {
                 cookie.save('token', response.data.token, { path: '/' });
                 cookie.save('user', response.data.user, { path: '/' });
-                // window.location.reload()
+                this.props.remove();
             })
             .catch((error) => {
                 console.log(error);
             });
-        this.props.remove();
     }
     render() {
         return (

@@ -7,8 +7,6 @@ const axios = require('axios');
 class TrashLookSix extends React.Component {
     constructor(props) {
         super(props);
-
-
         this.trashLook = this.trashLook.bind(this);
     }
     trashLook() {
@@ -24,12 +22,11 @@ class TrashLookSix extends React.Component {
             .then((response) => {
                 cookie.save('token', response.data.token, { path: '/' });
                 cookie.save('user', response.data.user, { path: '/' });
-                // window.location.reload()
+                this.props.remove();
             })
             .catch((error) => {
                 console.log(error);
             });
-        this.props.remove();
     }
     render() {
         return (

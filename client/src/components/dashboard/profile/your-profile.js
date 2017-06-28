@@ -13,7 +13,7 @@ import TrashLookSix from './profile/utils/trash-look-six';
 // const PhotoBooth = require('./profile/photo-booth');
 
 const YourProfile = React.createClass({
-   componentWillMount() {
+    componentWillMount() {
         // Fetch user data prior to component mounting
         let user = cookie.load('user');
         console.log("this user is:", user._id + " " + user.email);
@@ -46,37 +46,6 @@ const YourProfile = React.createClass({
         this.trashSixChange = this.trashSixChange.bind(this);
     },
 
-    check() {
-
-        console.log(window.location.href.indexOf("edit-info"));
-
-        if (window.location.href.indexOf("edit-info") > -1) {
-            return (
-                <EditInfo firstName={this.state.firstName}
-                    lastInitial={this.state.lastInitial}
-                    is_male={this.state.is_male} age={this.state.age}
-                    seeking_male={this.state.seeking_male}
-                    age_pref_min={this.state.age_pref_min}
-                    age_pref_max={this.state.age_pref_max}
-                    profile_look={this.state.profile_look} />
-            );
-        } else {
-            return (
-                <UserInfo firstName={this.state.firstName}
-                    lastInitial={this.state.lastInitial}
-                    is_male={this.state.is_male} age={this.state.age}
-                    seeking_male={this.state.seeking_male}
-                    age_pref_min={this.state.age_pref_min}
-                    age_pref_max={this.state.age_pref_max}
-                    look={this.state.look}
-                    lookTwo={this.state.lookTwo}
-                    lookThree={this.state.lookThree}
-                    lookFour={this.state.lookFour}
-                    lookFive={this.state.lookFive}
-                    lookSix={this.state.lookSix} />
-            );
-        }
-    },
     render: function () {
 
         return (
@@ -101,7 +70,19 @@ const YourProfile = React.createClass({
                         {this.state.lookSix ? <TrashLookSix remove={this.trashSixChange} /> : <PhotoBoothModal />}
                     </span>
                 </div>
-                {this.check()}
+
+                <YourInfo firstName={this.state.firstName}
+                    lastInitial={this.state.lastInitial}
+                    is_male={this.state.is_male} age={this.state.age}
+                    seeking_male={this.state.seeking_male}
+                    age_pref_min={this.state.age_pref_min}
+                    age_pref_max={this.state.age_pref_max}
+                    look={this.state.look}
+                    lookTwo={this.state.lookTwo}
+                    lookThree={this.state.lookThree}
+                    lookFour={this.state.lookFour}
+                    lookFive={this.state.lookFive}
+                    lookSix={this.state.lookSix} />
             </div>
         );
     },
