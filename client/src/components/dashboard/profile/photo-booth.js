@@ -101,7 +101,7 @@ class PhotoBooth extends React.Component {
                 }, (error) => {
                     alert(error, 'error occurred. check your aws settings and try again.')
                 })
-        }, 10000)
+        }, 2500)
 
     }
     playVideo() {
@@ -125,7 +125,7 @@ class PhotoBooth extends React.Component {
                         </div>
                 }
                 {this.state.uploading ?
-                    <div className="uploading">Uploading...</div> : null}
+                    <div className="uploading">Saving...</div> : null}
             </div>
         )
     }

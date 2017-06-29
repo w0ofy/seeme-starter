@@ -10,7 +10,7 @@ const YourInfo = React.createClass({
           <Link to="edit-info">edit profile</Link>
         </div>
         <div className="user-info-text">
-          <h3>Hi, my name is {this.props.firstName}! I am one handsome {this.props.age} year old {this.props.is_male}. Want to seeme?</h3>
+          <h2>Hi, my name is {this.props.firstName}! I am one handsome {this.props.age} year old {this.props.is_male}. Want to seeme?</h2>
         </div>
       </div>
     );

@@ -10,7 +10,7 @@ export const CLIENT_ROOT_URL = 'http://localhost:8080';
 
 export function fetchMyProfile(uid) {
   return function (dispatch) {
-    axios.get(`${API_URL}/user/${uid}`, {
+    axios.get(`${API_URL}/see/${uid}`, {
       headers: { Authorization: cookie.load('token') },
     })
     .then((response) => {

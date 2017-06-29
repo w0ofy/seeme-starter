@@ -39,7 +39,7 @@ const editInfo = React.createClass({
 
     const user = cookie.load('user');
     const emailQuery = user.email;
-    axios.put('http://localhost:3000/api/user/update', {
+    axios.put('http://localhost:3000/api/see/update', {
       emailQuery: emailQuery,
       firstName: userProfile.firstName,
       is_male: userProfile.is_male,

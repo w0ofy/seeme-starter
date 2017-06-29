@@ -28,7 +28,8 @@
     "react-transition-group": "^1.2.0",
     "recordrtc": "^5.4.2",
     "socket.io": "^1.4.6",
-    "socket.io-client": "^1.4.6"
+    "socket.io-client": "^1.4.6",
+    "swing": "^3.1.0"
   },
   "devDependencies": {
     "babel-core": "^6.6.0",

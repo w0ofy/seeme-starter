@@ -64,7 +64,7 @@ export function S3Upload(fileInfo) { //parameters: { type, data, id }
                 const user = cookie.load('user');
                 const emailQuery = user.email;
 
-                axios.put('http://localhost:3000/api/user/update-looks', {
+                axios.put('http://localhost:3000/api/see/update-looks', {
                     emailQuery: emailQuery,
                     lookLink: lookLink
                 },

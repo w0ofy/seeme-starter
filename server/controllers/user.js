@@ -117,8 +117,8 @@ exports.addLook = function (req, res, next) {
 exports.deleteLook = function (req, res, next) {
 
   const emailQuery = req.body.emailQuery,
-  deleteThisLook = req.body.lookId,
-  query = { email: emailQuery };
+    deleteThisLook = req.body.lookId,
+    query = { email: emailQuery };
 
   // console.log("emailquery: ", emailQuery)
   // console.log("look to delete", deleteThisLook);
@@ -128,7 +128,6 @@ exports.deleteLook = function (req, res, next) {
       if (err) {
         console.log("newlook: ", newLook);
         throw err;
-
       }
 
       User.findOne(query, (err, updatedUser) => {
@@ -139,8 +138,19 @@ exports.deleteLook = function (req, res, next) {
           user: userInfo
 
         });
-
       });
-
     });
+};
+
+exports.findAllUsers = function (req, res, next) {
+  User.find({}, function (err, users) {
+    if (!err) {
+      console.log("bobom", users);
+      return res.status(201).json({ users: users });
+
+    } else {
+      res.status(400).json({ error: 'No user could be found for this ID.' });
+      throw err;
+    }
+  });
 };

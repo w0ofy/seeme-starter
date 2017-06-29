@@ -26,6 +26,7 @@ import Logout from './components/auth/logout';
 import Profile from './components/dashboard/profile.js';
 import EditInfo from './components/dashboard/profile/edit-info';
 import Swipe from './components/dashboard/profile/swipe';
+import YourInfo from './components/dashboard/profile/your-profile';
 // import Inbox from './components/dashboard/messaging/inbox';
 // import Conversation from './components/dashboard/messaging/conversation';
 // import ComposeMessage from './components/dashboard/messaging/compose-message';
@@ -45,6 +46,7 @@ export default (
     <Route path="logout" component={Logout} />
     <Route path="my-profile" component={Profile} />
     <Route path="edit-info" component={Profile} />
+    <Route path="see/:uid" component={YourInfo} />
     <Route path="swatch" component={Swipe} />
     <Route path="*" component={NotFoundPage} />
   </Route>
