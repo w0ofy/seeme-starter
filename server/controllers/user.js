@@ -44,13 +44,11 @@ exports.updateProfile = function (req, res, next) {
   const emailQuery = req.body.emailQuery,
     firstName = req.body.firstName,
     lastInitial = req.body.lastInitial
-  age = req.body.age,
+    age = req.body.age,
     is_male = req.body.is_male,
     seeking_male = req.body.seeking_male,
     age_pref_min = req.body.age_pref_min,
     age_pref_max = req.body.age_pref_max;
-  // console.log("body", req.body);
-  console.log("isssssssssssssss", is_male);
 
   var query = { email: emailQuery };
 
@@ -67,7 +65,7 @@ exports.updateProfile = function (req, res, next) {
     }
     User.findOne({ email: emailQuery }, (err, updatedUser) => {
       const userInfo = setUserInfo(updatedUser);
-      console.log("userInfo", userInfo);
+      // console.log("userInfo", userInfo);
       res.status(201).json({
         token: `JWT ${generateToken(userInfo)}`,
         user: userInfo
@@ -95,7 +93,7 @@ exports.addLook = function (req, res, next) {
         throw err;
 
       }
-      console.log("loooooooooooooooooook", user.looks);
+      // console.log("loooooooooooooooooook", user.looks);
 
       User.findOne(query, (err, updatedUser) => {
         const userInfo = setUserInfo(updatedUser);
@@ -120,9 +118,6 @@ exports.deleteLook = function (req, res, next) {
     deleteThisLook = req.body.lookId,
     query = { email: emailQuery };
 
-  // console.log("emailquery: ", emailQuery)
-  // console.log("look to delete", deleteThisLook);
-
   User.findOneAndUpdate(query, { $pull: { "looks": { _id: deleteThisLook } } },
     (err, user) => {
       if (err) {
@@ -132,7 +127,7 @@ exports.deleteLook = function (req, res, next) {
 
       User.findOne(query, (err, updatedUser) => {
         const userInfo = setUserInfo(updatedUser);
-        // console.log("userInfo", userInfo);
+
         res.status(201).json({
           token: `JWT ${generateToken(userInfo)}`,
           user: userInfo
@@ -145,7 +140,7 @@ exports.deleteLook = function (req, res, next) {
 exports.findAllUsers = function (req, res, next) {
   User.find({}, function (err, users) {
     if (!err) {
-      console.log("bobom", users);
+      // console.log("bobom", users);
       return res.status(201).json({ users: users });
 
     } else {

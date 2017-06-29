@@ -1,43 +1,63 @@
 const cookie = require('react-cookie')
 const axios = require('axios');
-const React = require('react');
+import React from 'react';
 
 
-const Swipe = React.createClass({
+class Swipe extends React.Component {
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            users: []
+        };
+    }
     componentWillMount() {
-        // Fetch user data prior to component mounting
-        let user = cookie.load('user');
         const token = cookie.load('token');
         const url = 'http://localhost:3000/api/all-users';
-        let allUsers = null;
         axios.get(url, { headers: { Authorization: token } })
-            .then((response) => {
-                console.log("helllloooo")
-                allUsers = response.data;
-                console.log("allusers: ", response.data)
-            })
-            .catch((error) => {
-                throw error;
+            .then(res => {
+                console.log(res.data.users);
+                const users = res.data.users
+                this.setState({ users });
             });
-
-    },
-
-    render: function () {
+    }
+    render() {
 
         return (
+            <div>
             <div className="wrap">
                 <div id="tinderslide" className="">
                     <ul>
-                        <li className="pane1">
-                            <div className="img">
-                                <video id="recorded-video" className="video" preload="true" src="" />
-                            </div>
-                            <div id="" className="first-name"></div>
-                            <div className="like"></div>
-                            <div className="dislike"></div>
-                        </li>
+                        {this.state.users.map(function (user) {
+                            console.log('user::: ', user);
+                            return (<Pane key={user._id} age={user.age} link={user.looks[0].link} name={user.firstName} />)
+                        })}
                     </ul>
                 </div>
+            </div>
+            <div class="actions">
+                <a href="#" className="dislike"><i></i></a>
+                <a href="#" className="like"><i></i></a>
+            </div>
+            </div>
+        );
+    }
+};
+
+const Pane = React.createClass({
+    render: function () {
+        return (
+            <div>
+                <li className="pane1">
+                    <div className="img">
+                        <video id="recorded-video" className="video" reload="true" src={this.props.link} />
+                    </div>
+                    <div id={this.props.id} className="first-name">
+                        {this.props.name}, {this.props.age}
+                    </div>
+                    <div className="like"></div>
+                    <div className="dislike"></div>
+                </li>
             </div>
         );
     }

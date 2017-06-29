@@ -53,8 +53,6 @@ module.exports = function (app) {
   // View user profile route
   userRoutes.get('/:uid', requireAuth, UserController.viewProfile);
 
-
-
   // Update user profile route
   userRoutes.put('/update', requireAuth, UserController.updateProfile);
 
@@ -64,6 +62,8 @@ module.exports = function (app) {
   // Delete user looks route
   userRoutes.put('/delete-look',  UserController.deleteLook);
 
+
+  
   // Find all users route
   apiRoutes.get('/all-users', requireAuth, UserController.findAllUsers);
 
