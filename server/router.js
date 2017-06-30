@@ -65,7 +65,10 @@ module.exports = function (app) {
 
   
   // Find all users route
-  apiRoutes.get('/all-users', requireAuth, UserController.findAllUsers);
+  apiRoutes.put('/all-users', requireAuth, UserController.findAllUsers);
+
+  // PUT route to add users being liked to logged in user and getting-liked user
+  apiRoutes.put('/liking', requireAuth, UserController.likingUser);
 
   // Test protected route
   apiRoutes.get('/protected', requireAuth, (req, res) => {

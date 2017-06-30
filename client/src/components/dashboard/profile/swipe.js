@@ -6,16 +6,50 @@ import React from 'react';
 class Swipe extends React.Component {
     constructor(props) {
         super(props);
-
+        const userCookie = cookie.load('user');
         this.state = {
-            users: []
+            users: [],
+            loggedInUsersId: userCookie._id
         };
+        this.handleLikeClick = this.handleLikeClick.bind(this);
+    }
+    handleLikeClick(e) {
+        e.preventDefault();
+        const userCookie = cookie.load('user');
+        const token = cookie.load('token');
+        const url = 'http://localhost:3000/api/liking'
+        let beingSwiped = $('#tinderslide ul div:last-child');
+
+        beingSwiped.animate('transform', 'translateX(900px)');
+        let liked = this.state.users.pop()
+
+        console.log('likingid:', liked._id);
+        axios.put(url, {
+            emailQuery: userCookie.email,
+            uid: userCookie._id,
+            likedId: liked._id
+        }, { headers: { Authorization: token } })
+            .then(res => {
+                cookie.save('token', res.data.token, { path: '/' });
+                cookie.save('user', res.data.user, { path: '/' });
+                console.log(res)
+            });
+
+        beingSwiped.remove();
     }
     componentWillMount() {
+        const userCookie = cookie.load('user');
         const token = cookie.load('token');
         const url = 'http://localhost:3000/api/all-users';
-        axios.get(url, { headers: { Authorization: token } })
+        const likedids = []
+        for (let i = 0; i < userCookie.liked_ids.length; i++) {
+            likedids.push(userCookie.liked_ids[i].id);
+        }
+        console.log("likedids:", likedids);
+        axios.put(url, {id: userCookie._id, liked: likedids}, { headers: { Authorization: token } })
             .then(res => {
+
+                // create logic to not show users under this user's matches, user userCookie
                 console.log(res.data.users);
                 const users = res.data.users
                 this.setState({ users });
@@ -25,20 +59,20 @@ class Swipe extends React.Component {
 
         return (
             <div>
-            <div className="wrap">
-                <div id="tinderslide" className="">
-                    <ul>
-                        {this.state.users.map(function (user) {
-                            console.log('user::: ', user);
-                            return (<Pane key={user._id} age={user.age} link={user.looks[0].link} name={user.firstName} />)
-                        })}
-                    </ul>
+                <div className="wrap">
+                    <div id="tinderslide" className={this.state.loggedInUsersId}>
+                        <ul>
+                            {this.state.users.map(function (user) {
+                                console.log('user::: ', user);
+                                return (<Pane key={user._id} uid={user._id} age={user.age} link={user.looks[0].link} name={user.firstName} />)
+                            })}
+                        </ul>
+                    </div>
                 </div>
-            </div>
-            <div class="actions">
-                <a href="#" className="dislike"><i></i></a>
-                <a href="#" className="like"><i></i></a>
-            </div>
+                <div className="actions">
+                    <a href="#" className="dislike"><i></i></a>
+                    <a href="#" onClick={this.handleLikeClick} className="like"><i></i></a>
+                </div>
             </div>
         );
     }
@@ -47,12 +81,12 @@ class Swipe extends React.Component {
 const Pane = React.createClass({
     render: function () {
         return (
-            <div>
+            <div className="to-like" id={this.props.uid}>
                 <li className="pane1">
                     <div className="img">
                         <video id="recorded-video" className="video" reload="true" src={this.props.link} />
                     </div>
-                    <div id={this.props.id} className="first-name">
+                    <div className="first-name">
                         {this.props.name}, {this.props.age}
                     </div>
                     <div className="like"></div>

@@ -17,10 +17,9 @@ exports.setUserInfo = function setUserInfo(request) {
     profile_look: request.profile_look,
     looks: request.looks,
     matches: request.matches,
-    questions_asked: request.questions_asked,
-    questions_asking: request.questions_asking,
-    reactions: request.reactions,
-    role: request.role
+    role: request.role,
+    liked_ids: request.liked_ids,
+    liked_by_ids: request.liked_by_ids,
   };
   
   return getUserInfo;
