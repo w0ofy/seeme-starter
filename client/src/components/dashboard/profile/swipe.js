@@ -85,6 +85,7 @@ class Swipe extends React.Component {
         if (userCookie.is_male === false) {
 
         }
+
         axios.put(url, { id: userCookie._id, liked: likedids, disliked: dislikedids, age_pref_min: userCookie.age_pref_min, age_pref_max: userCookie.age_pref_max, seeking_male: userCookie.seeking_male }, { headers: { Authorization: token } })
             .then(res => {
 
@@ -102,8 +103,14 @@ class Swipe extends React.Component {
                     <div id="tinderslide" className={this.state.loggedInUsersId}>
                         <ul>
                             {this.state.users.map(function (user) {
-                                console.log('user::: ', user);
-                                return (<Pane key={user._id} uid={user._id} age={user.age} link={user.looks[0].link} name={user.firstName} />)
+                                console.log('user::: ', user.looks[0]);
+                                let profilelook = null;
+                                if (user.looks[0] === undefined) {
+                                    profilelook = "none";
+                                } else {
+                                    profilelook = user.looks[0].link;
+                                }
+                                return (<Pane key={user._id} uid={user._id} age={user.age} link={profilelook} name={user.firstName} />)
                             })}
                         </ul>
                     </div>

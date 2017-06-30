@@ -1,4 +1,5 @@
 const User = require('../models/user');
+const Matches = require('../models/matches');
 const setUserInfo = require('../helpers').setUserInfo;
 const jwt = require('jsonwebtoken');
 const config = require('../config/main');
@@ -145,21 +146,21 @@ exports.findAllUsers = function (req, res, next) {
     seeking_male = req.body.seeking_male,
     age_pref_min = req.body.age_pref_min,
     age_pref_max = req.body.age_pref_max;
-  let notSeeking = true;
-
+  let is_male = false;
+  console.log(seeking_male);
   if (disliked) {
     for (var i = 0; i < disliked.length; i++) {
       donotshow.push(disliked[i]);
     }
   }
   if (seeking_male === false) {
-    notSeeking = false
+    is_male = true
   }
   donotshow.push(id);
 
   console.log(donotshow);
-  //NEED TO ADD AGE RANGE
-  User.find({ _id: { $nin: donotshow }, is_male: { $ne: notSeeking }, age: { $lte: age_pref_max }, age: { $gte: age_pref_min } }, function (err, users) {
+
+  User.find({ _id: { $nin: donotshow }, is_male: { $ne: is_male }, age: { $lte: age_pref_max }, age: { $gte: age_pref_min } }, function (err, users) {
     if (!err) {
       return res.status(201).json({ users: users });
     } else {
@@ -178,12 +179,55 @@ exports.likingUser = function (req, res, next) {
     query = { email: emailQuery };
   console.log(likedId);
 
-  User.update({ _id: likedId }, { $push: { "liked_By_ids": { id: liked_by_id } } },
+  User.findOne({ _id: { $eq: likedId } }, function (err, user) {
+    if (err) {
+      throw err;
+    }
+  }).exec(function (err, user) {
+
+    for (let i = 0; i < user.liked_ids.length; i++) {
+      if (liked_by_id === user.liked_ids[i].id) {
+        // Update matches for logged in user
+
+        let newMatch = new Matches(user);
+        newMatch.save(function (error, doc) {
+          // Log any errors
+          if (error) {
+            console.log(error);
+          }
+          // Otherwise
+          else {
+            // Use the article id to find and update it's note $push: { "liked_ids": { id: likedId } }
+            User.findOneAndUpdate({ "_id": liked_by_id }, { $push: { matches: doc._id } })
+              // Execute the above query
+              .exec(function (err, doc) {
+                // Log any errors
+                if (err) {
+                  console.log(err);
+                }
+                else {
+                  // Or send the document to the browser
+                  console.log("successfully added match");
+                }
+              });
+          }
+        });
+
+        //update matches for corresponding user
+
+
+      }
+    }
+  });
+
+
+  User.update({ _id: likedId }, { $push: { "liked_by_ids": { id: liked_by_id } } },
     (err, user) => {
       if (err) {
         throw err;
+      } else {
+        console.log('success');
       }
-
     });
 
   User.findOneAndUpdate(query, { $push: { "liked_ids": { id: likedId } } },
@@ -203,6 +247,7 @@ exports.likingUser = function (req, res, next) {
       });
     });
 };
+
 
 exports.dislikingUser = function (req, res, next) {
   const

@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 const bcrypt = require('bcrypt-nodejs');
 const ROLE_MEMBER = require('../constants').ROLE_MEMBER;
 const Schema = mongoose.Schema;
-
+const Matches = require('./matches');
 //= ===============================
 // Looks Schema
 //= ===============================
@@ -11,12 +11,7 @@ var LookSchema = new Schema({
     link: String
 });
 
-var MatchSchema = new Schema({
-    user: {
-        type: Schema.Types.ObjectId,
-        ref: "User"
-    }
-})
+
 //= ===============================
 // User Schema
 //= ===============================
@@ -74,9 +69,10 @@ const UserSchema = new Schema({
     liked_by_ids: Array,
     liked_ids: Array,
     disliked_ids: Array,
-    matches: [
-        MatchSchema
-    ],
+    matches: [{
+        type: Schema.Types.ObjectId,
+        ref: 'Matches'
+    }],
     resetPasswordToken: { type: String },
     resetPasswordExpires: { type: Date },
     role: {
@@ -127,5 +123,5 @@ UserSchema.methods.comparePassword = function (candidatePassword, cb) {
 // module.exports = mongoose.model('Reactions', ReactionSchema);
 var User = mongoose.model('User', UserSchema);
 var Looks = mongoose.model('Looks', LookSchema);
-var Matches = mongoose.model('Matches', MatchSchema);
-module.exports = User, Looks, Matches;
+module.exports = User;
+
