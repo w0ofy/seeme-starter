@@ -142,11 +142,11 @@ exports.findAllUsers = function (req, res, next) {
     donotshow = req.body.liked,
     id = req.body.id,
     disliked = req.body.disliked,
-    seeking_male = req.body.seeking_male;
-    
+    seeking_male = req.body.seeking_male,
+    age_pref_min = req.body.age_pref_min,
+    age_pref_max = req.body.age_pref_max;
   let notSeeking = true;
 
-  
   if (disliked) {
     for (var i = 0; i < disliked.length; i++) {
       donotshow.push(disliked[i]);
@@ -158,11 +158,10 @@ exports.findAllUsers = function (req, res, next) {
   donotshow.push(id);
 
   console.log(donotshow);
-  User.find({ _id: { $nin: donotshow }, is_male: {$ne: notSeeking} }, function (err, users) {
+  //NEED TO ADD AGE RANGE
+  User.find({ _id: { $nin: donotshow }, is_male: { $ne: notSeeking }, age: { $lte: age_pref_max }, age: { $gte: age_pref_min } }, function (err, users) {
     if (!err) {
-      // console.log("bobom", users);
       return res.status(201).json({ users: users });
-
     } else {
       res.status(400).json({ error: 'No user could be found for this ID.' });
       throw err;
