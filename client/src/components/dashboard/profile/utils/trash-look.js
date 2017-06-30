@@ -18,7 +18,7 @@ class TrashLook extends React.Component {
         const emailQuery = user.email;
         const lookId = user.looks[0]._id;
         console.log(lookId)
-        axios.put('http://localhost:3000/api/user/delete-look', {
+        axios.put('http://localhost:3000/api/see/delete-look', {
             emailQuery: emailQuery,
             lookId: lookId
         },

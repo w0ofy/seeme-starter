@@ -1,89 +1,143 @@
 const cookie = require('react-cookie')
 const axios = require('axios');
-const React = require('react');
-import Swipeable from 'react-swipeable'
+import React from 'react';
 
-const Swipe = React.createClass({
+
+class Swipe extends React.Component {
+    constructor(props) {
+        super(props);
+        let userCookie = cookie.load('user');
+        this.state = {
+            thisuser: userCookie,
+            users: [],
+            loggedInUsersId: userCookie._id
+        };
+        this.handleLikeClick = this.handleLikeClick.bind(this);
+        this.handleDislikeClick = this.handleDislikeClick.bind(this);
+    }
+    handleLikeClick(e) {
+        e.preventDefault();
+        const userCookie = cookie.load('user');
+        const token = cookie.load('token');
+        const url = 'http://localhost:3000/api/liking'
+        let beingSwiped = $('#tinderslide ul div:last-child');
+
+        beingSwiped.animate('transform', 'translateX(900px)');
+        let liked = this.state.users.pop()
+
+        console.log('likingid:', liked._id);
+        axios.put(url, {
+            emailQuery: userCookie.email,
+            uid: userCookie._id,
+            likedId: liked._id
+        }, { headers: { Authorization: token } })
+            .then(res => {
+                cookie.save('token', res.data.token, { path: '/' });
+                cookie.save('user', res.data.user, { path: '/' });
+                console.log(res)
+            });
+
+        beingSwiped.remove();
+    }
+    handleDislikeClick(e) {
+        e.preventDefault();
+        const userCookie = cookie.load('user');
+        const token = cookie.load('token');
+        const url = 'http://localhost:3000/api/disliking'
+        let beingSwiped = $('#tinderslide ul div:last-child');
+
+        beingSwiped.animate('transform', 'translateX(900px)');
+        let disliked = this.state.users.pop()
+
+        axios.put(url, {
+            uid: userCookie._id,
+            dislikedId: disliked._id
+        }, { headers: { Authorization: token } })
+            .then(res => {
+                cookie.save('token', res.data.token, { path: '/' });
+                cookie.save('user', res.data.user, { path: '/' });
+                console.log(res)
+            });
+
+        beingSwiped.remove();
+    }
+    handleVideoClick(e) {
+        e.preventDefault();
+        this.click(function () { this.video.paused ? this.video.play() : this.video.pause(); });
+    }
     componentWillMount() {
-        // Fetch user data prior to component mounting
-        let user = cookie.load('user');
-        console.log("this user is:", user._id + " " + user.email);
-
-        if (user == undefined) {
-            window.location.href = 'http://localhost:8080/login';
-        } else {
-            let gender = user.is_male;
-            if (gender === false) {
-                gender = "girl";
-            } else {
-                gender = "guy";
+        const userCookie = cookie.load('user'),
+            token = cookie.load('token'),
+            url = 'http://localhost:3000/api/all-users',
+            likedids = [],
+            dislikedids = [];
+        if (userCookie.liked_ids) {
+            for (let i = 0; i < userCookie.liked_ids.length; i++) {
+                likedids.push(userCookie.liked_ids[i].id);
             }
-            this.setState({
-                firstName: user.firstName,
-                lastInitial: user.lastInitial,
-                age: user.age,
-                age_pref_min: user.age_pref_min,
-                age_pref_max: user.age_pref_max,
-                is_male: gender,
-                seeking_male: user.seeking_male,
-                look: user.looks[0] ? user.looks[0].link : "",
-                lookTwo: user.looks[1] ? user.looks[1].link : "",
-                lookThree: user.looks[2] ? user.looks[2].link : "",
-                lookFour: user.looks[3] ? user.looks[3].link : "",
-                lookFive: user.looks[4] ? user.looks[4].link : "",
-                lookSix: user.looks[5] ? user.looks[5].link : "",
-            })
         }
-        
-    },
-    
-    swiping(e, deltaX, deltaY, absX, absY, velocity) {
-        console.log('Swiping...', e, deltaX, deltaY, absX, absY, velocity)
-    },
 
-    swiped(e, deltaX, deltaY, isFlick, velocity) {
-        console.log('Swiped...', e, deltaX, deltaY, isFlick, velocity)
-    },
-    check() {
-
-        console.log(window.location.href.indexOf("edit-info"));
-
-        if (window.location.href.indexOf("edit-info") > -1) {
-            return (
-                <EditInfo firstName={this.state.firstName}
-                    lastInitial={this.state.lastInitial}
-                    is_male={this.state.is_male} age={this.state.age}
-                    seeking_male={this.state.seeking_male}
-                    age_pref_min={this.state.age_pref_min}
-                    age_pref_max={this.state.age_pref_max}
-                    profile_look={this.state.profile_look} />
-            );
-        } else {
-            return (
-                <UserInfo firstName={this.state.firstName}
-                    lastInitial={this.state.lastInitial}
-                    is_male={this.state.is_male} age={this.state.age}
-                    seeking_male={this.state.seeking_male}
-                    age_pref_min={this.state.age_pref_min}
-                    age_pref_max={this.state.age_pref_max}
-                    look={this.state.look}
-                    lookTwo={this.state.lookTwo}
-                    lookThree={this.state.lookThree}
-                    lookFour={this.state.lookFour}
-                    lookFive={this.state.lookFive}
-                    lookSix={this.state.lookSix} />
-            );
+        if (userCookie.disliked_ids) {
+            for (let i = 0; i < userCookie.disliked_ids.length; i++) {
+                dislikedids.push(userCookie.disliked_ids[i].id);
+            }
         }
-    },
-    render: function () {
+        if (userCookie.is_male === false) {
+
+        }
+
+        axios.put(url, { id: userCookie._id, liked: likedids, disliked: dislikedids, age_pref_min: userCookie.age_pref_min, age_pref_max: userCookie.age_pref_max, seeking_male: userCookie.seeking_male }, { headers: { Authorization: token } })
+            .then(res => {
+
+                // create logic to not show users under this user's matches, user userCookie
+                console.log(res.data.users);
+                const users = res.data.users
+                this.setState({ users });
+            });
+    }
+    render() {
 
         return (
             <div>
-                <Swipeable
-                    onSwiping={this.swiping}
-                    onSwiped={this.swiped} >
-                    You can swipe here!
-                </Swipeable>
+                <div className="wrap">
+                    <div id="tinderslide" className={this.state.loggedInUsersId}>
+                        <ul>
+                            {this.state.users.map(function (user) {
+                                console.log('user::: ', user.looks[0]);
+                                let profilelook = null;
+                                if (user.looks[0] === undefined) {
+                                    profilelook = "none";
+                                } else {
+                                    profilelook = user.looks[0].link;
+                                }
+                                return (<Pane key={user._id} uid={user._id} age={user.age} link={profilelook} name={user.firstName} />)
+                            })}
+                        </ul>
+                    </div>
+                </div>
+                <div className="actions">
+                    <a href="#" onClick={this.handleDislikeClick} className="dislike"><i></i></a>
+                    <a href="#" onClick={this.handleLikeClick} className="like"><i></i></a>
+                </div>
+            </div>
+        );
+    }
+};
+
+const Pane = React.createClass({
+    render: function () {
+        return (
+            <div className="to-like" id={this.props.uid}>
+                <li className="pane1">
+                    <div className="img">
+                        <video id="recorded-video" onClick={this.handleVideoClick} className="video" reload="true" src={this.props.link} />
+                    </div>
+                    <div className="first-name">
+                        {this.props.name}, {this.props.age}
+                    </div>
+                    <div className="like"></div>
+                    <div className="dislike"></div>
+                </li>
             </div>
         );
     }

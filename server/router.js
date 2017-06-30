@@ -48,10 +48,10 @@ module.exports = function (app) {
   //= ========================
 
   // Set user routes as a subgroup/middleware to apiRoutes
-  apiRoutes.use('/user', userRoutes);
+  apiRoutes.use('/see', userRoutes);
 
   // View user profile route
-  userRoutes.get('/:userId', requireAuth, UserController.viewProfile);
+  userRoutes.get('/:uid', requireAuth, UserController.viewProfile);
 
   // Update user profile route
   userRoutes.put('/update', requireAuth, UserController.updateProfile);
@@ -60,7 +60,18 @@ module.exports = function (app) {
   userRoutes.put('/update-looks', requireAuth, UserController.addLook);
 
   // Delete user looks route
-  userRoutes.put('/delete-look',  UserController.deleteLook);
+  userRoutes.put('/delete-look', UserController.deleteLook);
+
+
+
+  // Find all users route
+  apiRoutes.put('/all-users', requireAuth, UserController.findAllUsers);
+
+  // PUT route to add users being liked to logged in user and getting-liked user
+  apiRoutes.put('/liking', requireAuth, UserController.likingUser);
+
+  // PUT route to add users being liked to logged in user and getting-liked user
+  apiRoutes.put('/disliking', requireAuth, UserController.dislikingUser);
 
   // Test protected route
   apiRoutes.get('/protected', requireAuth, (req, res) => {
@@ -75,29 +86,7 @@ module.exports = function (app) {
   // Chat Routes
   //= ========================
 
-  // // Set chat routes as a subgroup/middleware to apiRoutes
-  // apiRoutes.use('/chat', chatRoutes);
 
-  // // View messages to and from authenticated user
-  // chatRoutes.get('/', requireAuth, ChatController.getConversations);
-
-  // // Retrieve single conversation
-  // chatRoutes.get('/:conversationId', requireAuth, ChatController.getConversation);
-
-  // // Send reply in conversation
-  // chatRoutes.post('/:conversationId', requireAuth, ChatController.sendReply);
-
-  // // Start new conversation
-  // chatRoutes.post('/new/:recipient', requireAuth, ChatController.newConversation);
-
- 
-  // //= ========================
-  // // Communication Routes
-  // //= ========================
-  // apiRoutes.use('/communication', communicationRoutes);
-
-  // // Send email from contact form
-  // communicationRoutes.post('/contact', CommunicationController.sendContactForm);
 
   // Set url for API group routes
   app.use('/api', apiRoutes);

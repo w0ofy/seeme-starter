@@ -20,13 +20,16 @@
     "react-ga": "^1.4.1",
     "react-icons": "^2.2.5",
     "react-modal": "^2.0.2",
+    "react-rangeslider": "^2.1.0",
     "react-router": "^2.6.0",
+    "react-slider": "^0.8.0",
     "react-swipe-card": "^0.1.4",
     "react-swipeable": "^4.0.1",
     "react-transition-group": "^1.2.0",
     "recordrtc": "^5.4.2",
     "socket.io": "^1.4.6",
-    "socket.io-client": "^1.4.6"
+    "socket.io-client": "^1.4.6",
+    "swing": "^3.1.0"
   },
   "devDependencies": {
     "babel-core": "^6.6.0",

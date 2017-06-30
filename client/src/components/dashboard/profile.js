@@ -43,7 +43,6 @@ const Profile = React.createClass({
                 lookSix: user.looks[5] ? user.looks[5].link : "",
             })
         }
-        this.trashSixChange = this.trashSixChange.bind(this);
     },
 
     check() {

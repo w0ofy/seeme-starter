@@ -1,7 +1,4 @@
 const ROLE_MEMBER = require('./constants').ROLE_MEMBER;
-// const ROLE_CLIENT = require('./constants').ROLE_CLIENT;
-// const ROLE_OWNER = require('./constants').ROLE_OWNER;
-// const ROLE_ADMIN = require('./constants').ROLE_ADMIN;
 
 // Set user info from request
 exports.setUserInfo = function setUserInfo(request) {
@@ -20,10 +17,10 @@ exports.setUserInfo = function setUserInfo(request) {
     profile_look: request.profile_look,
     looks: request.looks,
     matches: request.matches,
-    questions_asked: request.questions_asked,
-    questions_asking: request.questions_asking,
-    reactions: request.reactions,
-    role: request.role
+    role: request.role,
+    disliked_ids: request.disliked_ids,
+    liked_ids: request.liked_ids,
+    liked_by_ids: request.liked_by_ids,
   };
   
   return getUserInfo;
@@ -39,7 +36,3 @@ exports.getRole = function getRole(checkRole) {
 
   return role;
 };
-// removed from switch case for exports.getRole
-// case ROLE_ADMIN: role = 4; break;
-// case ROLE_OWNER: role = 3; break;
-// case ROLE_CLIENT: role = 2; break;

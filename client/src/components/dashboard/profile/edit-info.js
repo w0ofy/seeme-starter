@@ -39,7 +39,7 @@ const editInfo = React.createClass({
 
     const user = cookie.load('user');
     const emailQuery = user.email;
-    axios.put('http://localhost:3000/api/user/update', {
+    axios.put('http://localhost:3000/api/see/update', {
       emailQuery: emailQuery,
       firstName: userProfile.firstName,
       is_male: userProfile.is_male,
@@ -63,9 +63,18 @@ const editInfo = React.createClass({
     return (
       <div className="edit-info">
         <form id="edit-info" onSubmit={this.handleFormSubmit}>
+          <label>My name is:</label>
           <input onChange={this.handleChange("firstName")} name="firstName" type="text" placeholder={this.props.firstName} />
-          <input onChange={this.handleChange("is_male")} name="is_male" type="text" placeholder={this.props.is_male} />
-          <input onChange={this.handleChange("is_male")} name="is_male" type="text" placeholder={this.props.seeking_male} />
+          <label>I am a:</label>
+          <select onChange={this.handleChange("is_male")} name="is_male">
+            <option value="false">Girl</option>
+            <option value="true">Guy</option>
+          </select>
+          <label>I am looking to meet a:</label>
+          <select onChange={this.handleChange("seeking_male")} name="seeking_male" >
+            <option value="true">Guy</option>
+            <option value="false">Girl</option>
+          </select>
           <input onChange={this.handleChange("age")} name="age" type="text" placeholder={this.props.age} />
           <input onChange={this.handleChange("age_pref_min")} name="age_pref_min" id="min" className="inline" type="text" placeholder={this.props.age_pref_min} />
           <input onChange={this.handleChange("age_pref_max")} name="age_pref_max" id="max" className="inline" type="text" placeholder={this.props.age_pref_max} />

@@ -57,7 +57,7 @@ class PhotoBoothModal extends React.Component {
     render() {
         return (
             <div>
-                <button className="add-look" onClick={this.openModal}><MdVideoCall /></button>
+                <button className="add-look" title="Add A New Look" onClick={this.openModal}><MdVideoCall /></button>
                 <Modal
                     isOpen={this.state.modalIsOpen}
                     onAfterOpen={this.afterOpenModal}

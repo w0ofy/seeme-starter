@@ -3,25 +3,14 @@ const mongoose = require('mongoose');
 const bcrypt = require('bcrypt-nodejs');
 const ROLE_MEMBER = require('../constants').ROLE_MEMBER;
 const Schema = mongoose.Schema;
-
+const Matches = require('./matches');
 //= ===============================
 // Looks Schema
 //= ===============================
 var LookSchema = new Schema({
     link: String
 });
-//= ===============================
-// Questions Schema
-//= ===============================
-// var QuestionSchema = new Schema({
-//     question: String
-// });
-// //= ===============================
-// // Reactions Schema
-// //= ===============================
-// var ReactionSchema = new Schema({
-//     reaction: String
-// });
+
 
 //= ===============================
 // User Schema
@@ -77,11 +66,12 @@ const UserSchema = new Schema({
     looks: [
         LookSchema
     ],
-    liked_By_ids: Array,
+    liked_by_ids: Array,
     liked_ids: Array,
+    disliked_ids: Array,
     matches: [{
         type: Schema.Types.ObjectId,
-        ref: "Users"
+        ref: 'Matches'
     }],
     resetPasswordToken: { type: String },
     resetPasswordExpires: { type: Date },
@@ -96,35 +86,36 @@ const UserSchema = new Schema({
         timestamps: true
     });
 
+
 //= ===============================
 // User ORM Methods
 //= ===============================
 
 // Pre-save of user to database, hash password if password is modified or new
 UserSchema.pre('save', function (next) {
-  const user = this,
-    SALT_FACTOR = 5;
+    const user = this,
+        SALT_FACTOR = 5;
 
-  if (!user.isModified('password')) return next();
+    if (!user.isModified('password')) return next();
 
-  bcrypt.genSalt(SALT_FACTOR, (err, salt) => {
-    if (err) return next(err);
+    bcrypt.genSalt(SALT_FACTOR, (err, salt) => {
+        if (err) return next(err);
 
-    bcrypt.hash(user.password, salt, null, (err, hash) => {
-      if (err) return next(err);
-      user.password = hash;
-      next();
+        bcrypt.hash(user.password, salt, null, (err, hash) => {
+            if (err) return next(err);
+            user.password = hash;
+            next();
+        });
     });
-  });
 });
 
 // Method to compare password for login
 UserSchema.methods.comparePassword = function (candidatePassword, cb) {
-  bcrypt.compare(candidatePassword, this.password, (err, isMatch) => {
-    if (err) { return cb(err); }
+    bcrypt.compare(candidatePassword, this.password, (err, isMatch) => {
+        if (err) { return cb(err); }
 
-    cb(null, isMatch);
-  });
+        cb(null, isMatch);
+    });
 };
 
 // module.exports = mongoose.model('Looks', LookSchema);
@@ -132,4 +123,5 @@ UserSchema.methods.comparePassword = function (candidatePassword, cb) {
 // module.exports = mongoose.model('Reactions', ReactionSchema);
 var User = mongoose.model('User', UserSchema);
 var Looks = mongoose.model('Looks', LookSchema);
-module.exports = User, Looks;
+module.exports = User;
+
