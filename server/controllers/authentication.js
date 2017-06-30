@@ -18,12 +18,31 @@ function generateToken(user) {
 // Login Route
 //= =======================================
 exports.login = function (req, res, next) {
-  const userInfo = setUserInfo(req.user);
+  // const userInfo = setUserInfo(req.user);
+  let query = { email: req.user.email };
+  User.findOneAndUpdate(query, { logged_in: true }, (err, user) => { 
+    if (err) {
+      throw err
+    }
 
-  res.status(200).json({
-    token: `JWT ${generateToken(userInfo)}`,
-    user: userInfo
+    User.findOne(query, (err, updatedUser) => {
+        const userInfo = setUserInfo(updatedUser);
+        res.status(200).json({
+          token: `JWT ${generateToken(userInfo)}`,
+          user: userInfo
+        });
+    });
   });
+};
+
+exports.logout = function (req, res, next) {
+  let query = req.body.emailQuery
+  User.findOneAndUpdate(query, { logged_in: false }, (err, user) => { 
+    if (err) {
+      throw err
+    }
+  });
+
 };
 
 
