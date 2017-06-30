@@ -82,8 +82,11 @@ class Swipe extends React.Component {
                 dislikedids.push(userCookie.disliked_ids[i].id);
             }
         }
-        console.log("likedids:", userCookie.disliked_ids);
-        axios.put(url, { id: userCookie._id, liked: likedids, disliked: dislikedids }, { headers: { Authorization: token } })
+        if (userCookie.is_male === false) {
+
+        }
+        axios.put(url, { id: userCookie._id, liked: likedids, disliked: dislikedids, is_male: userCookie.is_male, 
+            seeking_male: userCookie.seeking_male }, { headers: { Authorization: token } })
             .then(res => {
 
                 // create logic to not show users under this user's matches, user userCookie

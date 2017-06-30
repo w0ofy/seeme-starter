@@ -141,7 +141,10 @@ exports.findAllUsers = function (req, res, next) {
   const
     donotshow = req.body.liked,
     id = req.body.id,
-    disliked = req.body.disliked;
+    disliked = req.body.disliked,
+    seeking_male = req.body.seeking_male;
+    
+  let notSeeking = true;
 
   
   if (disliked) {
@@ -149,11 +152,13 @@ exports.findAllUsers = function (req, res, next) {
       donotshow.push(disliked[i]);
     }
   }
-
+  if (seeking_male === false) {
+    notSeeking = false
+  }
   donotshow.push(id);
-  
+
   console.log(donotshow);
-  User.find({ _id: { $nin: donotshow } }, function (err, users) {
+  User.find({ _id: { $nin: donotshow }, is_male: {$ne: notSeeking} }, function (err, users) {
     if (!err) {
       // console.log("bobom", users);
       return res.status(201).json({ users: users });
