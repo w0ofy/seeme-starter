@@ -37,6 +37,9 @@ module.exports = function (app) {
   // Login route
   authRoutes.post('/login', requireLogin, AuthenticationController.login);
 
+  // Updated logged_in boolean
+  authRoutes.put('/logout', AuthenticationController.logout);
+
   // Password reset request route (generate/send token)
   authRoutes.post('/forgot-password', AuthenticationController.forgotPassword);
 

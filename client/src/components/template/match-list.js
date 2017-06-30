@@ -1,32 +1,28 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router';
-const cookie = require('react-cookie');
+const cookie = require('react-cookie'),
+      user = cookie.load('user');
 
 const MatchList = React.createClass({
 
   renderList() {
-    const user = cookie.load('user')
     console.log(user);
     if (user !== undefined) {
       return  [<div className="match-list-container">
         <div className="match">
-          <Link to="#">react</Link> |
-          <Link to="#">chat</Link>
+          <Link to="#chat">Vin</Link>
           <div className="image" />
         </div>
         <div className="match">
-          <Link to="#">react</Link> |
-          <Link to="#">chat</Link>
+          <Link to="#chat">Ant</Link>
           <div className="image" />
         </div>
         <div className="match">
-          <Link to="#">react</Link> |
-          <Link to="#">chat</Link>
+          <Link to="#chat">Mike</Link>
           <div className="image" />
         </div>
         <div className="match">
-          <Link to="#">react</Link> |
-          <Link to="#">chat</Link>
+          <Link to="#">Franklin</Link>
           <div className="image" />
         </div>
       </div>]
