@@ -73,6 +73,7 @@ const UserSchema = new Schema({
     ],
     liked_by_ids: Array,
     liked_ids: Array,
+    disliked_ids: Array,
     matches: [
         MatchSchema
     ],
@@ -127,4 +128,4 @@ UserSchema.methods.comparePassword = function (candidatePassword, cb) {
 var User = mongoose.model('User', UserSchema);
 var Looks = mongoose.model('Looks', LookSchema);
 var Matches = mongoose.model('Matches', MatchSchema);
-module.exports = User, Looks;
+module.exports = User, Looks, Matches;

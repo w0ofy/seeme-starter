@@ -138,11 +138,22 @@ exports.deleteLook = function (req, res, next) {
 };
 
 exports.findAllUsers = function (req, res, next) {
-  const id = req.body.id;
-  const liked = req.body.liked
-  liked.push(id);
+  const
+    donotshow = req.body.liked,
+    id = req.body.id,
+    disliked = req.body.disliked;
 
-  User.find({ _id: { $nin: liked } }, function (err, users) {
+  
+  if (disliked) {
+    for (var i = 0; i < disliked.length; i++) {
+      donotshow.push(disliked[i]);
+    }
+  }
+
+  donotshow.push(id);
+  
+  console.log(donotshow);
+  User.find({ _id: { $nin: donotshow } }, function (err, users) {
     if (!err) {
       // console.log("bobom", users);
       return res.status(201).json({ users: users });
@@ -163,7 +174,7 @@ exports.likingUser = function (req, res, next) {
     query = { email: emailQuery };
   console.log(likedId);
 
-  User.update({_id: likedId}, { $push: { "liked_By_ids": { id: liked_by_id } } },
+  User.update({ _id: likedId }, { $push: { "liked_By_ids": { id: liked_by_id } } },
     (err, user) => {
       if (err) {
         throw err;
@@ -185,6 +196,31 @@ exports.likingUser = function (req, res, next) {
           user: userInfo
 
         });
+      });
+    });
+};
+
+exports.dislikingUser = function (req, res, next) {
+  const
+    thisuser = req.body.uid,
+    dislikedId = req.body.dislikedId,
+
+    query = { _id: thisuser };
+
+  User.update(query, { $push: { "disliked_ids": { id: dislikedId } } },
+    (err, user) => {
+      if (err) {
+        throw err;
+      }
+
+      User.findOne(query, (err, updatedUser) => {
+        const userInfo = setUserInfo(updatedUser);
+
+        res.status(201).json({
+          token: `JWT ${generateToken(userInfo)}`,
+          user: userInfo
+        });
+
       });
     });
 };

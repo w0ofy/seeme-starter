@@ -6,12 +6,14 @@ import React from 'react';
 class Swipe extends React.Component {
     constructor(props) {
         super(props);
-        const userCookie = cookie.load('user');
+        let userCookie = cookie.load('user');
         this.state = {
+            thisuser: userCookie,
             users: [],
             loggedInUsersId: userCookie._id
         };
         this.handleLikeClick = this.handleLikeClick.bind(this);
+        this.handleDislikeClick = this.handleDislikeClick.bind(this);
     }
     handleLikeClick(e) {
         e.preventDefault();
@@ -37,16 +39,51 @@ class Swipe extends React.Component {
 
         beingSwiped.remove();
     }
-    componentWillMount() {
+    handleDislikeClick(e) {
+        e.preventDefault();
         const userCookie = cookie.load('user');
         const token = cookie.load('token');
-        const url = 'http://localhost:3000/api/all-users';
-        const likedids = []
-        for (let i = 0; i < userCookie.liked_ids.length; i++) {
-            likedids.push(userCookie.liked_ids[i].id);
+        const url = 'http://localhost:3000/api/disliking'
+        let beingSwiped = $('#tinderslide ul div:last-child');
+
+        beingSwiped.animate('transform', 'translateX(900px)');
+        let disliked = this.state.users.pop()
+
+        axios.put(url, {
+            uid: userCookie._id,
+            dislikedId: disliked._id
+        }, { headers: { Authorization: token } })
+            .then(res => {
+                cookie.save('token', res.data.token, { path: '/' });
+                cookie.save('user', res.data.user, { path: '/' });
+                console.log(res)
+            });
+
+        beingSwiped.remove();
+    }
+    handleVideoClick(e) {
+        e.preventDefault();
+        this.click(function () { this.video.paused ? this.video.play() : this.video.pause(); });
+    }
+    componentWillMount() {
+        const userCookie = cookie.load('user'),
+            token = cookie.load('token'),
+            url = 'http://localhost:3000/api/all-users',
+            likedids = [],
+            dislikedids = [];
+        if (userCookie.liked_ids) {
+            for (let i = 0; i < userCookie.liked_ids.length; i++) {
+                likedids.push(userCookie.liked_ids[i].id);
+            }
         }
-        console.log("likedids:", likedids);
-        axios.put(url, {id: userCookie._id, liked: likedids}, { headers: { Authorization: token } })
+
+        if (userCookie.disliked_ids) {
+            for (let i = 0; i < userCookie.disliked_ids.length; i++) {
+                dislikedids.push(userCookie.disliked_ids[i].id);
+            }
+        }
+        console.log("likedids:", userCookie.disliked_ids);
+        axios.put(url, { id: userCookie._id, liked: likedids, disliked: dislikedids }, { headers: { Authorization: token } })
             .then(res => {
 
                 // create logic to not show users under this user's matches, user userCookie
@@ -70,7 +107,7 @@ class Swipe extends React.Component {
                     </div>
                 </div>
                 <div className="actions">
-                    <a href="#" className="dislike"><i></i></a>
+                    <a href="#" onClick={this.handleDislikeClick} className="dislike"><i></i></a>
                     <a href="#" onClick={this.handleLikeClick} className="like"><i></i></a>
                 </div>
             </div>
@@ -84,7 +121,7 @@ const Pane = React.createClass({
             <div className="to-like" id={this.props.uid}>
                 <li className="pane1">
                     <div className="img">
-                        <video id="recorded-video" className="video" reload="true" src={this.props.link} />
+                        <video id="recorded-video" onClick={this.handleVideoClick} className="video" reload="true" src={this.props.link} />
                     </div>
                     <div className="first-name">
                         {this.props.name}, {this.props.age}

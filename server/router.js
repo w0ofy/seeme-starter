@@ -60,15 +60,18 @@ module.exports = function (app) {
   userRoutes.put('/update-looks', requireAuth, UserController.addLook);
 
   // Delete user looks route
-  userRoutes.put('/delete-look',  UserController.deleteLook);
+  userRoutes.put('/delete-look', UserController.deleteLook);
 
 
-  
+
   // Find all users route
   apiRoutes.put('/all-users', requireAuth, UserController.findAllUsers);
 
   // PUT route to add users being liked to logged in user and getting-liked user
   apiRoutes.put('/liking', requireAuth, UserController.likingUser);
+
+  // PUT route to add users being liked to logged in user and getting-liked user
+  apiRoutes.put('/disliking', requireAuth, UserController.dislikingUser);
 
   // Test protected route
   apiRoutes.get('/protected', requireAuth, (req, res) => {
