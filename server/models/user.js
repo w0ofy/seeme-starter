@@ -30,10 +30,6 @@ const UserSchema = new Schema({
         type: String,
         required: true
     },
-    lastInitial: {
-        type: String,
-        required: true
-    },
     age: {
         type: Number,
         default: 18,

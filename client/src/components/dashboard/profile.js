@@ -29,7 +29,6 @@ const Profile = React.createClass({
             }
             this.setState({
                 firstName: user.firstName,
-                lastInitial: user.lastInitial,
                 age: user.age,
                 age_pref_min: user.age_pref_min,
                 age_pref_max: user.age_pref_max,
@@ -52,7 +51,6 @@ const Profile = React.createClass({
         if (window.location.href.indexOf("edit-info") > -1) {
             return (
                 <EditInfo firstName={this.state.firstName}
-                    lastInitial={this.state.lastInitial}
                     is_male={this.state.is_male} age={this.state.age}
                     seeking_male={this.state.seeking_male}
                     age_pref_min={this.state.age_pref_min}
@@ -62,7 +60,6 @@ const Profile = React.createClass({
         } else {
             return (
                 <UserInfo firstName={this.state.firstName}
-                    lastInitial={this.state.lastInitial}
                     is_male={this.state.is_male} age={this.state.age}
                     seeking_male={this.state.seeking_male}
                     age_pref_min={this.state.age_pref_min}

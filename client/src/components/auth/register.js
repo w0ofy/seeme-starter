@@ -8,7 +8,6 @@ const Register = React.createClass({
     return {
       email: '',
       firstName: '',
-      lastInital: '',
       password: '',
       age: '',
       is_male: '',
@@ -20,7 +19,6 @@ const Register = React.createClass({
     axios.post('http://localhost:3000/api/auth/register', {
       email: this.state.email,
       firstName: this.state.firstName,
-      lastInitial: this.state.lastInitial,
       password: this.state.password,
       age: this.state.age,
       is_male: this.state.is_male,
@@ -48,11 +46,8 @@ const Register = React.createClass({
           <div className="row">
             <div className="col-md-6">
               <div className="row">
-                <div className="col-md-6">
+                <div className="col-md-12">
                   <input placeholder="First Name" name="firstName" onChange={this.handleInputChange} value={this.state.firstName} type="text" />
-                </div>
-                <div className="col-md-6">
-                  <input name="lastInitial" onChange={this.handleInputChange} value={this.state.lastInitial} placeholder="Last Initial" type="text" />
                 </div>
               </div>
             </div>
