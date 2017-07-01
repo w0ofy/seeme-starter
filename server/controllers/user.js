@@ -37,6 +37,7 @@ exports.viewProfile = function (req, res, next) {
 };
 
 
+
 //= =======================================
 // Update Profile Route
 //= =======================================
@@ -115,6 +116,7 @@ exports.addLook = function (req, res, next) {
 //= =======================================
 // Update Profile Route
 //= =======================================
+
 exports.deleteLook = function (req, res, next) {
 
   const emailQuery = req.body.emailQuery,
@@ -214,7 +216,7 @@ exports.likingUser = function (req, res, next) {
                 }
                 else {
                   
-                  console.log("user?", match);
+                  console.log("user", match);
                   let matchedWith = new Matches(match);
                   matchedWith.save(function (error, match2) {
 
@@ -271,7 +273,6 @@ exports.likingUser = function (req, res, next) {
     });
 };
 
-
 exports.dislikingUser = function (req, res, next) {
   const
     thisuser = req.body.uid,
@@ -296,3 +297,16 @@ exports.dislikingUser = function (req, res, next) {
       });
     });
 };
+
+//= =======================================
+// Populate Matches Route
+//= =======================================
+
+exports.populateMatches = function(req, res, next) {
+  query = { _id: req.body.id }
+  User.findOne(query).populate("matches").exec((err, matches) =>{
+    if (err) throw err;
+    console.log(matches)
+    res.json(matches);
+  })
+}

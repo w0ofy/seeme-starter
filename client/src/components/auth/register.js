@@ -22,7 +22,8 @@ const Register = React.createClass({
       password: this.state.password,
       age: this.state.age,
       is_male: this.state.is_male,
-      seeking_male: this.state.seeking_male
+      seeking_male: this.state.seeking_male,
+      logged_in: true
     })
       .then((response) => {
         cookie.save('token', response.data.token, { path: '/' });
