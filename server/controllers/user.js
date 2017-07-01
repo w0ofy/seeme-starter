@@ -142,26 +142,30 @@ exports.deleteLook = function (req, res, next) {
 
 exports.findAllUsers = function (req, res, next) {
   const
-    donotshow = req.body.liked,
-    id = req.body.id,
-    disliked = req.body.disliked,
-    seeking_male = req.body.seeking_male,
-    age_pref_min = req.body.age_pref_min,
-    age_pref_max = req.body.age_pref_max;
+    donotshow = req.body.liked, // initially, users who are already liked by the logged-in user
+    id = req.body.id, // logged-in user id
+    disliked = req.body.disliked, // initially, users who are already disliked by the logged-in user
+    seeking_male = req.body.seeking_male, // seeking male pref
+    age_pref_min = req.body.age_pref_min, // age min pref
+    age_pref_max = req.body.age_pref_max; // age max pref
   let is_male = false;
+
   console.log(seeking_male);
   if (disliked) {
     for (var i = 0; i < disliked.length; i++) {
+      // push all dislikes into likes array to officially start building a donotshow array
       donotshow.push(disliked[i]);
     }
   }
+  // if user isn't trying to meet a male, set to find guys because query is set to find $ne (not equal)
   if (seeking_male === false) {
     is_male = true
   }
+  // push currently logged in user to the donotshow array
   donotshow.push(id);
 
-  console.log(donotshow);
-
+  // console.log(donotshow);
+  // find all users excluding the users in donotshow array
   User.find({ _id: { $nin: donotshow }, is_male: { $ne: is_male }, age: { $lte: age_pref_max }, age: { $gte: age_pref_min } }, function (err, users) {
     if (!err) {
       return res.status(201).json({ users: users });
@@ -180,17 +184,18 @@ exports.likingUser = function (req, res, next) {
 
     query = { email: emailQuery };
   console.log(likedId);
-
+  // find the user who the logged-in user liked
   User.findOne({ _id: { $eq: likedId } }, function (err, user) {
     if (err) {
       throw err;
     }
   }).exec(function (err, user) {
-
+    
     for (let i = 0; i < user.liked_ids.length; i++) {
+      // if the above user likes the logged in user too...
       if (liked_by_id === user.liked_ids[i].id) {
-        // Update matches for logged in user
-
+        
+        // Save the user who got liked
         let newMatch = new Matches(user);
         newMatch.save(function (error, match) {
           // Log any errors
@@ -199,7 +204,7 @@ exports.likingUser = function (req, res, next) {
           }
           // Otherwise
           else {
-            // Use the article id to find and update it's note $push: { "liked_ids": { id: likedId } }
+            // add the liked-user to the logged-in user's matches
             User.findOneAndUpdate({ "_id": liked_by_id }, { $push: { matches: match._id } })
               // Execute the above query
               .exec(function (err, match) {
@@ -208,15 +213,17 @@ exports.likingUser = function (req, res, next) {
                   console.log(err);
                 }
                 else {
-                  //Match should be the logged_in user, aka the user that initiated the match by swiping:
+                  
                   console.log("user?", match);
                   let matchedWith = new Matches(match);
                   matchedWith.save(function (error, match2) {
+
                     if (error) {
                       console.log(error);
-                    } 
-                    
+                    }                    
                     else {
+
+                      // Add a match to the logged in user as well
                       User.findOneAndUpdate({ "_id": likedId}, { $push: {matches: match2._id}})
                       .exec(function(error, match2){
                         if (error) {
@@ -233,9 +240,10 @@ exports.likingUser = function (req, res, next) {
           });
         }
       }
+      
     });
 
-
+  // always update logged in user's likes
   User.update({ _id: likedId }, { $push: { "liked_by_ids": { id: liked_by_id } } },
     (err, user) => {
       if (err) {
@@ -244,7 +252,7 @@ exports.likingUser = function (req, res, next) {
         console.log('success');
       }
     });
-
+  // always update a liked-user's likes
   User.findOneAndUpdate(query, { $push: { "liked_ids": { id: likedId } } },
     (err, user) => {
       if (err) {
@@ -270,7 +278,7 @@ exports.dislikingUser = function (req, res, next) {
     dislikedId = req.body.dislikedId,
 
     query = { _id: thisuser };
-
+  // update the logged-in user's dislikes
   User.update(query, { $push: { "disliked_ids": { id: dislikedId } } },
     (err, user) => {
       if (err) {
