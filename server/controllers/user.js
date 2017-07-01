@@ -44,8 +44,8 @@ exports.updateProfile = function (req, res, next) {
 
   const emailQuery = req.body.emailQuery,
     firstName = req.body.firstName,
-    lastInitial = req.body.lastInitial
-  age = req.body.age,
+    lastInitial = req.body.lastInitial,
+    age = req.body.age,
     is_male = req.body.is_male,
     seeking_male = req.body.seeking_male,
     age_pref_min = req.body.age_pref_min,
@@ -192,7 +192,7 @@ exports.likingUser = function (req, res, next) {
         // Update matches for logged in user
 
         let newMatch = new Matches(user);
-        newMatch.save(function (error, doc) {
+        newMatch.save(function (error, match) {
           // Log any errors
           if (error) {
             console.log(error);
@@ -200,27 +200,40 @@ exports.likingUser = function (req, res, next) {
           // Otherwise
           else {
             // Use the article id to find and update it's note $push: { "liked_ids": { id: likedId } }
-            User.findOneAndUpdate({ "_id": liked_by_id }, { $push: { matches: doc._id } })
+            User.findOneAndUpdate({ "_id": liked_by_id }, { $push: { matches: match._id } })
               // Execute the above query
-              .exec(function (err, doc) {
+              .exec(function (err, match) {
                 // Log any errors
                 if (err) {
                   console.log(err);
                 }
                 else {
-                  // Or send the document to the browser
-                  console.log("successfully added match");
+                  //Match should be the logged_in user, aka the user that initiated the match by swiping:
+                  console.log("user?", match);
+                  let matchedWith = new Matches(match);
+                  matchedWith.save(function (error, match2) {
+                    if (error) {
+                      console.log(error);
+                    } 
+                    
+                    else {
+                      User.findOneAndUpdate({ "_id": likedId}, { $push: {matches: match2._id}})
+                      .exec(function(error, match2){
+                        if (error) {
+                          console.log(error);
+                        } else {
+                          console.log("fasdfada");
+                        }
+                      })
+                    }
+                  })
                 }
-              });
-          }
-        });
-
-        //update matches for corresponding user
-
-
+              })
+            }
+          });
+        }
       }
-    }
-  });
+    });
 
 
   User.update({ _id: likedId }, { $push: { "liked_by_ids": { id: liked_by_id } } },
