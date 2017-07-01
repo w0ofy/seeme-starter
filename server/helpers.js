@@ -21,6 +21,7 @@ exports.setUserInfo = function setUserInfo(request) {
     disliked_ids: request.disliked_ids,
     liked_ids: request.liked_ids,
     liked_by_ids: request.liked_by_ids,
+    logged_in: request.logged_in
   };
   
   return getUserInfo;
