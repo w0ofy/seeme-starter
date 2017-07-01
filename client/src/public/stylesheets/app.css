@@ -10,6 +10,7 @@ body {
     padding-top: 70px;
     padding-bottom: 50px;
     -webkit-font-smoothing: antialiased;
+    text-rendering: optimizelegibility;
 }
 
 h1,
@@ -23,7 +24,7 @@ h6 {
 
 h1 {
     font-family: 'Montserrat', sans-serif;
-    font-size: 42px;
+    font-size: 54px;
     font-weight: 500;
     color: #009fdc
 }
@@ -143,8 +144,27 @@ p.copyright>span {
     color: #777
 }
 
+
+/*#register-box {
+    margin-left: 10px;
+}*/
+
+#register input[type="submit"] {
+    width: auto
+}
+
 .register-container {
     margin-right: 10%;
+    animation: fadeIn 1.5s forwards;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
 }
 
 .sm-inline {
@@ -156,7 +176,7 @@ p.copyright>span {
 /* ================= NAV BAR =================*/
 
 .nav-container {
-    padding: 0 2% 0 1%;
+    padding: 0 4% 0 4%;
 }
 
 .navbar {
@@ -204,6 +224,30 @@ p.copyright>span {
     font-size: 14px;
     transition: border 0.5s;
     outline: none;
+}
+
+
+/* HOME */
+
+.one-liner-ct {
+    display: flex;
+    flex-direction: row;
+}
+
+.img-ct {
+    align-self: center;
+    margin-right: 8%;
+}
+
+.inline-txt-ct {
+    align-self: center;
+}
+
+.inline-txt {
+    font-size: 28px;
+    font-weight: bold;
+    letter-spacing: normal;
+    text-rendering: optimizelegibility;
 }
 
 
