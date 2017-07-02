@@ -22,15 +22,13 @@ componentWillMount: function() {
     axios.post(url, 
       { id: user._id }, 
       { headers: { Authorization: token }
-    }).then((err, res)=>{ 
-      if (err) {
-        throw err;
-      } 
+    }).then((res)=>{ 
         console.log(res)
-        
-        // this.setState({
-        //   matches: res
-        // });
+        this.setState({
+          matches: res
+        });
+    }).catch((err)=> {
+      console.log(err)
     });
   } else {
     return false;

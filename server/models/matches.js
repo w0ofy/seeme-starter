@@ -5,13 +5,10 @@ const UserSchema = require('./user.js')
 
 
 
-var MatchSchema = new Schema({
-    user: {
+var MatchSchema = new Schema([{
         type: Schema.Types.ObjectId,
-        ref: "User",
-    }
-})
-
+        ref: "User"
+}])
 
 
 module.exports = {
