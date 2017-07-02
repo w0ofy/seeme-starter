@@ -22,10 +22,10 @@ import Logout from './components/auth/logout';
 // import MyProfile from './components/dashboard/my-profile';
 // import YourProfile from './components/dashboard/your-profile';
 // import FindMatches from './components/dashboard/find-matches';
-
+// import chatWindow from './components/chat/chatWindow.js'
 import Profile from './components/dashboard/profile.js';
 import EditInfo from './components/dashboard/profile/edit-info';
-import Swipe from './components/dashboard/profile/swipe';
+import Swipe from './components/dashboard/profile/swipe/swipe.js';
 import YourInfo from './components/dashboard/profile/your-profile';
 // import Inbox from './components/dashboard/messaging/inbox';
 // import Conversation from './components/dashboard/messaging/conversation';
@@ -41,6 +41,7 @@ import RequireAuth from './components/auth/require_auth';
 export default (
   <Route path="/" component={App}>
     <IndexRoute component={HomePage} />
+    {/*<Route path="chat" component={chatWindow} />*/}
     <Route path="register" component={Register} />
     <Route path="login" component={Login} />
     <Route path="logout" component={Logout} />
