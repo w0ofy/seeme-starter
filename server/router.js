@@ -76,6 +76,9 @@ module.exports = function (app) {
   // PUT route to add users being liked to logged in user and getting-liked user
   apiRoutes.put('/disliking', requireAuth, UserController.dislikingUser);
 
+  // Populate matches
+  apiRoutes.post('/matches', requireAuth, UserController.populateMatches); 
+
   // Test protected route
   apiRoutes.get('/protected', requireAuth, (req, res) => {
     res.send({ content: 'The protected test route is functional!' });

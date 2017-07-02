@@ -1,18 +1,20 @@
 // Importing Node packages required for schema
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
-const UserSchema = require('./user');
+const UserSchema = require('./user.js')
+
 
 
 var MatchSchema = new Schema({
-    user: [{
+    user: {
         type: Schema.Types.ObjectId,
-        ref: "User"
-    }]
+        ref: "User",
+    }
 })
 
 
 
-
-var Matches = mongoose.model('Matches', MatchSchema);
-module.exports = Matches;
+module.exports = {
+    model: mongoose.model('Matches', MatchSchema),
+    schema: MatchSchema
+}
