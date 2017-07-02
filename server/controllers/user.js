@@ -44,7 +44,6 @@ exports.updateProfile = function (req, res, next) {
 
   const emailQuery = req.body.emailQuery,
     firstName = req.body.firstName,
-    lastInitial = req.body.lastInitial,
     age = req.body.age,
     is_male = req.body.is_male,
     seeking_male = req.body.seeking_male,

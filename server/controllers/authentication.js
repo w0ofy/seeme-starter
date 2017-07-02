@@ -53,7 +53,6 @@ exports.register = function (req, res, next) {
   // Check for registration errors
   const email = req.body.email,
     firstName = req.body.firstName,
-    lastInitial = req.body.lastInitial,
     password = req.body.password,
     age = req.body.age,
     is_male = req.body.is_male,
@@ -67,7 +66,7 @@ exports.register = function (req, res, next) {
   }
 
   // Return error if full name not provided
-  if (!firstName || !lastInitial) {
+  if (!firstName) {
     return res.status(422).send({ error: 'You must enter your full name.' });
   }
 
@@ -89,7 +88,6 @@ exports.register = function (req, res, next) {
       email,
       password,
       firstName,
-      lastInitial,
       age,
       is_male,
       seeking_male,
