@@ -40,27 +40,37 @@ const Register = React.createClass({
     // const { handleSubmit } = this.props;
 
     return (
-      <div className="register-container">
-        <form id="register" onSubmit={this.handleSubmit}>
+      <div>
 
-          <div className="row">
-            <div className="col-md-6">
-              <div className="row">
-                <div className="col-md-12">
-                  <input placeholder="First Name" name="firstName" onChange={this.handleInputChange} value={this.state.firstName} type="text" />
-                </div>
+        <div className="row">
+          <div className="col-md-12">
+
+
+            <div className="row">
+              <div className="col-md-4">
+                <input placeholder="First Name" name="firstName" onChange={this.handleInputChange} value={this.state.firstName} type="text" />
               </div>
             </div>
-            <div className="col-md-6">
-              <input name="age" type="text" onChange={this.handleInputChange} value={this.state.age} placeholder="Age" />
 
-            </div>
-          </div>
-          <div className="row">
-            <div className="col-md-6">
-
+            <div className="col-md-4">
               <input name="email" type="text" onChange={this.handleInputChange} value={this.state.email} placeholder="Email" />
             </div>
+
+            <div className="col-md-4">
+              <input name="password" type="password" onChange={this.handleInputChange} value={this.state.password} placeholder="Password" />
+            </div>
+
+          </div>
+
+          <div className="row">
+            <div className="col-md-6">
+              <input name="age" type="text" onChange={this.handleInputChange} value={this.state.age} placeholder="Age" />
+            </div>
+
+          </div>
+
+          <div className="row">
+
             <div className="col-md-6">
               <select name="is_male" onChange={this.handleInputChange}>
                 <option>I am a</option>
@@ -71,10 +81,7 @@ const Register = React.createClass({
             </div>
           </div>
           <div className="row">
-            <div className="col-md-6">
-              <input name="password" type="password" onChange={this.handleInputChange} value={this.state.password} placeholder="Password" />
 
-            </div>
             <div className="col-md-6">
               <select name="seeking_male" onChange={this.handleInputChange}>
                 <option>Looking to meet a</option>
@@ -85,10 +92,11 @@ const Register = React.createClass({
           </div>
           <div className="row">
             <div className="col-xs-6 col-sm-3">
-              <input type="submit" className="btn btn-success" value="Create Profile" />
+              <input type="submit" className="btn btn-success" value="Create Account" />
             </div>
           </div>
-        </form>
+
+        </div>
       </div>
     );
   },

@@ -19,7 +19,7 @@ h3,
 h4,
 h5,
 h6 {
-    font-family: 'Montserrat', sans-serif;
+    font-family: 'Montserrat', 'Helvetica', 'Arial', 'sans-serif'
 }
 
 h1 {
@@ -39,13 +39,26 @@ footer {
     bottom: 0;
 }
 
-.wrapper {
-    height: 100%;
+body::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+    background-color: #F5F5F5;
 }
 
-.title {
-    text-align: left;
-    margin-left: 10%;
+body::-webkit-scrollbar {
+    width: 0 !important;
+    background-color: #F5F5F5;
+}
+
+body::-webkit-scrollbar-thumb {
+    background-color: #3f3f3f;
+}
+
+.center {
+    text-align: center;
+}
+
+.wrapper {
+    height: 100%;
 }
 
 .modal {
@@ -209,6 +222,10 @@ p.copyright>span {
     margin-top: 6px;
 }
 
+.nav li {
+    margin-top: 4px;
+}
+
 .l-input-ct {
     float: left
 }
@@ -219,7 +236,6 @@ p.copyright>span {
     border: 1px solid #ccc;
     border-radius: 2px;
     box-sizing: border-box;
-    font-family: 'Quicksand', sans-serif;
     color: #2C3E50;
     font-size: 14px;
     transition: border 0.5s;
@@ -228,6 +244,20 @@ p.copyright>span {
 
 
 /* HOME */
+
+.home {
+    margin-left: 15%;
+}
+
+.hms-one,
+.hms-two {
+    height: 80vh;
+    animation: fadeIn 1s forwards;
+}
+
+.hms-one {
+    padding-top: 15%;
+}
 
 .one-liner-ct {
     display: flex;
@@ -243,11 +273,203 @@ p.copyright>span {
     align-self: center;
 }
 
-.inline-txt {
-    font-size: 28px;
+.flexed {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.flexed h1 {
+    text-align: center;
+    transition: all 1s ease-in;
+}
+
+.title {
+    text-align: center;
+}
+
+.title h1 {
+    font-size: 68px;
+    font-style: italic;
+}
+
+.reg-title {
+    font-size: 54px !important;
+    margin-bottom: 50px;
+}
+
+.subtitle {
+    text-align: center;
+    font-size: 40px;
+    font-style: italic;
     font-weight: bold;
-    letter-spacing: normal;
-    text-rendering: optimizelegibility;
+}
+
+.flex-inline {
+    display: -webkit-flex;
+    display: flex;
+    -webkit-flex-direction: row;
+    flex-direction: row;
+    -webkit-align-items: center;
+    align-items: center;
+    -webkit-justify-content: center;
+    justify-content: center;
+    margin: 5em 0;
+}
+
+.abt-btn {
+    font-size: 16px;
+    font-weight: bold;
+    outline: none;
+    background: white;
+    color: rgba(125, 5, 174, 0.75);
+    border: 1px solid rgba(125, 5, 174, 0.75);
+    -webkit-transition: all .15s ease-in;
+    -moz-transition: all .15s ease-in;
+    transition: all .15s ease-in;
+}
+
+.abt-btn:hover {
+    color: rgb(125, 5, 174);
+    outline: none;
+}
+
+.abt-btn:active,
+.abt-btn:focus {
+    color: white;
+    outline: none;
+}
+
+.crt-btn {
+    background: rgba(125, 5, 174, 0.75);
+    color: white;
+    font-weight: bold;
+    margin-left: 25px;
+    padding: 16px 28px;
+    font-size: 21px;
+    border-radius: 6px;
+    -webkit-transition: all .15s ease-in;
+    -moz-transition: all .15s ease-in;
+    transition: all .15s ease-in;
+}
+
+.crt-btn:hover {
+    background: rgb(125, 5, 174);
+    color: white
+}
+
+.crt-btn:active,
+.crt-btn:focus {
+    background: rgba(125, 5, 174, 0.75);
+    color: white;
+    outline: none;
+}
+
+
+/* ================= REGISTER =================*/
+
+#register input,
+#register select,
+#login input {
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    margin-bottom: 10px;
+    box-sizing: border-box;
+    font-family: 'Montserrat', sans-serif;
+    color: #2C3E50;
+    font-size: 16px;
+    transition: border 0.3s;
+    width: 100%;
+    outline: none;
+}
+
+#register input,
+#register select {
+    padding: 16px;
+    font-size: 20px;
+}
+
+#register input:focus,
+#register select:focus,
+#login input:focus {
+    border: solid 1px lightgreen;
+}
+
+#register input::placeholder {
+    color: rgba(44, 62, 80, .55)
+}
+
+.btn-ct {
+    margin: 15px 0;
+    text-align: center;
+}
+
+#register {
+    font-family: 'Montserrat', sans-serif;
+    padding: 65px 20px;
+    border: 1px solid rgba(192, 192, 192, .5);
+    border-radius: 15px;
+    width: 50%;
+    margin-left: 25%;
+    box-shadow: 0 1px 6px 1px rgba(177, 170, 180, 0.4);
+}
+
+.flexed-row {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+#register .btn-continue {
+    padding: 10px 15px;
+    border-radius: 1px;
+    color: white;
+    background: #27AE60;
+}
+
+#register input[type="submit"],
+#register .btn-back {
+    border-radius: 1px;
+    padding: 12px 15px;
+    font-size: 20px;
+    float: left;
+    color: white;
+    background: #27AE60;
+    margin-bottom: 0;
+}
+
+#register input[type="submit"] {
+    float: right;
+    font-weight: normal;
+}
+
+#register .btn-continue:hover,
+#register input[type="submit"]:hover,
+#register .btn-back:hover {
+    box-shadow: 0 0 0 2px white, 0 0 0 3px #27AE60;
+}
+
+.partOne,
+.partTwo {
+    transition: all 1s ease-in;
+    animation: fadeIn 1s forwards;
+    width: 90%;
+    margin-left: 5%;
+}
+
+.partOne h4,
+.partTwo h4 {
+    letter-spacing: 1px;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
 }
 
 
@@ -509,36 +731,7 @@ p.copyright>span {
 }
 
 
-/* ================= REGISTER =================*/
-
-#register input,
-#register select,
-#login input {
-    padding: 8px;
-    border: 1px solid #ccc;
-    border-radius: 3px;
-    margin-bottom: 10px;
-    box-sizing: border-box;
-    font-family: 'Montserrat', sans-serif;
-    color: #2C3E50;
-    font-size: 16px;
-    transition: border 0.3s;
-    width: 100%;
-    outline: none;
-}
-
-#register input:focus,
-#register select:focus,
-#login input:focus {
-    border: solid 1px lightblue;
-}
-
-#register input::placeholder {
-    color: rgba(0, 159, 220, 0.6);
-}
-
-
-/* ================= REGISTER =================*/
+/* ================= Match List =================*/
 
 .match-list-container {
     position: fixed;
