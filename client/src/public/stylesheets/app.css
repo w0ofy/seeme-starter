@@ -7,7 +7,7 @@ html {
 body {
     font-family: 'quicksand', 'raleway', sans-serif;
     background: #fff;
-    padding-top: 70px;
+    padding-top: 50px;
     padding-bottom: 50px;
     -webkit-font-smoothing: antialiased;
     text-rendering: optimizelegibility;
@@ -219,12 +219,13 @@ p.copyright>span {
 
 .header-login {
     line-height: 35px;
-    margin-top: 6px;
+    margin-top: 2px;
 }
 
-.nav li {
+
+/*.nav li {
     margin-top: 4px;
-}
+}*/
 
 .l-input-ct {
     float: left
@@ -373,9 +374,10 @@ p.copyright>span {
 #login input {
     padding: 8px;
     border: 1px solid #ccc;
+    -moz-border-radius: 2px;
+    -webkit-border-radius: 2px;
     border-radius: 3px;
     margin-bottom: 10px;
-    box-sizing: border-box;
     font-family: 'Montserrat', sans-serif;
     color: #2C3E50;
     font-size: 16px;
@@ -528,21 +530,38 @@ p.copyright>span {
 .user-container {
     width: 85%;
     margin-left: 0%;
-    padding: 1%;
+    /*padding: 1%;*/
 }
 
 .lookContainer {
+    position: relative;
     display: flex;
-    width: 100%;
-    border: 4px solid rgba(125, 5, 174, 0.75);
+    flex-direction: row;
+    /* border: 4px solid rgba(125, 5, 174, 0.75); */
     border-radius: 1px;
+    width: 100%;
+    height: 214px;
+    overflow-x: scroll;
+}
+
+.lookContainer::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+    background-color: white;
+}
+
+.lookContainer::-webkit-scrollbar {
+    width: 12px !important;
+    background-color: black;
+}
+
+.lookContainer::-webkit-scrollbar-thumb {
+    background-color: #3f3f3f;
 }
 
 .look {
     position: relative;
-    flex-direction: column;
-    height: 157px;
-    width: 15em;
+    height: 100%;
+    min-width: 27%;
     background: lightgreen;
 }
 
@@ -579,7 +598,7 @@ p.copyright>span {
         box-shadow: none;
     }
     to {
-        box-shadow: inset 0 0 5px 60px rgba(125, 5, 174, 0.75);
+        box-shadow: inset 0 0 1px 60px rgba(125, 5, 174, 0.75);
     }
 }
 
@@ -683,12 +702,20 @@ p.copyright>span {
 }
 
 .vid-look {
-    width: 100%;
+    position: absolute;
+    left: 0;
+    /*min-width: 100%;
+    min-height: 100%;*/
+    background-size: cover;
+    overflow: hidden;
     cursor: pointer;
+    height: 100%;
+    /*width: 100%;*/
 }
 
 .user-info {
-    width: 50%
+    width: 75%;
+    padding: 2%;
 }
 
 .user-info-text {
@@ -722,6 +749,8 @@ p.copyright>span {
     background: #efefef;
     border: none;
     border-bottom: solid 2px #c9c9c9;
+    -moz-transition: border 0.3s;
+    -webkit-transition: border 0.3s;
     transition: border 0.3s;
 }
 
@@ -738,8 +767,8 @@ p.copyright>span {
     right: 0;
     width: 15%;
     padding: 1%;
-    top: calc(6%);
-    height: calc(94%);
+    top: 50px;
+    height: 100%;
     background: aliceblue;
     border-left: 1px solid #3f3f3f
 }
@@ -767,6 +796,16 @@ select option {
     color: #9e44c2;
     font-weight: bold;
     font-size: 13px;
+}
+
+
+/* CHAT BOX */
+
+.chatbox {
+    position: fixed;
+    top: 200px;
+    height: 200px;
+    width: 250px;
 }
 
 

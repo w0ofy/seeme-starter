@@ -4,12 +4,13 @@ const Schema = mongoose.Schema;
 
 
 
-var MatchSchema = new Schema({
-    user: {
+var MatchSchema = new Schema(
+    [{
         type: Schema.Types.ObjectId,
         ref: "User"
-    }
-})
+    }]
+
+)
 
 
 
