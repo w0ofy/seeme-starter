@@ -23,7 +23,7 @@ class Swipe extends React.Component {
         let beingSwiped = $('#tinderslide ul div:last-child');
 
         //Retrieve logged in user's current number of matches
-        let numOfMatches = user.matches.length;
+        let numOfMatches = userCookie.matches.length;
         console.log(numOfMatches);
 
         beingSwiped.animate('transform', 'translateX(900px)');
@@ -41,7 +41,7 @@ class Swipe extends React.Component {
                 //if the new user object has more matches than before...
                 if (res.data.user.matches.length > numOfMatches) {
                     //notify the user of their match.
-                    console.log(res.data.user.matches.pop())
+                    // console.log(res.data.user.matches.pop())
                 }
             });
 
@@ -96,8 +96,6 @@ class Swipe extends React.Component {
         axios.put(url, { id: userCookie._id, liked: likedids, disliked: dislikedids, age_pref_min: userCookie.age_pref_min, age_pref_max: userCookie.age_pref_max, seeking_male: userCookie.seeking_male }, { headers: { Authorization: token } })
             .then(res => {
 
-                // create logic to not show users under this user's matches, user userCookie
-                console.log(res.data.users);
                 const users = res.data.users
                 this.setState({ users });
             });
@@ -110,7 +108,7 @@ class Swipe extends React.Component {
                     <div id="tinderslide" className={this.state.loggedInUsersId}>
                         <ul>
                             {this.state.users.map(function (user) {
-                                console.log('user::: ', user.looks[0]);
+                                {/*console.log('user::: ', user.looks[0]);*/}
                                 let profilelook = null;
                                 if (user.looks[0] === undefined) {
                                     profilelook = "none";

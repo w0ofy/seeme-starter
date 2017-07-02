@@ -57,7 +57,7 @@ exports.register = function (req, res, next) {
     age = req.body.age,
     is_male = req.body.is_male,
     seeking_male = req.body.seeking_male,
-    logged_in = req.body.logged_in;
+    logged_in = true;
 
   console.log(req.body);
   // Return error if no email provided

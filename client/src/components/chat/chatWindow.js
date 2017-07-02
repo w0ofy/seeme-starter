@@ -6,7 +6,7 @@ const currentUser = cookie.load('user');
 // const chatHistory = $('.chatHistory');
 const logged_in_user = currentUser; 
 const userName = {};
-userName.value = logged_in_user.firstName;
+// userName.value = logged_in_user.firstName;
 console.log(userName.value);
 
 const chatWindow = React.createClass({

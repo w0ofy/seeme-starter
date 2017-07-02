@@ -6,7 +6,6 @@ exports.setUserInfo = function setUserInfo(request) {
   const getUserInfo = {
     _id: request._id,
     firstName: request.firstName,
-    lastInitial: request.lastInitial,
     email: request.email,
     age: request.age,
     is_male: request.is_male,

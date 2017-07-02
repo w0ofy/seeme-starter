@@ -9,12 +9,12 @@ var MatchSchema = new Schema({
     user: {
         type: Schema.Types.ObjectId,
         ref: "User",
-        user: UserSchema
     }
 })
 
 
 
-
-var Matches = mongoose.model('Matches', MatchSchema);
-module.exports = Matches;
+module.exports = {
+    model: mongoose.model('Matches', MatchSchema),
+    schema: MatchSchema
+}

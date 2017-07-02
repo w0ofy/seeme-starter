@@ -3,6 +3,7 @@ const Matches = require('../models/matches');
 const setUserInfo = require('../helpers').setUserInfo;
 const jwt = require('jsonwebtoken');
 const config = require('../config/main');
+
 function generateToken(user) {
   return jwt.sign(user, config.secret, {
     expiresIn: 604800 // in seconds
@@ -19,19 +20,25 @@ exports.viewProfile = function (req, res, next) {
   // console.log("here", req.user._id);
   // console.log("here", userId);
   if (req.user._id.toString() !== userId) {
-    return res.status(401).json({ error: 'You are not authorized to view this user profile.' });
+    return res.status(401).json({
+      error: 'You are not authorized to view this user profile.'
+    });
   } else {
 
 
     User.findById(userId, (err, user) => {
       if (err) {
-        res.status(400).json({ error: 'No user could be found for this ID.' });
+        res.status(400).json({
+          error: 'No user could be found for this ID.'
+        });
         return next(err);
       }
 
       const userToReturn = setUserInfo(user);
 
-      return res.status(200).json({ user: userToReturn });
+      return res.status(200).json({
+        user: userToReturn
+      });
     });
   }
 };
@@ -45,7 +52,6 @@ exports.updateProfile = function (req, res, next) {
 
   const emailQuery = req.body.emailQuery,
     firstName = req.body.firstName,
-    lastInitial = req.body.lastInitial,
     age = req.body.age,
     is_male = req.body.is_male,
     seeking_male = req.body.seeking_male,
@@ -53,7 +59,9 @@ exports.updateProfile = function (req, res, next) {
     age_pref_max = req.body.age_pref_max,
     logged_in = req.body.logged_in;
 
-  var query = { email: emailQuery };
+  var query = {
+    email: emailQuery
+  };
 
   User.findOneAndUpdate(query, {
     firstName: firstName,
@@ -67,7 +75,9 @@ exports.updateProfile = function (req, res, next) {
     if (err) {
       console.log("Something wrong when updating data!");
     }
-    User.findOne({ email: emailQuery }, (err, updatedUser) => {
+    User.findOne({
+      email: emailQuery
+    }, (err, updatedUser) => {
       const userInfo = setUserInfo(updatedUser);
       // console.log("userInfo", userInfo);
       res.status(201).json({
@@ -85,12 +95,20 @@ exports.updateProfile = function (req, res, next) {
 exports.addLook = function (req, res, next) {
 
   const emailQuery = req.body.emailQuery,
-    newLook = { link: req.body.lookLink };
+    newLook = {
+      link: req.body.lookLink
+    };
   // console.log("body", req.body);
 
-  const query = { email: emailQuery };
+  const query = {
+    email: emailQuery
+  };
   console.log("req.body", req.body);
-  User.findOneAndUpdate(query, { $push: { "looks": newLook } },
+  User.findOneAndUpdate(query, {
+      $push: {
+        "looks": newLook
+      }
+    },
     (err, user) => {
       if (err) {
         console.log("newlook: ", newLook);
@@ -121,9 +139,17 @@ exports.deleteLook = function (req, res, next) {
 
   const emailQuery = req.body.emailQuery,
     deleteThisLook = req.body.lookId,
-    query = { email: emailQuery };
+    query = {
+      email: emailQuery
+    };
 
-  User.findOneAndUpdate(query, { $pull: { "looks": { _id: deleteThisLook } } },
+  User.findOneAndUpdate(query, {
+      $pull: {
+        "looks": {
+          _id: deleteThisLook
+        }
+      }
+    },
     (err, user) => {
       if (err) {
         console.log("newlook: ", newLook);
@@ -168,11 +194,28 @@ exports.findAllUsers = function (req, res, next) {
 
   // console.log(donotshow);
   // find all users excluding the users in donotshow array
-  User.find({ _id: { $nin: donotshow }, is_male: { $ne: is_male }, age: { $lte: age_pref_max }, age: { $gte: age_pref_min } }, function (err, users) {
+  User.find({
+    _id: {
+      $nin: donotshow
+    },
+    is_male: {
+      $ne: is_male
+    },
+    age: {
+      $lte: age_pref_max
+    },
+    age: {
+      $gte: age_pref_min
+    }
+  }, function (err, users) {
     if (!err) {
-      return res.status(201).json({ users: users });
+      return res.status(201).json({
+        users: users
+      });
     } else {
-      res.status(400).json({ error: 'No user could be found for this ID.' });
+      res.status(400).json({
+        error: 'No user could be found for this ID.'
+      });
       throw err;
     }
   });
@@ -184,21 +227,28 @@ exports.likingUser = function (req, res, next) {
     liked_by_id = req.body.uid,
     likedId = req.body.likedId,
 
-    query = { email: emailQuery };
+    query = {
+      email: emailQuery
+    };
   console.log(likedId);
   // find the user who the logged-in user liked
-  User.findOne({ _id: { $eq: likedId } }, function (err, user) {
+  User.findOne({
+    _id: {
+      $eq: likedId
+    }
+  }, function (err, user) {
     if (err) {
       throw err;
     }
   }).exec(function (err, user) {
-    
+
     for (let i = 0; i < user.liked_ids.length; i++) {
       // if the above user likes the logged in user too...
       if (liked_by_id === user.liked_ids[i].id) {
-        
+        console.log(user)
         // Save the user who got liked
-        let newMatch = new Matches(user);
+        let newMatch = new Matches.model(user);
+
         newMatch.save(function (error, match) {
           // Log any errors
           if (error) {
@@ -207,46 +257,64 @@ exports.likingUser = function (req, res, next) {
           // Otherwise
           else {
             // add the liked-user to the logged-in user's matches
-            User.findOneAndUpdate({ "_id": liked_by_id }, { $push: { matches: match._id } })
+            User.findOneAndUpdate({
+                "_id": liked_by_id
+              }, {
+                $push: {
+                  matches: match._id
+                }
+              })
               // Execute the above query
               .exec(function (err, match) {
                 // Log any errors
                 if (err) {
                   console.log(err);
-                }
-                else {
-                  
+                } else {
+
                   console.log("user", match);
-                  let matchedWith = new Matches(match);
+                  let matchedWith = new Matches.model(match);
                   matchedWith.save(function (error, match2) {
 
                     if (error) {
                       console.log(error);
-                    }                    
-                    else {
+                    } else {
 
                       // Add a match to the logged in user as well
-                      User.findOneAndUpdate({ "_id": likedId}, { $push: {matches: match2._id}})
-                      .exec(function(error, match2){
-                        if (error) {
-                          console.log(error);
-                        } else {
-                          console.log("fasdfada");
-                        }
-                      })
+                      User.findOneAndUpdate({
+                          "_id": likedId
+                        }, {
+                          $push: {
+                            matches: match2._id
+                          }
+                        })
+                        .exec(function (error, match2) {
+                          if (error) {
+                            console.log(error);
+                          } else {
+                            console.log("fasdfada");
+                          }
+                        })
                     }
                   })
                 }
               })
-            }
-          });
-        }
+          }
+        });
       }
-      
-    });
+    }
+
+  });
 
   // always update logged in user's likes
-  User.update({ _id: likedId }, { $push: { "liked_by_ids": { id: liked_by_id } } },
+  User.update({
+      _id: likedId
+    }, {
+      $push: {
+        "liked_by_ids": {
+          id: liked_by_id
+        }
+      }
+    },
     (err, user) => {
       if (err) {
         throw err;
@@ -255,7 +323,13 @@ exports.likingUser = function (req, res, next) {
       }
     });
   // always update a liked-user's likes
-  User.findOneAndUpdate(query, { $push: { "liked_ids": { id: likedId } } },
+  User.findOneAndUpdate(query, {
+      $push: {
+        "liked_ids": {
+          id: likedId
+        }
+      }
+    },
     (err, user) => {
       if (err) {
         throw err;
@@ -278,9 +352,17 @@ exports.dislikingUser = function (req, res, next) {
     thisuser = req.body.uid,
     dislikedId = req.body.dislikedId,
 
-    query = { _id: thisuser };
+    query = {
+      _id: thisuser
+    };
   // update the logged-in user's dislikes
-  User.update(query, { $push: { "disliked_ids": { id: dislikedId } } },
+  User.update(query, {
+      $push: {
+        "disliked_ids": {
+          id: dislikedId
+        }
+      }
+    },
     (err, user) => {
       if (err) {
         throw err;
@@ -302,11 +384,17 @@ exports.dislikingUser = function (req, res, next) {
 // Populate Matches Route
 //= =======================================
 
-exports.populateMatches = function(req, res, next) {
-  query = { _id: req.body.id }
-  User.findOne(query).populate("matches").exec((err, matches) =>{
-    if (err) throw err;
+exports.populateMatches = function (req, res, next) {
+  query = {
+    _id: req.body.id
+  }
+  User.findOne(query).populate("matches").exec((err, matches) => {
+    if (err) {
+      throw err;
+    }
     console.log(matches)
-    res.json(matches);
+    res.status(201).json({
+      user: matches
+    });
   })
 }
