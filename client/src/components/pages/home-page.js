@@ -182,5 +182,3 @@ const HomePage = React.createClass({
 })
 
 module.exports = HomePage;
-
-// <h3><span className="sm-inline">It's free and always will be.</span></h3>

@@ -16,7 +16,7 @@ const UserInfo = React.createClass({
     return (
       <div className="user-info">
         <div className="edit-container">
-          <Link to="edit-info">edit profile</Link>
+          
         </div>
         <div className="user-info-text">
         <label>My name is:</label>
