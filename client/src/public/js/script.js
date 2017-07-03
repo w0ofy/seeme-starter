@@ -1,17 +1,9 @@
 $(document).ready(function () {
-    $('.video').click(function () { this.paused ? this.play() : this.pause(); });
-
-    $(function () {
-
-        $(".lookContainer").mousewheel(function (event, delta) {
-
-            this.scrollLeft -= (delta * 30);
-
-            event.preventDefault();
-
-        });
-
+    $(".lookContainer").mousewheel(function (event, delta) {
+        event.preventDefault();
+        this.scrollLeft -= (delta * 30);
     });
+})
     // const homeElement = document.getElementById('registersection');
     // if (homeElement === null) {
     //     $('body').css({
@@ -22,7 +14,7 @@ $(document).ready(function () {
     //         background: 'linear - gradient(aliceblue, white);'
     //     })
     // }
-});
+
 
 
 

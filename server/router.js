@@ -53,9 +53,6 @@ module.exports = function (app) {
   // Set user routes as a subgroup/middleware to apiRoutes
   apiRoutes.use('/see', userRoutes);
 
-  // View user profile route
-  userRoutes.get('/:uid', requireAuth, UserController.viewProfile);
-
   // Update user profile route
   userRoutes.put('/update', requireAuth, UserController.updateProfile);
 
@@ -66,6 +63,8 @@ module.exports = function (app) {
   userRoutes.put('/delete-look', UserController.deleteLook);
 
 
+  // View user profile route
+  apiRoutes.get('/:uid', requireAuth, UserController.viewProfile);
 
   // Find all users route
   apiRoutes.put('/all-users', requireAuth, UserController.findAllUsers);

@@ -1,22 +1,9 @@
 import React, { Component } from 'react';
 import Modal from 'react-modal';
 import PhotoBooth from './photo-booth';
-import MdVideoCall from 'react-icons/lib/md/video-call';
+import MdAddAPhoto from 'react-icons/lib/md/add-a-photo';
 import MdClose from 'react-icons/lib/md/close'
-// const PhotoBooth = require('./photo-booth');
 
-/*
-The app element allows you to specify the portion of your app that should be hidden (via aria-hidden)
-to prevent assistive technologies such as screenreaders from reading content outside of the content of
-your modal.  It can be specified in the following ways:
-
-* element
-Modal.setAppElement(appElement);
-
-* query selector - uses the first element found if you pass in a class.
-Modal.setAppElement('#your-app-element');
-
-*/
 const customStyles = {
     content: {
         top: '50%',
@@ -57,7 +44,8 @@ class PhotoBoothModal extends React.Component {
     render() {
         return (
             <div>
-                <button className="add-look" title="Add A New Look" onClick={this.openModal}><MdVideoCall /></button>
+                <button className="add-look" title="Add A New Look" onClick={this.openModal}><MdAddAPhoto /></button>
+                <h4 className="add-l-label">Add A Look</h4>
                 <Modal
                     isOpen={this.state.modalIsOpen}
                     onAfterOpen={this.afterOpenModal}
@@ -69,7 +57,6 @@ class PhotoBoothModal extends React.Component {
                     <PhotoBooth />
                     
                     <button className="cncl-modal" onClick={this.closeModal}><MdClose /></button>
-                    
                 </Modal>
             </div>
         );

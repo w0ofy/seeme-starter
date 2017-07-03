@@ -125,12 +125,21 @@ body::-webkit-scrollbar-thumb {
 }
 
 .swipe-icon {
+    font-size: 28px;
     stroke-width: 0.6px;
     stroke: white;
 }
 
 .swipe-icon:hover>svg {
     stroke: rgba(63, 30, 76, 0.9);
+}
+
+.swipe-icon:focus>svg,
+.swipe-icon:active>svg,
+a:active>svg,
+a:focus>svg {
+    stroke: white;
+    color: white !important;
 }
 
 .navbar-default .navbar-nav>li>a:hover {
@@ -489,6 +498,17 @@ p.copyright>span {
 
 /* ================= MY PROFILE =================*/
 
+.profile-ct {
+    padding: 2%;
+}
+
+.add-l-label {
+    position: absolute;
+    top: 50%;
+    left: 25%;
+    font-size: 18px;
+}
+
 .add-look,
 .trash-look {
     position: absolute;
@@ -514,7 +534,7 @@ p.copyright>span {
 
 .add-look {
     color: #b6b6b6;
-    top: 30%;
+    top: 20%;
     left: calc(25% + 25px);
     font-size: 50px;
 }
@@ -523,8 +543,12 @@ p.copyright>span {
     color: #4d4d4d;
 }
 
+.trash-look {
+    color: white;
+}
+
 .trash-look:hover {
-    color: #be302c;
+    color: #ec443f !important;
 }
 
 .edit-container {
@@ -556,8 +580,8 @@ p.copyright>span {
     /* flex-direction: row; */
     /* border: 4px solid rgba(125, 5, 174, 0.75); */
     /* border-radius: 1px; */
-    width: 96%;
-    margin: 0 2%;
+    width: 100%;
+    /*margin: 0 2%;*/
     height: 150px;
     overflow-x: scroll;
     overflow-y: hidden;
@@ -743,23 +767,33 @@ p.copyright>span {
 
 .user-title {
     display: block;
-    width: 250px;
-    padding: 2%;
+    min-width: 250px;
+    /*padding: 2%;*/
 }
 
 .user-title-text h3 {
-    margin: 8px;
+    margin: 8px 0;
     padding: 7px;
     outline: none;
     border: none;
     border-bottom: solid 2px #c9c9c9;
-    transition: border 0.3s;
 }
 
 div.user-title>div>h3>a {
     font-size: 33px;
     padding: 10px;
+}
+
+div.user-title>div>h3>a,
+div.user-title>div>h3>a:focus,
+div.user-title>div>h3>a:active,
+div.user-title>div>h3>a:focus>svg,
+div.user-title>div>h3>a:active>svg {
     color: #b0b0b0;
+}
+
+div.user-title>div>h3>a>svg {
+    float: right;
 }
 
 div.user-title>div>h3>a:hover {
@@ -768,7 +802,7 @@ div.user-title>div>h3>a:hover {
 
 .user-info {
     width: 75%;
-    padding: 2%;
+    /*padding: 2%;*/
 }
 
 .user-info-text {
@@ -795,7 +829,7 @@ div.user-title>div>h3>a:hover {
 
 #edit-info {
     width: 75%;
-    padding: 2%;
+    /*padding: 2%;*/
 }
 
 #edit-info input,

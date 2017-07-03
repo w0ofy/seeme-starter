@@ -16,6 +16,14 @@ import TrashLookSeven from './profile/utils/trash-look-seven';
 
 const Profile = React.createClass({
     componentWillMount() {
+        let removeScript = document.getElementById('main');
+        $(removeScript).remove();
+        const script = document.createElement("script");
+        script.setAttribute("id", "main");
+        script.src = "/src/public/js/script.js";
+        script.async = true;
+        document.body.appendChild(script);
+
         // Fetch user data prior to component mounting
         let user = cookie.load('user');
         console.log("this user is:", user._id + " " + user.email);
@@ -23,18 +31,12 @@ const Profile = React.createClass({
         if (user == undefined) {
             window.location.href = 'http://localhost:8080/login';
         } else {
-            let gender = user.is_male;
-            if (gender === false) {
-                gender = "girl";
-            } else {
-                gender = "guy";
-            }
             this.setState({
                 firstName: user.firstName,
                 age: user.age,
                 age_pref_min: user.age_pref_min,
                 age_pref_max: user.age_pref_max,
-                is_male: gender,
+                is_male: user.is_male,
                 seeking_male: user.seeking_male,
                 look: user.looks[0] ? user.looks[0].link : "",
                 lookTwo: user.looks[1] ? user.looks[1].link : "",
@@ -53,18 +55,13 @@ const Profile = React.createClass({
 
         if (window.location.href.indexOf("edit-info") > -1) {
             return (
-                <EditInfo firstName={this.state.firstName}
-                    is_male={this.state.is_male} age={this.state.age}
-                    seeking_male={this.state.seeking_male}
-                    age_pref_min={this.state.age_pref_min}
-                    age_pref_max={this.state.age_pref_max}
-                    profile_look={this.state.profile_look} />
+                <EditInfo />
             );
         } else {
             return (
                 <UserInfo firstName={this.state.firstName}
-                    is_male={this.state.is_male} age={this.state.age}
-                    seeking_male={this.state.seeking_male}
+                    is_male={this.gender()} age={this.state.age}
+                    seeking_male={this.seekingGender()}
                     age_pref_min={this.state.age_pref_min}
                     age_pref_max={this.state.age_pref_max}
                     look={this.state.look}
@@ -76,32 +73,48 @@ const Profile = React.createClass({
             );
         }
     },
+    gender() {
+        let user = cookie.load('user');
+        if (user.is_male === false) {
+            return ("girl");
+        } else if (user.is_male = true) {
+            return ("guy");
+        }
+    },
+    seekingGender() {
+        let user = cookie.load('user');
+        if (user.seeking_male === false) {
+            return ("girl");
+        } else if (user.seeking_male = true) {
+            return ("guy");
+        }
+    },
     render: function () {
 
         return (
-            <div>
-                <UserTitle firstName={this.state.firstName} age={this.state.age}/>
-                
+            <div className="profile-ct">
+                <UserTitle firstName={this.state.firstName} age={this.state.age} />
+
                 <div className="lookContainer">
-                    <div className="look"><video id="vid-look" className="video vid-look" src={this.state.look} />
+                    <div className="look" onClick={() => { this.refs.v1.paused ? this.refs.v1.play() : this.refs.v1.pause() }}><video id="vid-look" ref="v1" className="video vid-look" src={this.state.look} />
                         {this.state.look ? <TrashLook remove={this.trashChange} /> : <PhotoBoothModal />}
                     </div>
-                    <div className="look"><video id="vid-look-two" className="video vid-look" src={this.state.lookTwo} />
+                    <div className="look" onClick={() => { this.refs.v2.paused ? this.refs.v2.play() : this.refs.v2.pause() }}><video id="vid-look-two" ref="v2" className="video vid-look" src={this.state.lookTwo} />
                         {this.state.lookTwo ? <TrashLookTwo remove={this.trashTwoChange} /> : <PhotoBoothModal />}
                     </div>
-                    <div className="look"><video id="vid-look-three" className="video vid-look" src={this.state.lookThree} />
+                    <div className="look" onClick={() => { this.refs.v3.paused ? this.refs.v3.play() : this.refs.v3.pause() }}><video id="vid-look-three" ref="v3" className="video vid-look" src={this.state.lookThree} />
                         {this.state.lookThree ? <TrashLookThree remove={this.trashThreeChange} /> : <PhotoBoothModal />}
                     </div>
-                    <div className="look"><video id="vid-look-four" className="video vid-look" src={this.state.lookFour} />
+                    <div className="look" onClick={() => { this.refs.v4.paused ? this.refs.v4.play() : this.refs.v4.pause() }}><video id="vid-look-four" ref="v4" className="video vid-look" src={this.state.lookFour} />
                         {this.state.lookFour ? <TrashLookFour remove={this.trashFourChange} /> : <PhotoBoothModal />}
                     </div>
-                    <div className="look"><video id="vid-look-five" className="video vid-look" src={this.state.lookFive} />
+                    <div className="look" onClick={() => { this.refs.v5.paused ? this.refs.v5.play() : this.refs.v5.pause() }}><video id="vid-look-five" ref="v5" className="video vid-look" src={this.state.lookFive} />
                         {this.state.lookFive ? <TrashLookFive remove={this.trashFiveChange} /> : <PhotoBoothModal />}
                     </div>
-                    <div className="look"><video id="vid-look-six" className="video vid-look" src={this.state.lookSix} />
+                    <div className="look" onClick={() => { this.refs.v6.paused ? this.refs.v6.play() : this.refs.v6.pause() }}><video id="vid-look-six" ref="v6" className="video vid-look" src={this.state.lookSix} />
                         {this.state.lookSix ? <TrashLookSix remove={this.trashSixChange} /> : <PhotoBoothModal />}
                     </div>
-                    <div className="look"><video id="vid-look-seven" className="video vid-look" src={this.state.lookSeven} />
+                    <div className="look" onClick={() => { this.refs.v7.paused ? this.refs.v7.play() : this.refs.v7.pause() }}><video id="vid-look-seven" ref="v7" className="video vid-look" src={this.state.lookSeven} />
                         {this.state.lookSeven ? <TrashLookSix remove={this.trashSevenChange} /> : <PhotoBoothModal />}
                     </div>
                 </div>

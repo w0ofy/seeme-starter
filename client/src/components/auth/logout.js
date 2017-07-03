@@ -18,7 +18,7 @@ const Logout = React.createClass({
 
     setTimeout(function() {
       window.location.href = 'http://localhost:8080/'
-    }, 2000);
+    }, 1000);
     
   },
   componentWillMount() {
