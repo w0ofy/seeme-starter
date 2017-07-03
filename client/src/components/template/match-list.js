@@ -1,79 +1,70 @@
-const React = require('react');
+import React, { Component } from 'react';
 import { Link } from 'react-router';
-const chatWindow = require('../chat/chatWindow');
+import chatWindow from '../chat/chatWindow';
 const axios = require('axios');
 const cookie = require('react-cookie');
 
 const MatchList = React.createClass({
 
-  getInitialState: function() {
-    return ({ 
-      chatWindows: [],
-      matches: []
-    })
-  },
+getInitialState: function() {
+  return { 
+    chatWindows: [],
+    matches: []
+  }
+},
 
 componentWillMount: function() {
-  let user = cookie.load('user');
-
-  if (user !== undefined){
     let url='http://localhost:3000/api/matches';
     let token = cookie.load('token');
+    let user = cookie.load('user');
+    if (user !== undefined) {
     axios.post(url, 
       { id: user._id }, 
       { headers: { Authorization: token }
     }).then((res)=>{ 
-        console.log(res)
+        console.log(res.data)
         this.setState({
-          matches: res
+          matches: res.data
         });
     }).catch((err)=> {
       console.log(err)
     });
-  } else {
-    return false;
-  }
-},
+    }
+  },
 
   renderList: function() {
     let user = cookie.load('user');
     if (user !==undefined) {
       return (
         <div className="match-list-container">
-            {this.state.matches.map((item)=>{
-              return 
-              (<div className="match">
-                <span onClick={this.openChat} Name={item}> {item} </span>
-                <div className="image" />
-              </div>)
-            })}
+            {this.state.matches.map(item=>(
+              <div className="match">
+                  <Link onClick={this.handleClick.bind(this)} firstName={item.firstName}> {item.firstName} </Link>
+                  <div className="image" />
+              </div>
+            ))}
         </div>);
     } else {
       return (<div className="empty"/>)
     }
   },
 
-  openChat: function(e) {
-    let user = cookie.load('user');
-    if (user !== undefined) {
-      this.state.chatWindows.concat(
-        {
+  handleClick: function(e) {
+    e.preventDefault();
+      this.setState({chatWindows: this.state.chatWindows.concat(
+        [{
           user1: "what de fuck"
-        }
-      )
-    } else { 
-      console.log("WOOWOOOOO!!!")
-      return false;
-    }
+        }]
+      )});
+      console.log(this.state.chatWindows);
+      this.mapChats();
   },
   
-  mapChats: function () {
+  mapChats: function() {
     let user = cookie.load('user');
-    console.log(user);
     if (user !== undefined) {
-      this.state.chatWindows.map((item) => {
-        return 
-        (<chatWindow user1={item.user1} />)
+      this.state.chatWindows.map(item=>{
+       return (<chatWindow user1={item.user1} />)
         //set IDs as props here as well.
       })
     } else {
