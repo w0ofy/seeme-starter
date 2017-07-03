@@ -46,10 +46,11 @@ const MatchList = React.createClass({
         <div className="match-list-container">
           {this.state.matches.map((item) => {
             // console.log(item);
+            let urlId = 'http://localhost:8080/see/' + item._id;
             return (
               
             <div className="match">
-              <a href="#" onClick={this.openChat} >{item.firstName}</a>
+              <Link to={urlId}>{item.firstName}</Link>
               <div className="image" />
             </div>)
           })}

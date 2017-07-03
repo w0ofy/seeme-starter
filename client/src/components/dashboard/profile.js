@@ -3,6 +3,7 @@ const axios = require('axios');
 const React = require('react');
 const EditInfo = require('./profile/edit-info');
 const UserInfo = require('./profile/user-info');
+const UserTitle = require('./profile/user-title');
 import PhotoBoothModal from './profile/photo-booth-modal';
 import TrashLook from './profile/utils/trash-look';
 import TrashLookTwo from './profile/utils/trash-look-two';
@@ -79,6 +80,8 @@ const Profile = React.createClass({
 
         return (
             <div>
+                <UserTitle firstName={this.state.firstName} age={this.state.age}/>
+                
                 <div className="lookContainer">
                     <div className="look"><video id="vid-look" className="video vid-look" src={this.state.look} />
                         {this.state.look ? <TrashLook remove={this.trashChange} /> : <PhotoBoothModal />}

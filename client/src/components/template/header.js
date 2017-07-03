@@ -5,6 +5,7 @@ import MdIconPack from 'react-icons/lib/md';
 import MdPeople from 'react-icons/lib/md/people';
 import MdTouchApp from 'react-icons/lib/md/touch-app';
 import MdExitApp from 'react-icons/lib/md/exit-to-app';
+import SwipeIcon from 'react-icons/lib/md/swipe-icon';
 const HeaderLogin = require('../auth/header-login')
 const cookie = require('react-cookie');
 
@@ -18,7 +19,7 @@ const Header = React.createClass({
           <Link to="my-profile"><MdPeople className="nav-size" /></Link>
         </li>,
         <li key={`${2}header`}>
-          <Link to="swatch"><MdTouchApp className="nav-size" /></Link>
+          <Link to="swatch" className="swipe-icon"><SwipeIcon className="nav-size swipe-icon" /></Link>
         </li>,
         <li key={`${3}header`}>
           <Link to="logout"><MdExitApp className="nav-size" /></Link>

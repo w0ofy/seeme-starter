@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 import HeaderTemplate from './template/header';
 import FooterTemplate from './template/footer';
+import ListShadow from './template/list-shadow';
 import MatchList from './template/match-list';
 import CSSTransitionGroup from 'react-transition-group/CSSTransitionGroup';
+import Typekit from 'react-typekit';
 
 class App extends Component {
   render() {
@@ -10,6 +12,7 @@ class App extends Component {
     return (
       <div>
         <HeaderTemplate logo="seemē" />
+        <ListShadow />
         <MatchList />
 
         <CSSTransitionGroup
@@ -26,6 +29,7 @@ class App extends Component {
           
         </CSSTransitionGroup>
         <FooterTemplate />
+        <Typekit kitId="khm7xtw" />
       </div>
     );
   }
