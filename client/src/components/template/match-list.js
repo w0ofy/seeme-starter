@@ -16,24 +16,20 @@ const MatchList = React.createClass({
   componentWillMount: function () {
     let user = cookie.load('user');
 
-    if (user !== undefined) {
-      let url = 'http://localhost:3000/api/matches';
+    if (user !== undefined){
+      let url='http://localhost:3000/api/matches';
       let token = cookie.load('token');
-      axios.post(url,
-        { id: user._id },
-        {
-          headers: { Authorization: token }
-        }).then((res) => {
-          // console.log("result", res.data)
-
+      axios.post(url, 
+        { id: user._id }, 
+        { headers: { Authorization: token }
+      }).then((res)=>{ 
+          console.log(res)
           this.setState({
-            matches: res.data
+            matches: res
           });
-
-        }).catch((err) => {
-          console.log(err);
-        });
-
+      }).catch((err)=> {
+        console.log(err)
+      });
     } else {
       return false;
     }
@@ -62,16 +58,13 @@ const MatchList = React.createClass({
 
   openChat: function (e) {
     e.preventDefault();
-    
-
-      this.state.chatWindows.concat(
+      this.setState({chatWindows: this.state.chatWindows.concat(
         [{
           user1: "what de fuck"
         }]
-      )
-      console.log("chatWindows", this.state.chatWindows);
-      {this.mapChats}
-    
+      )});
+      console.log(this.state.chatWindows);
+      this.mapChats();
   },
 
   mapChats: function () {

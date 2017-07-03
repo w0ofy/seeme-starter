@@ -2,8 +2,6 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-
-
 var MatchSchema = new Schema(
     [{
         type: Schema.Types.ObjectId,
@@ -11,8 +9,6 @@ var MatchSchema = new Schema(
     }]
 
 )
-
-
 
 module.exports = {
     model: mongoose.model('Matches', MatchSchema),

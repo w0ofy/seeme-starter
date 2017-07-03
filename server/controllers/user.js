@@ -388,14 +388,14 @@ exports.populateMatches = function (req, res, next) {
   query = {
     _id: req.body.id
   }
-  User.findOne(query).populate({
-    path: 'matches',
-    populate: { path: 'matches' }}).exec((err, user) => {
+  User.findOne(query).populate({ 
+    path: 'matches', 
+    populate: { path: 'matches'}
+  }).exec((err, user) => {
     if (err) {
       throw err;
     }
-    // console.log(user.matches)
-    res.json(user.matches)
+    res.json(user.matches);
   })
-}
+};
 
