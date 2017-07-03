@@ -289,12 +289,12 @@ p.copyright>span {
 }
 
 .title h1 {
-    font-size: 68px;
+    font-size: 4em;
     font-style: italic;
 }
 
 .reg-title {
-    font-size: 54px !important;
+    font-size: 3em !important;
     margin-bottom: 50px;
 }
 
