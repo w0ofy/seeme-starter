@@ -14,19 +14,10 @@ function generateToken(user) {
 // User Routes
 //= =======================================
 exports.viewProfile = function (req, res, next) {
-  const userId = req.params.userId;
-  console.log(req.user._id);
-  // console.log(req.user._id + " " + userId);
-  // console.log("here", req.user._id);
-  // console.log("here", userId);
-  if (req.user._id.toString() !== userId) {
-    return res.status(401).json({
-      error: 'You are not authorized to view this user profile.'
-    });
-  } else {
+  const uid = req.params.uid;
+  console.log(uid);
 
-
-    User.findById(userId, (err, user) => {
+    User.findById(uid, (err, user) => {
       if (err) {
         res.status(400).json({
           error: 'No user could be found for this ID.'
@@ -40,7 +31,7 @@ exports.viewProfile = function (req, res, next) {
         user: userToReturn
       });
     });
-  }
+
 };
 
 
@@ -49,7 +40,7 @@ exports.viewProfile = function (req, res, next) {
 // Update Profile Route
 //= =======================================
 exports.updateProfile = function (req, res, next) {
-
+  console.log(req.body)
   const emailQuery = req.body.emailQuery,
     firstName = req.body.firstName,
     age = req.body.age,

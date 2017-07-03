@@ -16,13 +16,13 @@ const Header = React.createClass({
     if (user !== undefined) {
       return [
         <li key={`${1}header`}>
-          <Link to="my-profile"><MdPeople className="nav-size" /></Link>
+          <Link to="/my-profile"><MdPeople className="nav-size" /></Link>
         </li>,
         <li key={`${2}header`}>
-          <Link to="swatch" className="swipe-icon"><SwipeIcon className="nav-size swipe-icon" /></Link>
+          <Link to="/swatch" className="swipe-icon"><SwipeIcon className="nav-size swipe-icon" /></Link>
         </li>,
         <li key={`${3}header`}>
-          <Link to="logout"><MdExitApp className="nav-size" /></Link>
+          <Link to="/logout"><MdExitApp className="nav-size" /></Link>
         </li>
       ];
     } else {
