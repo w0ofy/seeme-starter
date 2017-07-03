@@ -65,7 +65,7 @@ const UserSchema = new Schema({
     liked_by_ids: Array,
     liked_ids: Array,
     disliked_ids: Array,
-    matches: [Matches.schema],
+    matches: Array,
     resetPasswordToken: { type: String },
     resetPasswordExpires: { type: Date },
     role: {
