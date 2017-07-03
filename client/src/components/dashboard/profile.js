@@ -3,6 +3,7 @@ const axios = require('axios');
 const React = require('react');
 const EditInfo = require('./profile/edit-info');
 const UserInfo = require('./profile/user-info');
+const UserTitle = require('./profile/user-title');
 import PhotoBoothModal from './profile/photo-booth-modal';
 import TrashLook from './profile/utils/trash-look';
 import TrashLookTwo from './profile/utils/trash-look-two';
@@ -10,6 +11,7 @@ import TrashLookThree from './profile/utils/trash-look-three';
 import TrashLookFour from './profile/utils/trash-look-four';
 import TrashLookFive from './profile/utils/trash-look-five';
 import TrashLookSix from './profile/utils/trash-look-six';
+import TrashLookSeven from './profile/utils/trash-look-seven';
 // const PhotoBooth = require('./profile/photo-booth');
 
 const Profile = React.createClass({
@@ -40,6 +42,7 @@ const Profile = React.createClass({
                 lookFour: user.looks[3] ? user.looks[3].link : "",
                 lookFive: user.looks[4] ? user.looks[4].link : "",
                 lookSix: user.looks[5] ? user.looks[5].link : "",
+                lookSeven: user.looks[5] ? user.looks[5].link : ""
             })
         }
     },
@@ -77,29 +80,38 @@ const Profile = React.createClass({
 
         return (
             <div>
+                <UserTitle firstName={this.state.firstName} age={this.state.age}/>
+                
                 <div className="lookContainer">
-                    <span className="look"><video id="vid-look" className="video vid-look" src={this.state.look} />
+                    <div className="look"><video id="vid-look" className="video vid-look" src={this.state.look} />
                         {this.state.look ? <TrashLook remove={this.trashChange} /> : <PhotoBoothModal />}
-                    </span>
-                    <span className="look"><video id="vid-look-two" className="video vid-look" src={this.state.lookTwo} />
+                    </div>
+                    <div className="look"><video id="vid-look-two" className="video vid-look" src={this.state.lookTwo} />
                         {this.state.lookTwo ? <TrashLookTwo remove={this.trashTwoChange} /> : <PhotoBoothModal />}
-                    </span>
-                    <span className="look"><video id="vid-look-three" className="video vid-look" src={this.state.lookThree} />
+                    </div>
+                    <div className="look"><video id="vid-look-three" className="video vid-look" src={this.state.lookThree} />
                         {this.state.lookThree ? <TrashLookThree remove={this.trashThreeChange} /> : <PhotoBoothModal />}
-                    </span>
-                    <span className="look"><video id="vid-look-four" className="video vid-look" src={this.state.lookFour} />
+                    </div>
+                    <div className="look"><video id="vid-look-four" className="video vid-look" src={this.state.lookFour} />
                         {this.state.lookFour ? <TrashLookFour remove={this.trashFourChange} /> : <PhotoBoothModal />}
-                    </span>
-                    <span className="look"><video id="vid-look-five" className="video vid-look" src={this.state.lookFive} />
+                    </div>
+                    <div className="look"><video id="vid-look-five" className="video vid-look" src={this.state.lookFive} />
                         {this.state.lookFive ? <TrashLookFive remove={this.trashFiveChange} /> : <PhotoBoothModal />}
-                    </span>
-                    <span className="look"><video id="vid-look-six" className="video vid-look" src={this.state.lookSix} />
+                    </div>
+                    <div className="look"><video id="vid-look-six" className="video vid-look" src={this.state.lookSix} />
                         {this.state.lookSix ? <TrashLookSix remove={this.trashSixChange} /> : <PhotoBoothModal />}
-                    </span>
+                    </div>
+                    <div className="look"><video id="vid-look-seven" className="video vid-look" src={this.state.lookSeven} />
+                        {this.state.lookSeven ? <TrashLookSix remove={this.trashSevenChange} /> : <PhotoBoothModal />}
+                    </div>
                 </div>
                 {this.check()}
             </div>
         );
+    },
+    trashSevenChange() {
+        this.setState({ lookSix: null })
+        document.getElementById('vid-look-seven').classList.add('hide');
     },
     trashSixChange() {
         this.setState({ lookSix: null })

@@ -105,10 +105,10 @@ exports.addLook = function (req, res, next) {
   };
   console.log("req.body", req.body);
   User.findOneAndUpdate(query, {
-      $push: {
-        "looks": newLook
-      }
-    },
+    $push: {
+      "looks": newLook
+    }
+  },
     (err, user) => {
       if (err) {
         console.log("newlook: ", newLook);
@@ -144,12 +144,12 @@ exports.deleteLook = function (req, res, next) {
     };
 
   User.findOneAndUpdate(query, {
-      $pull: {
-        "looks": {
-          _id: deleteThisLook
-        }
+    $pull: {
+      "looks": {
+        _id: deleteThisLook
       }
-    },
+    }
+  },
     (err, user) => {
       if (err) {
         console.log("newlook: ", newLook);
@@ -258,8 +258,8 @@ exports.likingUser = function (req, res, next) {
           else {
             // add the liked-user to the logged-in user's matches
             User.findOneAndUpdate({
-                "_id": liked_by_id
-              }, {
+              "_id": liked_by_id
+            }, {
                 $push: {
                   matches: match._id
                 }
@@ -281,8 +281,8 @@ exports.likingUser = function (req, res, next) {
 
                       // Add a match to the logged in user as well
                       User.findOneAndUpdate({
-                          "_id": likedId
-                        }, {
+                        "_id": likedId
+                      }, {
                           $push: {
                             matches: match2._id
                           }
@@ -307,8 +307,8 @@ exports.likingUser = function (req, res, next) {
 
   // always update logged in user's likes
   User.update({
-      _id: likedId
-    }, {
+    _id: likedId
+  }, {
       $push: {
         "liked_by_ids": {
           id: liked_by_id
@@ -324,12 +324,12 @@ exports.likingUser = function (req, res, next) {
     });
   // always update a liked-user's likes
   User.findOneAndUpdate(query, {
-      $push: {
-        "liked_ids": {
-          id: likedId
-        }
+    $push: {
+      "liked_ids": {
+        id: likedId
       }
-    },
+    }
+  },
     (err, user) => {
       if (err) {
         throw err;
@@ -357,12 +357,12 @@ exports.dislikingUser = function (req, res, next) {
     };
   // update the logged-in user's dislikes
   User.update(query, {
-      $push: {
-        "disliked_ids": {
-          id: dislikedId
-        }
+    $push: {
+      "disliked_ids": {
+        id: dislikedId
       }
-    },
+    }
+  },
     (err, user) => {
       if (err) {
         throw err;
@@ -397,4 +397,5 @@ exports.populateMatches = function (req, res, next) {
     }
     res.json(user.matches);
   })
-}
+};
+

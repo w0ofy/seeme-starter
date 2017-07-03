@@ -16,7 +16,13 @@ const YourProfile = React.createClass({
     componentWillMount() {
         // Fetch user data prior to component mounting
         let user = cookie.load('user');
-        console.log("this user is:", user._id + " " + user.email);
+        let token = cookie.load('token');
+        // console.log("this user is:", user._id + " " + user.email);
+        console.log("param", this.props.params.uid);
+        const url = 'http://localhost:3000/api/' + this.props.params.uid ;
+        axios.get(url, { headers: { Authorization: token } } ).then(error, toViewUser => {
+            console.log(toViewUser);
+        });
 
         if (user == undefined) {
             window.location.href = 'http://localhost:8080/login';
