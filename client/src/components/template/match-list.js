@@ -26,7 +26,7 @@ const MatchList = React.createClass({
       }).then((res)=>{ 
           console.log(res)
           this.setState({
-            matches: res
+            matches: res.data
           });
       }).catch((err)=> {
         console.log(err)
@@ -47,7 +47,8 @@ const MatchList = React.createClass({
             return (
               
             <div className="match">
-              <Link to={urlId}>{item.firstName}</Link>
+              <Link to={urlId}>{item.firstName}</Link> | 
+              <span id={item._id} onClick={this.openChat.bind(this)}> Chat</span>
               <div className="image" />
             </div>)
           })}
@@ -59,31 +60,34 @@ const MatchList = React.createClass({
 
   openChat: function (e) {
     e.preventDefault();
+    let user = cookie.load('user');
+    let Match = e.target.id
       this.setState({chatWindows: this.state.chatWindows.concat(
         [{
-          user1: "what de fuck"
+          UID: user._id,
+          MatchID: Match
         }]
       )});
-      console.log(this.state.chatWindows);
-      this.mapChats();
   },
 
 
-  mapChats: function () {
+  // mapChats: function () {
     
-      this.state.chatWindows.map((item) => {
-        console.log("IIIITTTEEMMMM", item);
-        return (<chatWindow user1={item.user1} />)
-        //set IDs as props here as well.
-      })
+  //     this.state.chatWindows.map((item) => {
+  //       console.log(item)
+  //       return (<chatWindow user1={item.UID} user2={item.MatchID} />)
+  //     })
     
-  },
+  // },
 
   render: function () {
     return (
       <div>
         {this.renderList()}
-        {this.mapChats()}
+        {this.state.chatWindows.map((item) => {
+          console.log(item)
+          return (<chatWindow user1={item.UID} user2={item.MatchID} />)
+        })}
       </div>
     );
   }

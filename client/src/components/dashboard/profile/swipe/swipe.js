@@ -70,7 +70,7 @@ class Swipe extends React.Component {
     }
     handleVideoClick(e) {
         e.preventDefault();
-        this.click(function () { this.video.paused ? this.video.play() : this.video.pause(); });
+        this.click(function () { this.paused ? this.play() : this.pause(); });
     }
     componentWillMount() {
         const userCookie = cookie.load('user'),

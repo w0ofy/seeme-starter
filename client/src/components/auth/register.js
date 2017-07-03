@@ -111,6 +111,6 @@ const Register = React.createClass({
       [name]: value
     });
   }
-})
+});
 
 module.exports = Register;
