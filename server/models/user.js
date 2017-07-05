@@ -58,6 +58,25 @@ const UserSchema = new Schema({
         default: false,
         required: true
     },
+    interests: {
+        cycling: Boolean,
+        politics: Boolean,
+        motorcycles: Boolean,
+        cars: Boolean,
+        sleeping: Boolean,
+        working: Boolean,
+        photography: Boolean,
+        learning: Boolean,
+        traveling: Boolean,
+        hot_showers: Boolean,
+        innovating: Boolean,
+        law: Boolean,
+        art: Boolean,
+        news: Boolean,
+        math: Boolean,
+        planning: Boolean,
+        school: Boolean
+    },
     profile_look: String,
     looks: [
         LookSchema

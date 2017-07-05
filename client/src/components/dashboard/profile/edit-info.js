@@ -65,7 +65,7 @@ const EditInfo = React.createClass({
             </div>
             <div className="form-row">
               <span className="form-label">Age</span>
-              <input onChange={this.handleChange} name="age" type="number" placeholder={this.state.age} defaultValue={this.state.age} />
+              <input className="form-text" onChange={this.handleChange} name="age" type="number" placeholder={this.state.age} defaultValue={this.state.age} />
             </div>
 
             <div className="form-row">
@@ -97,11 +97,29 @@ const EditInfo = React.createClass({
               </RadioGroup>
             </div>
             <div className="form-row">
-              <span className="form-label">Age Search Range</span>
+              <span className="form-label">Age Range</span>
               <input onChange={this.handleChange} name="age_pref_min" id="min" className="inline" type="number" placeholder={this.state.age_pref_min} defaultValue={this.state.age_pref_min} /> <span className="inline-label">to</span> 
               <input onChange={this.handleChange} name="age_pref_max" id="max" className="inline" type="number" placeholder={this.state.age_pref_max} defaultValue={this.state.age_pref_max} />
             </div>
           </div>
+
+
+
+          <div className="app-section interests">
+            <div className="form-section-row">
+              <span className="form-section-title">Interests</span>
+            </div>
+            <div className="form-row">
+              <RadioGroup
+                className="radio-group"
+                name="seeking_male"
+                seeking_male={this.state.seeking_male}
+                onChange={this.handleRadioSeekingChange}>
+                <Radio id="smale" value="true" defaultChecked={this.state.seeking_male === true} /><label htmlFor="smale" className="radio-label"><i><Male /></i>Guy</label>
+              </RadioGroup>
+            </div>
+          </div>
+
 
 
           <div className="form-row">
