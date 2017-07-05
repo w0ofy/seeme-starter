@@ -10,7 +10,9 @@ class Swipe extends React.Component {
         this.state = {
             thisuser: userCookie,
             users: [],
-            loggedInUsersId: userCookie._id
+            loggedInUsersId: userCookie._id,
+            swipedRight: false,
+            swipedLeft: false
         };
         this.handleLikeClick = this.handleLikeClick.bind(this);
         this.handleDislikeClick = this.handleDislikeClick.bind(this);
@@ -26,7 +28,7 @@ class Swipe extends React.Component {
         let numOfMatches = userCookie.matches.length;
         console.log(numOfMatches);
 
-        beingSwiped.animate('transform', 'translateX(900px)');
+        this.setState({ swipedRight: true })
         let liked = this.state.users.pop()
 
         console.log('likingid:', liked._id);
@@ -44,8 +46,11 @@ class Swipe extends React.Component {
                     // console.log(res.data.user.matches.pop())
                 }
             });
-
-        beingSwiped.remove();
+        let that = this;
+        setTimeout(function () {
+            beingSwiped.remove();
+            that.setState({ swipedRight: false })
+        }, 350);
     }
     handleDislikeClick(e) {
         e.preventDefault();
@@ -54,7 +59,7 @@ class Swipe extends React.Component {
         const url = 'http://localhost:3000/api/disliking'
         let beingSwiped = $('#tinderslide ul div:last-child');
 
-        beingSwiped.animate('transform', 'translateX(900px)');
+        this.setState({ swipedLeft: true })
         let disliked = this.state.users.pop()
 
         axios.put(url, {
@@ -65,8 +70,12 @@ class Swipe extends React.Component {
                 cookie.save('token', res.data.token, { path: '/' });
                 cookie.save('user', res.data.user, { path: '/' });
             });
+        let that = this;
+        setTimeout(function () {
+            beingSwiped.remove();
+            that.setState({ swipedLeft: false })
+        }, 350);
 
-        beingSwiped.remove();
     }
     handleVideoClick(e) {
         e.preventDefault();
@@ -101,22 +110,23 @@ class Swipe extends React.Component {
             });
     }
     render() {
-
+        let that = this;
         return (
             <div>
                 <div className="wrap">
                     <div id="tinderslide" className={this.state.loggedInUsersId}>
                         <ul>
-                            {this.state.users.map(function (user) {
-                                {/*console.log('user::: ', user.looks[0]);*/}
-                                let profilelook = null;
-                                if (user.looks[0] === undefined) {
-                                    profilelook = "none";
-                                } else {
-                                    profilelook = user.looks[0].link;
-                                }
-                                return (<Pane key={user._id} uid={user._id} age={user.age} link={profilelook} name={user.firstName} />)
-                            })}
+                            {
+                                this.state.users.map(function (user) {
+                                    {/*console.log('user::: ', user.looks[0]);*/ }
+                                    let profilelook = null;
+                                    if (user.looks[0] === undefined) {
+                                        profilelook = "none";
+                                    } else {
+                                        profilelook = user.looks[0].link;
+                                    }
+                                    return (<Pane key={user._id} classSwipedRight={that.state.swipedRight} classSwipedLeft={that.state.swipedLeft} uid={user._id} age={user.age} link={profilelook} name={user.firstName} />)
+                                })}
                         </ul>
                     </div>
                 </div>
@@ -132,7 +142,7 @@ class Swipe extends React.Component {
 const Pane = React.createClass({
     render: function () {
         return (
-            <div className="to-like" id={this.props.uid}>
+            <div className={"to-like " + (this.props.classSwipedRight ? " swipe-right " : null) + (this.props.classSwipedLeft ? " swipe-left " : null)} id={this.props.uid}>
                 <li className="pane1">
                     <div className="img">
                         <video id="recorded-video" onClick={this.handleVideoClick} className="video" reload="true" src={this.props.link} />

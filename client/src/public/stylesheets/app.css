@@ -78,6 +78,7 @@ body::-webkit-scrollbar-thumb {
     width: 75%;
     position: relative;
     border-top: 1px solid rgba(0, 0, 0, .05);
+    border-radius: 2px;
     margin: 1em 0;
     padding: 2em;
     -webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
@@ -1089,13 +1090,54 @@ select option {
 }
 
 
+/* ================= Swipe Page Classes ================= */
+
+.swipe-right {
+    animation: swipeRight .25s forwards;
+    -webkit-animation: swipeRight .25s forwards;
+    -moz-animation: swipeRight .25s forwards;
+    -o-animation: swipeRight .25s forwards;
+    -ms-animation: swipeRight .25s forwards
+}
+
+.swipe-left {
+    animation: swipeLeft .25s forwards;
+    -webkit-animation: swipeLeft .25s forwards;
+    -moz-animation: swipeLeft .25s forwards;
+    -o-animation: swipeLeft .25s forwards;
+    -ms-animation: swipeLeft .25s forwards
+}
+
+@keyframes swipeLeft {
+    to {
+        transform: translateX(-2000px) rotate(-25deg);
+        -webkit-transform: translateX(-2000px) rotate(-25deg);
+        -moz-transform: translateX(-2000px) rotate(-25deg);
+        -o-transform: translateX(-2000px) rotate(-25deg);
+        -ms-transform: translateX(-2000px) rotate(-25deg);
+    }
+}
+
+@keyframes swipeRight {
+    to {
+        transform: translateX(2000px) rotate(25deg);
+        -webkit-transform: translateX(2000px) rotate(25deg);
+        -moz-transform: translateX(2000px) rotate(25deg);
+        -o-transform: translateX(2000px) rotate(25deg);
+        -ms-transform: translateX(2000px) rotate(25deg);
+    }
+}
+
+
 /* ================= Logout Classes ================= */
 
+
+/*
 .logout-msg {
     font-family: 'Montserrat', 'Raleway', sans-serif;
     font-size: 45px;
     text-align: center;
-}
+}*/
 
 
 /* ================= Add/Remove Classes ================= */
