@@ -42,9 +42,7 @@ const Header = React.createClass({
           <div className="nav-container">
             <div className="navbar-header">
               <button type="button" className="navbar-toggle collapsed" data-toggle="collapse" data-target="#nav-collapse">
-                <span className="icon-bar" />
-                <span className="icon-bar" />
-                <span className="icon-bar" />
+                <span>Login</span>
               </button>
               <span className="navbar-brand">{this.props.logo}</span>
             </div>

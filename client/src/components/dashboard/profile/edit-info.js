@@ -54,41 +54,59 @@ const EditInfo = React.createClass({
     return (
       <div className="edit-info">
         <form id="edit-info" onSubmit={this.handleFormSubmit}>
-          <div className="form-row">
-            <span className="form-label">Name</span>
-            <input className="form-text" onChange={this.handleChange} name="firstName" type="text" placeholder={this.state.firstName} />
+          <div className="app-section">
+            <div className="form-section-row">
+              <span className="form-section-title">Basic Info</span>
+            </div>
+
+            <div className="form-row">
+              <span className="form-label">Name</span>
+              <input className="form-text" onChange={this.handleChange} name="firstName" type="text" placeholder={this.state.firstName} defaultValue={this.state.firstName} />
+            </div>
+            <div className="form-row">
+              <span className="form-label">Age</span>
+              <input onChange={this.handleChange} name="age" type="number" placeholder={this.state.age} defaultValue={this.state.age} />
+            </div>
+
+            <div className="form-row">
+              <span className="form-label">Gender</span>
+              <RadioGroup
+                className="radio-group"
+                name="is_male"
+                is_male={this.state.is_male}
+                onChange={this.handleRadioIsChange}>
+                <Radio id="imale" value="true" defaultChecked={this.state.is_male === true} /><label htmlFor="imale" className="radio-label"><i><Male /></i>Guy</label>
+                <Radio id="ifemale" value="false" defaultChecked={this.state.is_male === false} /><label htmlFor="ifemale" className="radio-label"><i><Female /></i>Girl</label>
+              </RadioGroup>
+            </div>
           </div>
-          <div className="form-row">
-            <span className="form-label">Age</span>
-            <input onChange={this.handleChange} name="age" type="text" placeholder={this.state.age} />
+
+          <div className="app-section">
+            <div className="form-section-row">
+              <span className="form-section-title">Match Preferences</span>
+            </div>
+            <div className="form-row">
+              <span className="form-label">Interested In</span>
+              <RadioGroup
+                className="radio-group"
+                name="seeking_male"
+                seeking_male={this.state.seeking_male}
+                onChange={this.handleRadioSeekingChange}>
+                <Radio id="smale" value="true" defaultChecked={this.state.seeking_male === true} /><label htmlFor="smale" className="radio-label"><i><Male /></i>Guy</label>
+                <Radio id="sfemale" value="false" defaultChecked={this.state.seeking_male === false} /><label htmlFor="sfemale" className="radio-label"><i><Female /></i>Girl</label>
+              </RadioGroup>
+            </div>
+            <div className="form-row">
+              <span className="form-label">Age Search Range</span>
+              <input onChange={this.handleChange} name="age_pref_min" id="min" className="inline" type="number" placeholder={this.state.age_pref_min} defaultValue={this.state.age_pref_min} /> <span className="inline-label">to</span> 
+              <input onChange={this.handleChange} name="age_pref_max" id="max" className="inline" type="number" placeholder={this.state.age_pref_max} defaultValue={this.state.age_pref_max} />
+            </div>
           </div>
 
+
           <div className="form-row">
-            <span className="form-label">Gender</span>
-            <RadioGroup
-              className="radio-group"
-              name="is_male"
-              is_male={this.state.is_male}
-              onChange={this.handleRadioIsChange}>
-              <Radio id="imale" value="true" defaultChecked={this.state.is_male === true} /><label htmlFor="imale" className="radio-label"><i><Male /></i>Guy</label>
-              <Radio id="ifemale" value="false" defaultChecked={this.state.is_male === false} /><label htmlFor="ifemale" className="radio-label"><i><Female /></i>Girl</label>
-            </RadioGroup>
+            <button type="submit" className="btn btn-lg btn-success">Save Profile Info</button>
           </div>
-
-
-          <RadioGroup
-            className="radio-group"
-            name="seeking_male"
-            seeking_male={this.state.seeking_male}
-            onChange={this.handleRadioSeekingChange}>
-            <Radio id="smale" value="true" defaultChecked={this.state.seeking_male === true} /><label htmlFor="smale" className="radio-label"><i><Male /></i>Guy</label>
-            <Radio id="sfemale" value="false" defaultChecked={this.state.seeking_male === false} /><label htmlFor="sfemale" className="radio-label"><i><Female /></i>Girl</label>
-          </RadioGroup>
-
-
-          <input onChange={this.handleChange} name="age_pref_min" id="min" className="inline" type="text" placeholder={this.state.age_pref_min} />
-          <input onChange={this.handleChange} name="age_pref_max" id="max" className="inline" type="text" placeholder={this.state.age_pref_max} />
-          <button type="submit" className="btn btn-success">Save Profile Info</button>
         </form>
       </div>
     );

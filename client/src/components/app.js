@@ -5,6 +5,7 @@ import ListShadow from './template/list-shadow';
 import MatchList from './template/match-list';
 import CSSTransitionGroup from 'react-transition-group/CSSTransitionGroup';
 import Typekit from 'react-typekit';
+const ReactCSSTransitionGroup = require('react-addons-css-transition-group');
 
 class App extends Component {
   render() {
@@ -15,19 +16,13 @@ class App extends Component {
         <ListShadow />
         <MatchList />
 
-        <CSSTransitionGroup
-          transitionName='fade'
-          transitionAppear={true}
-          transitionEnter={true}
-          transitionLeave={true}
-          transitionEnterTimeout={200}
-        >
+        <ReactCSSTransitionGroup transitionName="fade">
         
           <div className="user-container">
            {React.cloneElement(this.props.children, {key: page})}
           </div>
           
-        </CSSTransitionGroup>
+        </ReactCSSTransitionGroup>
         <FooterTemplate />
         <Typekit kitId="khm7xtw" />
       </div>
