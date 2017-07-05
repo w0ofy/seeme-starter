@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router';
-import chatWindow from '../chat/chatWindow';
+const chatWindow = require('../chat/chatWindow');
 const axios = require('axios');
 const cookie = require('react-cookie');
 
@@ -69,16 +69,6 @@ const MatchList = React.createClass({
         }]
       )});
   },
-
-
-  // mapChats: function () {
-    
-  //     this.state.chatWindows.map((item) => {
-  //       console.log(item)
-  //       return (<chatWindow user1={item.UID} user2={item.MatchID} />)
-  //     })
-    
-  // },
 
   render: function () {
     return (
