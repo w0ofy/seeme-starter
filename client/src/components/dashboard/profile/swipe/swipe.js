@@ -109,6 +109,7 @@ class Swipe extends React.Component {
                 const users = res.data.users
                 this.setState({ users });
             });
+        console.log("users", this.state.users);
     }
     render() {
         let that = this;
@@ -117,24 +118,41 @@ class Swipe extends React.Component {
                 <div className="wrap">
                     <div id="tinderslide" className={this.state.loggedInUsersId}>
                         <ul>
-                            {
-                                this.state.users.map(function (user) {
-                                    {/*console.log('user::: ', user.looks[0]);*/ }
-                                    let profilelook = null;
-                                    if (user.looks[0] === undefined) {
-                                        profilelook = "none";
+
+                            {this.state.users.length === 0
+                                ? <h1 className={that.state.users.length === 0 ? "" : "no-more"}>There is no one nearby within your match preferences.<br /> Try back later or try changing your preferences.</h1>
+                                : this.state.users.map(function (user, i) {
+                                    if (that.state.users.length === i + 1) {
+                                        // last one
+                                        let profilelook = null;
+                                        if (user.looks[0] === undefined) {
+                                            profilelook = "none";
+                                        } else {
+                                            profilelook = user.looks[0].link;
+                                        }
+                                        return (<div><h1 className={that.state.users.length === 0 ? "" : "no-more"}>No one nearby within your match preferences. Try back later or try changing your preferences.</h1><Pane key={i} classSwipedRight={that.state.swipedRight} classSwipedLeft={that.state.swipedLeft} uid={user._id} age={user.age} link={profilelook} name={user.firstName} /></div>)
+
                                     } else {
-                                        profilelook = user.looks[0].link;
+                                        // not last one
+                                        let profilelook = null;
+                                        if (user.looks[0] === undefined) {
+                                            profilelook = "none";
+                                        } else {
+                                            profilelook = user.looks[0].link;
+                                        }
+                                        return (<Pane key={i} classSwipedRight={that.state.swipedRight} classSwipedLeft={that.state.swipedLeft} uid={user._id} age={user.age} link={profilelook} name={user.firstName} />)
                                     }
-                                    return (<Pane key={user._id} classSwipedRight={that.state.swipedRight} classSwipedLeft={that.state.swipedLeft} uid={user._id} age={user.age} link={profilelook} name={user.firstName} />)
-                                })}
+                                })
+                            }
                         </ul>
                     </div>
                 </div>
-                <div className="actions">
-                    <a href="#" onClick={this.handleDislikeClick} className="dislike"><i></i></a>
-                    <a href="#" onClick={this.handleLikeClick} className="like"><i></i></a>
-                </div>
+                {this.state.users.length == 0 ? null :
+                    <div className="actions">
+                        <a href="#" onClick={this.handleDislikeClick} className="dislike"><i></i></a>
+                        <a href="#" onClick={this.handleLikeClick} className="like"><i></i></a>
+                    </div>
+                }
             </div>
         );
     }
@@ -143,13 +161,15 @@ class Swipe extends React.Component {
 const Pane = React.createClass({
     render: function () {
         return (
-            <div className={"to-like " + (this.props.classSwipedRight ? " swipe-right " : null) + (this.props.classSwipedLeft ? " swipe-left " : null)} id={this.props.uid}>
+            <div className={" to-like " + (this.props.classSwipedRight ? " swipe-right " : " ") + (this.props.classSwipedLeft
+                ? " swipe-left " : " ")} id={this.props.uid}>
                 <li className="pane1">
                     <div className="img">
                         <video id="recorded-video" ref={this.props.uid} onClick={() => {
-                            let video = this.props.uid; 
-                            this.refs[video].paused ? this.refs[video].play() : this.refs[video].pause() }} 
-                            className="video" 
+                            let video = this.props.uid;
+                            this.refs[video].paused ? this.refs[video].play() : this.refs[video].pause()
+                        }}
+                            className="video"
                             src={this.props.link} />
                     </div>
                     <div className="first-name">
