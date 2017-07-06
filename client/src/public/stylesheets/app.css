@@ -1142,6 +1142,29 @@ select option {
 
 /* CHAT BOX */
 
+#chat,
+.chat-window {
+    display: block;
+    position: absolute;
+    width: 250px;
+    background: rgba(211, 211, 211, 0.67);
+    height: 250px;
+    z-index: 1;
+    right: 15%;
+    animation: slideFromRight .35s forwards;
+}
+
+@keyframes slideFromRight {
+    from {
+        transform: translateX(1500px);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(inherit);
+        opacity: 1;
+    }
+}
+
 .chatbox {
     position: fixed;
     top: 200px;

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router';
 import SwipeIcon from 'react-icons/lib/md/swipe-icon';
-const ChatWindow = require('../chat/chatWindow(july)');
+const ChatWindow = require('../chat/chatWindow');
 const axios = require('axios');
 const cookie = require('react-cookie');
 
@@ -25,20 +25,21 @@ const MatchList = React.createClass({
 
   componentWillMount: function () {
     let user = cookie.load('user');
-    if (user !== undefined){
-      let url='http://localhost:3000/api/matches';
+    if (user !== undefined) {
+      let url = 'http://localhost:3000/api/matches';
       let token = cookie.load('token');
-      axios.post(url, 
-        { id: user._id }, 
-        { headers: { Authorization: token }
-      }).then((res)=>{ 
+      axios.post(url,
+        { id: user._id },
+        {
+          headers: { Authorization: token }
+        }).then((res) => {
           console.log(res)
           this.setState({
             matches: res.data
           });
-      }).catch((err)=> {
-        console.log(err)
-      });
+        }).catch((err) => {
+          console.log(err)
+        });
     } else {
       return false;
     }
@@ -51,10 +52,10 @@ const MatchList = React.createClass({
     } else if (user.matches.length === 0 && window.location.href != 'http://localhost:8080/swatch') {
       return (
         <div className="match-list-container">
-            <Link to="/swatch" className="swipe-icon">
-              <SwipeIcon className="nav-size swipe-icon" />
-            </Link>
-            <span> Click to start making matches! </span>
+          <Link to="/swatch" className="swipe-icon">
+            <SwipeIcon className="nav-size swipe-icon" />
+          </Link>
+          <span> Click to start making matches! </span>
         </div>
       )
     } else {
@@ -64,11 +65,11 @@ const MatchList = React.createClass({
             // console.log(item);
             let urlId = 'http://localhost:8080/see/' + item._id;
             return (
-            <div className="match">
-              <Link to={urlId}>{item.firstName}</Link> | 
+              <div className="match">
+                <Link to={urlId}>{item.firstName}</Link> |
               <span id={item._id} onClick={this.openChat.bind(this)}> Chat</span>
-              <div className={"image " + (item.logged_in ? " online " : null)} />
-            </div>)
+                <div className={"image " + (item.logged_in ? " online " : null)} />
+              </div>)
           })}
         </div>);
     }
@@ -79,21 +80,25 @@ const MatchList = React.createClass({
     let user = cookie.load('user');
     let Match = e.target.id
 
-    if (this.state.chatWindows.length < 3 && !containsObject({UID: user._id, MatchID: Match}, this.state.chatWindows)) {
-      this.setState({chatWindows: this.state.chatWindows.concat(
-        [{
-          UID: user._id,
-          MatchID: Match
-        }]
-      )});  
-    } else if (this.state.chatWindows.length >= 3 && !containsObject({UID: user._id, MatchID: Match}, this.state.chatWindows)) {
+    if (this.state.chatWindows.length < 3 && !containsObject({ UID: user._id, MatchID: Match }, this.state.chatWindows)) {
+      this.setState({
+        chatWindows: this.state.chatWindows.concat(
+          [{
+            UID: user._id,
+            MatchID: Match
+          }]
+        )
+      });
+    } else if (this.state.chatWindows.length >= 3 && !containsObject({ UID: user._id, MatchID: Match }, this.state.chatWindows)) {
       this.state.chatWindows.shift()
-      this.setState({chatWindows: this.state.chatWindows.concat(
-        [{
-          UID: user._id,
-          MatchID: Match
-        }]
-      )});  
+      this.setState({
+        chatWindows: this.state.chatWindows.concat(
+          [{
+            UID: user._id,
+            MatchID: Match
+          }]
+        )
+      });
     }
   },
 
@@ -102,7 +107,7 @@ const MatchList = React.createClass({
     this.setState(
       {
         chatWindows: this.state.chatWindows.filter(
-          (chat, MatchID)=>{
+          (chat, MatchID) => {
             return chat.MatchID == MatchID;
           })
       }
@@ -114,7 +119,11 @@ const MatchList = React.createClass({
       <div>
         {this.renderList()}
         {this.state.chatWindows.map((item) => {
+<<<<<<< HEAD
           return (<ChatWindow id={item.MatchID} handleClose={this.closeChat} user1={item.UID} user2={item.MatchID} />)
+=======
+          return (<div><ChatWindow className="chat-window" id={item.MatchID} handleClose={this.closeChat} user1={item.UID} user2={item.MatchID} /></div>)
+>>>>>>> 12dc69f0adb44ac82ca95772d4062a155e1928ad
         })}
       </div>
     );
