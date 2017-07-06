@@ -3,6 +3,8 @@ $(document).ready(function () {
         event.preventDefault();
         this.scrollLeft -= (delta * 30);
     });
+
+    
 })
     // const homeElement = document.getElementById('registersection');
     // if (homeElement === null) {

@@ -58,6 +58,26 @@ const UserSchema = new Schema({
         default: false,
         required: true
     },
+    interests: {
+        cycling: {type: Boolean, default: false},
+        politics: {type: Boolean, default: false},
+        motorcycles: {type: Boolean, default: false},
+        cars: {type: Boolean, default: false},
+        sleeping: {type: Boolean, default: false},
+        working: {type: Boolean, default: false},
+        photography: {type: Boolean, default: false},
+        learning: {type: Boolean, default: false},
+        traveling: {type: Boolean, default: false},
+        hot_showers: {type: Boolean, default: false},
+        innovating: {type: Boolean, default: false},
+        law: {type: Boolean, default: false},
+        art: {type: Boolean, default: false},
+        news: {type: Boolean, default: false},
+        math: {type: Boolean, default: false},
+        planning: {type: Boolean, default: false},
+        school: {type: Boolean, default: false},
+        books: {type: Boolean, default: false}
+    },
     profile_look: String,
     looks: [
         LookSchema
@@ -66,6 +86,10 @@ const UserSchema = new Schema({
     liked_ids: Array,
     disliked_ids: Array,
     matches: Array,
+    chats: [{
+        type: Schema.Types.ObjectId,
+        ref: 'Chat'
+    }],
     resetPasswordToken: { type: String },
     resetPasswordExpires: { type: Date },
     role: {

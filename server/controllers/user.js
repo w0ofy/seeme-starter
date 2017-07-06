@@ -47,7 +47,10 @@ exports.updateProfile = function (req, res, next) {
     is_male = req.body.is_male,
     seeking_male = req.body.seeking_male,
     age_pref_min = req.body.age_pref_min,
-    age_pref_max = req.body.age_pref_max;
+    age_pref_max = req.body.age_pref_max,
+    sleeping = req.body.sleeping,
+    cycling = req.body.cycling,
+    logged_in = req.body.logged_in;
 
   let query = {
     email: emailQuery
@@ -60,9 +63,13 @@ exports.updateProfile = function (req, res, next) {
     age: age,
     age_pref_min: age_pref_min,
     age_pref_max: age_pref_max,
+    interests: {cycling: cycling, sleeping: sleeping},
+    logged_in: logged_in
+
   }, (err, user) => {
     if (err) {
-      console.log("Something wrong when updating data!");
+      console.log("Something went wrong when updating the database!");
+      throw err
     }
     User.findOne({
       email: emailQuery
@@ -79,7 +86,7 @@ exports.updateProfile = function (req, res, next) {
 };
 
 //= =======================================
-// Update Profile Route
+// Add Look Route
 //= =======================================
 exports.addLook = function (req, res, next) {
 
@@ -120,9 +127,6 @@ exports.addLook = function (req, res, next) {
     });
 };
 
-//= =======================================
-// Update Profile Route
-//= =======================================
 
 exports.deleteLook = function (req, res, next) {
 
