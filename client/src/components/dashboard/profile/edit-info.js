@@ -3,6 +3,9 @@ const React = require('react');
 const cookie = require('react-cookie');
 import Female from 'react-icons/lib/md/female';
 import Male from 'react-icons/lib/md/male';
+import FaBicycle from 'react-icons/lib/fa/bicycle';
+import FaBook from 'react-icons/lib/fa/book';
+import FaBed from 'react-icons/lib/fa/bed';
 import { RadioGroup, Radio } from 'react-radio-group';
 
 const EditInfo = React.createClass({
@@ -16,7 +19,9 @@ const EditInfo = React.createClass({
       age: user.age,
       age_pref_min: user.age_pref_min,
       age_pref_max: user.age_pref_max,
-      cycling: user.interests.cycling
+      cycling: user.interests.cycling,
+      books: user.interests.books,
+      sleeping: user.interests.sleeping
     }
   },
 
@@ -33,7 +38,10 @@ const EditInfo = React.createClass({
       seeking_male: this.state.seeking_male,
       age: this.state.age,
       age_pref_min: this.state.age_pref_min,
-      age_pref_max: this.state.age_pref_max
+      age_pref_max: this.state.age_pref_max,
+      cycling: this.state.cycling,
+      books: this.state.books,
+      sleeping: this.state.sleeping
     },
       { headers: { Authorization: cookie.load('token') } })
       .then((response) => {
@@ -108,31 +116,18 @@ const EditInfo = React.createClass({
 
           <div className="app-section interests">
             <div className="form-section-row">
-              <span className="form-section-title">Other Things</span>
+              <span className="form-section-title">Things I Like</span>
             </div>
             <div className="form-col">
               <span>
-                <input className="interest-box" type="checkbox" id="cycling" value="true" name="cycling" defaultChecked={this.state.cycling === true} /><label htmlFor="cycling" className="radio-label"><i><Male /></i>Cycling</label>
+                <input className="interest-box" onChange={this.handleChange} type="checkbox" id="cycling" name="cycling" defaultChecked={this.state.cycling === true} /><label htmlFor="cycling" className="radio-label"><i><FaBicycle /></i>Biycling</label>
               </span>
               <span>
-                <input className="interest-box" type="checkbox" id="cycling" value="true" name="cycling" defaultChecked={this.state.cycling === true} /><label htmlFor="cycling" className="radio-label"><i><Male /></i>Cycling</label>
+                <input className="interest-box" onChange={this.handleChange} type="checkbox" id="books" name="books" defaultChecked={this.state.books === true} /><label htmlFor="books" className="radio-label"><i><FaBook /></i>Books</label>
               </span>
               <span>
-                <input className="interest-box" type="checkbox" id="cycling" value="true" name="cycling" defaultChecked={this.state.cycling === true} /><label htmlFor="cycling" className="radio-label"><i><Male /></i>Cycling</label>
+                <input className="interest-box" onChange={this.handleChange} type="checkbox" id="sleeping" name="sleeping" defaultChecked={this.state.sleeping === true} /><label htmlFor="sleeping" className="radio-label"><i><FaBed /></i>Sleeping</label>
               </span>
-              <span>
-                <input className="interest-box" type="checkbox" id="cycling" value="true" name="cycling" defaultChecked={this.state.cycling === true} /><label htmlFor="cycling" className="radio-label"><i><Male /></i>Cycling</label>
-              </span>
-              <span>
-                <input className="interest-box" type="checkbox" id="cycling" value="true" name="cycling" defaultChecked={this.state.cycling === true} /><label htmlFor="cycling" className="radio-label"><i><Male /></i>Cycling</label>
-              </span>
-              <span>
-                <input className="interest-box" type="checkbox" id="cycling" value="true" name="cycling" defaultChecked={this.state.cycling === true} /><label htmlFor="cycling" className="radio-label"><i><Male /></i>Cycling</label>
-              </span>
-              <span>
-                <input className="interest-box" type="checkbox" id="cycling" value="true" name="cycling" defaultChecked={this.state.cycling === true} /><label htmlFor="cycling" className="radio-label"><i><Male /></i>Cycling</label>
-              </span>
-
             </div>
           </div>
 
@@ -149,7 +144,7 @@ const EditInfo = React.createClass({
     const target = event.target;
     const value = target.type === 'checkbox' ? target.checked : target.value;
     const name = target.name;
-
+    console.log(name, value);
     this.setState({
       [name]: value
     });

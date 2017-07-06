@@ -75,7 +75,8 @@ const UserSchema = new Schema({
         news: {type: Boolean, default: false},
         math: {type: Boolean, default: false},
         planning: {type: Boolean, default: false},
-        school: {type: Boolean, default: false}
+        school: {type: Boolean, default: false},
+        books: {type: Boolean, default: false}
     },
     profile_look: String,
     looks: [

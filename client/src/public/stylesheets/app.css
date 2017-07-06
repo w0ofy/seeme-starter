@@ -977,6 +977,7 @@ input[type="radio"] {
     width: inherit;
     height: inherit;
     color: #009fdc;
+    padding: 5px;
 }
 
 .radio-label i svg g {
@@ -999,6 +1000,10 @@ input[type="radio"]:checked+label>i {
     display: -webkit-flex;
     flex-direction: column;
     align-items: center;
+}
+
+.form-col>span {
+    height: 42px;
 }
 
 .interest-box {

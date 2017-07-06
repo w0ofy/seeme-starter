@@ -146,7 +146,11 @@ const Pane = React.createClass({
             <div className={"to-like " + (this.props.classSwipedRight ? " swipe-right " : null) + (this.props.classSwipedLeft ? " swipe-left " : null)} id={this.props.uid}>
                 <li className="pane1">
                     <div className="img">
-                        <video id="recorded-video" ref={this.props.uid} onClick={() => { let video = this.props.uid; this.refs[video].paused ? this.refs[video].play() : this.refs[video].pause() }} className="video" reload="true" src={this.props.link} />
+                        <video id="recorded-video" ref={this.props.uid} onClick={() => {
+                            let video = this.props.uid; 
+                            this.refs[video].paused ? this.refs[video].play() : this.refs[video].pause() }} 
+                            className="video" 
+                            src={this.props.link} />
                     </div>
                     <div className="first-name">
                         {this.props.name}, {this.props.age}
