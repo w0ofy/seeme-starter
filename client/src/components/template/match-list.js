@@ -1,14 +1,13 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router';
 import SwipeIcon from 'react-icons/lib/md/swipe-icon';
-const chatWindow = require('../chat/chatWindow');
+const ChatWindow = require('../chat/chatWindow(july)');
 const axios = require('axios');
 const cookie = require('react-cookie');
 
 function containsObject(obj, list) {
   for (var i = 0; i < list.length; i++) {
     if (list[i].MatchID == obj.MatchID) {
-      console.log("Whoop!")
       return true;
     }
   }
@@ -115,7 +114,7 @@ const MatchList = React.createClass({
       <div>
         {this.renderList()}
         {this.state.chatWindows.map((item) => {
-          return (<chatWindow id={item.MatchID} handleClose={this.closeChat} user1={item.UID} user2={item.MatchID} />)
+          return (<ChatWindow id={item.MatchID} handleClose={this.closeChat} user1={item.UID} user2={item.MatchID} />)
         })}
       </div>
     );

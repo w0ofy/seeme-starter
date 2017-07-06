@@ -91,7 +91,11 @@ module.exports = function (app) {
   // Chat Routes
   //= ========================
 
+  // Set chat routes as a subgroup/middleware to apiRoutes
 
+   apiRoutes.use('/chat', chatRoutes);
+
+  //  chatRoutes.
 
   // Set url for API group routes
   app.use('/api', apiRoutes);
