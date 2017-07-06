@@ -86,6 +86,10 @@ const UserSchema = new Schema({
     liked_ids: Array,
     disliked_ids: Array,
     matches: Array,
+    chats: [{
+        type: Schema.Types.ObjectId,
+        ref: 'Chat'
+    }],
     resetPasswordToken: { type: String },
     resetPasswordExpires: { type: Date },
     role: {
