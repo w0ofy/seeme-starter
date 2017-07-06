@@ -586,11 +586,22 @@ p.copyright>span {
     -moz-transition: all .1s linear;
 }
 
+a.add-look {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 81%;
+    padding-bottom: 20px;
+}
+
 .look:hover>div>.trash-look {
     color: white;
 }
 
-.look:hover>div>button {
+.look:hover>div>a {
     color: #4d4d4d;
 }
 
@@ -976,6 +987,25 @@ input[type="radio"]+label>i {
 }
 
 input[type="radio"]:checked+label>i {
+    border: 1px solid rgba(125, 5, 174, 0.75);
+}
+
+.form-col {
+    display: flex;
+    display: -webkit-flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.interest-box {
+    opacity: 0;
+}
+
+input[type="checkbox"]+label>i {
+    border: 1px solid transparent;
+}
+
+input[type="checkbox"]:checked+label>i {
     border: 1px solid rgba(125, 5, 174, 0.75);
 }
 

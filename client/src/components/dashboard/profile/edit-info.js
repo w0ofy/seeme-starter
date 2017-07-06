@@ -16,6 +16,7 @@ const EditInfo = React.createClass({
       age: user.age,
       age_pref_min: user.age_pref_min,
       age_pref_max: user.age_pref_max,
+      cycling: user.interests.cycling
     }
   },
 
@@ -98,7 +99,7 @@ const EditInfo = React.createClass({
             </div>
             <div className="form-row">
               <span className="form-label">Age Range</span>
-              <input onChange={this.handleChange} name="age_pref_min" id="min" className="inline" type="number" placeholder={this.state.age_pref_min} defaultValue={this.state.age_pref_min} /> <span className="inline-label">to</span> 
+              <input onChange={this.handleChange} name="age_pref_min" id="min" className="inline" type="number" placeholder={this.state.age_pref_min} defaultValue={this.state.age_pref_min} /> <span className="inline-label">to</span>
               <input onChange={this.handleChange} name="age_pref_max" id="max" className="inline" type="number" placeholder={this.state.age_pref_max} defaultValue={this.state.age_pref_max} />
             </div>
           </div>
@@ -107,16 +108,31 @@ const EditInfo = React.createClass({
 
           <div className="app-section interests">
             <div className="form-section-row">
-              <span className="form-section-title">Interests</span>
+              <span className="form-section-title">Other Things</span>
             </div>
-            <div className="form-row">
-              <RadioGroup
-                className="radio-group"
-                name="seeking_male"
-                seeking_male={this.state.seeking_male}
-                onChange={this.handleRadioSeekingChange}>
-                <Radio id="smale" value="true" defaultChecked={this.state.seeking_male === true} /><label htmlFor="smale" className="radio-label"><i><Male /></i>Guy</label>
-              </RadioGroup>
+            <div className="form-col">
+              <span>
+                <input className="interest-box" type="checkbox" id="cycling" value="true" name="cycling" defaultChecked={this.state.cycling === true} /><label htmlFor="cycling" className="radio-label"><i><Male /></i>Cycling</label>
+              </span>
+              <span>
+                <input className="interest-box" type="checkbox" id="cycling" value="true" name="cycling" defaultChecked={this.state.cycling === true} /><label htmlFor="cycling" className="radio-label"><i><Male /></i>Cycling</label>
+              </span>
+              <span>
+                <input className="interest-box" type="checkbox" id="cycling" value="true" name="cycling" defaultChecked={this.state.cycling === true} /><label htmlFor="cycling" className="radio-label"><i><Male /></i>Cycling</label>
+              </span>
+              <span>
+                <input className="interest-box" type="checkbox" id="cycling" value="true" name="cycling" defaultChecked={this.state.cycling === true} /><label htmlFor="cycling" className="radio-label"><i><Male /></i>Cycling</label>
+              </span>
+              <span>
+                <input className="interest-box" type="checkbox" id="cycling" value="true" name="cycling" defaultChecked={this.state.cycling === true} /><label htmlFor="cycling" className="radio-label"><i><Male /></i>Cycling</label>
+              </span>
+              <span>
+                <input className="interest-box" type="checkbox" id="cycling" value="true" name="cycling" defaultChecked={this.state.cycling === true} /><label htmlFor="cycling" className="radio-label"><i><Male /></i>Cycling</label>
+              </span>
+              <span>
+                <input className="interest-box" type="checkbox" id="cycling" value="true" name="cycling" defaultChecked={this.state.cycling === true} /><label htmlFor="cycling" className="radio-label"><i><Male /></i>Cycling</label>
+              </span>
+
             </div>
           </div>
 
@@ -131,7 +147,7 @@ const EditInfo = React.createClass({
   },
   handleChange(event) {
     const target = event.target;
-    const value = target.value;
+    const value = target.type === 'checkbox' ? target.checked : target.value;
     const name = target.name;
 
     this.setState({

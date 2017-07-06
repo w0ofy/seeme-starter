@@ -44,7 +44,7 @@ class PhotoBoothModal extends React.Component {
     render() {
         return (
             <div>
-                <button className="add-look" title="Add A New Look" onClick={this.openModal}><MdAddAPhoto /></button>
+                <a className="add-look" title="Add A New Look" onClick={this.openModal}><MdAddAPhoto /></a>
                 <h4 className="add-l-label">Add A Look</h4>
                 <Modal
                     isOpen={this.state.modalIsOpen}
