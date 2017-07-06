@@ -52,7 +52,7 @@ exports.updateProfile = function (req, res, next) {
     cycling = req.body.cycling,
     logged_in = req.body.logged_in;
 
-  var query = {
+  let query = {
     email: emailQuery
   };
 
@@ -65,6 +65,7 @@ exports.updateProfile = function (req, res, next) {
     age_pref_max: age_pref_max,
     interests: {cycling: cycling, sleeping: sleeping},
     logged_in: logged_in
+
   }, (err, user) => {
     if (err) {
       console.log("Something went wrong when updating the database!");
