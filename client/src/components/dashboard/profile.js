@@ -51,8 +51,6 @@ const Profile = React.createClass({
 
     check() {
 
-        console.log(window.location.href.indexOf("edit-info"));
-
         if (window.location.href.indexOf("edit-info") > -1) {
             return (
                 <EditInfo />
