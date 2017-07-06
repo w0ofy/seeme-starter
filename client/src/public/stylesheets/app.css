@@ -876,6 +876,10 @@ div.user-title>div>h3>a>svg {
     top: 1px;
 }
 
+div.user-title>div>h3>a>svg {
+    float: right;
+}
+
 div.user-title>div>h3>a:hover {
     color: rgba(125, 5, 174, 0.75) !important;
 }

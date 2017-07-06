@@ -1,10 +1,11 @@
-const React = require('react');
+import React, { Component } from 'react';
 import { Link } from 'react-router';
 const chatWindow = require('../chat/chatWindow');
 const axios = require('axios');
 const cookie = require('react-cookie');
 
 const MatchList = React.createClass({
+
 
   getInitialState: function () {
     return ({
@@ -16,24 +17,20 @@ const MatchList = React.createClass({
   componentWillMount: function () {
     let user = cookie.load('user');
 
-    if (user !== undefined) {
-      let url = 'http://localhost:3000/api/matches';
+    if (user !== undefined){
+      let url='http://localhost:3000/api/matches';
       let token = cookie.load('token');
-      axios.post(url,
-        { id: user._id },
-        {
-          headers: { Authorization: token }
-        }).then((res) => {
-          // console.log("result", res.data)
-
+      axios.post(url, 
+        { id: user._id }, 
+        { headers: { Authorization: token }
+      }).then((res)=>{ 
+          console.log(res)
           this.setState({
             matches: res.data
           });
-
-        }).catch((err) => {
-          console.log(err);
-        });
-
+      }).catch((err)=> {
+        console.log(err)
+      });
     } else {
       return false;
     }
@@ -50,7 +47,8 @@ const MatchList = React.createClass({
             return (
               
             <div className="match">
-              <Link to={urlId}>{item.firstName}</Link>
+              <Link to={urlId}>{item.firstName}</Link> | 
+              <span id={item._id} onClick={this.openChat.bind(this)}> Chat</span>
               <div className="image" />
             </div>)
           })}
@@ -62,33 +60,24 @@ const MatchList = React.createClass({
 
   openChat: function (e) {
     e.preventDefault();
-    
-
-      this.state.chatWindows.concat(
+    let user = cookie.load('user');
+    let Match = e.target.id
+      this.setState({chatWindows: this.state.chatWindows.concat(
         [{
-          user1: "what de fuck"
+          UID: user._id,
+          MatchID: Match
         }]
-      )
-      console.log("chatWindows", this.state.chatWindows);
-      {this.mapChats}
-    
-  },
-
-  mapChats: function () {
-    
-      this.state.chatWindows.map((item) => {
-        console.log("IIIITTTEEMMMM", item);
-        return (<chatWindow user1={item.user1} />)
-        //set IDs as props here as well.
-      })
-    
+      )});
   },
 
   render: function () {
     return (
       <div>
         {this.renderList()}
-        {this.mapChats()}
+        {this.state.chatWindows.map((item) => {
+          console.log(item)
+          return (<chatWindow user1={item.UID} user2={item.MatchID} />)
+        })}
       </div>
     );
   }
