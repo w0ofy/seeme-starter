@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router';
 import SwipeIcon from 'react-icons/lib/md/swipe-icon';
+import io from 'socket.io-client';
+const socket = io.connect('http://localhost:3000/')
 const ChatWindow = require('../chat/chatWindow');
 const axios = require('axios');
 const cookie = require('react-cookie');
@@ -40,6 +42,18 @@ const MatchList = React.createClass({
         }).catch((err) => {
           console.log(err)
         });
+
+      socket.on('connect', () => {
+        let url = 'http://localhost:3000/api/see/update-socket'
+        axios.put(url,
+        { emailQuery: user.email, socket_id: socket.id },
+        {
+          headers: { Authorization: token }
+        }).catch((err) => {
+          console.log(err)
+        });
+      });
+
     } else {
       return false;
     }
@@ -119,11 +133,7 @@ const MatchList = React.createClass({
       <div>
         {this.renderList()}
         {this.state.chatWindows.map((item) => {
-<<<<<<< HEAD
           return (<ChatWindow id={item.MatchID} handleClose={this.closeChat} user1={item.UID} user2={item.MatchID} />)
-=======
-          return (<div><ChatWindow className="chat-window" id={item.MatchID} handleClose={this.closeChat} user1={item.UID} user2={item.MatchID} /></div>)
->>>>>>> 12dc69f0adb44ac82ca95772d4062a155e1928ad
         })}
       </div>
     );

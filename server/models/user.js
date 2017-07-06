@@ -58,6 +58,7 @@ const UserSchema = new Schema({
         default: false,
         required: true
     },
+    socket_id: String,
     interests: {
         cycling: {type: Boolean, default: false},
         politics: {type: Boolean, default: false},

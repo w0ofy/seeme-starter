@@ -50,7 +50,8 @@ exports.updateProfile = function (req, res, next) {
     age_pref_max = req.body.age_pref_max,
     sleeping = req.body.sleeping,
     cycling = req.body.cycling,
-    logged_in = req.body.logged_in;
+    logged_in = req.body.logged_in,
+    socket_id = req.body.socket_id;
 
   let query = {
     email: emailQuery
@@ -64,8 +65,8 @@ exports.updateProfile = function (req, res, next) {
     age_pref_min: age_pref_min,
     age_pref_max: age_pref_max,
     interests: {cycling: cycling, sleeping: sleeping},
-    logged_in: logged_in
-
+    logged_in: logged_in,
+    socket_id: socket_id,
   }, (err, user) => {
     if (err) {
       console.log("Something went wrong when updating the database!");
@@ -84,6 +85,21 @@ exports.updateProfile = function (req, res, next) {
 
   });
 };
+
+exports.updateSocketID = function (req, res, next) {
+  const query = { email: req.body.emailQuery }
+    socket_id = req.body.socket_id;
+  User.findOneAndUpdate(query, { socket_id: socket_id }, (err, user) => {
+    if (err) {
+      throw err
+    } else { 
+      res.status(201).json({
+        token: `JWT ${generateToken(user)}`,
+        user: user
+      });
+    }
+  })
+}
 
 //= =======================================
 // Add Look Route

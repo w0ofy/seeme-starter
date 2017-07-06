@@ -21,7 +21,8 @@ exports.setUserInfo = function setUserInfo(request) {
     liked_ids: request.liked_ids,
     liked_by_ids: request.liked_by_ids,
     logged_in: request.logged_in,
-    interests: request.interests
+    interests: request.interests,
+    socket_id: socket_id
   };
   
   return getUserInfo;
