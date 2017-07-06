@@ -47,10 +47,9 @@ exports.updateProfile = function (req, res, next) {
     is_male = req.body.is_male,
     seeking_male = req.body.seeking_male,
     age_pref_min = req.body.age_pref_min,
-    age_pref_max = req.body.age_pref_max,
-    logged_in = req.body.logged_in;
+    age_pref_max = req.body.age_pref_max;
 
-  var query = {
+  let query = {
     email: emailQuery
   };
 
@@ -61,7 +60,6 @@ exports.updateProfile = function (req, res, next) {
     age: age,
     age_pref_min: age_pref_min,
     age_pref_max: age_pref_max,
-    logged_in: logged_in
   }, (err, user) => {
     if (err) {
       console.log("Something wrong when updating data!");

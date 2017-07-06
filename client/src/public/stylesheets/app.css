@@ -1013,6 +1013,27 @@ select option {
     box-shadow: none;
 }
 
+.image {
+    position: relative;
+    left: 5px;
+    top: 1px;
+    display: inline-block;
+    border: 1px solid #000000;
+    padding: 3.5px;
+    border-radius: 100px;
+}
+
+.online {
+    position: relative;
+    background: #27AE60;
+    left: 5px;
+    top: 1px;
+    display: inline-block;
+    border: 1px solid #27AE60;
+    padding: 3.5px;
+    border-radius: 100px;
+}
+
 .err-inp {
     margin-top: -8px;
     display: block;
