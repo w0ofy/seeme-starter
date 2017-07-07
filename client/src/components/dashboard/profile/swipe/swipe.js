@@ -121,7 +121,7 @@ class Swipe extends React.Component {
                         <ul>
 
                             {this.state.users.length === 0
-                                ? <span className={that.state.users.length === 0 ? "n-more" : "y-more"}>There is no one nearby within your match preferences.<br /> Try back later or try changing your <Link to="/edit-profile">match preferences</Link>.</span>
+                                ? <span className={that.state.users.length === 0 ? "n-more" : "y-more"}>There is no one nearby within your match preferences. Try back later or try changing your <Link to="/edit-info" className="match-pref">match preferences</Link>.</span>
                                 : this.state.users.map(function (user, i) {
 
                                     let profilelook = null;

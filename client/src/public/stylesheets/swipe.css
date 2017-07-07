@@ -22,6 +22,11 @@
     position: absolute;
 }
 
+.match-pref {
+    color: rgba(125, 5, 174, 0.75);
+    transition: all .2s linear;
+}
+
 #tinderslide {
     position: relative;
     background: #fff;
@@ -224,12 +229,13 @@
     text-align: center;
 }
 
-.view-chat-btn {
+
+/*.view-chat-btn {
     border-radius: 0;
     display: block;
     height: 40px;
     line-height: 30px;
-}
+}*/
 
 .video {
     cursor: pointer;

@@ -10,11 +10,11 @@ import { AUTH_USER } from './actions/types';
 // import './public/stylesheets/base.scss';
 
 // Initialize Google Analytics
-ReactGA.initialize('UA-000000-01');
+// ReactGA.initialize('UA-000000-01');
 
-function logPageView() {
-  ReactGA.pageview(window.location.pathname);
-}
+// function logPageView() {
+//   ReactGA.pageview(window.location.pathname);
+// }
 
 // const token = cookie.load('token');
 
