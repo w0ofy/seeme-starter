@@ -1,6 +1,7 @@
 const axios = require('axios');
 const React = require('react');
 const cookie = require('react-cookie');
+
 import io from 'socket.io-client';
 const socket = io.connect('http://localhost:3000/')
 const ChatWindow = React.createClass({
@@ -41,6 +42,25 @@ const ChatWindow = React.createClass({
     },
 
     render: function () {
+const User = cookie.load('user');
+
+class Chat extends React.Component {  
+    
+    constructor(props) { 
+        super(props) 
+            this.state = { 
+                chatHistory: [],
+                input: '',
+                messages: ''
+            } 
+    }
+    
+    componentWillMount() { 
+    }
+     
+
+    render() {
+
         return (
             <div id="chat">
                 <div className="input-group input-group-lg">
@@ -53,35 +73,19 @@ const ChatWindow = React.createClass({
                     </div>
                 </div>
                 <div className="form-group">
+
                     <form onSubmit={this.handleSendMessage}>
                         <textarea onChange={this.handleChange("message")} className="form-control" id="messageInput" rows="3" placeholder="Enter Message Here" />
                         <input type="submit" value="Send" />
                     </form>
+
+                    <textarea onChange={this.handleChange("message")} className="form-control" id="messageInput" rows="3" placeholder='Enter Message Here'></textarea>
+
                 </div>
             </div>
         );
     }
-});
-
-module.exports = ChatWindow;
+};
 
 
-            // <div id="chat">
-            //     <div className="input-group input-group-lg">
-            //         <span className="input-group-addon" id="sizing-addon1"><span className="glyphicon glyphicon-user" ariaHidden="true"></span></span>
-            //         <input type="text" className="form-control" id="userName" placeholder="No User" ariaDescribedBy="sizing-addon1" />
-            //     </div>
-            //     <div className="panel panel-default" id='chatWindow'>
-            //         <div className="panel-heading">
-            //             <h3 className="panel-title">Chat History</h3>
-            //         </div>
-            //         <div className="panel-body">
-            //             <div className="chatHistory">
-            //                 <div className="chatStatus">Status:<span id='state'>idle</span></div>
-            //             </div>
-            //         </div>
-            //     </div>
-            //     <div className="form-group">
-            //         <textarea onChange={this.handleChange("message")} className="form-control" id="messageInput" rows="3" placeholder='Enter Message Here'></textarea>
-            //     </div>
-            // </div>
+module.exports = Chat;
