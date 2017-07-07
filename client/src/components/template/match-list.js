@@ -45,14 +45,14 @@ const MatchList = React.createClass({
         });
 
       socket.on('connect', () => {
-        let url = 'http://localhost:3000/api/see/update-socket'
-        axios.put(url,
-        { emailQuery: user.email, socket_id: socket.id },
-        {
-          headers: { Authorization: token }
-        }).catch((err) => {
-          console.log(err)
-        });
+        let url = 'http://localhost:3000/api/update-socket';
+          axios.put(url,
+            { emailQuery: user.email, socket_id: socket.id },
+            {
+              headers: { Authorization: token }
+            }).catch((err) => {
+              console.log(err)
+            });
       });
 
     } else {

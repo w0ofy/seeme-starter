@@ -1,13 +1,9 @@
 const AuthenticationController = require('./controllers/authentication');
 const UserController = require('./controllers/user');
-// const ChatController = require('./controllers/chat');
-// const CommunicationController = require('./controllers/communication');
+const ChatController = require('./controllers/chat');
 const express = require('express');
 const passport = require('passport');
 const ROLE_MEMBER = require('./constants').ROLE_MEMBER;
-// const ROLE_CLIENT = require('./constants').ROLE_CLIENT;
-// const ROLE_OWNER = require('./constants').ROLE_OWNER;
-// const ROLE_ADMIN = require('./constants').ROLE_ADMIN;
 
 const passportService = require('./config/passport');
 
@@ -56,14 +52,12 @@ module.exports = function (app) {
   // Update user profile route
   userRoutes.put('/update', requireAuth, UserController.updateProfile);
 
-  // Update user socket_id
-  userRoutes.put('/update-socket', requireAuth, UserController.updateSocketID)
-
   // Update user looks route
   userRoutes.put('/update-looks', requireAuth, UserController.addLook);
 
   // Delete user looks route
   userRoutes.put('/delete-look', UserController.deleteLook);
+
 
   // View user profile route
   apiRoutes.get('/:uid', requireAuth, UserController.viewProfile);
@@ -78,7 +72,7 @@ module.exports = function (app) {
   apiRoutes.put('/disliking', requireAuth, UserController.dislikingUser);
 
   // Populate matches
-  apiRoutes.post('/matches', requireAuth, UserController.populateMatches); 
+  apiRoutes.post('/matches', requireAuth, UserController.populateMatches);
 
   // Test protected route
   apiRoutes.get('/protected', requireAuth, (req, res) => {
@@ -92,13 +86,13 @@ module.exports = function (app) {
   //= ========================
   // Chat Routes
   //= ========================
+  // Find all users route
+  apiRoutes.put('/update-socket', requireAuth, ChatController.updateSocketId);
 
-  // Set chat routes as a subgroup/middleware to apiRoutes
+  apiRoutes.put('/create-message', requireAuth, ChatController.createMessage);
 
-   apiRoutes.use('/chat', chatRoutes);
-
-  //  chatRoutes.
-
+  apiRoutes.post('/get-messages', requireAuth, ChatController.getMessages);
+  
   // Set url for API group routes
   app.use('/api', apiRoutes);
 };

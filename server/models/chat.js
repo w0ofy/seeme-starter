@@ -1,19 +1,17 @@
-// Importing Node packages required for schema
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
-
-var ChatSchema = new Schema({
-        id: String,
-        messages: {
-            message: {
-                type: Schema.Types.ObjectId,
-                ref: "Message"
-            }
+const MessageSchema = require('./message').schema;
+var ChatSchema = new Schema(
+    [{
+        chat: {
+            type: Schema.Types.ObjectId,
+            ref: 'Messages'
         }
-    }
+    }]
+
 )
 
 module.exports = {
-    model: mongoose.model('Chat', ChatSchema),
+    model: mongoose.model('Chats', ChatSchema),
     schema: ChatSchema
 }
