@@ -24,7 +24,7 @@ import Logout from './components/auth/logout';
 // import FindMatches from './components/dashboard/find-matches';
 // import chatWindow from './components/chat/chatWindow.js'
 import Profile from './components/dashboard/profile.js';
-import EditInfo from './components/dashboard/profile/edit-info';
+import EditInfo from './components/dashboard/profile/edit-info.js';
 import Swipe from './components/dashboard/profile/swipe/swipe.js';
 import YourInfo from './components/dashboard/profile/your-profile';
 // import Inbox from './components/dashboard/messaging/inbox';

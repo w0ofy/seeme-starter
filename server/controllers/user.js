@@ -51,13 +51,22 @@ exports.updateProfile = function (req, res, next) {
     sleeping = req.body.sleeping,
     cycling = req.body.cycling,
     news = req.body.news,
-    traveling = req.body.traveling,
+    politics = req.body.politics,
+    motorcycles = req.body.motorcycles,
     cars = req.body.cars,
-    learning = req.body.learning,
-    law = req.body.law,
-    art = req.body.art
+    working = req.body.working,
     photography = req.body.photography,
-    logged_in = req.body.logged_in;
+    learning = req.body.learning,
+    traveling = req.body.traveling,
+    innovating = req.body.innovating,
+    law = req.body.law,
+    art = req.body.art,
+    math = req.body.math,
+    school = req.body.school,
+    music = req.body.music,
+    cooking = req.body.cooking,
+    outdoors = req.body.outdoors,
+    logged_in = req.body.logged_in
 
   let query = {
     email: emailQuery
@@ -70,7 +79,7 @@ exports.updateProfile = function (req, res, next) {
     age: age,
     age_pref_min: age_pref_min,
     age_pref_max: age_pref_max,
-    interests: {cycling: cycling, sleeping: sleeping, news: news, photography: photography, traveling: traveling, cars: cars, learning: learning, law: law, art: art},
+    interests: {cycling: cycling, sleeping: sleeping, news: news, photography: photography, traveling: traveling, cars: cars, learning: learning, law: law, art: art, math: math, school: school, music: music, cooking: cooking, outdoors: outdoors, innovating: innovating },
     logged_in: logged_in
 
   }, (err, user) => {
