@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router';
+import MdArrowUpward from 'react-icons/lib/md/arrow-upward';
 import SwipeIcon from 'react-icons/lib/md/swipe-icon';
 import io from 'socket.io-client';
 const socket = io.connect('http://localhost:3000/')
@@ -63,16 +64,20 @@ const MatchList = React.createClass({
     let user = cookie.load('user');
     if (user == undefined) {
       return (<div className="empty" />)
-    } else if (user.matches.length === 0 && window.location.href != 'http://localhost:8080/swatch') {
+    } else if (user.matches.length === 0 && window.location.href !== 'http://localhost:8080/swatch') {
       return (
         <div className="match-list-container">
-          <Link to="/swatch" className="swipe-icon">
-            <SwipeIcon className="nav-size swipe-icon" />
-          </Link>
-          <span> Click to start making matches! </span>
+          <p>Your matches will display here. No matches yet.</p>
+          <span>Click <Link to="/swatch" className="click-to-match"><SwipeIcon /></Link> To Start Making Matches!</span>
         </div>
       )
-    } else {
+    } else if (user.matches.length === 0) {
+      return (<div className="match-list-container">
+        <p>Your matches will display here. No matches yet.</p>
+      </div>)
+    }
+
+    else {
       return (
         <div className="match-list-container">
           {this.state.matches.map((item) => {

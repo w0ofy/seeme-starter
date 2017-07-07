@@ -367,7 +367,7 @@ p.copyright>span {
     cursor: pointer;
     position: absolute;
     top: 45px;
-    left: -105px;
+    left: -13.5%;
     font-size: 80px;
     /*border: 1px solid #d2d2d2;*/
     /*border-radius: 100%;*/
@@ -1091,6 +1091,21 @@ input.inline {
     height: 100%;
     box-shadow: 2px 0px 3px 0px rgba(0, 0, 0, .1);
     z-index: 1;
+}
+
+.click-to-match {
+    font-size: 29px;
+    transition: all .2s ease-in;
+}
+
+.click-to-match:hover {
+    color: rgba(125, 5, 174, 0.75)
+}
+
+.match-list-container p,
+.match-list-container span {
+    display: block;
+    text-align: center;
 }
 
 .match {

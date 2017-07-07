@@ -120,28 +120,17 @@ class Swipe extends React.Component {
                         <ul>
 
                             {this.state.users.length === 0
-                                ? <h1 className={that.state.users.length === 0 ? "" : "no-more"}>There is no one nearby within your match preferences.<br /> Try back later or try changing your preferences.</h1>
+                                ? <span className={that.state.users.length === 0 ? "n-more" : "y-more"}>There is no one nearby within your match preferences.<br /> Try back later or try changing your match preferences.</span>
                                 : this.state.users.map(function (user, i) {
-                                    if (that.state.users.length === i + 1) {
-                                        // last one
-                                        let profilelook = null;
-                                        if (user.looks[0] === undefined) {
-                                            profilelook = "none";
-                                        } else {
-                                            profilelook = user.looks[0].link;
-                                        }
-                                        return (<div><h1 className={that.state.users.length === 0 ? "" : "no-more"}>No one nearby within your match preferences. Try back later or try changing your preferences.</h1><Pane key={i} classSwipedRight={that.state.swipedRight} classSwipedLeft={that.state.swipedLeft} uid={user._id} age={user.age} link={profilelook} name={user.firstName} /></div>)
 
+                                    let profilelook = null;
+                                    if (user.looks[0] === undefined) {
+                                        profilelook = "none";
                                     } else {
-                                        // not last one
-                                        let profilelook = null;
-                                        if (user.looks[0] === undefined) {
-                                            profilelook = "none";
-                                        } else {
-                                            profilelook = user.looks[0].link;
-                                        }
-                                        return (<Pane key={i} classSwipedRight={that.state.swipedRight} classSwipedLeft={that.state.swipedLeft} uid={user._id} age={user.age} link={profilelook} name={user.firstName} />)
+                                        profilelook = user.looks[0].link;
                                     }
+                                    return (<Pane key={i} classSwipedRight={that.state.swipedRight} classSwipedLeft={that.state.swipedLeft} uid={user._id} age={user.age} link={profilelook} name={user.firstName} />)
+
                                 })
                             }
                         </ul>

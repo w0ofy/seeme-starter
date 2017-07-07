@@ -50,7 +50,14 @@ exports.updateProfile = function (req, res, next) {
     age_pref_max = req.body.age_pref_max,
     sleeping = req.body.sleeping,
     cycling = req.body.cycling,
-    logged_in = req.body.logged_in
+    news = req.body.news,
+    traveling = req.body.traveling,
+    cars = req.body.cars,
+    learning = req.body.learning,
+    law = req.body.law,
+    art = req.body.art
+    photography = req.body.photography,
+    logged_in = req.body.logged_in;
 
   let query = {
     email: emailQuery
@@ -63,8 +70,9 @@ exports.updateProfile = function (req, res, next) {
     age: age,
     age_pref_min: age_pref_min,
     age_pref_max: age_pref_max,
-    interests: {cycling: cycling, sleeping: sleeping},
-    logged_in: logged_in,
+    interests: {cycling: cycling, sleeping: sleeping, news: news, photography: photography, traveling: traveling, cars: cars, learning: learning, law: law, art: art},
+    logged_in: logged_in
+
   }, (err, user) => {
     if (err) {
       console.log("Something went wrong when updating the database!");

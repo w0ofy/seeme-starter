@@ -4,7 +4,8 @@ const cookie = require('react-cookie');
 import Female from 'react-icons/lib/md/female';
 import Male from 'react-icons/lib/md/male';
 import FaBicycle from 'react-icons/lib/fa/bicycle';
-import FaBook from 'react-icons/lib/fa/book';
+import FaNewspaperO from 'react-icons/lib/fa/newspaper-o';
+import FaPaintBrush from 'react-icons/lib/fa/paint-brush';
 import FaBed from 'react-icons/lib/fa/bed';
 import { RadioGroup, Radio } from 'react-radio-group';
 
@@ -20,8 +21,9 @@ const EditInfo = React.createClass({
       age_pref_min: user.age_pref_min,
       age_pref_max: user.age_pref_max,
       cycling: user.interests.cycling,
-      books: user.interests.books,
-      sleeping: user.interests.sleeping
+      news: user.interests.news,
+      sleeping: user.interests.sleeping,
+      art: user.interests.art
     }
   },
 
@@ -40,8 +42,9 @@ const EditInfo = React.createClass({
       age_pref_min: this.state.age_pref_min,
       age_pref_max: this.state.age_pref_max,
       cycling: this.state.cycling,
-      books: this.state.books,
-      sleeping: this.state.sleeping
+      books: this.state.news,
+      sleeping: this.state.sleeping,
+      art: this.state.art
     },
       { headers: { Authorization: cookie.load('token') } })
       .then((response) => {
@@ -120,13 +123,16 @@ const EditInfo = React.createClass({
             </div>
             <div className="form-col">
               <span>
-                <input className="interest-box" onChange={this.handleChange} type="checkbox" id="cycling" name="cycling" defaultChecked={this.state.cycling === true} /><label htmlFor="cycling" className="radio-label"><i><FaBicycle /></i>Biycling</label>
+                <input className="interest-box" onChange={this.handleChange} type="checkbox" id="cycling" name="cycling" defaultChecked={this.state.cycling === true} /><label htmlFor="cycling" className="radio-label"><i><FaBicycle /></i>Bicycling</label>
               </span>
               <span>
-                <input className="interest-box" onChange={this.handleChange} type="checkbox" id="books" name="books" defaultChecked={this.state.books === true} /><label htmlFor="books" className="radio-label"><i><FaBook /></i>Books</label>
+                <input className="interest-box" onChange={this.handleChange} type="checkbox" id="news" name="news" defaultChecked={this.state.news === true} /><label htmlFor="news" className="radio-label"><i><FaNewspaperO /></i>The "News"</label>
               </span>
               <span>
                 <input className="interest-box" onChange={this.handleChange} type="checkbox" id="sleeping" name="sleeping" defaultChecked={this.state.sleeping === true} /><label htmlFor="sleeping" className="radio-label"><i><FaBed /></i>Sleeping</label>
+              </span>
+              <span>
+                <input className="interest-box" onChange={this.handleChange} type="checkbox" id="art" name="art" defaultChecked={this.state.art === true} /><label htmlFor="art" className="radio-label"><i><FaPaintBrush /></i>Art</label>
               </span>
             </div>
           </div>
