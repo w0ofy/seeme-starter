@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { Link } from 'react-router';
 import MdArrowUpward from 'react-icons/lib/md/arrow-upward';
 import SwipeIcon from 'react-icons/lib/md/swipe-icon';
+import io from 'socket.io-client';
+const socket = io.connect('http://localhost:3000/')
 const ChatWindow = require('../chat/chatWindow');
 const axios = require('axios');
 const cookie = require('react-cookie');
@@ -9,7 +11,6 @@ const cookie = require('react-cookie');
 function containsObject(obj, list) {
   for (var i = 0; i < list.length; i++) {
     if (list[i].MatchID == obj.MatchID) {
-      console.log("Whoop!")
       return true;
     }
   }
@@ -42,6 +43,18 @@ const MatchList = React.createClass({
         }).catch((err) => {
           console.log(err)
         });
+
+      socket.on('connect', () => {
+        let url = 'http://localhost:3000/api/see/update-socket'
+        axios.put(url,
+        { emailQuery: user.email, socket_id: socket.id },
+        {
+          headers: { Authorization: token }
+        }).catch((err) => {
+          console.log(err)
+        });
+      });
+
     } else {
       return false;
     }
@@ -125,7 +138,7 @@ const MatchList = React.createClass({
       <div>
         {this.renderList()}
         {this.state.chatWindows.map((item) => {
-          return (<div><ChatWindow className="chat-window" id={item.MatchID} handleClose={this.closeChat} user1={item.UID} user2={item.MatchID} /></div>)
+          return (<ChatWindow id={item.MatchID} handleClose={this.closeChat} user1={item.UID} user2={item.MatchID} />)
         })}
       </div>
     );
