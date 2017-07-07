@@ -3,14 +3,16 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 var MessageSchema = new Schema(
-    [{
-        text: String,
+    {
+        senderId: String,
+        receiverId: String,
+        message: String,
         timestamp: {
             type: Date,
             default: Date.now()
         },
-        sender: String
-    }]
+
+    }
 
 )
 

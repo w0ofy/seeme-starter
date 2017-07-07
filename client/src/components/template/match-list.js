@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { Link } from 'react-router';
 import MdArrowUpward from 'react-icons/lib/md/arrow-upward';
 import SwipeIcon from 'react-icons/lib/md/swipe-icon';
+import io from 'socket.io-client';
+const socket = io.connect('http://localhost:3000/')
 const ChatWindow = require('../chat/chatWindow');
 const axios = require('axios');
 const cookie = require('react-cookie');
@@ -42,6 +44,18 @@ const MatchList = React.createClass({
         }).catch((err) => {
           console.log(err)
         });
+
+      socket.on('connect', () => {
+        let url = 'http://localhost:3000/api/update-socket';
+          axios.put(url,
+            { emailQuery: user.email, socket_id: socket.id },
+            {
+              headers: { Authorization: token }
+            }).catch((err) => {
+              console.log(err)
+            });
+      });
+
     } else {
       return false;
     }
