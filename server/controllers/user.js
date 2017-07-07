@@ -17,20 +17,20 @@ exports.viewProfile = function (req, res, next) {
   const uid = req.params.uid;
   console.log(uid);
 
-    User.findById(uid, (err, user) => {
-      if (err) {
-        res.status(400).json({
-          error: 'No user could be found for this ID.'
-        });
-        return next(err);
-      }
-
-      const userToReturn = setUserInfo(user);
-
-      return res.status(200).json({
-        user: userToReturn
+  User.findById(uid, (err, user) => {
+    if (err) {
+      res.status(400).json({
+        error: 'No user could be found for this ID.'
       });
+      return next(err);
+    }
+
+    const userToReturn = setUserInfo(user);
+
+    return res.status(200).json({
+      user: userToReturn
     });
+  });
 
 };
 
@@ -54,9 +54,13 @@ exports.updateProfile = function (req, res, next) {
     traveling = req.body.traveling,
     cars = req.body.cars,
     learning = req.body.learning,
-    law = req.body.law,
-    art = req.body.art
+    art = req.body.art,
+    motorcycles = req.body.motorcycles,
     photography = req.body.photography,
+    cooking = req.body.cooking,
+    outdoors = req.body.outdoors,
+    music = req.body.music,
+    innovating = req.body.innovating,
     logged_in = req.body.logged_in;
 
   let query = {
@@ -70,7 +74,7 @@ exports.updateProfile = function (req, res, next) {
     age: age,
     age_pref_min: age_pref_min,
     age_pref_max: age_pref_max,
-    interests: {cycling: cycling, sleeping: sleeping, news: news, photography: photography, traveling: traveling, cars: cars, learning: learning, law: law, art: art},
+    interests: { cycling: cycling, sleeping: sleeping, news: news, photography: photography, traveling: traveling, cars: cars, learning: learning, art: art, cooking: cooking, outdoors: outdoors, music: music, motorcycles: motorcycles, innovating: innovating },
     logged_in: logged_in
 
   }, (err, user) => {
@@ -134,7 +138,9 @@ exports.addLook = function (req, res, next) {
     });
 };
 
-
+//= =======================================
+// Delete Look Route
+//= =======================================
 exports.deleteLook = function (req, res, next) {
 
   const emailQuery = req.body.emailQuery,
@@ -168,6 +174,9 @@ exports.deleteLook = function (req, res, next) {
     });
 };
 
+//= =======================================
+// Find All Users for Swipe Page Route
+//= =======================================
 exports.findAllUsers = function (req, res, next) {
   const
     donotshow = req.body.liked, // initially, users who are already liked by the logged-in user
@@ -221,6 +230,9 @@ exports.findAllUsers = function (req, res, next) {
   });
 };
 
+//= =======================================
+// On Like/Swipe Right Route
+//= =======================================
 exports.likingUser = function (req, res, next) {
   const
     emailQuery = req.body.emailQuery,
@@ -230,7 +242,8 @@ exports.likingUser = function (req, res, next) {
     query = {
       email: emailQuery
     };
-  console.log(likedId);
+  // console.log(likedId);
+
   // find the user who the logged-in user liked
   User.findOne({
     _id: {
@@ -245,7 +258,7 @@ exports.likingUser = function (req, res, next) {
     for (let i = 0; i < user.liked_ids.length; i++) {
       // if the above user likes the logged in user too...
       if (liked_by_id === user.liked_ids[i].id) {
-        console.log(user)
+        // console.log(user)
         // Save the user who got liked
         let newMatch = new Matches.model(user);
 
@@ -301,52 +314,56 @@ exports.likingUser = function (req, res, next) {
           }
         });
       }
-    }
-
-  });
-
-  // always update logged in user's likes
-  User.update({
-    _id: likedId
-  }, {
+    } // mike: added this .then(). match list wasn't updating on reload without it. Had to sign in sign out for match list to update. I think because without the .then(), this was happening before lines 248-317 were finished? So the new user and token were being sent, before the user's matches were updated. Change back by removing .then() if you can prove otherwise.
+  }).then(function () {
+    // always update logged in user's likes
+    User.update({
+      _id: likedId
+    }, {
+        $push: {
+          "liked_by_ids": {
+            id: liked_by_id
+          }
+        }
+      },
+      (err, user) => {
+        if (err) {
+          throw err;
+        } else {
+          console.log('success');
+        }
+      });
+    // always update a liked-user's likes
+    User.findOneAndUpdate(query, {
       $push: {
-        "liked_by_ids": {
-          id: liked_by_id
+        "liked_ids": {
+          id: likedId
         }
       }
     },
-    (err, user) => {
-      if (err) {
-        throw err;
-      } else {
-        console.log('success');
-      }
-    });
-  // always update a liked-user's likes
-  User.findOneAndUpdate(query, {
-    $push: {
-      "liked_ids": {
-        id: likedId
-      }
-    }
-  },
-    (err, user) => {
-      if (err) {
-        throw err;
-      }
+      (err, user) => {
+        if (err) {
+          throw err;
+        }
+        console.log("bang");
+        User.findOne(query, (err, updatedUser) => {
+          const userInfo = setUserInfo(updatedUser);
 
-      User.findOne(query, (err, updatedUser) => {
-        const userInfo = setUserInfo(updatedUser);
+          res.status(201).json({
+            token: `JWT ${generateToken(userInfo)}`,
+            user: userInfo
 
-        res.status(201).json({
-          token: `JWT ${generateToken(userInfo)}`,
-          user: userInfo
-
+          });
         });
       });
-    });
+  })
+
+
 };
 
+//= =======================================
+// On Dislike/Swipe Left Route
+//= =======================================
 exports.dislikingUser = function (req, res, next) {
   const
     thisuser = req.body.uid,
@@ -388,9 +405,9 @@ exports.populateMatches = function (req, res, next) {
   query = {
     _id: req.body.id
   }
-  User.findOne(query).populate({ 
-    path: 'matches', 
-    populate: { path: 'matches'}
+  User.findOne(query).populate({
+    path: 'matches',
+    populate: { path: 'matches' }
   }).exec((err, user) => {
     if (err) {
       throw err;

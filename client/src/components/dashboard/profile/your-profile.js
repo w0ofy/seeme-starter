@@ -34,7 +34,7 @@ class YourProfile extends React.Component {
         let removeScript = document.getElementById('main');
         $(removeScript).remove();
         const script = document.createElement("script");
-        script.setAttribute("id","main");
+        script.setAttribute("id", "main");
         script.src = "/src/public/js/script.js";
         script.async = true;
         document.body.appendChild(script);
@@ -75,6 +75,19 @@ class YourProfile extends React.Component {
                     lookFour: theUser.looks[3] ? theUser.looks[3].link : " ",
                     lookFive: theUser.looks[4] ? theUser.looks[4].link : " ",
                     lookSix: theUser.looks[5] ? theUser.looks[5].link : " ",
+                    cycling: theUser.interests.cycling,
+                    news: theUser.interests.news,
+                    sleeping: theUser.interests.sleeping,
+                    motorcycles: theUser.interests.motorcycles,
+                    cars: theUser.interests.cars,
+                    photography: theUser.interests.photography,
+                    learning: theUser.interests.learning,
+                    traveling: theUser.interests.traveling,
+                    innovating: theUser.interests.innovating,
+                    art: theUser.interests.art,
+                    music: theUser.interests.music,
+                    cooking: theUser.interests.cooking,
+                    outdoors: theUser.interests.outdoors
                 })
                 console.log("state", this.setState);
             });
@@ -119,7 +132,21 @@ class YourProfile extends React.Component {
                     lookThree={this.state.lookThree}
                     lookFour={this.state.lookFour}
                     lookFive={this.state.lookFive}
-                    lookSix={this.state.lookSix} />
+                    lookSix={this.state.lookSix}
+                    cycling={this.state.cycling}
+                    news={this.state.news}
+                    sleeping={this.state.sleeping}
+                    motorcycles={this.state.motorcycles}
+                    cars={this.state.cars}
+                    photography={this.state.photography}
+                    learning={this.state.learning}
+                    traveling={this.state.traveling}
+                    innovating={this.state.innovating}
+                    art={this.state.art}
+                    music={this.state.music}
+                    cooking={this.state.cooking}
+                    outdoors={this.state.outdoors}
+                     />
             </div>
         );
     }

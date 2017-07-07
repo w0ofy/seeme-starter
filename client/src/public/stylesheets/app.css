@@ -70,7 +70,7 @@ body::-webkit-scrollbar-thumb {
     top: 0;
     right: 0;
     margin-top: 0 !important;
-    width: 23% !important;
+    width: 24% !important;
     height: 87%;
 }
 
@@ -86,7 +86,8 @@ body::-webkit-scrollbar-thumb {
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
 }
 
-.center {
+.m-c {
+    display: block;
     text-align: center;
 }
 
@@ -506,6 +507,35 @@ p.copyright>span {
 
 /* ================= MY PROFILE =================*/
 
+.flex-col {
+    display: -webkit-flex;
+    display: flex;
+    -webkit-justify-content: center;
+    justify-content: center;
+}
+
+.flex-row {
+    display: flex;
+    flex-wrap: wrap;
+    margin-left: -10px;
+    margin-top: -10px;
+}
+
+.int-text {
+    flex: 1 0 200px;
+    box-sizing: border-box;
+    /* background: #e0ddd5; */
+    color: #171e42;
+    padding: 5px;
+    /* margin-left: 10px; */
+    /* margin-top: 10px; */
+    text-align: center;
+}
+
+.int-text i {
+    font-size: 28px;
+}
+
 .modal {
     display: none;
     position: fixed;
@@ -916,6 +946,10 @@ div.user-title>div>h3>a:hover {
     width: 100%;
 }
 
+#save-profile {
+    transition: all .15s linear;
+}
+
 #edit-info input,
 #edit-info select {
     display: block;
@@ -973,11 +1007,17 @@ input[type="radio"] {
     transition: all .07s linear;
 }
 
+div.form-col>span>span>label>i>svg,
 .radio-label i svg {
     width: inherit;
     height: inherit;
     color: #009fdc;
+    padding: 0;
+}
+
+div.form-col>div>span>label>i>svg {
     padding: 5px;
+    color: #9098a5;
 }
 
 .radio-label i svg g {
@@ -996,14 +1036,32 @@ input[type="radio"]:checked+label>i {
 }
 
 .form-col {
-    display: flex;
     display: -webkit-flex;
-    flex-direction: column;
-    align-items: center;
+    display: flex;
+    /* -webkit-align-items: flex-start; */
+    /* align-items: flex-start; */
+    /* -webkit-justify-content: center; */
+    /* justify-content: flex-start; */
+    /* -webkit-align-content: center; */
+    /* align-content: center; */
+    /* flex: 1; */
 }
 
-.form-col>span {
-    height: 42px;
+.form-col>div:nth-child(1) {
+    margin-right: auto;
+    margin-left: 18px
+}
+
+.form-col>div:nth-child(2) {
+    margin-right: -19px;
+}
+
+div.form-col>span {
+    flex: 1
+}
+
+.form-col>div>span {
+    height: 33px;
 }
 
 .interest-box {
@@ -1016,6 +1074,11 @@ input[type="checkbox"]+label>i {
 
 input[type="checkbox"]:checked+label>i {
     border: 1px solid rgba(125, 5, 174, 0.75);
+    color: #009fdc;
+}
+
+input[type="checkbox"]:checked+label>i>svg {
+    color: #009fdc;
 }
 
 input.inline {

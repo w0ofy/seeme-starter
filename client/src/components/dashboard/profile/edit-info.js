@@ -1,18 +1,33 @@
-const axios = require('axios');
-const React = require('react');
-const cookie = require('react-cookie');
+const
+  axios = require('axios'),
+  React = require('react'),
+  cookie = require('react-cookie');
 import Female from 'react-icons/lib/md/female';
 import Male from 'react-icons/lib/md/male';
 import FaBicycle from 'react-icons/lib/fa/bicycle';
-import FaNewspaperO from 'react-icons/lib/fa/newspaper-o';
-import FaPaintBrush from 'react-icons/lib/fa/paint-brush';
 import FaBed from 'react-icons/lib/fa/bed';
+import FaNewspaperO from 'react-icons/lib/fa/newspaper-o';
+import FaMotorcycle from 'react-icons/lib/fa/motorcycle';
+import FaBank from 'react-icons/lib/fa/bank';
+import FaAutomobile from 'react-icons/lib/fa/automobile';
+import FaBriefcase from 'react-icons/lib/fa/briefcase';
+import FaPlane from 'react-icons/lib/fa/plane';
+import FaLightbulbO from 'react-icons/lib/fa/lightbulb-o';
+import FaGavel from 'react-icons/lib/fa/Gavel';
+import FaPaintBrush from 'react-icons/lib/fa/paint-brush';
+import FaCalculator from 'react-icons/lib/fa/calculator';
+import FaGraduationCap from 'react-icons/lib/fa/graduation-cap';
+import FaCamera from 'react-icons/lib/fa/camera';
+import FaMusic from 'react-icons/lib/fa/music';
+import FaSpoon from 'react-icons/lib/fa/spoon';
+import FaTree from 'react-icons/lib/fa/tree';
 import { RadioGroup, Radio } from 'react-radio-group';
 
 const EditInfo = React.createClass({
 
   getInitialState: function () {
     let user = cookie.load('user');
+    console.log(user.interests);
     return {
       firstName: user.firstName,
       is_male: user.is_male,
@@ -23,7 +38,16 @@ const EditInfo = React.createClass({
       cycling: user.interests.cycling,
       news: user.interests.news,
       sleeping: user.interests.sleeping,
-      art: user.interests.art
+      motorcycles: user.interests.motorcycles,
+      cars: user.interests.cars,
+      photography: user.interests.photography,
+      learning: user.interests.learning,
+      traveling: user.interests.traveling,
+      innovating: user.interests.innovating,
+      art: user.interests.art,
+      music: user.interests.music,
+      cooking: user.interests.cooking,
+      outdoors: user.interests.outdoors
     }
   },
 
@@ -42,9 +66,23 @@ const EditInfo = React.createClass({
       age_pref_min: this.state.age_pref_min,
       age_pref_max: this.state.age_pref_max,
       cycling: this.state.cycling,
-      books: this.state.news,
+      news: this.state.news,
       sleeping: this.state.sleeping,
-      art: this.state.art
+      politics: this.state.politics,
+      motorcycles: this.state.motorcycles,
+      cars: this.state.cars,
+      working: this.state.working,
+      photography: this.state.photography,
+      learning: this.state.learning,
+      traveling: this.state.traveling,
+      innovating: this.state.innovating,
+      law: this.state.law,
+      art: this.state.art,
+      math: this.state.math,
+      school: this.state.school,
+      music: this.state.music,
+      cooking: this.state.cooking,
+      outdoors: this.state.outdoors
     },
       { headers: { Authorization: cookie.load('token') } })
       .then((response) => {
@@ -122,25 +160,62 @@ const EditInfo = React.createClass({
               <span className="form-section-title">Things I Like</span>
             </div>
             <div className="form-col">
-              <span>
-                <input className="interest-box" onChange={this.handleChange} type="checkbox" id="cycling" name="cycling" defaultChecked={this.state.cycling === true} /><label htmlFor="cycling" className="radio-label"><i><FaBicycle /></i>Bicycling</label>
-              </span>
-              <span>
-                <input className="interest-box" onChange={this.handleChange} type="checkbox" id="news" name="news" defaultChecked={this.state.news === true} /><label htmlFor="news" className="radio-label"><i><FaNewspaperO /></i>The "News"</label>
-              </span>
-              <span>
-                <input className="interest-box" onChange={this.handleChange} type="checkbox" id="sleeping" name="sleeping" defaultChecked={this.state.sleeping === true} /><label htmlFor="sleeping" className="radio-label"><i><FaBed /></i>Sleeping</label>
-              </span>
-              <span>
-                <input className="interest-box" onChange={this.handleChange} type="checkbox" id="art" name="art" defaultChecked={this.state.art === true} /><label htmlFor="art" className="radio-label"><i><FaPaintBrush /></i>Art</label>
-              </span>
+              <div>
+                <span>
+                  <input className="interest-box" onChange={this.handleChange} type="checkbox" id="cycling" name="cycling" defaultChecked={this.state.cycling === true} /><label htmlFor="cycling" className="radio-label"><i><FaBicycle /></i>Cycling</label>
+                </span>
+
+                <span>
+                  <input className="interest-box" onChange={this.handleChange} type="checkbox" id="sleeping" name="sleeping" defaultChecked={this.state.sleeping === true} /><label htmlFor="sleeping" className="radio-label"><i><FaBed /></i>Sleeping</label>
+                </span>
+                <span>
+                  <input className="interest-box" onChange={this.handleChange} type="checkbox" id="motorcycles" name="motorcycles" defaultChecked={this.state.motorcycles === true} /><label htmlFor="motorcycles" className="radio-label"><i><FaMotorcycle /></i>Motorcycles</label>
+                </span>
+
+                <span>
+                  <input className="interest-box" onChange={this.handleChange} type="checkbox" id="learning" name="learning" defaultChecked={this.state.learning === true} /><label htmlFor="learning" className="radio-label"><i><FaGraduationCap /></i>Learning</label>
+                </span>
+                <span>
+                  <input className="interest-box" onChange={this.handleChange} type="checkbox" id="traveling" name="traveling" defaultChecked={this.state.traveling === true} /><label htmlFor="traveling" className="radio-label"><i><FaPlane /></i>Traveling</label>
+                </span>
+                <span>
+                  <input className="interest-box" onChange={this.handleChange} type="checkbox" id="innovating" name="innovating" defaultChecked={this.state.innovating === true} /><label htmlFor="innovating" className="radio-label"><i><FaLightbulbO /></i>Innovating</label>
+                </span>
+
+                <span>
+                  <input className="interest-box" onChange={this.handleChange} type="checkbox" id="photography" name="photography" defaultChecked={this.state.photography === true} /><label htmlFor="photography" className="radio-label"><i><FaCamera /></i>Photography</label>
+                </span>
+              </div>
+
+              <div>
+                <span>
+                  <input className="interest-box" onChange={this.handleChange} type="checkbox" id="cars" name="cars" defaultChecked={this.state.cars === true} /><label htmlFor="cars" className="radio-label"><i><FaAutomobile /></i>Cars</label>
+                </span>
+                <span>
+                  <input className="interest-box" onChange={this.handleChange} type="checkbox" id="news" name="news" defaultChecked={this.state.news === true} /><label htmlFor="news" className="radio-label"><i><FaNewspaperO /></i>News</label>
+                </span>
+                <span>
+                  <input className="interest-box" onChange={this.handleChange} type="checkbox" id="art" name="art" defaultChecked={this.state.art === true} /><label htmlFor="art" className="radio-label"><i><FaPaintBrush /></i>Art</label>
+                </span>
+                <span>
+                  <input className="interest-box" onChange={this.handleChange} type="checkbox" id="music" name="music" defaultChecked={this.state.music === true} /><label htmlFor="music" className="radio-label"><i><FaMusic /></i>Music</label>
+                </span>
+                <span>
+                  <input className="interest-box" onChange={this.handleChange} type="checkbox" id="cooking" name="cooking" defaultChecked={this.state.cooking === true} /><label htmlFor="cooking" className="radio-label"><i><FaSpoon /></i>Cooking</label>
+                </span>
+                <span>
+                  <input className="interest-box" onChange={this.handleChange} type="checkbox" id="outdoors" name="outdoors" defaultChecked={this.state.outdoors === true} /><label htmlFor="outdoors" className="radio-label"><i><FaTree /></i>Outdoors</label>
+                </span>
+
+              </div>
+
             </div>
           </div>
 
 
 
           <div className="form-row">
-            <button type="submit" className="btn btn-lg btn-success">Save Profile Info</button>
+            <button id="save-profile" type="submit" className="btn btn-lg btn-success">Save Profile Info</button>
           </div>
         </form>
       </div>

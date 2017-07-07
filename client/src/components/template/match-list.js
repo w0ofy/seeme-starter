@@ -68,8 +68,8 @@ const MatchList = React.createClass({
     } else if (user.matches.length === 0 && window.location.href !== 'http://localhost:8080/swatch') {
       return (
         <div className="match-list-container">
-          <p>Your matches will display here. No matches yet.</p>
-          <span>Click <Link to="/swatch" className="click-to-match"><SwipeIcon /></Link> To Start Making Matches!</span>
+          <p className="m-c">Your matches will display here. No matches yet.</p>
+          <span className="m-c">Click <Link to="/swatch" className="click-to-match"><SwipeIcon /></Link> To Start Making Matches!</span>
         </div>
       )
     } else if (user.matches.length === 0) {
