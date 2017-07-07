@@ -58,6 +58,7 @@ const UserSchema = new Schema({
         default: false,
         required: true
     },
+    socket_id: String,
     interests: {
         cycling: {type: Boolean, default: false},
         politics: {type: Boolean, default: false},
@@ -86,10 +87,12 @@ const UserSchema = new Schema({
     liked_ids: Array,
     disliked_ids: Array,
     matches: Array,
-    chats: [{
-        type: Schema.Types.ObjectId,
-        ref: 'Chat'
-    }],
+    chats: {
+        chat: {
+            type: Schema.Types.ObjectId,
+            ref: 'Chat'
+        }
+    },
     resetPasswordToken: { type: String },
     resetPasswordExpires: { type: Date },
     role: {

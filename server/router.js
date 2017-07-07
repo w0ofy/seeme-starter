@@ -56,12 +56,14 @@ module.exports = function (app) {
   // Update user profile route
   userRoutes.put('/update', requireAuth, UserController.updateProfile);
 
+  // Update user socket_id
+  userRoutes.put('/update-socket', requireAuth, UserController.updateSocketID)
+
   // Update user looks route
   userRoutes.put('/update-looks', requireAuth, UserController.addLook);
 
   // Delete user looks route
   userRoutes.put('/delete-look', UserController.deleteLook);
-
 
   // View user profile route
   apiRoutes.get('/:uid', requireAuth, UserController.viewProfile);
@@ -91,7 +93,11 @@ module.exports = function (app) {
   // Chat Routes
   //= ========================
 
+  // Set chat routes as a subgroup/middleware to apiRoutes
 
+   apiRoutes.use('/chat', chatRoutes);
+
+  //  chatRoutes.
 
   // Set url for API group routes
   app.use('/api', apiRoutes);

@@ -92,6 +92,21 @@ exports.updateProfile = function (req, res, next) {
   });
 };
 
+exports.updateSocketID = function (req, res, next) {
+  const query = { email: req.body.emailQuery }
+    socket_id = req.body.socket_id;
+  User.findOneAndUpdate(query, { socket_id: socket_id }, (err, user) => {
+    if (err) {
+      throw err
+    } else { 
+      res.status(201).json({
+        token: `JWT ${generateToken(user)}`,
+        user: user
+      });
+    }
+  })
+}
+
 //= =======================================
 // Add Look Route
 //= =======================================
