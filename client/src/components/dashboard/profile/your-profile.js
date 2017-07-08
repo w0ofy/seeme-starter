@@ -100,7 +100,7 @@ class YourProfile extends React.Component {
 
         return (
             <div className="profile-ct">
-            <YourTitle firstName={this.state.firstName} age={this.state.age} />
+                <YourTitle firstName={this.state.firstName} age={this.state.age} />
                 <div className="lookContainer">
                     <span className="look" onClick={() => { this.refs.v1.paused ? this.refs.v1.play() : this.refs.v1.pause() }}><video id="vid-look" ref="v1" className="video vid-look" src={this.state.look} />
 
@@ -148,7 +148,7 @@ class YourProfile extends React.Component {
                     music={this.state.music}
                     cooking={this.state.cooking}
                     outdoors={this.state.outdoors}
-                     />
+                />
             </div>
         );
     }

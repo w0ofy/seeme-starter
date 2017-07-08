@@ -116,7 +116,7 @@ const UserInfo = React.createClass({
             </div>
             <div className="form-col inter-col-pro">
               <div>
-                {this.noLoves()}
+                
                 {this.state.cycling ? <span className="int-text"><i><FaBicycle /></i><p>Cycling</p></span> : null}
                 {this.state.sleeping ? <span className="int-text"><i><FaBed /></i><p>Sleeping</p></span> : null}
                 {this.state.motorcycles ? <span className="int-text"><i><FaMotorcycle /></i><p>Motorcycles</p></span> : null}
