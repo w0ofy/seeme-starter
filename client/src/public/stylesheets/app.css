@@ -241,6 +241,25 @@ p.copyright>span {
     animation: fadeIn 1s forwards;
 }
 
+hr {
+    border: 0;
+    border-top: 4px double #8c8c8c;
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+hr {
+    border-width: 0 0 1px;
+    color: #d8d8d8;
+    border-image: linear-gradient( 90deg, #efefef, rgba(158, 68, 194, 0.59), #efefef) 0 0 100%;
+    border-style: solid;
+    width: 50%;
+}
+
+.hms-two h2 {
+    font-weight: bold;
+}
+
 .hms-one {
     padding-top: 15%;
 }
@@ -290,8 +309,11 @@ p.copyright>span {
 }
 
 .reg-title {
+    font-family: 'Stolzl', 'Montserrat', 'Raleway', sans-serif;
     font-size: 3em !important;
-    margin-bottom: 50px;
+    margin-bottom: 10px;
+    font-weight: bold;
+    font-style: normal !important;
 }
 
 .subtitle {
@@ -511,7 +533,7 @@ p.copyright>span {
     display: -webkit-flex;
     display: flex;
     -webkit-justify-content: center;
-    justify-content: center;
+    justify-content: flex-start;
 }
 
 .flex-row {
@@ -519,6 +541,12 @@ p.copyright>span {
     flex-wrap: wrap;
     margin-left: -10px;
     margin-top: -10px;
+}
+
+.stats {
+    justify-content: flex-start;
+    align-items: center;
+    flex-direction: column;
 }
 
 .int-text {
@@ -534,6 +562,7 @@ p.copyright>span {
 
 .int-text i {
     font-size: 28px;
+    color: #9113c3;
 }
 
 .modal {
@@ -915,7 +944,7 @@ div.user-title>div>h3>a:hover {
 }
 
 .user-info {
-    width: 75%;
+    width: 100%;
     /*padding: 2%;*/
 }
 
@@ -1047,6 +1076,29 @@ input[type="radio"]:checked+label>i {
     /* flex: 1; */
 }
 
+.pro>i>svg {
+    cursor: default !important;
+}
+
+.inter-col {
+    height: 100% !important;
+}
+
+.inter-col-y {
+    height: 100% !important;
+}
+
+.center-text {
+    display: block;
+    text-align: center;
+}
+
+.inter-col-pro>div {
+    flex: 1;
+    text-align: center;
+    margin: 0 !important;
+}
+
 .form-col>div:nth-child(1) {
     margin-right: auto;
     margin-left: 18px
@@ -1090,6 +1142,14 @@ input.inline {
     display: -webkit-flex;
 }
 
+.relative {
+    position: relative;
+}
+
+.full {
+    width: 100%;
+}
+
 .form-section-row {
     display: flex;
     display: -webkit-flex;
@@ -1131,6 +1191,39 @@ input.inline {
 
 
 /* ================= Match List and Chat Window =================*/
+
+.wsm {
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+
+.wsm,
+.wtc {
+    width: 100%;
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    height: 80px;
+    border-radius: 27px;
+    font-weight: bold;
+    transition: all .2s linear;
+    -webkit-font-smoothing: antialiased;
+    color: white;
+    font-size: 1.3em;
+}
+
+.match>a,
+.match>span {
+    cursor: pointer;
+    transition: all .2s linear;
+    font-size: 17px;
+}
+
+.match>a:hover,
+.match>span:hover {
+    text-decoration: none;
+    color: rgba(125, 5, 174, 0.75);
+}
 
 .match-list-container {
     position: fixed;

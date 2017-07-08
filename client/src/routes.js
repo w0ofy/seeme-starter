@@ -41,7 +41,6 @@ import RequireAuth from './components/auth/require_auth';
 export default (
   <Route path="/" component={App}>
     <IndexRoute component={HomePage} />
-    {/*<Route path="chat" component={chatWindow} />*/}
     <Route path="register" component={Register} />
     <Route path="login" component={Login} />
     <Route path="logout" component={Logout} />
@@ -52,10 +51,3 @@ export default (
     <Route path="*" component={NotFoundPage} />
   </Route>
 );
-
-    // <Route path="dashboard">
-    //   <IndexRoute component={RequireAuth(Dashboard)} />
-    //   <Route path="inbox" component={RequireAuth(Inbox)} />
-    //   <Route path="conversation/new" component={RequireAuth(ComposeMessage)} />
-    //   <Route path="conversation/view/:conversationId" component={RequireAuth(Conversation)} />
-    // </Route>

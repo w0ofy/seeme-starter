@@ -3,6 +3,7 @@ const axios = require('axios');
 const React = require('react');
 const EditInfo = require('./edit-info');
 const YourInfo = require('./your-info');
+const YourTitle = require('./your-title');
 import PhotoBoothModal from './photo-booth-modal';
 import TrashLook from './utils/trash-look';
 import TrashLookTwo from './utils/trash-look-two';
@@ -89,7 +90,7 @@ class YourProfile extends React.Component {
                     cooking: theUser.interests.cooking,
                     outdoors: theUser.interests.outdoors
                 })
-                console.log("state", this.setState);
+                // console.log("state", this.setState);
             });
 
         }
@@ -99,6 +100,7 @@ class YourProfile extends React.Component {
 
         return (
             <div className="profile-ct">
+            <YourTitle firstName={this.state.firstName} age={this.state.age} />
                 <div className="lookContainer">
                     <span className="look" onClick={() => { this.refs.v1.paused ? this.refs.v1.play() : this.refs.v1.pause() }}><video id="vid-look" ref="v1" className="video vid-look" src={this.state.look} />
 

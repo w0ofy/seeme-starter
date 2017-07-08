@@ -9,20 +9,16 @@ const ReactCSSTransitionGroup = require('react-addons-css-transition-group');
 
 class App extends Component {
   render() {
-    const page = this.props.location.pathname.substr(1);
     return (
       <div>
         <HeaderTemplate logo="seemē" />
         <ListShadow />
         <MatchList />
-
-        <ReactCSSTransitionGroup transitionName="fade">
         
           <div className="user-container">
-           {React.cloneElement(this.props.children, {key: page})}
+           {this.props.children}
           </div>
-          
-        </ReactCSSTransitionGroup>
+
         <FooterTemplate />
         <Typekit kitId="khm7xtw" />
       </div>

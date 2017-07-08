@@ -3,13 +3,13 @@ import ReactDOM from 'react-dom';
 import { Router, browserHistory } from 'react-router';
 import cookie from 'react-cookie';
 import routes from './routes';
-import ReactGA from 'react-ga';
-import { AUTH_USER } from './actions/types';
+// import ReactGA from 'react-ga';
+// import { AUTH_USER } from './actions/types';
 
 // // Import stylesheets
 // import './public/stylesheets/base.scss';
 
-// Initialize Google Analytics
+// // Initialize Google Analytics
 // ReactGA.initialize('UA-000000-01');
 
 // function logPageView() {
@@ -25,6 +25,6 @@ import { AUTH_USER } from './actions/types';
 
 ReactDOM.render(
   <div>
-    <Router history={browserHistory} routes={routes} onUpdate={logPageView} />
+    <Router history={browserHistory} routes={routes} />
   </div>,
   document.querySelector('.wrapper'));
