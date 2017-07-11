@@ -25,7 +25,7 @@ Good to go!
 
 ## Design mockups
 --------------------------------------------------------------
-![Home / Landing Page](/mock-ups/landing.pngraw=true "Landing Page")
+![Home / Landing Page](/mock-ups/landing.png?raw=true "Landing Page")
 --------------------------------------------------------------
 ![Slide Down Effect: to About Section](/mock-ups/about.png?raw=true "About Section")
 --------------------------------------------------------------
