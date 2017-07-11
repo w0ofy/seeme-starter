@@ -106,7 +106,7 @@ const EditInfo = React.createClass({
         <form id="edit-info" onSubmit={this.handleFormSubmit}>
           <div className="app-section">
             <div className="form-section-row">
-              <span className="form-section-title">Basic Info</span>
+              <span className="form-section-title">The Basics</span>
             </div>
 
             <div className="form-row">
@@ -157,7 +157,7 @@ const EditInfo = React.createClass({
 
           <div className="app-section interests">
             <div className="form-section-row">
-              <span className="form-section-title">Things I Like</span>
+              <span className="form-section-title">The Things I Love</span>
             </div>
             <div className="form-col">
               <div>

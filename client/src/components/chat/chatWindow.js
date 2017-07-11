@@ -42,24 +42,6 @@ const ChatWindow = React.createClass({
     },
 
     render: function () {
-const User = cookie.load('user');
-
-class Chat extends React.Component {  
-    
-    constructor(props) { 
-        super(props) 
-            this.state = { 
-                chatHistory: [],
-                input: '',
-                messages: ''
-            } 
-    }
-    
-    componentWillMount() { 
-    }
-     
-
-    render() {
 
         return (
             <div id="chat">
@@ -78,14 +60,11 @@ class Chat extends React.Component {
                         <textarea onChange={this.handleChange("message")} className="form-control" id="messageInput" rows="3" placeholder="Enter Message Here" />
                         <input type="submit" value="Send" />
                     </form>
-
-                    <textarea onChange={this.handleChange("message")} className="form-control" id="messageInput" rows="3" placeholder='Enter Message Here'></textarea>
-
                 </div>
             </div>
         );
     }
-};
+});
 
 
-module.exports = Chat;
+module.exports = ChatWindow;

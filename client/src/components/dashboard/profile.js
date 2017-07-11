@@ -44,7 +44,8 @@ const Profile = React.createClass({
                 lookFour: user.looks[3] ? user.looks[3].link : "",
                 lookFive: user.looks[4] ? user.looks[4].link : "",
                 lookSix: user.looks[5] ? user.looks[5].link : "",
-                lookSeven: user.looks[5] ? user.looks[5].link : ""
+                lookSeven: user.looks[5] ? user.looks[5].link : "",
+                matches: user.matches.length >= 1 ? user.matches.length : "0"
             })
         }
     },
@@ -67,7 +68,8 @@ const Profile = React.createClass({
                     lookThree={this.state.lookThree}
                     lookFour={this.state.lookFour}
                     lookFive={this.state.lookFive}
-                    lookSix={this.state.lookSix} />
+                    lookSix={this.state.lookSix} 
+                    matchCount={this.state.matches}/>
             );
         }
     },

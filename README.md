@@ -1,7 +1,7 @@
 # seemē
-seemē - dating application - In Development 
+A Dating (Web) Application - In Development 
 
-# TODO
+# Todo
 Converting to ES6/JSX
 Updating all packages for most recent version of ReactJS
 Cleaning file architecture

@@ -127,7 +127,7 @@ const HomePage = React.createClass({
               </div>
               <div>
                 <h2>How?</h2>
-                <h3>Take a profile video, post several videos under your profile - we call them "Looks" - and you're ready to go. Simply see, watch, swipe, match, chat, meet. See mē, see more.</h3>
+                <h3>Take a profile video, post several videos under your profile - we call them "Looks" - and you're ready to go. Simply see, watch, swipe, match, chat, meet. See more, see mē.</h3>
               </div>
             </div>
           </ReactCSSTransitionGroup>
@@ -143,6 +143,7 @@ const HomePage = React.createClass({
                 <div className="col-sm-12 col-xs-12 flexed">
                   <div className="title">
                     <h1 className="reg-title">Take A Look. Meet Your Match.</h1>
+                    <hr />
                   </div>
                   <form id="register" onSubmit={this.handleSubmit}>
 
