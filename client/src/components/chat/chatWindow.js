@@ -2,8 +2,9 @@ const axios = require('axios');
 const React = require('react');
 const cookie = require('react-cookie');
 
-import io from 'socket.io-client';
-const socket = io.connect('http://localhost:3000/')
+// import io from 'socket.io-client';
+// const socket = io.connect('http://localhost:3000/')
+
 const ChatWindow = React.createClass({
 
     getInitialState: function () {
