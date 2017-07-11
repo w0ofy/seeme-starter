@@ -4,7 +4,10 @@ A Dating (Web) Application - In Development
 ## Todo
 Converting to ES6/JSX
 Updating all packages for most recent version of ReactJS
-Cleaning file architecture
+Clean file architecture
+Number input: min/max (consider draggable range)
+Socket.io
+Bundle.js - localhost fix
 
 ## For Local Testing and Development
 in '/server' run:
