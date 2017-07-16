@@ -10,6 +10,7 @@ const Element = Scroll.Element;
 const Events = Scroll.Events;
 const scroll = Scroll.animateScroll;
 const scrollSpy = Scroll.scrollSpy;
+const that = this;
 
 class HomePage extends React.Component {
   constructor(props) {
@@ -31,11 +32,13 @@ class HomePage extends React.Component {
     this.hideAbout = this.hideAbout.bind(this);
     this.onContinueClick = this.onContinueClick.bind(this);
     this.onBackClick = this.onBackClick.bind(this);
+    this.handleInputChange = this.handleInputChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
   componentWillMount() {
     const user = cookie.load('user');
     if (user !== undefined) {
-      window.location.href = 'http://seemeapp.herokuapp.com/my-profile';
+      window.location.href = 'https://seemeapp.herokuapp.com/my-profile';
     } else {
       return;
     }
@@ -57,7 +60,7 @@ class HomePage extends React.Component {
     e.preventDefault();
     let removeScript = document.getElementById('disable-scroll');
     document.body.removeChild(removeScript);
-    axios.post('http://seemeapp.herokuapp.com/api/auth/register', {
+    axios.post('https://seemeapp.herokuapp.com/api/auth/register', {
       email: this.state.email,
       firstName: this.state.firstName,
       password: this.state.password,
@@ -69,7 +72,7 @@ class HomePage extends React.Component {
         cookie.save('token', response.data.token, { path: '/' });
         cookie.save('user', response.data.user, { path: '/' });
 
-        window.location.href = 'http://seemeapp.herokuapp.com/my-profile';
+        window.location.href = 'https://seemeapp.herokuapp.com/my-profile';
       })
       .catch((err) => {
         console.log(err);
@@ -134,7 +137,7 @@ class HomePage extends React.Component {
 
         <span id="registersection" />
         {this.state.showAbout ?
-          <ReactCSSTransitionGroup transitionName="fade">
+          <ReactCSSTransitionGroup transitionName="fade" transitionEnterTimeout={0.7} transitionLeaveTimeout={0.7}>
             <div className="section hms-two">
               <MdKeyboardArrowUp className="arrow-up" onClick={this.hideAbout} />
               <div>
@@ -157,7 +160,7 @@ class HomePage extends React.Component {
           <ReactCSSTransitionGroup transitionName="fade" transitionEnterTimeout={0.7} transitionLeaveTimeout={0.7}>
             <div className="section hms-two">
 
-              <MdKeyboardArrowUp className="arrow-up" spy={true} smooth={true} duration={350} onClick={this.hideRegistration} />
+              <MdKeyboardArrowUp className="arrow-up" onClick={this.hideRegistration} />
 
               <div className="row">
                 <div className="col-sm-12 col-xs-12 flexed">
@@ -192,7 +195,7 @@ class HomePage extends React.Component {
                         </div>
                       </div>
 
-                      : <ReactCSSTransitionGroup transitionName="fade">
+                      : <ReactCSSTransitionGroup transitionName="fade" transitionEnterTimeout={0.7} transitionLeaveTimeout={0.7}>
                         <div>
                           <div className="partTwo">
                             <h4 className="center">MATCHING DETAILS</h4>

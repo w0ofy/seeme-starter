@@ -2,7 +2,6 @@
 const express = require('express'),
   app = express(),
   bodyParser = require('body-parser'),
-  // logger = require('morgan'),
   router = require('./router'),
   mongoose = require('mongoose'),
   config = require('./config/main'),
@@ -17,7 +16,11 @@ mongoose.connect(MONGODB_URI, { useMongoClient: true });
 // // Start the server
 let server;
 server = app.listen(process.env.PORT);
-app.listen(process.env.PORT);
+app.listen(process.env.PORT, () => console.log("Listening on port"));
+
+if (process.env.NODE_ENV === 'production') {
+  app.use(express.static('/build'));
+}
 
 
 
@@ -26,7 +29,7 @@ app.listen(process.env.PORT);
 // socketEvents(io);
 
 // Set static file location for production
-app.use(express.static('./public'));
+app.use(express.static('/public'));
 
 // Setting up basic middleware for all Express requests
 app.use(bodyParser.urlencoded({ extended: false })); // Parses urlencoded bodies
@@ -36,7 +39,7 @@ app.use(bodyParser.json()); // Send JSON responses
 
 // Enable CORS from client-side
 app.use((req, res, next) => {
-  res.header('Access-Control-Allow-Origin', 'http://seemeapp.herokuapp.com');
+  res.header('Access-Control-Allow-Origin', 'https://seemeapp.herokuapp.com');
   res.header('Access-Control-Allow-Methods', 'PUT, GET, POST, DELETE, OPTIONS');
   res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization, Access-Control-Allow-Credentials');
   res.header('Access-Control-Allow-Credentials', 'true');

@@ -93,6 +93,7 @@ module.exports = function (app) {
 
   apiRoutes.post('/get-messages', requireAuth, ChatController.getMessages);
   
+  
   // Set url for API group routes
   app.use('/api', apiRoutes);
 };

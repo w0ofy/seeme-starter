@@ -10,17 +10,20 @@ class HeaderLogin extends React.Component {
       email: '',
       password: ''
     }
+    this.handleSubmit = this.handleSubmit.bind(this);
+    this.updateEmailValue = this.updateEmailValue.bind(this);
+    this.updatePasswordValue = this.updatePasswordValue.bind(this);
   }
   handleSubmit(e) {
     e.preventDefault();
-    axios.post('http://seemeapp.herokuapp.com/api/auth/login', {
+    axios.post('https://seemeapp.herokuapp.com/api/auth/login', {
       email: this.state.email,
       password: this.state.password
     })
       .then((response) => {
         cookie.save('token', response.data.token, { path: '/' });
         cookie.save('user', response.data.user, { path: '/' });
-        window.location.href = "http://seemeapp.herokuapp.com/my-profile";
+        window.location.href = "https://seemeapp.herokuapp.com/my-profile";
       })
       .catch((error) => {
         console.log(error);
