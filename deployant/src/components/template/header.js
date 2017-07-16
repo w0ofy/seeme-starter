@@ -24,7 +24,8 @@ class Header extends React.Component {
   }
   renderLinks() {
     let user = cookie.load('user')
-    console.log(user);
+    // console.log(user);
+    // authenticated navigation
     if (user !== undefined) {
       return [
         <li key={`${1}header`}>
@@ -40,7 +41,7 @@ class Header extends React.Component {
     } else {
       return [
         // Unauthenticated navigation
-        <li>
+        <li key={`${4}header`}>
           <HeaderLogin />
         </li>
       ];

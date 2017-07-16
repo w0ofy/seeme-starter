@@ -12,16 +12,9 @@ const scroll = Scroll.animateScroll;
 const scrollSpy = Scroll.scrollSpy;
 
 class HomePage extends React.Component {
-  componentWillMount() {
-    const user = cookie.load('user');
-    if (user !== undefined) {
-      window.location.href = 'http://seemeapp.herokuapp.com/my-profile';
-    } else {
-      return;
-    }
-  }
-  getInitialState() {
-    return {
+  constructor(props) {
+    super(props);
+    this.state = {
       showRegistration: false,
       showPartOne: false,
       showAbout: false,
@@ -31,8 +24,35 @@ class HomePage extends React.Component {
       age: '',
       is_male: '',
       seeking_male: ''
-    };
+    }
+    this.onAboutClick = this.onAboutClick.bind(this);
+    this.onClick = this.onClick.bind(this);
+    this.hideRegistration = this.hideRegistration.bind(this);
+    this.hideAbout = this.hideAbout.bind(this);
+    this.onContinueClick = this.onContinueClick.bind(this);
+    this.onBackClick = this.onBackClick.bind(this);
   }
+  componentWillMount() {
+    const user = cookie.load('user');
+    if (user !== undefined) {
+      window.location.href = 'http://seemeapp.herokuapp.com/my-profile';
+    } else {
+      return;
+    }
+  }
+  // getInitialState() {
+  //   return {
+  //     showRegistration: false,
+  //     showPartOne: false,
+  //     showAbout: false,
+  //     email: '',
+  //     firstName: '',
+  //     password: '',
+  //     age: '',
+  //     is_male: '',
+  //     seeking_male: ''
+  //   };
+  // }
   handleSubmit(e) {
     e.preventDefault();
     let removeScript = document.getElementById('disable-scroll');
@@ -134,7 +154,7 @@ class HomePage extends React.Component {
           : null}
 
         {this.state.showRegistration ?
-          <ReactCSSTransitionGroup transitionName="fade">
+          <ReactCSSTransitionGroup transitionName="fade" transitionEnterTimeout={0.7} transitionLeaveTimeout={0.7}>
             <div className="section hms-two">
 
               <MdKeyboardArrowUp className="arrow-up" spy={true} smooth={true} duration={350} onClick={this.hideRegistration} />

@@ -4,11 +4,12 @@ const axios = require('axios');
 const cookie = require('react-cookie');
 
 class HeaderLogin extends React.Component {
-  getInitialState() {
-    return {
+  constructor(props) {
+    super(props);
+    this.state = {
       email: '',
       password: ''
-    };
+    }
   }
   handleSubmit(e) {
     e.preventDefault();
@@ -32,10 +33,10 @@ class HeaderLogin extends React.Component {
       <div className="header-login">
         <form id="header-login" onSubmit={this.handleSubmit}>
           <div className="l-input-ct">
-            <input palceholder="email" name="email" type="text" onChange={this.updateEmailValue} ref="email" />
+            <input placeholder="email" name="email" type="text" onChange={this.updateEmailValue} ref="email" />
           </div>
           <div className="l-input-ct">
-            <input palceholder="password" name="password" type="password" onChange={this.updatePasswordValue} ref="password" />
+            <input placeholder="password" name="password" type="password" onChange={this.updatePasswordValue} ref="password" />
           </div>
           <button type="submit" className="btn btn-primary">Login</button>
         </form>

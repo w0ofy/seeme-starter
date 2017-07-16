@@ -26,7 +26,7 @@ app.listen(process.env.PORT);
 // socketEvents(io);
 
 // Set static file location for production
-app.use(express.static('/public'));
+app.use(express.static('./public'));
 
 // Setting up basic middleware for all Express requests
 app.use(bodyParser.urlencoded({ extended: false })); // Parses urlencoded bodies

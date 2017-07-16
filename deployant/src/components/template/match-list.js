@@ -18,12 +18,12 @@ function containsObject(obj, list) {
 };
 
 class MatchList extends React.Component {
-
-  getInitialState() {
-    return ({
+  constructor(props) {
+    super(props);
+    this.state = {
       chatWindows: [],
       matches: []
-    })
+    }
   }
   componentWillMount() {
     let user = cookie.load('user');
@@ -133,9 +133,9 @@ class MatchList extends React.Component {
     return (
       <div>
         {this.renderList()}
-        {this.state != null ? this.state.chatWindows.map((item) => {
+        {this.state.chatWindows.map((item) => {
           return (<ChatWindow id={item.MatchID} handleClose={this.closeChat} user1={item.UID} user2={item.MatchID} />)
-        }) : null }
+        })}
       </div>
     );
   }
