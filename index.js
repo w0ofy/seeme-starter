@@ -16,7 +16,7 @@ var MONGODB_URI = process.env.MONGODB_URI || 'mongodb://localhost:27017/seeme-st
 mongoose.connect(MONGODB_URI, { useMongoClient: true });
 
 
-// // Start the server
+// // Start the server OLD VERSION
 // let server;
 // server = app.listen(process.env.PORT);
 // app.listen(process.env.PORT, () => console.log("Listening on port"));
