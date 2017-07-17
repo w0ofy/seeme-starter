@@ -33,6 +33,13 @@ class Profile extends React.Component {
             lookSeven: null,
             matches: null,
         }
+        this.trashChange = this.trashChange.bind(this);
+        this.trashTwoChange = this.trashTwoChange.bind(this);
+        this.trashThreeChange = this.trashThreeChange.bind(this);
+        this.trashFourChange = this.trashFourChange.bind(this);
+        this.trashFiveChange = this.trashFiveChange.bind(this);
+        this.trashSixChange = this.trashSixChange.bind(this);
+        this.trashSevenChange = this.trashSevenChange.bind(this);
     }
     componentWillMount() {
         let removeScript = document.getElementById('main');
@@ -142,7 +149,7 @@ class Profile extends React.Component {
         );
     }
     trashSevenChange() {
-        this.setState({ lookSix: null })
+        this.setState({ lookSeven: null })
         document.getElementById('vid-look-seven').classList.add('hide');
     }
     trashSixChange() {
