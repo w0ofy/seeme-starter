@@ -22,7 +22,7 @@ make sure you're running mongoDB ```mongod``` in Bash or Terminal
 in '/client/ run (install nodemon globally):
 ```nodemon ./node_modules/webpack-dev-server/bin/webpack-dev-server.js```
 
-in '/server' run:
+in '/' run:
 ```nodemon index.js```
 
 Good to go!
