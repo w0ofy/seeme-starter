@@ -5,14 +5,10 @@ A Dating App - Under Active Development
 ## [Demo](https://seemedate.herokuapp.com/)
 
 ## Todo
-Converting to ES6/JSX
---------------------------------------------------------------
-File architecture
---------------------------------------------------------------
-Number input: min/max (consider draggable range)
---------------------------------------------------------------
-Socket.io
-
+- Converting to ES6/JSX
+- File architecture
+- Number input: min/max (consider draggable range)
+- Socket.io
 
 ## For Local Testing and Development
 Directions coming soon
