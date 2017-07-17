@@ -25,10 +25,11 @@ const
 
 class EditInfo extends React.Component {
 
-  getInitialState () {
+  constructor (props) {
+    super(props);
     let user = cookie.load('user');
     console.log(user.interests);
-    return {
+    this.state = {
       firstName: user.firstName,
       is_male: user.is_male,
       seeking_male: user.seeking_male,
