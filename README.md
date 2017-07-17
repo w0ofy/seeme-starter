@@ -1,31 +1,21 @@
 # seemē
 A Dating App - Under Active Development 
-[Demo](https://seemedate.herokuapp.com/)
+
+--------------------------------------------------------------
+## [Demo](https://seemedate.herokuapp.com/)
 
 ## Todo
 Converting to ES6/JSX
-Updating all packages for most recent version of ReactJS
-Clean file architecture
+--------------------------------------------------------------
+File architecture
+--------------------------------------------------------------
 Number input: min/max (consider draggable range)
+--------------------------------------------------------------
 Socket.io
-Bundle.js - localhost fix
+
 
 ## For Local Testing and Development
-in '/server' run:
-```npm install```
-
-in '/client' run:
-```npm install```
-
-make sure you're running mongoDB ```mongod``` in Bash or Terminal
-
-in '/client/ run (install nodemon globally):
-```nodemon ./node_modules/webpack-dev-server/bin/webpack-dev-server.js```
-
-in '/' run:
-```nodemon index.js```
-
-Good to go!
+Directions coming soon
 
 ## Design mockups
 --------------------------------------------------------------
