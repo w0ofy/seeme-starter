@@ -5,26 +5,27 @@ import MdIconPack from 'react-icons/lib/md';
 import MdPersonOutline from 'react-icons/lib/md/person-outline';
 import MdTouchApp from 'react-icons/lib/md/touch-app';
 import MdExitApp from 'react-icons/lib/md/exit-to-app';
-import SwipeIcon from 'react-icons/lib/md/swipe-icon';
-const HeaderLogin = require('../auth/header-login')
+import SwipeIcon from '../../icons/swipe-icon';
+import HeaderLogin from '../auth/header-login';
 const cookie = require('react-cookie');
 const axios = require('axios');
 
-const Header = React.createClass({
+class Header extends React.Component {
   logoutUser() {
     let user = cookie.load('user');
     let emailQuery = { email: user.email };
-    axios.put('http://localhost:3000/api/auth/logout', { emailQuery
+    axios.put('https://seemedate.herokuapp.com/api/auth/logout', { emailQuery
     },
       { headers: { Authorization: cookie.load('token') } 
     });
 
     cookie.remove('token', { path: '/' });
     cookie.remove('user', { path: '/' });    
-  },
+  }
   renderLinks() {
     let user = cookie.load('user')
-    console.log(user);
+    // console.log(user);
+    // authenticated navigation
     if (user !== undefined) {
       return [
         <li key={`${1}header`}>
@@ -40,14 +41,14 @@ const Header = React.createClass({
     } else {
       return [
         // Unauthenticated navigation
-        <li>
+        <li key={`${4}header`}>
           <HeaderLogin />
         </li>
       ];
     }
-  },
+  }
 
-  render: function () {
+  render() {
     return (
       <div>
         <nav className="navbar navbar-default navbar-fixed-top">
@@ -71,6 +72,6 @@ const Header = React.createClass({
       </div>
     );
   }
-})
+};
 
-module.exports = Header;
+export default Header;

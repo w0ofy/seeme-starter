@@ -1,6 +1,6 @@
 # seemē
-A Dating (Web) Application - In Development 
-[Demo](https://seemeapp.herokuapp.com/)
+A Dating App - Under Active Development 
+[Demo](https://seemedate.herokuapp.com/)
 
 ## Todo
 Converting to ES6/JSX

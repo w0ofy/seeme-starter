@@ -1,9 +1,4 @@
-const cookie = require('react-cookie')
-const axios = require('axios');
-const React = require('react');
-const EditInfo = require('./profile/edit-info');
-const UserInfo = require('./profile/user-info');
-const UserTitle = require('./profile/user-title');
+import React, { Component } from 'react';
 import PhotoBoothModal from './profile/photo-booth-modal';
 import TrashLook from './profile/utils/trash-look';
 import TrashLookTwo from './profile/utils/trash-look-two';
@@ -12,12 +7,36 @@ import TrashLookFour from './profile/utils/trash-look-four';
 import TrashLookFive from './profile/utils/trash-look-five';
 import TrashLookSix from './profile/utils/trash-look-six';
 import TrashLookSeven from './profile/utils/trash-look-seven';
-// const PhotoBooth = require('./profile/photo-booth');
+import EditInfo from './profile/edit-info';
+import UserInfo from './profile/user-info';
+import UserTitle from './profile/user-title';
+const cookie = require('react-cookie')
+const axios = require('axios');
 
-const Profile = React.createClass({
+class Profile extends React.Component {
+
+    constructor(props) {
+        super(props);
+        this.state = {
+            firstName: null,
+            age: null,
+            age_pref_min: null,
+            age_pref_max: null,
+            is_male: null,
+            seeking_male: null,
+            look: null,
+            lookTwo: null,
+            lookThree: null,
+            lookFour: null,
+            lookFive: null,
+            lookSix: null,
+            lookSeven: null,
+            matches: null,
+        }
+    }
     componentWillMount() {
         let removeScript = document.getElementById('main');
-        $(removeScript).remove();
+        document.body.removeChild(removeScript);
         const script = document.createElement("script");
         script.setAttribute("id", "main");
         script.src = "/src/public/js/script.js";
@@ -29,7 +48,7 @@ const Profile = React.createClass({
         console.log("this user is:", user._id + " " + user.email);
 
         if (user == undefined) {
-            window.location.href = 'http://localhost:8080/login';
+            window.location.href = 'https://seemedate.herokuapp.com/login';
         } else {
             this.setState({
                 firstName: user.firstName,
@@ -48,7 +67,7 @@ const Profile = React.createClass({
                 matches: user.matches.length >= 1 ? user.matches.length : "0"
             })
         }
-    },
+    }
 
     check() {
 
@@ -68,11 +87,11 @@ const Profile = React.createClass({
                     lookThree={this.state.lookThree}
                     lookFour={this.state.lookFour}
                     lookFive={this.state.lookFive}
-                    lookSix={this.state.lookSix} 
-                    matchCount={this.state.matches}/>
+                    lookSix={this.state.lookSix}
+                    matchCount={this.state.matches} />
             );
         }
-    },
+    }
     gender() {
         let user = cookie.load('user');
         if (user.is_male === false) {
@@ -80,7 +99,7 @@ const Profile = React.createClass({
         } else if (user.is_male = true) {
             return ("guy");
         }
-    },
+    }
     seekingGender() {
         let user = cookie.load('user');
         if (user.seeking_male === false) {
@@ -88,8 +107,8 @@ const Profile = React.createClass({
         } else if (user.seeking_male = true) {
             return ("guy");
         }
-    },
-    render: function () {
+    }
+    render() {
 
         return (
             <div className="profile-ct">
@@ -121,35 +140,35 @@ const Profile = React.createClass({
                 {this.check()}
             </div>
         );
-    },
+    }
     trashSevenChange() {
         this.setState({ lookSix: null })
         document.getElementById('vid-look-seven').classList.add('hide');
-    },
+    }
     trashSixChange() {
         this.setState({ lookSix: null })
         document.getElementById('vid-look-six').classList.add('hide');
-    },
+    }
     trashFiveChange() {
         this.setState({ lookFive: null })
         document.getElementById('vid-look-five').classList.add('hide');
-    },
+    }
     trashFourChange() {
         this.setState({ lookFour: null })
         document.getElementById('vid-look-four').classList.add('hide');
-    },
+    }
     trashThreeChange() {
         this.setState({ lookThree: null })
         document.getElementById('vid-look-three').classList.add('hide');
-    },
+    }
     trashTwoChange() {
         this.setState({ lookTwo: null })
         document.getElementById('vid-look-two').classList.add('hide');
-    },
+    }
     trashChange() {
         this.setState({ look: null })
         document.getElementById('vid-look').classList.add('hide');
     }
-});
+};
 
-module.exports = Profile;
+export default Profile;

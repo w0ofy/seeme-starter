@@ -14,7 +14,7 @@ export function captureUserMedia(callback) {
 function getSignedUrl(file) {
 
     let queryString = '?objectName=' + file.id + '&contentType=' + encodeURIComponent(file.type);
-    return fetch('http://localhost:3000/s3/sign' + queryString)
+    return fetch('https://seemedate.herokuapp.com/s3/sign' + queryString)
         .then((response) => {
             console.log("res", response)
             return response.json();
@@ -64,7 +64,7 @@ export function S3Upload(fileInfo) { //parameters: { type, data, id }
                 const user = cookie.load('user');
                 const emailQuery = user.email;
 
-                axios.put('http://localhost:3000/api/see/update-looks', {
+                axios.put('https://seemedate.herokuapp.com/api/see/update-looks', {
                     emailQuery: emailQuery,
                     lookLink: lookLink
                 },
@@ -72,7 +72,7 @@ export function S3Upload(fileInfo) { //parameters: { type, data, id }
                     .then((response) => {
                         cookie.save('token', response.data.token, { path: '/' });
                         cookie.save('user', response.data.user, { path: '/' });
-                        // window.location.href = 'http://localhost:8080/my-profile';
+                        // window.location.href = 'https://seemedate.herokuapp.com/my-profile';
                     })
                     .catch((error) => {
                         console.log(error);

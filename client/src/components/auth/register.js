@@ -1,10 +1,10 @@
-const axios = require('axios');
-const React = require('react');
-const cookie = require('react-cookie');
+import React, { Component } from 'react';
 import asyncValidate from './validate/asyncValidate';
+const axios = require('axios');
+const cookie = require('react-cookie');
 
-const Register = React.createClass({
-  getInitialState: function () {
+class Register extends React.Component {
+  getInitialState() {
     return {
       email: '',
       firstName: '',
@@ -13,10 +13,10 @@ const Register = React.createClass({
       is_male: '',
       seeking_male: ''
     };
-  },
-  handleSubmit: function (e) {
+  }
+  handleSubmit(e) {
     e.preventDefault();
-    axios.post('http://localhost:3000/api/auth/register', {
+    axios.post('https://seemedate.herokuapp.com/api/auth/register', {
       email: this.state.email,
       firstName: this.state.firstName,
       password: this.state.password,
@@ -29,15 +29,15 @@ const Register = React.createClass({
         cookie.save('token', response.data.token, { path: '/' });
         cookie.save('user', response.data.user, { path: '/' });
 
-        window.location.href = 'http://localhost:8080/my-profile';
+        window.location.href = 'https://seemedate.herokuapp.com/my-profile';
       })
       .catch((err) => {
         console.log(err);
       });
-  },
+  }
 
 
-  render: function () {
+  render() {
     // const { handleSubmit } = this.props;
 
     return (
@@ -100,7 +100,7 @@ const Register = React.createClass({
         </div>
       </div>
     );
-  },
+  }
 
   handleInputChange(event) {
     const target = event.target;
@@ -111,6 +111,6 @@ const Register = React.createClass({
       [name]: value
     });
   }
-});
+};
 
-module.exports = Register;
+export default Register;

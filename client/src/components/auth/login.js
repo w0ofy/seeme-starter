@@ -1,32 +1,31 @@
+import React, { Component } from 'react';
 import { Link } from 'react-router';
 const axios = require('axios');
-const React = require('react');
 const cookie = require('react-cookie');
 
-const Login = React.createClass({
-  getInitialState: function () {
+class Login extends React.Component {
+  getInitialState () {
     return {
       email: '',
       password: ''
     };
-  },
-  handleSubmit: function (e) {
+  }
+  handleSubmit (e) {
     e.preventDefault();
-    axios.post('http://localhost:3000/api/auth/login', {
+    axios.post('https://seemedate.herokuapp.com/api/auth/login', {
       email: this.state.email,
       password: this.state.password
     })
       .then((response) => {
         cookie.save('token', response.data.token, { path: '/' });
         cookie.save('user', response.data.user, { path: '/' });
-        window.location.href = "http://localhost:8080/my-profile";
+        window.location.href = "https://seemedate.herokuapp.com/my-profile";
       })
       .catch((error) => {
         console.log(error);
       });
-  },
-
-  render: function () {
+  }
+  render () {
 
     return (
       <div className="row">
@@ -47,17 +46,16 @@ const Login = React.createClass({
         </div>
       </div>
     );
-  },
-  updateEmailValue: function (evt) {
+  }
+  updateEmailValue (evt) {
     this.setState({
       email: evt.target.value
     });
-  },
-  updatePasswordValue: function (evt) {
+  }
+  updatePasswordValue (evt) {
     this.setState({
       password: evt.target.value
     });
   }
-})
-
-module.exports = Login;
+};
+export default Login;

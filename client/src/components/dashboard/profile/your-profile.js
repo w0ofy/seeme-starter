@@ -1,9 +1,4 @@
-const cookie = require('react-cookie')
-const axios = require('axios');
-const React = require('react');
-const EditInfo = require('./edit-info');
-const YourInfo = require('./your-info');
-const YourTitle = require('./your-title');
+import React, { Component } from 'react';
 import PhotoBoothModal from './photo-booth-modal';
 import TrashLook from './utils/trash-look';
 import TrashLookTwo from './utils/trash-look-two';
@@ -11,7 +6,12 @@ import TrashLookThree from './utils/trash-look-three';
 import TrashLookFour from './utils/trash-look-four';
 import TrashLookFive from './utils/trash-look-five';
 import TrashLookSix from './utils/trash-look-six';
-// const PhotoBooth = require('./photo-booth');
+import EditInfo from './edit-info';
+import YourInfo from './your-info';
+import YourTitle from './your-title';
+const cookie = require('react-cookie')
+const axios = require('axios');
+
 
 class YourProfile extends React.Component {
     constructor() {
@@ -33,7 +33,7 @@ class YourProfile extends React.Component {
     }
     componentWillMount() {
         let removeScript = document.getElementById('main');
-        $(removeScript).remove();
+        document.body.removeChild(removeScript);
         const script = document.createElement("script");
         script.setAttribute("id", "main");
         script.src = "/src/public/js/script.js";
@@ -45,14 +45,14 @@ class YourProfile extends React.Component {
         let user = cookie.load('user');
         let token = cookie.load('token');
         if (user == undefined) {
-            window.location.href = 'http://localhost:8080/';
+            window.location.href = 'https://seemedate.herokuapp.com/';
         } else {
 
             let theUser = null;
             let gender = null;
             // console.log("param", this.props.params.uid);
 
-            const url = 'http://localhost:3000/api/' + this.props.params.uid;
+            const url = 'https://seemedate.herokuapp.com/api/' + this.props.params.uid;
             axios.get(url, { headers: { Authorization: token } }).then(viewUser => {
                 // console.log(viewUser.data);
                 theUser = viewUser.data.user
@@ -154,4 +154,4 @@ class YourProfile extends React.Component {
     }
 };
 
-module.exports = YourProfile;
+export default YourProfile;

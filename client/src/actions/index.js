@@ -1,8 +1,8 @@
 import axios from 'axios';
 import cookie from 'react-cookie';
 import { logoutUser } from './auth';
-export const API_URL = 'http://localhost:3000/api';
-export const CLIENT_ROOT_URL = 'http://localhost:8080';
+export const API_URL = 'https://seemedate.herokuapp.com/api';
+export const CLIENT_ROOT_URL = 'https://seemedate.herokuapp.com';
 
 //= ===============================
 // Utility actions

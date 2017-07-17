@@ -1,7 +1,8 @@
-const React = require('react')
-const axios = require('axios');
 import asyncValidate from './validate/asyncValidate';
 import MdKeyboardArrowUp from 'react-icons/lib/md/keyboard-arrow-up';
+import React, { Component } from 'react';
+const ReactCSSTransitionGroup = require('react-addons-css-transition-group');
+const axios = require('axios');
 const cookie = require('react-cookie');
 const Scroll = require('react-scroll');
 const Link = Scroll.Link;
@@ -9,19 +10,12 @@ const Element = Scroll.Element;
 const Events = Scroll.Events;
 const scroll = Scroll.animateScroll;
 const scrollSpy = Scroll.scrollSpy;
-const ReactCSSTransitionGroup = require('react-addons-css-transition-group');
+const that = this;
 
-const HomePage = React.createClass({
-  componentWillMount() {
-    const user = cookie.load('user');
-    if (user !== undefined) {
-      window.location.href = 'http://localhost:8080/my-profile';
-    } else {
-      return;
-    }
-  },
-  getInitialState() {
-    return {
+class HomePage extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
       showRegistration: false,
       showPartOne: false,
       showAbout: false,
@@ -31,13 +25,42 @@ const HomePage = React.createClass({
       age: '',
       is_male: '',
       seeking_male: ''
-    };
-  },
-  handleSubmit: function (e) {
+    }
+    this.onAboutClick = this.onAboutClick.bind(this);
+    this.onClick = this.onClick.bind(this);
+    this.hideRegistration = this.hideRegistration.bind(this);
+    this.hideAbout = this.hideAbout.bind(this);
+    this.onContinueClick = this.onContinueClick.bind(this);
+    this.onBackClick = this.onBackClick.bind(this);
+    this.handleInputChange = this.handleInputChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+  }
+  componentWillMount() {
+    const user = cookie.load('user');
+    if (user !== undefined) {
+      window.location.href = 'https://seemedate.herokuapp.com/my-profile';
+    } else {
+      return;
+    }
+  }
+  // getInitialState() {
+  //   return {
+  //     showRegistration: false,
+  //     showPartOne: false,
+  //     showAbout: false,
+  //     email: '',
+  //     firstName: '',
+  //     password: '',
+  //     age: '',
+  //     is_male: '',
+  //     seeking_male: ''
+  //   };
+  // }
+  handleSubmit(e) {
     e.preventDefault();
     let removeScript = document.getElementById('disable-scroll');
-    $(removeScript).remove();
-    axios.post('http://localhost:3000/api/auth/register', {
+    document.body.removeChild(removeScript);
+    axios.post('https://seemedate.herokuapp.com/api/auth/register', {
       email: this.state.email,
       firstName: this.state.firstName,
       password: this.state.password,
@@ -49,20 +72,20 @@ const HomePage = React.createClass({
         cookie.save('token', response.data.token, { path: '/' });
         cookie.save('user', response.data.user, { path: '/' });
 
-        window.location.href = 'http://localhost:8080/my-profile';
+        window.location.href = 'https://seemedate.herokuapp.com/my-profile';
       })
       .catch((err) => {
         console.log(err);
       });
-  },
+  }
   onAboutClick() {
     this.setState({ showAbout: true });
     scroll.scrollTo(100);
-  },
+  }
   onClick() {
     this.setState({ showRegistration: true, showPartOne: true });
     scroll.scrollTo(100);
-  },
+  }
   hideRegistration() {
     const that = this;
     scroll.scrollToTop({ duration: 350 });
@@ -70,20 +93,20 @@ const HomePage = React.createClass({
       that.setState({ showRegistration: false, showPartOne: false });
     }, 351);
 
-  },
+  }
   hideAbout() {
     const that = this;
     scroll.scrollToTop({ duration: 350 });
     setTimeout(function () {
       that.setState({ showAbout: false });
     }, 351);
-  },
+  }
   onContinueClick() {
     this.setState({ showPartOne: false });
-  },
+  }
   onBackClick() {
     this.setState({ showPartOne: true });
-  },
+  }
   render() {
     return (
       <div id="home" className="home">
@@ -114,7 +137,7 @@ const HomePage = React.createClass({
 
         <span id="registersection" />
         {this.state.showAbout ?
-          <ReactCSSTransitionGroup transitionName="fade">
+          <ReactCSSTransitionGroup transitionName="fade" transitionEnterTimeout={0.7} transitionLeaveTimeout={0.7}>
             <div className="section hms-two">
               <MdKeyboardArrowUp className="arrow-up" onClick={this.hideAbout} />
               <div>
@@ -134,10 +157,10 @@ const HomePage = React.createClass({
           : null}
 
         {this.state.showRegistration ?
-          <ReactCSSTransitionGroup transitionName="fade">
+          <ReactCSSTransitionGroup transitionName="fade" transitionEnterTimeout={0.7} transitionLeaveTimeout={0.7}>
             <div className="section hms-two">
 
-              <MdKeyboardArrowUp className="arrow-up" spy={true} smooth={true} duration={350} onClick={this.hideRegistration} />
+              <MdKeyboardArrowUp className="arrow-up" onClick={this.hideRegistration} />
 
               <div className="row">
                 <div className="col-sm-12 col-xs-12 flexed">
@@ -150,7 +173,7 @@ const HomePage = React.createClass({
                     {this.state.showPartOne
                       ? <div>
                         <div className="partOne">
-                          <h4 className="center">CREATE YOUR LOGIN</h4>
+                          <h4 className="center-text">CREATE YOUR LOGIN</h4>
                           <div className="flexed">
 
                             <div>
@@ -172,10 +195,10 @@ const HomePage = React.createClass({
                         </div>
                       </div>
 
-                      : <ReactCSSTransitionGroup transitionName="fade">
+                      : <ReactCSSTransitionGroup transitionName="fade" transitionEnterTimeout={0.7} transitionLeaveTimeout={0.7}>
                         <div>
                           <div className="partTwo">
-                            <h4 className="center">MATCHING DETAILS</h4>
+                            <h4 className="center-text">MATCHING DETAILS</h4>
                             <div className="flexed">
 
                               <div>
@@ -216,7 +239,7 @@ const HomePage = React.createClass({
         }
       </div>
     );
-  },
+  }
   handleInputChange(event) {
     const target = event.target;
     const value = target.value;
@@ -226,8 +249,6 @@ const HomePage = React.createClass({
       [name]: value
     });
   }
-})
+};
 
-module.exports = HomePage;
-
-
+export default HomePage;

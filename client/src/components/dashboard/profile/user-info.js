@@ -1,7 +1,4 @@
-
-const
-  React = require('react'),
-  cookie = require('react-cookie');
+import React, { Component } from 'react';
 import { Link } from 'react-router';
 import FaBicycle from 'react-icons/lib/fa/bicycle';
 import FaBed from 'react-icons/lib/fa/bed';
@@ -12,7 +9,7 @@ import FaAutomobile from 'react-icons/lib/fa/automobile';
 import FaBriefcase from 'react-icons/lib/fa/briefcase';
 import FaPlane from 'react-icons/lib/fa/plane';
 import FaLightbulbO from 'react-icons/lib/fa/lightbulb-o';
-import FaGavel from 'react-icons/lib/fa/Gavel';
+import FaGavel from 'react-icons/lib/fa/gavel';
 import FaPaintBrush from 'react-icons/lib/fa/paint-brush';
 import FaCalculator from 'react-icons/lib/fa/calculator';
 import FaGraduationCap from 'react-icons/lib/fa/graduation-cap';
@@ -20,16 +17,18 @@ import FaCamera from 'react-icons/lib/fa/camera';
 import FaMusic from 'react-icons/lib/fa/music';
 import FaSpoon from 'react-icons/lib/fa/spoon';
 import FaTree from 'react-icons/lib/fa/tree';
-import Female from 'react-icons/lib/md/female';
-import Male from 'react-icons/lib/md/male';
+import Female from '../../../icons/female';
+import Male from '../../../icons/male';
 import { RadioGroup, Radio } from 'react-radio-group';
+const cookie = require('react-cookie');
 
-const UserInfo = React.createClass({
+class UserInfo extends React.Component {
 
-  getInitialState() {
+  constructor(props) {
+    super(props);
     let user = cookie.load('user');
     console.log(user.interests);
-    return {
+    this.state = {
       cycling: user.interests.cycling,
       news: user.interests.news,
       sleeping: user.interests.sleeping,
@@ -50,12 +49,12 @@ const UserInfo = React.createClass({
       age_pref_min: user.age_pref_min,
       age_pref_max: user.age_pref_max
     }
-  },
+  }
   noLoves() {
-    if (this.state.cycling==false && this.state.outdoors==false && this.state.cooking==false && this.state.music==false && this.state.art==false && this.state.innovating==false && this.state.traveling==false && this.state.learning==false && this.state.photography==false && this.state.cars==false && this.state.motorcycles==false && this.state.sleeping==false && this.state.news==false) {
+    if (this.state.cycling == false && this.state.outdoors == false && this.state.cooking == false && this.state.music == false && this.state.art == false && this.state.innovating == false && this.state.traveling == false && this.state.learning == false && this.state.photography == false && this.state.cars == false && this.state.motorcycles == false && this.state.sleeping == false && this.state.news == false) {
       return (<div className="center-text"><h4>I don't like anything?</h4></div>)
     }
-  },
+  }
   render() {
     return (
       <div className="user-info">
@@ -116,7 +115,7 @@ const UserInfo = React.createClass({
             </div>
             <div className="form-col inter-col-pro">
               <div>
-                
+
                 {this.state.cycling ? <span className="int-text"><i><FaBicycle /></i><p>Cycling</p></span> : null}
                 {this.state.sleeping ? <span className="int-text"><i><FaBed /></i><p>Sleeping</p></span> : null}
                 {this.state.motorcycles ? <span className="int-text"><i><FaMotorcycle /></i><p>Motorcycles</p></span> : null}
@@ -141,6 +140,6 @@ const UserInfo = React.createClass({
       </div>
     );
   }
-})
+};
 
-module.exports = UserInfo;
+export default UserInfo;

@@ -1,7 +1,8 @@
 import React from 'react';
+import { Link } from 'react-router';
 const cookie = require('react-cookie')
 const axios = require('axios');
-import { Link } from 'react-router';
+
 
 
 class Swipe extends React.Component {
@@ -22,8 +23,8 @@ class Swipe extends React.Component {
         e.preventDefault();
         const userCookie = cookie.load('user');
         const token = cookie.load('token');
-        const url = 'http://localhost:3000/api/liking'
-        let beingSwiped = $('#tinderslide ul div:last-child');
+        const url = 'https://seemedate.herokuapp.com/api/liking'
+        let beingSwiped = document.getElementById('#tinderslide ul div:last-child');
 
         //Retrieve logged in user's current number of matches
         let numOfMatches = userCookie.matches.length;
@@ -57,8 +58,8 @@ class Swipe extends React.Component {
         e.preventDefault();
         const userCookie = cookie.load('user');
         const token = cookie.load('token');
-        const url = 'http://localhost:3000/api/disliking'
-        let beingSwiped = $('#tinderslide ul div:last-child');
+        const url = 'https://seemedate.herokuapp.com/api/disliking'
+        let beingSwiped = document.getElementById('#tinderslide ul div:last-child');
 
         this.setState({ swipedLeft: true })
         let disliked = this.state.users.pop()
@@ -86,7 +87,7 @@ class Swipe extends React.Component {
     componentWillMount() {
         const userCookie = cookie.load('user'),
             token = cookie.load('token'),
-            url = 'http://localhost:3000/api/all-users',
+            url = 'https://seemedate.herokuapp.com/api/all-users',
             likedids = [],
             dislikedids = [];
         if (userCookie.liked_ids) {
@@ -173,4 +174,4 @@ const Pane = React.createClass({
     }
 });
 
-module.exports = Swipe;
+export default Swipe;

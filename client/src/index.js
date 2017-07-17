@@ -3,6 +3,11 @@ import ReactDOM from 'react-dom';
 import { Router, browserHistory } from 'react-router';
 import cookie from 'react-cookie';
 import routes from './routes';
+import 'bootstrap/dist/css/bootstrap.css';
+import './App.css';
+// import './js/script.js';
+// import './js/jquery.mousewheel.js';
+// import './js/disable-scroll.js';
 // import ReactGA from 'react-ga';
 // import { AUTH_USER } from './actions/types';
 
@@ -16,6 +21,7 @@ import routes from './routes';
 //   ReactGA.pageview(window.location.pathname);
 // }
 
+// NOT USING REDUX
 // const token = cookie.load('token');
 
 // if (token) {

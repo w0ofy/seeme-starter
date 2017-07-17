@@ -1,5 +1,4 @@
-const React = require('react');
-const cookie = require('react-cookie');
+import React, { Component } from 'react';
 import { Link } from 'react-router';
 import FaBicycle from 'react-icons/lib/fa/bicycle';
 import FaBed from 'react-icons/lib/fa/bed';
@@ -10,7 +9,7 @@ import FaAutomobile from 'react-icons/lib/fa/automobile';
 import FaBriefcase from 'react-icons/lib/fa/briefcase';
 import FaPlane from 'react-icons/lib/fa/plane';
 import FaLightbulbO from 'react-icons/lib/fa/lightbulb-o';
-import FaGavel from 'react-icons/lib/fa/Gavel';
+import FaGavel from 'react-icons/lib/fa/gavel';
 import FaPaintBrush from 'react-icons/lib/fa/paint-brush';
 import FaCalculator from 'react-icons/lib/fa/calculator';
 import FaGraduationCap from 'react-icons/lib/fa/graduation-cap';
@@ -18,14 +17,15 @@ import FaCamera from 'react-icons/lib/fa/camera';
 import FaMusic from 'react-icons/lib/fa/music';
 import FaSpoon from 'react-icons/lib/fa/spoon';
 import FaTree from 'react-icons/lib/fa/tree';
+const cookie = require('react-cookie');
 
-const YourInfo = React.createClass({
+class YourInfo extends React.Component {
   getInitialState() {
     let user = cookie.load('user');
     return {
       userFirstName: user.firstName
     }
-  },
+  }
   renderForGender() {
     if (this.props.is_male === "guy") {
       console.log("iswhat", this.props.is_male);
@@ -42,7 +42,7 @@ const YourInfo = React.createClass({
         </div>
       )
     }
-  },
+  }
   render() {
     return (
       <div>
@@ -104,6 +104,6 @@ const YourInfo = React.createClass({
       </div>
     );
   }
-})
+};
 
-module.exports = YourInfo;
+export default YourInfo;

@@ -14,7 +14,7 @@ class TrashLookSix extends React.Component {
         const emailQuery = user.email;
         const lookId = user.looks[5]._id;
         console.log(lookId)
-        axios.put('http://localhost:3000/api/see/delete-look', {
+        axios.put('https://seemedate.herokuapp.com/api/see/delete-look', {
             emailQuery: emailQuery,
             lookId: lookId
         },
