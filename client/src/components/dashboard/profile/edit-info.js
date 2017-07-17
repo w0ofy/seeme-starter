@@ -50,6 +50,10 @@ class EditInfo extends React.Component {
       cooking: user.interests.cooking,
       outdoors: user.interests.outdoors
     }
+    this.handleChange = this.handleChange.bind(this)
+    this.handleRadioIsChange = this.handleRadioIsChange.bind(this);
+    this.handleRadioSeekingChange = this.handleRadioSeekingChange.bind(this);
+    this.handleFormSubmit = this.handleFormSubmit.bind(this);
   }
 
   handleFormSubmit (e) {
