@@ -1,7 +1,8 @@
 const React = require('react');
 const cookie = require('react-cookie');
+const createReactClass = require('create-react-class');
 
-const ListShadow = React.createClass({
+const ListShadow = createReactClass({
   renderShadow() {
     let user = cookie.load('user');
     if (user !== undefined) {

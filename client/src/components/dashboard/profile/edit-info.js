@@ -1,9 +1,6 @@
-const
-  axios = require('axios'),
-  React = require('react'),
-  cookie = require('react-cookie');
-import Female from 'react-icons/lib/md/female';
-import Male from 'react-icons/lib/md/male';
+import React, { Component } from 'react';
+import Female from '../../../icons/female';
+import Male from '../../../icons/male';
 import FaBicycle from 'react-icons/lib/fa/bicycle';
 import FaBed from 'react-icons/lib/fa/bed';
 import FaNewspaperO from 'react-icons/lib/fa/newspaper-o';
@@ -13,7 +10,7 @@ import FaAutomobile from 'react-icons/lib/fa/automobile';
 import FaBriefcase from 'react-icons/lib/fa/briefcase';
 import FaPlane from 'react-icons/lib/fa/plane';
 import FaLightbulbO from 'react-icons/lib/fa/lightbulb-o';
-import FaGavel from 'react-icons/lib/fa/Gavel';
+import FaGavel from 'react-icons/lib/fa/gavel';
 import FaPaintBrush from 'react-icons/lib/fa/paint-brush';
 import FaCalculator from 'react-icons/lib/fa/calculator';
 import FaGraduationCap from 'react-icons/lib/fa/graduation-cap';
@@ -22,10 +19,13 @@ import FaMusic from 'react-icons/lib/fa/music';
 import FaSpoon from 'react-icons/lib/fa/spoon';
 import FaTree from 'react-icons/lib/fa/tree';
 import { RadioGroup, Radio } from 'react-radio-group';
+const
+  axios = require('axios'),
+  cookie = require('react-cookie');
 
-const EditInfo = React.createClass({
+class EditInfo extends React.Component {
 
-  getInitialState: function () {
+  getInitialState () {
     let user = cookie.load('user');
     console.log(user.interests);
     return {
@@ -49,15 +49,15 @@ const EditInfo = React.createClass({
       cooking: user.interests.cooking,
       outdoors: user.interests.outdoors
     }
-  },
+  }
 
-  handleFormSubmit: function (e) {
+  handleFormSubmit (e) {
 
     e.preventDefault();
 
     const user = cookie.load('user');
     const emailQuery = user.email;
-    axios.put('http://localhost:3000/api/see/update', {
+    axios.put('https://seemedate.herokuapp.com/api/see/update', {
       emailQuery: emailQuery,
       firstName: this.state.firstName,
       is_male: this.state.is_male,
@@ -88,19 +88,19 @@ const EditInfo = React.createClass({
       .then((response) => {
         cookie.save('token', response.data.token, { path: '/' });
         cookie.save('user', response.data.user, { path: '/' });
-        window.location.href = 'http://localhost:8080/my-profile';
+        window.location.href = 'https://seemedate.herokuapp.com/my-profile';
       })
       .catch((error) => {
         console.log(error);
       });
-  },
+  }
   handleRadioIsChange(value) {
     this.setState({ is_male: value });
-  },
+  }
   handleRadioSeekingChange(value) {
     this.setState({ seeking_male: value });
-  },
-  render: function () {
+  }
+  render () {
     return (
       <div className="edit-info">
         <form id="edit-info" onSubmit={this.handleFormSubmit}>
@@ -220,7 +220,7 @@ const EditInfo = React.createClass({
         </form>
       </div>
     );
-  },
+  }
   handleChange(event) {
     const target = event.target;
     const value = target.type === 'checkbox' ? target.checked : target.value;
@@ -230,7 +230,6 @@ const EditInfo = React.createClass({
       [name]: value
     });
   }
-});
+};
 
-// export default EditInfo;
-module.exports = EditInfo
+export default EditInfo;

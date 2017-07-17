@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router';
 import MdArrowUpward from 'react-icons/lib/md/arrow-upward';
-import SwipeIcon from 'react-icons/lib/md/swipe-icon';
+import SwipeIcon from '../../icons/swipe-icon';
 // import io from 'socket.io-client';
-// const socket = io.connect('http://localhost:3000/')
+// const socket = io.connect('https://seemedate.herokuapp.com/')
 const ChatWindow = require('../chat/chatWindow');
 const axios = require('axios');
 const cookie = require('react-cookie');
@@ -17,19 +17,18 @@ function containsObject(obj, list) {
   return false;
 };
 
-const MatchList = React.createClass({
-
-  getInitialState: function () {
-    return ({
+class MatchList extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
       chatWindows: [],
       matches: []
-    })
-  },
-
-  componentWillMount: function () {
+    }
+  }
+  componentWillMount() {
     let user = cookie.load('user');
     if (user !== undefined) {
-      let url = 'http://localhost:3000/api/matches';
+      let url = 'https://seemedate.herokuapp.com/api/matches';
       let token = cookie.load('token');
       axios.post(url,
         { id: user._id },
@@ -45,7 +44,7 @@ const MatchList = React.createClass({
         });
 
       // socket.on('connect', () => {
-      //   let url = 'http://localhost:3000/api/update-socket';
+      //   let url = 'https://seemedate.herokuapp.com/api/update-socket';
       //     axios.put(url,
       //       { emailQuery: user.email, socket_id: socket.id },
       //       {
@@ -58,13 +57,12 @@ const MatchList = React.createClass({
     } else {
       return false;
     }
-  },
-
-  renderList: function () {
+  }
+  renderList() {
     let user = cookie.load('user');
     if (user == undefined) {
       return (<div className="empty" />)
-    } else if (user.matches.length === 0 && window.location.href !== 'http://localhost:8080/swatch') {
+    } else if (user.matches.length === 0 && window.location.href !== 'https://seemedate.herokuapp.com/swatch') {
       return (
         <div className="match-list-container">
           <p className="m-c">Your matches will display here. No matches yet.</p>
@@ -82,7 +80,7 @@ const MatchList = React.createClass({
         <div className="match-list-container">
           {this.state.matches.map((item) => {
             // console.log(item);
-            let urlId = 'http://localhost:8080/see/' + item._id;
+            let urlId = 'https://seemedate.herokuapp.com/see/' + item._id;
             return (
               <div className="match">
                 <Link to={urlId}>{item.firstName}</Link> |
@@ -92,9 +90,8 @@ const MatchList = React.createClass({
           })}
         </div>);
     }
-  },
-
-  openChat: function (e) {
+  }
+  openChat(e) {
     e.preventDefault();
     let user = cookie.load('user');
     let Match = e.target.id
@@ -119,9 +116,8 @@ const MatchList = React.createClass({
         )
       });
     }
-  },
-
-  closeChat: function (e) {
+  }
+  closeChat(e) {
     let MatchID = e.target.id
     this.setState(
       {
@@ -131,9 +127,9 @@ const MatchList = React.createClass({
           })
       }
     )
-  },
+  }
+  render() {
 
-  render: function () {
     return (
       <div>
         {this.renderList()}
@@ -143,6 +139,6 @@ const MatchList = React.createClass({
       </div>
     );
   }
-})
+};
 
-module.exports = MatchList;
+export default MatchList

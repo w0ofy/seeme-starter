@@ -1,7 +1,7 @@
 
-const React = require('react');
+import React, { Component } from 'react';
 
-const YourTitle = React.createClass({
+class YourTitle extends React.Component {
   render() {
     return (
       <div className="user-title">
@@ -12,6 +12,6 @@ const YourTitle = React.createClass({
       </div>
     );
   }
-})
+};
 
-module.exports = YourTitle;
+export default YourTitle;

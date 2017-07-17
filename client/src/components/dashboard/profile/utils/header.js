@@ -8,7 +8,7 @@ import MdExitApp from 'react-icons/lib/md/exit-to-app';
 const HeaderLogin = require('../auth/header-login')
 const cookie = require('react-cookie');
 
-const Header = React.createClass({
+class Header extends React.Component {
   renderLinks() {
     const user = cookie.load('user')
     console.log(user);
@@ -32,9 +32,9 @@ const Header = React.createClass({
         </li>
       ];
     }
-  },
+  }
 
-  render: function () {
+  render () {
     return (
       <div>
         <nav className="navbar navbar-default navbar-fixed-top">
@@ -58,6 +58,6 @@ const Header = React.createClass({
       </div>
     );
   }
-})
+};
 
-module.exports = Header;
+export default Header;

@@ -1,13 +1,12 @@
+import React, { Component } from 'react';
 const axios = require('axios');
-const React = require('react');
 const cookie = require('react-cookie');
-
 // import io from 'socket.io-client';
-// const socket = io.connect('http://localhost:3000/')
+// const socket = io.connect('https://seemedate.herokuapp.com/')
 
-const ChatWindow = React.createClass({
+class ChatWindow extends React.Component{
 
-    getInitialState: function () {
+    getInitialState () {
         return {
             user: this.props.user1,
             recipent: this.props.user2,
@@ -15,34 +14,34 @@ const ChatWindow = React.createClass({
             is_online: "",
             chathistory: []
         }
-    },
+    }
 
-    handleChange: function (key) {
+    handleChange (key) {
         return function (e) {
             let state = {};
             state[key] = e.target.value;
             this.setState(state);
         }.bind(this);
-    },
+    }
     handleSendMessage(e) {
         e.preventDefault();
         let user = cookie.load('user');
         let token = cookie.load('token');
         const that = this;
-        const url = 'http://localhost:3000/api/create-message'
+        const url = 'https://seemedate.herokuapp.com/api/create-message'
 
         axios.put(url, { senderId: user._id, receiverId: this.props.user2, message: that.state.message, }, { headers: { Authorization: token } }).then(res => {
             console.log(res.data.chats)
         });
-    },
-    componentWillMount: function () {
+    }
+    componentWillMount () {
         // let user = cookie.load('user');
         // if (user === undefined) {
         //     return false;
         // }
-    },
+    }
 
-    render: function () {
+    render () {
 
         return (
             <div id="chat">
@@ -65,7 +64,6 @@ const ChatWindow = React.createClass({
             </div>
         );
     }
-});
+};
 
-
-module.exports = ChatWindow;
+export default ChatWindow

@@ -1,0 +1,25 @@
+{
+    "name": "seeme",
+    "version": "1.0.0",
+    "main": "index.js",
+    "license": "MIT",
+    "dependencies": {
+        "express": "^4.15.3",
+        "aws-sdk": "^2.77.0",
+        "bcrypt-nodejs": "0.0.3",
+        "body-parser": "^1.15.0",
+        "http": "0.0.0",
+        "jsonwebtoken": "^5.7.0",
+        "lodash": "^4.6.1",
+        "mongoose": "^4.4.13",
+        "path": "^0.12.7",
+        "passport": "^0.3.2",
+        "passport-jwt": "^2.0.0",
+        "passport-local": "^1.0.0",
+        "socket.io": "^1.4.6"
+    },
+    "scripts": {
+        "start": "node index.js",
+        "heroku-postbuild": "cd client && npm install --only=dev && npm install && npm run build"
+    }
+}

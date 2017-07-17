@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router';
 const cookie = require('react-cookie');
 
-const Footer = React.createClass({
+class Footer extends React.Component {
   renderFooter() {
     let user = cookie.load('user');
     if (user !== undefined) {
@@ -16,7 +16,7 @@ const Footer = React.createClass({
         </div>
       </div>
     )
-  },
+  }
 
   render() {
     return (
@@ -26,6 +26,6 @@ const Footer = React.createClass({
     );
   }
 
-})
+};
 
-module.exports = Footer;
+export default Footer;
