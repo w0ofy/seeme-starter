@@ -21,11 +21,9 @@ mongoose.connect(MONGODB_URI, { useMongoClient: true });
 // server = app.listen(process.env.PORT);
 // app.listen(process.env.PORT, () => console.log("Listening on port"));
 
-if (process.env.NODE_ENV === 'production') {
-  app.use(express.static('/build'));
-}
-
-
+// if (process.env.NODE_ENV === 'production') {
+//   app.use(express.static('/build'));
+// }
 
 // const io = require('socket.io').listen(server);
 

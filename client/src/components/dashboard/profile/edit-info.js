@@ -25,10 +25,11 @@ const
 
 class EditInfo extends React.Component {
 
-  getInitialState () {
+  constructor (props) {
+    super(props);
     let user = cookie.load('user');
     console.log(user.interests);
-    return {
+    this.state = {
       firstName: user.firstName,
       is_male: user.is_male,
       seeking_male: user.seeking_male,
@@ -49,6 +50,10 @@ class EditInfo extends React.Component {
       cooking: user.interests.cooking,
       outdoors: user.interests.outdoors
     }
+    this.handleChange = this.handleChange.bind(this)
+    this.handleRadioIsChange = this.handleRadioIsChange.bind(this);
+    this.handleRadioSeekingChange = this.handleRadioSeekingChange.bind(this);
+    this.handleFormSubmit = this.handleFormSubmit.bind(this);
   }
 
   handleFormSubmit (e) {
