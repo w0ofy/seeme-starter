@@ -42,13 +42,13 @@ class Profile extends React.Component {
         this.trashSevenChange = this.trashSevenChange.bind(this);
     }
     componentWillMount() {
-        let removeScript = document.getElementById('main');
-        document.body.removeChild(removeScript);
-        const script = document.createElement("script");
-        script.setAttribute("id", "main");
-        script.src = "/src/public/js/script.js";
-        script.async = true;
-        document.body.appendChild(script);
+        // let removeScript = document.getElementById('main');
+        // document.body.removeChild(removeScript);
+        // const script = document.createElement("script");
+        // script.setAttribute("id", "main");
+        // script.src = "/src/public/js/script.js";
+        // script.async = true;
+        // document.body.appendChild(script);
 
         // Fetch user data prior to component mounting
         let user = cookie.load('user');
@@ -116,11 +116,9 @@ class Profile extends React.Component {
         }
     }
     render() {
-
         return (
             <div className="profile-ct">
                 <UserTitle firstName={this.state.firstName} age={this.state.age} />
-
                 <div className="lookContainer">
                     <div className="look" onClick={() => { this.refs.v1.paused ? this.refs.v1.play() : this.refs.v1.pause() }}><video id="vid-look" ref="v1" className="video vid-look" src={this.state.look} />
                         {this.state.look ? <TrashLook remove={this.trashChange} /> : <PhotoBoothModal />}

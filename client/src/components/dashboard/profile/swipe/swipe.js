@@ -3,8 +3,6 @@ import { Link } from 'react-router';
 const cookie = require('react-cookie')
 const axios = require('axios');
 
-
-
 class Swipe extends React.Component {
     constructor(props) {
         super(props);
