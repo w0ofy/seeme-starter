@@ -32,13 +32,13 @@ class YourProfile extends React.Component {
         }
     }
     componentWillMount() {
-        let removeScript = document.getElementById('main');
-        document.body.removeChild(removeScript);
-        const script = document.createElement("script");
-        script.setAttribute("id", "main");
-        script.src = "/src/public/js/script.js";
-        script.async = true;
-        document.body.appendChild(script);
+        // let removeScript = document.getElementById('main');
+        // document.body.removeChild(removeScript);
+        // const script = document.createElement("script");
+        // script.setAttribute("id", "main");
+        // script.src = "/src/public/js/script.js";
+        // script.async = true;
+        // document.body.appendChild(script);
     }
     componentDidMount() {
         // Fetch user data prior to component mounting

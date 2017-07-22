@@ -16,14 +16,16 @@ var MONGODB_URI = process.env.MONGODB_URI || 'mongodb://localhost:27017/seeme-st
 mongoose.connect(MONGODB_URI, { useMongoClient: true });
 
 
-// // Start the server OLD VERSION
+// // Start the server
 // let server;
 // server = app.listen(process.env.PORT);
 // app.listen(process.env.PORT, () => console.log("Listening on port"));
 
-// if (process.env.NODE_ENV === 'production') {
-//   app.use(express.static('/build'));
-// }
+if (process.env.NODE_ENV === 'production') {
+  app.use(express.static('/build'));
+}
+
+
 
 // const io = require('socket.io').listen(server);
 
@@ -57,7 +59,7 @@ app.use('/s3', s3Router({
 router(app);
 
 setInterval(function() {
-    http.get("https://seemedate.herokuapp.com");
+    http.get("http://seemedate.herokuapp.com");
 }, 300000); // every 5 minutes (300000);
 
 app.get('*', (req, res) => {

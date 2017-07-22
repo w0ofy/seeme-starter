@@ -43,23 +43,11 @@ class HomePage extends React.Component {
       return;
     }
   }
-  // getInitialState() {
-  //   return {
-  //     showRegistration: false,
-  //     showPartOne: false,
-  //     showAbout: false,
-  //     email: '',
-  //     firstName: '',
-  //     password: '',
-  //     age: '',
-  //     is_male: '',
-  //     seeking_male: ''
-  //   };
-  // }
+
   handleSubmit(e) {
     e.preventDefault();
-    let removeScript = document.getElementById('disable-scroll');
-    document.body.removeChild(removeScript);
+    // let removeScript = document.getElementById('disable-scroll');
+    // document.body.removeChild(removeScript);
     axios.post('https://seemedate.herokuapp.com/api/auth/register', {
       email: this.state.email,
       firstName: this.state.firstName,
