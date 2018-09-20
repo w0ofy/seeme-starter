@@ -1,5 +1,5 @@
 # seemē
-A Dating App - Under Active Development 
+A Dating App - No longer Under Active Development 
 
 --------------------------------------------------------------
 ## [Demo](https://seemedate.herokuapp.com/)
